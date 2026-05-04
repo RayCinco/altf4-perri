@@ -1,3 +1,5 @@
+import type { LiteracyLesson } from "@/lib/media_literacy";
+
 // TYPE (unchanged)
 export interface AnalysisResult {
   classification: 'fact' | 'opinion' | 'chismis';
@@ -22,6 +24,19 @@ export interface AnalysisResult {
     }>;
     verdict: string;
   };
+  /** Suspicious writing patterns detected in the original text */
+  linguisticFlags: string[];
+  /** Factual correction when classification is "chismis" (Fake) — null otherwise */
+  factCorrection: string | null;
+  /** Source credibility breakdown from the filter step */
+  sourceCredibility: {
+    score: number;
+    trustedCount: number;
+    semiTrustedCount: number;
+    untrustedCount: number;
+  };
+  /** Media literacy lesson generated after analysis */
+  literacyLesson: LiteracyLesson | null;
 }
 
 export async function analyzeImage(imageBase64: string): Promise<AnalysisResult> {
@@ -57,6 +72,10 @@ export async function analyzeImage(imageBase64: string): Promise<AnalysisResult>
           },
         ],
       },
+      linguisticFlags: [],
+      factCorrection: null,
+      sourceCredibility: { score: 80, trustedCount: 2, semiTrustedCount: 1, untrustedCount: 0 },
+      literacyLesson: null,
     };
   }
 
@@ -80,6 +99,10 @@ export async function analyzeImage(imageBase64: string): Promise<AnalysisResult>
         verdict: "No factual basis required.",
         sources: [],
       },
+      linguisticFlags: [],
+      factCorrection: null,
+      sourceCredibility: { score: 0, trustedCount: 0, semiTrustedCount: 0, untrustedCount: 0 },
+      literacyLesson: null,
     };
   }
 
@@ -102,5 +125,9 @@ export async function analyzeImage(imageBase64: string): Promise<AnalysisResult>
       verdict: "No evidence found.",
       sources: [],
     },
+    linguisticFlags: ["Sensational language detected", "No verifiable details"],
+    factCorrection: "Mock correction: This claim has no supporting evidence.",
+    sourceCredibility: { score: 0, trustedCount: 0, semiTrustedCount: 0, untrustedCount: 0 },
+    literacyLesson: null,
   };
 }

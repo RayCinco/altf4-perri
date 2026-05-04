@@ -3,12 +3,14 @@
  *
  * Sends extracted text to Google Gemini with the ChismiScan system prompt.
  * Gemini acts as a multi-stage reasoning pipeline: claim extraction,
- * context interpretation, classification, and Marites-style response.
+ * linguistic analysis, context interpretation, classification,
+ * fact correction, and Marites-style response.
  */
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { MARITES_PERSONALITY } from "./ai_personality";
 import { formatUserPrompt, formatSearchContextPrompt } from "./ai_search";
+import type { PipelineLogger } from "./logger";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -19,6 +21,10 @@ export interface GeminiResponse {
   marites_explanation: string;
   claims: string[];
   evidence: string[];
+  /** Suspicious writing patterns detected in the original text */
+  linguistic_flags: string[];
+  /** Factual correction when label is "Fake" — null if no correction available */
+  fact_correction: string | null;
 }
 
 // ─── System Prompt ────────────────────────────────────────────────────────────
@@ -43,22 +49,45 @@ Step 2: CLAIM EXTRACTION
 - Extract entities (people, places, events)
 - Focus on verifiable assertions
 
-Step 3: CONTEXT INTERPRETATION
+Step 3: LINGUISTIC / WRITING ANALYSIS
+Analyze the claim itself for suspicious writing patterns:
+- Detect ALL CAPS usage or excessive capitalization
+- Identify excessive punctuation (!!!, ???, ...)
+- Flag emotional manipulation language ("SHOCKING!", "BREAKING!", "OMG!", "GRABE!")
+- Detect vague attribution ("sources say", "they confirmed", "ayon sa insider")
+- Identify urgency/pressure language ("share before deleted!", "viral na!", "last chance!")
+- Check for lack of specific dates, names, or verifiable details
+- Detect logical inconsistencies within the text
+- Flag sensationalist or clickbait-style phrasing
+Report each detected pattern as a short, specific flag string.
+If no suspicious patterns are detected, return an empty array.
+
+Step 4: CONTEXT INTERPRETATION
 - Evaluate if credible sources would support the claim
 - Look for consistency and plausibility
+- Pay attention to source credibility tags ([TRUSTED] vs [SEMI-TRUSTED])
 - If no reliable sources exist, treat as weak or unverified claim
+- Give more weight to trusted sources than semi-trusted ones
 
-Step 4: CLASSIFICATION
+Step 5: CLASSIFICATION
 Classify into one:
 - TRUE → supported by credible sources or widely known facts
 - SUSPICIOUS → unclear, conflicting, or insufficient evidence
 - FAKE → no credible evidence or likely misinformation
 
-Step 5: CONFIDENCE SCORING
+Step 6: CONFIDENCE SCORING
 - Assign a confidence score (0–100)
-- Based on: presence of sources, consistency, clarity of claim
+- Based on: presence of sources, source credibility, consistency, clarity of claim
 
 ${MARITES_PERSONALITY}
+
+Step 8: FACT CORRECTION (ONLY when label is "Fake")
+When a claim is classified as FAKE, you MUST provide a factual correction:
+- State what the claim says vs what the evidence actually shows
+- Base the correction ONLY on the provided search sources — do NOT invent facts
+- Format: "The claim says [X], but according to [source], [the actual fact is Y]."
+- Keep it concise (1–2 sentences)
+- If no search results are available to form a correction, set fact_correction to null
 
 ========================================
 📤 OUTPUT FORMAT (STRICT JSON)
@@ -71,7 +100,9 @@ Return ONLY this JSON structure, no other text:
   "confidence": number (0-100),
   "marites_explanation": "Taglish explanation here (2-4 sentences)",
   "claims": ["list of extracted claims"],
-  "evidence": ["key findings or lack of sources"]
+  "evidence": ["key findings or lack of sources"],
+  "linguistic_flags": ["list of detected suspicious writing patterns, or empty array"],
+  "fact_correction": "factual correction string when label is Fake, or null"
 }
 
 ========================================
@@ -80,7 +111,9 @@ Return ONLY this JSON structure, no other text:
 - Do NOT invent facts
 - Do NOT assume something is true without evidence
 - Do NOT output outside the JSON format
-- Keep explanation concise (2–4 sentences)`;
+- Keep explanation concise (2–4 sentences)
+- fact_correction MUST be null when label is NOT "Fake"
+- linguistic_flags should be specific (e.g., "Excessive punctuation (!!!)" not just "suspicious")`;
 
 // ─── Main Analysis Function ──────────────────────────────────────────────────
 
@@ -89,12 +122,14 @@ Return ONLY this JSON structure, no other text:
  *
  * @param text          - The extracted/cleaned text to analyze
  * @param searchContext - Optional search results for fact-checking context
+ * @param logger        - Optional pipeline logger to record AI steps
  * @returns Parsed GeminiResponse with classification, confidence, and explanation
  * @throws Error if the API key is missing, Gemini fails, or response is unparseable
  */
 export async function analyzeWithGemini(
   text: string,
-  searchContext?: string
+  searchContext?: string,
+  logger?: PipelineLogger
 ): Promise<GeminiResponse> {
   console.log("[AI] 🧠 Starting AI analysis pipeline...");
   console.log(`[AI] 📝 Text to analyze: "${text.substring(0, 50)}..."`);
@@ -120,13 +155,35 @@ export async function analyzeWithGemini(
     userPrompt += formatSearchContextPrompt(searchContext);
   }
 
+  logger?.log("AI", "Prompts constructed", {
+    systemPrompt: SYSTEM_PROMPT,
+    userPrompt,
+    hasSearchContext: !!searchContext,
+  });
+
   console.log("[AI] ⏳ Waiting for Gemini's verdict...");
   const result = await model.generateContent(userPrompt);
   const responseText = result.response.text().trim();
   console.log("[AI] 📩 Received response from Gemini");
   console.log(`[AI] 📜 Raw Response Preview: ${responseText.substring(0, 100).replace(/\n/g, ' ')}...`);
 
-  return parseGeminiResponse(responseText);
+  logger?.log("AI", "Raw Gemini response received", {
+    rawResponse: responseText,
+  });
+
+  const parsed = parseGeminiResponse(responseText);
+
+  logger?.log("AI", "Response parsed successfully", {
+    label: parsed.label,
+    confidence: parsed.confidence,
+    explanation: parsed.marites_explanation,
+    claims: parsed.claims,
+    evidence: parsed.evidence,
+    linguisticFlags: parsed.linguistic_flags,
+    factCorrection: parsed.fact_correction,
+  });
+
+  return parsed;
 }
 
 // ─── Response Parser ─────────────────────────────────────────────────────────
@@ -156,6 +213,14 @@ function parseGeminiResponse(responseText: string): GeminiResponse {
     const normalizedLabel = normalizeLabel(parsed.label);
     console.log(`[AI] ✅ Final Verdict: ${normalizedLabel} (Confidence: ${parsed.confidence}%)`);
 
+    if (parsed.linguistic_flags?.length > 0) {
+      console.log(`[AI] 🔍 Linguistic flags: ${parsed.linguistic_flags.join(", ")}`);
+    }
+
+    if (parsed.fact_correction) {
+      console.log(`[AI] ✏️ Fact correction: ${parsed.fact_correction.substring(0, 80)}...`);
+    }
+
     return {
       label: normalizedLabel,
       confidence: Math.min(100, Math.max(0, parsed.confidence)),
@@ -163,6 +228,8 @@ function parseGeminiResponse(responseText: string): GeminiResponse {
         parsed.marites_explanation || "Walang masabi si Marites... 🤔",
       claims: Array.isArray(parsed.claims) ? parsed.claims : [],
       evidence: Array.isArray(parsed.evidence) ? parsed.evidence : [],
+      linguistic_flags: Array.isArray(parsed.linguistic_flags) ? parsed.linguistic_flags : [],
+      fact_correction: typeof parsed.fact_correction === "string" ? parsed.fact_correction : null,
     };
   } catch (error) {
     console.error("Failed to parse Gemini response:", responseText);
