@@ -23,7 +23,7 @@ export interface LogEntry {
 export interface PipelineLogFile {
   session: {
     id: string;
-    mode: "image" | "text";
+    mode: "image" | "text" | "url";
     startedAt: string;
     completedAt: string;
     durationMs: number;
@@ -45,10 +45,10 @@ export interface PipelineLogFile {
 export class PipelineLogger {
   private entries: LogEntry[] = [];
   private sessionId: string;
-  private mode: "image" | "text";
+  private mode: "image" | "text" | "url";
   private startTime: Date;
 
-  constructor(mode: "image" | "text") {
+  constructor(mode: "image" | "text" | "url") {
     this.startTime = new Date();
     this.mode = mode;
     this.sessionId = this.createSessionId();

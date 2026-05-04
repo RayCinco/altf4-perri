@@ -3,7 +3,7 @@
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
-import { Upload, ImageIcon, Loader2, AlertCircle, Type } from "lucide-react";
+import { Upload, ImageIcon, Loader2, AlertCircle, Type, Link as LinkIcon } from "lucide-react";
 
 /** Rotating loading messages shown during analysis */
 const LOADING_MESSAGES = [
@@ -20,8 +20,10 @@ export default function Page() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loadingMessage, setLoadingMessage] = useState(LOADING_MESSAGES[0]);
-  const [inputMode, setInputMode] = useState<"image" | "text">("image");
+  const [inputMode, setInputMode] = useState<"image" | "text" | "url">("image");
   const [textInput, setTextInput] = useState("");
+  const [urlInput, setUrlInput] = useState("");
+  const [personality, setPersonality] = useState<"marites" | "formal">("marites");
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const loadingIntervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -58,6 +60,10 @@ export default function Page() {
 
     try {
       // Store the image preview for the result page
+      // Clean up old state
+      localStorage.removeItem("uploadedText");
+      localStorage.removeItem("uploadedUrl");
+      
       const reader = new FileReader();
       const imageBase64 = await new Promise<string>((resolve) => {
         reader.onload = (e) => resolve(e.target?.result as string);
@@ -68,6 +74,7 @@ export default function Page() {
       // Send image to API
       const formData = new FormData();
       formData.append("file", file);
+      formData.append("personality", personality);
 
       const response = await fetch("/api/analyze", {
         method: "POST",
@@ -106,11 +113,59 @@ export default function Page() {
     startLoadingMessages();
 
     try {
-      // No image for text mode
+      // Clean up old state
       localStorage.removeItem("uploadedImage");
+      localStorage.removeItem("uploadedUrl");
+      localStorage.setItem("uploadedText", textInput.trim());
 
       const formData = new FormData();
       formData.append("text", textInput.trim());
+      formData.append("personality", personality);
+
+      const response = await fetch("/api/analyze", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Analysis failed");
+      }
+
+      localStorage.setItem("analysisResult", JSON.stringify(data));
+      router.push("/result");
+    } catch (err) {
+      const message =
+        err instanceof Error ? err.message : "Something went wrong. Try again!";
+      setError(message);
+    } finally {
+      setIsLoading(false);
+      stopLoadingMessages();
+    }
+  };
+
+  /** Sends a URL to the /api/analyze endpoint */
+  const handleUrlSubmit = async () => {
+    if (!urlInput.trim()) {
+      setError("Please enter a valid URL.");
+      return;
+    }
+
+    setIsLoading(true);
+    setError(null);
+    setLoadingMessage(LOADING_MESSAGES[0]);
+    startLoadingMessages();
+
+    try {
+      // Clean up old state
+      localStorage.removeItem("uploadedImage");
+      localStorage.removeItem("uploadedText");
+      localStorage.setItem("uploadedUrl", urlInput.trim());
+
+      const formData = new FormData();
+      formData.append("url", urlInput.trim());
+      formData.append("personality", personality);
 
       const response = await fetch("/api/analyze", {
         method: "POST",
@@ -200,16 +255,41 @@ export default function Page() {
           Kape tayo habang nag-analyze ako ng news mo! ☕
         </p>
 
+        {/* ─── Personality Toggle ──────────────────────────────────── */}
+        <div className="flex justify-center mb-6">
+          <div className="bg-gray-100 p-1 rounded-full flex items-center shadow-inner">
+            <button
+              type="button"
+              onClick={() => setPersonality("marites")}
+              className={`flex items-center gap-2 px-5 py-2 rounded-full font-semibold text-sm transition-all ${personality === "marites"
+                ? "bg-white text-red-600 shadow-sm"
+                : "text-gray-500 hover:text-gray-700"
+                }`}
+            >
+              <span className="text-lg">🫖</span> Marites Mode
+            </button>
+            <button
+              type="button"
+              onClick={() => setPersonality("formal")}
+              className={`flex items-center gap-2 px-5 py-2 rounded-full font-semibold text-sm transition-all ${personality === "formal"
+                ? "bg-white text-blue-600 shadow-sm"
+                : "text-gray-500 hover:text-gray-700"
+                }`}
+            >
+              <span className="text-lg">👔</span> Formal Mode
+            </button>
+          </div>
+        </div>
+
         {/* ─── Input Mode Toggle ───────────────────────────────────── */}
         <div className="flex justify-center gap-2 mb-6">
           <button
             type="button"
             onClick={() => setInputMode("image")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all ${
-              inputMode === "image"
-                ? "bg-red-600 text-white shadow-md"
-                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-            }`}
+            className={`flex items-center gap-2 px-6 py-2.5 rounded-2xl font-semibold text-sm transition-all ${inputMode === "image"
+              ? "bg-red-600 text-white shadow-md"
+              : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              }`}
           >
             <ImageIcon className="w-4 h-4" />
             Image
@@ -217,18 +297,28 @@ export default function Page() {
           <button
             type="button"
             onClick={() => setInputMode("text")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all ${
-              inputMode === "text"
-                ? "bg-red-600 text-white shadow-md"
-                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-            }`}
+            className={`flex items-center gap-2 px-6 py-2.5 rounded-2xl font-semibold text-sm transition-all ${inputMode === "text"
+              ? "bg-red-600 text-white shadow-md"
+              : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              }`}
           >
             <Type className="w-4 h-4" />
             Text
           </button>
+          <button
+            type="button"
+            onClick={() => setInputMode("url")}
+            className={`flex items-center gap-2 px-6 py-2.5 rounded-2xl font-semibold text-sm transition-all ${inputMode === "url"
+              ? "bg-red-600 text-white shadow-md"
+              : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              }`}
+          >
+            <LinkIcon className="w-4 h-4" />
+            URL
+          </button>
         </div>
 
-        {/* ─── Error Message ───────────────────────────────────────── */}
+        {/* ─── Error Message ──────────────── */}
         <AnimatePresence>
           {error && (
             <motion.div
@@ -261,10 +351,9 @@ export default function Page() {
             className={`
               border-2 border-dashed rounded-xl p-12 text-center cursor-pointer
               transition-all duration-300
-              ${
-                isDragging
-                  ? "border-red-500 bg-red-50 scale-105"
-                  : "border-gray-300 bg-gray-50 hover:border-red-400 hover:bg-red-50"
+              ${isDragging
+                ? "border-red-500 bg-red-50 scale-105"
+                : "border-gray-300 bg-gray-50 hover:border-red-400 hover:bg-red-50"
               }
             `}
           >
@@ -322,12 +411,33 @@ export default function Page() {
           </div>
         )}
 
+        {/* ─── URL Input Mode ──────────────────────────────────────── */}
+        {inputMode === "url" && (
+          <div className="space-y-4">
+            <input
+              type="url"
+              value={urlInput}
+              onChange={(e) => setUrlInput(e.target.value)}
+              placeholder="Paste the URL of the article or post here..."
+              className="w-full p-4 border-2 border-gray-300 rounded-xl bg-gray-50 text-gray-800 placeholder-gray-400 focus:border-red-400 focus:bg-red-50 focus:outline-none transition-all"
+            />
+            <button
+              type="button"
+              onClick={handleUrlSubmit}
+              disabled={!urlInput.trim()}
+              className="w-full px-6 py-3 bg-linear-to-r from-red-600 to-red-700 text-white rounded-lg font-semibold hover:from-red-700 hover:to-red-800 transition-all shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Analyze URL 🔍
+            </button>
+          </div>
+        )}
+
         {/* ─── Info Banner ─────────────────────────────────────────── */}
         <div className="mt-6 p-4 bg-linear-to-r from-red-50 to-orange-50 border-2 border-red-200 rounded-lg">
           <p className="text-sm text-gray-800 text-center font-medium">
-            {inputMode === "image"
-              ? "Upload screenshots of news posts, social media claims, or forwarded messages."
-              : "Paste text from news articles, social media posts, or forwarded messages."}
+            {inputMode === "image" && "Upload screenshots of news posts, social media claims, or forwarded messages."}
+            {inputMode === "text" && "Paste text from news articles, social media posts, or forwarded messages."}
+            {inputMode === "url" && "Paste the direct link to a news article or social media post for analysis."}
           </p>
         </div>
       </div>

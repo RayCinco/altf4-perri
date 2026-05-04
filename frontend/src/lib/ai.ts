@@ -8,7 +8,7 @@
  */
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { MARITES_PERSONALITY } from "./ai_personality";
+import { MARITES_PERSONALITY, FORMAL_PERSONALITY } from "./ai_personality";
 import { formatUserPrompt, formatSearchContextPrompt } from "./ai_search";
 import type { PipelineLogger } from "./logger";
 
@@ -29,7 +29,11 @@ export interface GeminiResponse {
 
 // ─── System Prompt ────────────────────────────────────────────────────────────
 
-const SYSTEM_PROMPT = `You are the core intelligence behind "Chismis AI", a Filipino gossip-analysis system designed to analyze screenshots or text and determine whether a claim is TRUE, SUSPICIOUS, or FAKE.
+function getSystemPrompt(personality: "marites" | "formal"): string {
+  const personalityInstruction =
+    personality === "formal" ? FORMAL_PERSONALITY : MARITES_PERSONALITY;
+
+  return `You are the core intelligence behind "Chismis AI", a Filipino gossip-analysis system designed to analyze screenshots or text and determine whether a claim is TRUE, SUSPICIOUS, or FAKE.
 
 ========================================
 🎯 SYSTEM OBJECTIVE
@@ -79,7 +83,7 @@ Step 6: CONFIDENCE SCORING
 - Assign a confidence score (0–100)
 - Based on: presence of sources, source credibility, consistency, clarity of claim
 
-${MARITES_PERSONALITY}
+${personalityInstruction}
 
 Step 8: FACT CORRECTION (ONLY when label is "Fake")
 When a claim is classified as FAKE, you MUST provide a factual correction:
@@ -98,7 +102,7 @@ Return ONLY this JSON structure, no other text:
 {
   "label": "True | Suspicious | Fake",
   "confidence": number (0-100),
-  "marites_explanation": "Taglish explanation here (2-4 sentences)",
+  "marites_explanation": "Explanation here (2-4 sentences, adapt to requested tone)",
   "claims": ["list of extracted claims"],
   "evidence": ["key findings or lack of sources"],
   "linguistic_flags": ["list of detected suspicious writing patterns, or empty array"],
@@ -114,6 +118,7 @@ Return ONLY this JSON structure, no other text:
 - Keep explanation concise (2–4 sentences)
 - fact_correction MUST be null when label is NOT "Fake"
 - linguistic_flags should be specific (e.g., "Excessive punctuation (!!!)" not just "suspicious")`;
+}
 
 // ─── Main Analysis Function ──────────────────────────────────────────────────
 
@@ -129,9 +134,10 @@ Return ONLY this JSON structure, no other text:
 export async function analyzeWithGemini(
   text: string,
   searchContext?: string,
-  logger?: PipelineLogger
+  logger?: PipelineLogger,
+  personality: "marites" | "formal" = "marites"
 ): Promise<GeminiResponse> {
-  console.log("[AI] 🧠 Starting AI analysis pipeline...");
+  console.log(`[AI] 🧠 Starting AI analysis pipeline... (Personality: ${personality})`);
   console.log(`[AI] 📝 Text to analyze: "${text.substring(0, 50)}..."`);
   const apiKey = process.env.GEMINI_API_KEY;
 
@@ -141,10 +147,12 @@ export async function analyzeWithGemini(
     );
   }
 
+  const systemPrompt = getSystemPrompt(personality);
+
   const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({
     model: "gemini-2.0-flash",
-    systemInstruction: SYSTEM_PROMPT,
+    systemInstruction: systemPrompt,
   });
 
   // Build the user prompt
@@ -156,7 +164,7 @@ export async function analyzeWithGemini(
   }
 
   logger?.log("AI", "Prompts constructed", {
-    systemPrompt: SYSTEM_PROMPT,
+    personality,
     userPrompt,
     hasSearchContext: !!searchContext,
   });

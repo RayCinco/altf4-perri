@@ -27,19 +27,25 @@ export default function Page() {
   const [showShareModal, setShowShareModal] = useState(false);
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+  const [uploadedText, setUploadedText] = useState<string | null>(null);
+  const [uploadedUrl, setUploadedUrl] = useState<string | null>(null);
 
   const router = useRouter();
 
   useEffect(() => {
     const storedImage = localStorage.getItem("uploadedImage");
+    const storedText = localStorage.getItem("uploadedText");
+    const storedUrl = localStorage.getItem("uploadedUrl");
     const storedResult = localStorage.getItem("analysisResult");
 
-    if (!storedImage || !storedResult) {
+    if (!storedResult || (!storedImage && !storedText && !storedUrl)) {
       router.push("/");
       return;
     }
 
     setUploadedImage(storedImage);
+    setUploadedText(storedText);
+    setUploadedUrl(storedUrl);
     setResult(JSON.parse(storedResult));
   }, [router]);
 
@@ -113,17 +119,37 @@ export default function Page() {
         {/* Content */}
         <div className="p-8">
           <div className="grid md:grid-cols-2 gap-8">
-            {/* Image */}
-            {uploadedImage && (
+            {/* Input Display Section */}
+            {(uploadedImage || uploadedText || uploadedUrl) && (
               <div className="space-y-4">
-                <h3 className="font-semibold text-gray-700">Uploaded Image:</h3>
-                <div className="border-2 border-gray-200 rounded-xl overflow-hidden shadow-md">
-                  <img
-                    src={uploadedImage}
-                    alt="Uploaded content"
-                    className="w-full h-auto object-cover"
-                  />
-                </div>
+                <h3 className="font-semibold text-gray-700">Analyzed Content:</h3>
+                
+                {uploadedImage && (
+                  <div className="border-2 border-gray-200 rounded-xl overflow-hidden shadow-md">
+                    <img
+                      src={uploadedImage}
+                      alt="Uploaded content"
+                      className="w-full h-auto object-cover"
+                    />
+                  </div>
+                )}
+
+                {uploadedText && (
+                  <div className="border-2 border-gray-200 rounded-xl p-4 bg-gray-50 text-gray-700 max-h-64 overflow-y-auto whitespace-pre-wrap shadow-inner">
+                    {uploadedText}
+                  </div>
+                )}
+
+                {uploadedUrl && (
+                  <div className="border-2 border-gray-200 rounded-xl p-4 bg-blue-50 flex items-center gap-3">
+                    <div className="p-3 bg-blue-100 text-blue-600 rounded-full">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                    </div>
+                    <a href={uploadedUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 font-medium hover:underline break-all">
+                      {uploadedUrl}
+                    </a>
+                  </div>
+                )}
               </div>
             )}
 
@@ -388,24 +414,29 @@ export default function Page() {
 
                 {/* Teaching Points */}
                 <div className="bg-gradient-to-b from-indigo-50 to-white p-6 space-y-4">
-                  {result.literacyLesson.points.map((point, idx) => (
-                    <div key={idx} className="rounded-lg border border-indigo-100 overflow-hidden">
-                      {/* Issue (what's wrong) */}
-                      <div className="bg-red-50 px-4 py-3 flex items-start gap-2">
-                        <span className="text-red-500 mt-0.5 shrink-0 text-sm">✗</span>
-                        <p className="text-sm text-red-800">{point.issue}</p>
+                  {result.literacyLesson.points.map((point, idx) => {
+                    const isFact = result.classification === 'fact';
+                    return (
+                      <div key={idx} className="rounded-lg border border-indigo-100 overflow-hidden">
+                        {/* Issue / Observation */}
+                        <div className={`${isFact ? 'bg-blue-50' : 'bg-red-50'} px-4 py-3 flex items-start gap-2`}>
+                          <span className={`${isFact ? 'text-blue-500' : 'text-red-500'} mt-0.5 shrink-0 text-sm`}>
+                            {isFact ? '🔍' : '✗'}
+                          </span>
+                          <p className={`text-sm ${isFact ? 'text-blue-800' : 'text-red-800'}`}>{point.issue}</p>
+                        </div>
+                        {/* Arrow separator */}
+                        <div className="flex items-center justify-center py-1 bg-gray-50">
+                          <ArrowRight className="w-4 h-4 text-gray-400 rotate-90" />
+                        </div>
+                        {/* Correction / Why it's credible */}
+                        <div className="bg-green-50 px-4 py-3 flex items-start gap-2">
+                          <span className="text-green-500 mt-0.5 shrink-0 text-sm">✓</span>
+                          <p className="text-sm text-green-800">{point.correction}</p>
+                        </div>
                       </div>
-                      {/* Arrow separator */}
-                      <div className="flex items-center justify-center py-1 bg-gray-50">
-                        <ArrowRight className="w-4 h-4 text-gray-400 rotate-90" />
-                      </div>
-                      {/* Correction (what it should look like) */}
-                      <div className="bg-green-50 px-4 py-3 flex items-start gap-2">
-                        <span className="text-green-500 mt-0.5 shrink-0 text-sm">✓</span>
-                        <p className="text-sm text-green-800">{point.correction}</p>
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })}
 
                   {/* Quick Tip */}
                   <div className="mt-4 flex items-start gap-3 bg-amber-50 rounded-lg p-4 border border-amber-200">

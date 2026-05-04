@@ -18,6 +18,7 @@ import { analyzeWithGemini, type GeminiResponse } from "./ai";
 import { executeFactCheck } from "./ai_search";
 import { filterSources, type FilteredSources, type CategorizedSource } from "./source_filter";
 import { generateLiteracyLesson, type LiteracyLesson } from "./media_literacy";
+import { extractFromUrl } from "./url";
 import { PipelineLogger } from "./logger";
 import type { AnalysisResult } from "@/app/types/analysis";
 
@@ -39,7 +40,8 @@ const MAX_DISPLAY_SOURCES = 3;
  */
 export async function analyzeChismis(
   imageBuffer: Buffer,
-  mimeType: string
+  mimeType: string,
+  personality: "marites" | "formal" = "marites"
 ): Promise<AnalysisResult> {
   const logger = new PipelineLogger("image");
 
@@ -74,7 +76,7 @@ export async function analyzeChismis(
 
     // Step 4: Analyze the extracted text with Gemini AI
     console.log("[PIPELINE] ➡️ Step 4: Running AI Analysis");
-    const geminiResult = await analyzeWithGemini(extractedText, searchContext, logger);
+    const geminiResult = await analyzeWithGemini(extractedText, searchContext, logger, personality);
 
     // Step 5: Generate media literacy lesson
     console.log("[PIPELINE] ➡️ Step 5: Generating Media Literacy Lesson");
@@ -90,7 +92,7 @@ export async function analyzeChismis(
 
     // Step 6: Map the AI response to the frontend's AnalysisResult type
     console.log("[PIPELINE] ➡️ Step 6: Mapping output to AnalysisResult");
-    const finalResult = mapToAnalysisResult(geminiResult, filteredSources, literacyLesson);
+    const finalResult = mapToAnalysisResult(geminiResult, filteredSources, literacyLesson, personality);
 
     logger.log("OUTPUT", "Final result mapped for frontend", {
       classification: finalResult.classification,
@@ -131,7 +133,8 @@ export async function analyzeChismis(
  * @returns A fully populated AnalysisResult for the frontend
  */
 export async function analyzeChismisText(
-  text: string
+  text: string,
+  personality: "marites" | "formal" = "marites"
 ): Promise<AnalysisResult> {
   const logger = new PipelineLogger("text");
 
@@ -160,7 +163,7 @@ export async function analyzeChismisText(
 
     // Step 3: Analyze with Gemini AI
     console.log("[PIPELINE] ➡️ Step 3: Running AI Analysis");
-    const geminiResult = await analyzeWithGemini(text, searchContext, logger);
+    const geminiResult = await analyzeWithGemini(text, searchContext, logger, personality);
 
     // Step 4: Generate media literacy lesson
     console.log("[PIPELINE] ➡️ Step 4: Generating Media Literacy Lesson");
@@ -176,7 +179,7 @@ export async function analyzeChismisText(
 
     // Step 5: Map output
     console.log("[PIPELINE] ➡️ Step 5: Mapping output to AnalysisResult");
-    const finalResult = mapToAnalysisResult(geminiResult, filteredSources, literacyLesson);
+    const finalResult = mapToAnalysisResult(geminiResult, filteredSources, literacyLesson, personality);
 
     logger.log("OUTPUT", "Final result mapped for frontend", {
       classification: finalResult.classification,
@@ -202,6 +205,102 @@ export async function analyzeChismisText(
     return finalResult;
   } catch (error) {
     logger.log("ERROR", "Pipeline failed with exception", {
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+    });
+    await logger.save();
+    throw error;
+  }
+}
+
+/**
+ * Runs the analysis pipeline on a URL input.
+ *
+ * Pipeline: URL → Fetch HTML → Extract Text → Search → Filter → AI Analysis → Literacy → Mapped Result
+ *
+ * @param url - The URL to fetch and analyze
+ * @returns A fully populated AnalysisResult for the frontend
+ */
+export async function analyzeChismisUrl(
+  url: string,
+  personality: "marites" | "formal" = "marites"
+): Promise<AnalysisResult> {
+  const logger = new PipelineLogger("url");
+
+  console.log("----------------------------------------");
+  console.log("[PIPELINE] 🌐 Starting ChismiScan URL Pipeline");
+  console.log(`[PIPELINE] 🔗 URL: ${url}`);
+
+  logger.log("PIPELINE", "URL pipeline started", {
+    inputUrl: url,
+  });
+
+  try {
+    // Step 1: Fetch and extract text content from the URL
+    console.log("[PIPELINE] ➡️ Step 1: Fetching & Extracting URL Content");
+    const urlResult = await extractFromUrl(url, logger);
+
+    // Combine title + content for analysis
+    const extractedText = `[Title: ${urlResult.title}]\n[Source: ${urlResult.domain}]\n\n${urlResult.content}`;
+    console.log(`[PIPELINE] 📄 Extracted ${extractedText.length} chars from URL`);
+
+    // Step 2: Query SerperDev Search API for raw results
+    console.log("[PIPELINE] ➡️ Step 2: Running Search Fact-Check");
+    const searchResult = await executeFactCheck(extractedText, logger);
+
+    // Step 3: Filter and classify sources by credibility
+    console.log("[PIPELINE] ➡️ Step 3: Filtering Sources by Credibility");
+    let filteredSources: FilteredSources | null = null;
+    let searchContext: string | undefined;
+
+    if (searchResult && searchResult.rawSources.length > 0) {
+      filteredSources = filterSources(searchResult.rawSources, logger);
+      searchContext = filteredSources.formattedContext;
+    }
+
+    // Step 4: Analyze the extracted text with Gemini AI
+    console.log("[PIPELINE] ➡️ Step 4: Running AI Analysis");
+    const geminiResult = await analyzeWithGemini(extractedText, searchContext, logger, personality);
+
+    // Step 5: Generate media literacy lesson
+    console.log("[PIPELINE] ➡️ Step 5: Generating Media Literacy Lesson");
+    const topSources = getTopSources(filteredSources);
+    const literacyLesson = await generateLiteracyLesson(
+      extractedText,
+      mapClassification(geminiResult.label),
+      geminiResult.linguistic_flags,
+      geminiResult.evidence,
+      topSources.map((s) => ({ title: s.title, url: s.link, credibility: s.credibility })),
+      logger
+    );
+
+    // Step 6: Map output
+    console.log("[PIPELINE] ➡️ Step 6: Mapping output to AnalysisResult");
+    const finalResult = mapToAnalysisResult(geminiResult, filteredSources, literacyLesson, personality);
+
+    logger.log("OUTPUT", "Final result mapped for frontend", {
+      classification: finalResult.classification,
+      chismisLevel: finalResult.chismisLevel,
+      message: finalResult.message,
+      details: finalResult.details,
+      breakdown: finalResult.breakdown,
+      harmScore: finalResult.harmScore,
+      maritesMode: finalResult.maritesMode,
+      resibo: finalResult.resibo,
+      linguisticFlags: finalResult.linguisticFlags,
+      factCorrection: finalResult.factCorrection,
+      sourceCredibility: finalResult.sourceCredibility,
+      literacyLesson: finalResult.literacyLesson,
+    });
+
+    console.log("[PIPELINE] 🎉 URL Pipeline completed successfully!");
+    console.log("----------------------------------------");
+
+    await logger.save();
+
+    return finalResult;
+  } catch (error) {
+    logger.log("ERROR", "URL pipeline failed with exception", {
       error: error instanceof Error ? error.message : String(error),
       stack: error instanceof Error ? error.stack : undefined,
     });
@@ -247,7 +346,8 @@ function getTopSources(
 function mapToAnalysisResult(
   gemini: GeminiResponse,
   filteredSources: FilteredSources | null,
-  literacyLesson: LiteracyLesson | null
+  literacyLesson: LiteracyLesson | null,
+  personality: "marites" | "formal" = "marites"
 ): AnalysisResult {
   const classification = mapClassification(gemini.label);
   const chismisLevel = mapChismisLevel(gemini.label, gemini.confidence);
@@ -264,8 +364,8 @@ function mapToAnalysisResult(
   return {
     classification,
     chismisLevel,
-    message: getResultMessage(classification),
-    details: getResultDetails(gemini),
+    message: getResultMessage(classification, personality),
+    details: getResultDetails(gemini, personality),
     breakdown: {
       reasons: gemini.claims.length > 0
         ? gemini.claims
@@ -282,7 +382,7 @@ function mapToAnalysisResult(
     resibo: {
       verdict: gemini.evidence.length > 0
         ? gemini.evidence.join(" | ")
-        : "Walang mahanap na resibo si Marites... 👀",
+        : (personality === "formal" ? "No evidence found to support the claim." : "Walang mahanap na resibo si Marites... 👀"),
       sources: resiboSources,
     },
     linguisticFlags: gemini.linguistic_flags,
@@ -392,32 +492,48 @@ function calculateHarmScore(
  * Gets a headline message based on classification.
  */
 function getResultMessage(
-  classification: AnalysisResult["classification"]
+  classification: AnalysisResult["classification"],
+  personality: "marites" | "formal" = "marites"
 ): string {
+  const isFormal = personality === "formal";
+
   switch (classification) {
     case "fact":
-      return "Legit naman 'to ✅";
+      return isFormal ? "Verified Fact ✅" : "Legit naman 'to ✅";
     case "opinion":
-      return "Hmm... hindi sure si Marites 🤔";
+      return isFormal ? "Unverified / Needs Context 🤔" : "Hmm... hindi sure si Marites 🤔";
     case "chismis":
-      return "CHISMIS ALERT! 🚨";
+      return isFormal ? "Misinformation Detected 🚨" : "CHISMIS ALERT! 🚨";
     default:
-      return "Na-analyze na ni Marites!";
+      return isFormal ? "Analysis Complete" : "Na-analyze na ni Marites!";
   }
 }
 
 /**
  * Gets detail text from the Gemini response.
  */
-function getResultDetails(gemini: GeminiResponse): string {
+function getResultDetails(
+  gemini: GeminiResponse,
+  personality: "marites" | "formal" = "marites"
+): string {
+  const isFormal = personality === "formal";
+
   switch (gemini.label) {
     case "True":
-      return "Mukhang totoo naman ito based sa analysis ni Marites.";
+      return isFormal 
+        ? "This claim is supported by credible evidence and sources."
+        : "Mukhang totoo naman ito based sa analysis ni Marites.";
     case "Suspicious":
-      return "May mga questionable parts — double check muna bago i-share.";
+      return isFormal
+        ? "This claim contains questionable elements. Verify before sharing."
+        : "May mga questionable parts — double check muna bago i-share.";
     case "Fake":
-      return "Walang credible evidence na nahanap. Ingat sa pagsha-share!";
+      return isFormal
+        ? "No credible evidence supports this claim. Please avoid sharing misinformation."
+        : "Walang credible evidence na nahanap. Ingat sa pagsha-share!";
     default:
-      return "Check mo na lang rin sa ibang sources para sure.";
+      return isFormal
+        ? "Please cross-reference with credible news sources."
+        : "Check mo na lang rin sa ibang sources para sure.";
   }
 }

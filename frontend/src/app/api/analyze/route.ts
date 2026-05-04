@@ -4,11 +4,12 @@
  * Accepts:
  *   - multipart/form-data with a "file" field (image upload)
  *   - multipart/form-data with a "text" field (raw text input)
+ *   - multipart/form-data with a "url" field (URL content extraction)
  *
- * Pipeline: Image → OCR → AI Analysis → AnalysisResult JSON
+ * Pipeline: Input → Extract → Search → AI Analysis → AnalysisResult JSON
  */
 
-import { analyzeChismis, analyzeChismisText } from "@/lib/chismis";
+import { analyzeChismis, analyzeChismisText, analyzeChismisUrl } from "@/lib/chismis";
 
 /** Max file size: 10MB */
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
@@ -28,11 +29,22 @@ export async function POST(req: Request) {
     const formData = await req.formData();
     const file = formData.get("file") as File | null;
     const text = formData.get("text") as string | null;
+    const url = formData.get("url") as string | null;
+    const rawPersonality = formData.get("personality") as string | null;
+    const personality = (rawPersonality === "formal" ? "formal" : "marites") as "marites" | "formal";
+
+    // ─── URL Input Path ───────────────────────────────────────────────
+    if (url && url.trim().length > 0) {
+      console.log(`[API] 🌐 Detected URL input: ${url.trim()}`);
+      const result = await analyzeChismisUrl(url.trim(), personality);
+      console.log("[API] ✅ Returning URL analysis result");
+      return Response.json(result);
+    }
 
     // ─── Text Input Path ──────────────────────────────────────────────
     if (text && text.trim().length > 0) {
       console.log("[API] 📝 Detected text input");
-      const result = await analyzeChismisText(text.trim());
+      const result = await analyzeChismisText(text.trim(), personality);
       console.log("[API] ✅ Returning text analysis result");
       return Response.json(result);
     }
@@ -73,7 +85,7 @@ export async function POST(req: Request) {
     const buffer = Buffer.from(arrayBuffer);
 
     // Run the full pipeline: OCR → AI → Result
-    const result = await analyzeChismis(buffer, file.type);
+    const result = await analyzeChismis(buffer, file.type, personality);
     
     console.log("[API] ✅ Returning image analysis result");
     return Response.json(result);
