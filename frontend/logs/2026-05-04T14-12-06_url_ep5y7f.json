@@ -1,0 +1,179 @@
+{
+  "session": {
+    "id": "ep5y7f",
+    "mode": "url",
+    "startedAt": "2026-05-04T14:12:06.981Z",
+    "completedAt": "2026-05-04T14:12:14.023Z",
+    "durationMs": 7042
+  },
+  "pipeline": [
+    {
+      "timestamp": "2026-05-04T14:12:06.983Z",
+      "step": "PIPELINE",
+      "label": "URL pipeline started",
+      "data": {
+        "inputUrl": "https://guidetothephilippines.ph/articles/ultimate-guides/mayon-volcano-guide-albay-bicol"
+      }
+    },
+    {
+      "timestamp": "2026-05-04T14:12:06.986Z",
+      "step": "URL",
+      "label": "URL extraction started",
+      "data": {
+        "url": "https://guidetothephilippines.ph/articles/ultimate-guides/mayon-volcano-guide-albay-bicol",
+        "domain": "guidetothephilippines.ph"
+      }
+    },
+    {
+      "timestamp": "2026-05-04T14:12:07.335Z",
+      "step": "URL",
+      "label": "HTML fetched successfully",
+      "data": {
+        "htmlLength": 452089
+      }
+    },
+    {
+      "timestamp": "2026-05-04T14:12:07.342Z",
+      "step": "URL",
+      "label": "Content extracted and cleaned",
+      "data": {
+        "title": "Mayon Volcano Travel Guide: Everything You Need to Know | Guide to the Philippines",
+        "domain": "guidetothephilippines.ph",
+        "rawTextLength": 16158,
+        "cleanedTextLength": 5003,
+        "contentPreview": "Standing tall with its perfect cone shape, Mayon Volcano is one of the most breathtaking volcanoes in the Philippines and an iconic natural landmark. Located in the province of Albay in the Bicol regi"
+      }
+    },
+    {
+      "timestamp": "2026-05-04T14:12:08.864Z",
+      "step": "SEARCH",
+      "label": "Query generated from text",
+      "data": {
+        "inputTextPreview": "[Title: Mayon Volcano Travel Guide: Everything You Need to Know | Guide to the Philippines]\n[Source: guidetothephilippines.ph]\n\nStanding tall with its perfect cone shape, Mayon Volcano is one of the m",
+        "generatedQuery": "NO_SEARCH_NEEDED"
+      }
+    },
+    {
+      "timestamp": "2026-05-04T14:12:08.865Z",
+      "step": "SEARCH",
+      "label": "No search needed — AI decided to skip",
+      "data": {}
+    },
+    {
+      "timestamp": "2026-05-04T14:12:08.868Z",
+      "step": "AI",
+      "label": "Prompts constructed",
+      "data": {
+        "personality": "marites",
+        "userPrompt": "Analyze the following text and classify it:\n\n---\n[Title: Mayon Volcano Travel Guide: Everything You Need to Know | Guide to the Philippines]\n[Source: guidetothephilippines.ph]\n\nStanding tall with its perfect cone shape, Mayon Volcano is one of the most breathtaking volcanoes in the Philippines and an iconic natural landmark. Located in the province of Albay in the Bicol region, this active volcano is a must-visit for travelers seeking both stunning landscapes and thrilling adventures.The name \"Mayon,\" derived from the Bicolano word \"magayon,\" meaning beautiful, perfectly describes this natural wonder. Beyond its beauty, the volcano holds centuries of history and folklore, making it a symbol of resilience and culture in the region. Rising 2,462 meters above sea level, its majestic presence dominates the Albay province skyline, offering breathtaking views from nearly every corner of the region.According to local folklore, Mayon Volcano is named after \"Daragang Magayon,\" a beautiful maiden whose tragic love story is said to have shaped the iconic cone. Legend has it that Magayon fell in love with a warrior named Panganoron, but their love ended in tragedy when they were both killed by jealous rivals.Heartbroken, the gods transformed Magayon into the majestic volcano, her perfect cone symbolizing her beauty, and Panganoron’s spirit is said to bring rain to cool her fiery temper.Joining tours to Mayon Volcano lets you experience its beauty up close through activities like a 4x4 ATV ride to the Lava Wall trail or a visit to the historic Cagsawa Ruins, which stand as a poignant reminder of the volcano’s 1814 eruption. Each activity is a journey through Albay province’s vibrant culture, fascinating history, and awe-inspiring natural scenery.A visit to Mayon Volcano offers a mix of excitement, culture, and natural beauty that will leave a lasting impression. Whether you’re riding an ATV, sightseeing, or simply soaking in the views, this adventure is a must for anyone exploring the Philippines.Key Takeaways\nMayon Volcano is one of the most iconic natural landmarks in the Philippines , famous for its near-perfect cone shape and scenic views, located in Albay province in the Bicol Region.\nIt is an active volcano and part of the Pacific Ring of Fire , offering a striking backdrop for sightseeing, photography, and adventure tourism.\nTop attractions near Mayon include Cagsawa Ruins, Lignon Hill Nature Park, Daraga Church, and Sumlang Lake , all offering panoramic views of the volcano.\nAdventure seekers can explore the volcano’s surrounding areas by ATV , with guided trails ranging from beginner routes to more challenging paths that lead close to the lava front.\nCultural and heritage sites such as Cagsawa Ruins and local churches give visitors a glimpse into the region’s history and resilience, especially after past eruptions.\nThe best time to visit Mayon Volcano is during the dry season , from December to May , when the skies are clearer and the volcano’s cone is most visible.\nYou can reach Mayon Volcano via Bicol International Airport , which is accessible by flight from Manila or Cebu City and serves as the main jump-off point for tours.\nYou can book Mayon Volcano tours, transfers, and Bicol vacation packages through Guide to the Philippines for a convenient and organized trip.Best Time to VisitThe ideal time to visit Mayon Volcano is during the dry season from March to May, when the skies are clear, and the views are spectacular. A local saying claims that only the pure of heart can see Mayon Volcano in all its glory, as its perfect cone often hides behind clouds. Early mornings offer the best chance to see the volcano unobstructed by clouds.Budget-conscious travelers may prefer visiting during the off-peak season from November to December, when accommodations and flights are often more affordable. However, expect some rainfall during this period.How to Get ThereMayon Volcano’s striking beauty and perfect cone shape have made it one of the must-see attractions in the Philippines . Located in Albay province in the Bicol region, south of Luzon region, it’s easily accessible via various modes of transportation.You can travel to Mayon Volcano from Manila City , Cebu City, or other parts of the country. Here’s how you can travel to this iconic landmark and start your adventure:\nFor a hassle-free trip, browse  packages to Albay province that may include transfersBy AirThe fastest way to reach Albay province is by flying to Bicol International Airport (DRP), the gateway to the region. Direct flights are available from Manila City, Cebu City, and other major airports in the Philippines . Flight time from Manila City is approximately 1 hour and 20 minutes.By LandFor a scenic and budget-friendly journey, buses from Manila City to Legazpi City in Albay Province offer a 9-hour ride.By SeaVisitors from Cebu Island Province or Leyte Province can take ferries to Masbate Island and continue by land to Legazpi City in Albay. The ferry ride typically lasts 12-15 hours.Best Mayon Volcano Tours and ActivitiesA visit to Mayon Volcano is more than just admiring its breathtaking cone; it’s about immersing yourself ...\n---",
+        "hasSearchContext": false
+      }
+    },
+    {
+      "timestamp": "2026-05-04T14:12:11.306Z",
+      "step": "AI",
+      "label": "Raw Gemini response received",
+      "data": {
+        "rawResponse": "```json\n{\n  \"label\": \"True\",\n  \"confidence\": 95,\n  \"marites_explanation\": \"Ayy teh, it's true naman that Mayon Volcano is a famous landmark in Albay! It's known for its perfect cone and all that. Madaming turista pumupunta dyan para mag-picture at mag-adventure. So, yes, confirmed!\",\n  \"claims\": [\n    \"Mayon Volcano is located in Albay province in the Bicol region.\",\n    \"Mayon Volcano is an active volcano.\",\n    \"The best time to visit Mayon Volcano is during the dry season from December to May.\"\n  ],\n  \"evidence\": [\n    \"The article explicitly states the location and active status of Mayon Volcano.\",\n    \"The article mentions the best time to visit is during the dry season.\"\n  ],\n  \"linguistic_flags\": [],\n  \"fact_correction\": null\n}\n```"
+      }
+    },
+    {
+      "timestamp": "2026-05-04T14:12:11.308Z",
+      "step": "AI",
+      "label": "Response parsed successfully",
+      "data": {
+        "label": "True",
+        "confidence": 95,
+        "explanation": "Ayy teh, it's true naman that Mayon Volcano is a famous landmark in Albay! It's known for its perfect cone and all that. Madaming turista pumupunta dyan para mag-picture at mag-adventure. So, yes, confirmed!",
+        "claims": [
+          "Mayon Volcano is located in Albay province in the Bicol region.",
+          "Mayon Volcano is an active volcano.",
+          "The best time to visit Mayon Volcano is during the dry season from December to May."
+        ],
+        "evidence": [
+          "The article explicitly states the location and active status of Mayon Volcano.",
+          "The article mentions the best time to visit is during the dry season."
+        ],
+        "linguisticFlags": [],
+        "factCorrection": null
+      }
+    },
+    {
+      "timestamp": "2026-05-04T14:12:11.309Z",
+      "step": "LITERACY",
+      "label": "Generating literacy lesson",
+      "data": {
+        "classification": "fact",
+        "flagCount": 0,
+        "sourceCount": 0
+      }
+    },
+    {
+      "timestamp": "2026-05-04T14:12:14.018Z",
+      "step": "LITERACY",
+      "label": "Literacy lesson generated",
+      "data": {
+        "summary": "This article contains factual information about Mayon Volcano, which you can verify by looking for specific details and cross-referencing them with reliable sources.",
+        "pointCount": 3,
+        "tip": "When researching travel destinations, always double-check key facts with official sources to ensure accuracy and safety."
+      }
+    },
+    {
+      "timestamp": "2026-05-04T14:12:14.020Z",
+      "step": "OUTPUT",
+      "label": "Final result mapped for frontend",
+      "data": {
+        "classification": "fact",
+        "chismisLevel": 5,
+        "message": "Legit naman 'to ✅",
+        "details": "Mukhang totoo naman ito based sa analysis ni Marites.",
+        "breakdown": {
+          "reasons": [
+            "Mayon Volcano is located in Albay province in the Bicol region.",
+            "Mayon Volcano is an active volcano.",
+            "The best time to visit Mayon Volcano is during the dry season from December to May."
+          ],
+          "redFlags": [
+            "The article explicitly states the location and active status of Mayon Volcano."
+          ]
+        },
+        "harmScore": {
+          "level": "low",
+          "score": 11,
+          "explanation": "This content appears to be factual. Safe to share with context."
+        },
+        "maritesMode": "Ayy teh, it's true naman that Mayon Volcano is a famous landmark in Albay! It's known for its perfect cone and all that. Madaming turista pumupunta dyan para mag-picture at mag-adventure. So, yes, confirmed!",
+        "resibo": {
+          "verdict": "The article explicitly states the location and active status of Mayon Volcano. | The article mentions the best time to visit is during the dry season.",
+          "sources": []
+        },
+        "linguisticFlags": [],
+        "factCorrection": null,
+        "sourceCredibility": {
+          "score": 0,
+          "trustedCount": 0,
+          "semiTrustedCount": 0,
+          "untrustedCount": 0
+        },
+        "literacyLesson": {
+          "summary": "This article contains factual information about Mayon Volcano, which you can verify by looking for specific details and cross-referencing them with reliable sources.",
+          "points": [
+            {
+              "issue": "The article mentions that Mayon Volcano is located in Albay, Bicol.",
+              "correction": "You can verify this information through official government websites like the Philippine Institute of Volcanology and Seismology (PHIVOLCS) or reputable encyclopedias."
+            },
+            {
+              "issue": "The article describes Mayon Volcano as an active volcano.",
+              "correction": "PHIVOLCS regularly publishes updates on the activity status of Philippine volcanoes, so check their website for the most current information."
+            },
+            {
+              "issue": "The article uses the word 'magayon' as the origin of the name Mayon.",
+              "correction": "Look for academic sources or reputable cultural websites that discuss the etymology of the name to confirm this connection."
+            }
+          ],
+          "tip": "When researching travel destinations, always double-check key facts with official sources to ensure accuracy and safety."
+        }
+      }
+    }
+  ]
+}
