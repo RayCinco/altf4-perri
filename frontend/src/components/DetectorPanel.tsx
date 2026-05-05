@@ -122,14 +122,14 @@ export default function DetectorPanel() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 min-h-105">
         
         {/* Left Panel */}
-        <div className="bg-[#001D3F] border border-[#04356A] rounded-xl p-4 flex min-h-80">
+        <div className="bg-[#001d3f49] border border-[#04356A] rounded-xl p-4 flex min-h-80">
           {activeTab === "text" && <TextUI onAnalyze={handleAnalyze} loading={loading} />}
           {activeTab === "image" && <ImageUI onAnalyze={handleAnalyze} loading={loading} />}
           {activeTab === "url" && <UrlUI onAnalyze={handleAnalyze} loading={loading} />}
         </div>
 
         {/* Right Panel */}
-        <div className="bg-[#001D3F] border border-[#04356A] rounded-xl p-4 flex items-center justify-center min-h-80">
+        <div className="bg-[#001d3f49] border border-[#04356A] rounded-xl p-4 flex items-center justify-center min-h-80">
           
           {loading && (
             <div className="text-[#7FB3FF] animate-pulse text-sm">

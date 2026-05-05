@@ -3,9 +3,9 @@ import MeshGradientBackground from "@/components/MeshGradientBackground";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import HeroHeading  from "@/components/Heading";
-import { Afacad } from "next/font/google";
+import { Inter } from "next/font/google";
 
-const afacad = Afacad({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] });
 
 
 export default function RootLayout({
@@ -15,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${afacad.className} relative bg-black text-white`}>
+      <body className={`${inter.className} relative bg-black text-white`}>
         <MeshGradientBackground />
 
         {/* Header */}
