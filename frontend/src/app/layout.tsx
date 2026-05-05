@@ -1,16 +1,12 @@
 import "./globals.css";
+import MeshGradientBackground from "@/components/MeshGradientBackground";
 import { Header } from "@/components/Header";
-import { Google_Sans } from "next/font/google";
+import { Footer } from "@/components/Footer";
+import HeroHeading  from "@/components/Heading";
+import { Afacad } from "next/font/google";
 
-const sans = Google_Sans({
-  subsets: ["latin"],
-  display: "swap",
-});
+const afacad = Afacad({ subsets: ["latin"] });
 
-export const metadata = {
-  title: "ChismiScan",
-  description: "Gossip Analyzer & Fake News Detector",
-};
 
 export default function RootLayout({
   children,
@@ -19,14 +15,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${sans.className} bg-linear-to-br from-red-50 via-orange-50 to-yellow-50 min-h-screen`}>
+      <body className={`${afacad.className} relative bg-black text-white`}>
+        <MeshGradientBackground />
+
+        {/* Header */}
         <Header />
-        <main className="container mx-auto px-4 py-8 max-w-4xl">
+
+        {/* Page Content */}
+        <main className="relative z-10">
+          <HeroHeading />
           {children}
         </main>
-        <footer className="text-center py-6 text-sm text-gray-500">
-          <p>ChismiScan v1.0 - Powered by AltF4</p>
-        </footer>
+
+        {/* Footer */}
+        <Footer />
       </body>
     </html>
   );
