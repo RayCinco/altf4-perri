@@ -7,6 +7,11 @@ import { Afacad } from "next/font/google";
 
 const afacad = Afacad({ subsets: ["latin"] });
 
+export const metadata = {
+  icons: {
+    icon: "/Perri.png",
+  },
+};
 
 export default function RootLayout({
   children,
@@ -15,11 +20,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${afacad.className} relative bg-black text-white`}>
+      <body className={`${afacad.className} relative bg-black text-white`} suppressHydrationWarning={true}>
         <MeshGradientBackground />
-
-        {/* Header */}
-        <Header />
 
         {/* Page Content */}
         <main className="relative z-10">
