@@ -2,6 +2,7 @@ import type { LiteracyLesson } from "@/lib/media_literacy";
 
 // TYPE (unchanged)
 export interface AnalysisResult {
+  personality: 'marites' | 'formal';
   classification: 'fact' | 'opinion' | 'chismis';
   chismisLevel: number;
   message: string;
@@ -48,6 +49,7 @@ export async function analyzeImage(imageBase64: string): Promise<AnalysisResult>
 
   if (random < 0.33) {
     return {
+      personality: "marites",
       classification: "fact",
       chismisLevel: 10,
       message: "Legit naman ‘to",
@@ -81,6 +83,7 @@ export async function analyzeImage(imageBase64: string): Promise<AnalysisResult>
 
   if (random < 0.66) {
     return {
+      personality: "marites",
       classification: "opinion",
       chismisLevel: 40,
       message: "Opinion lang ‘to",
@@ -107,6 +110,7 @@ export async function analyzeImage(imageBase64: string): Promise<AnalysisResult>
   }
 
   return {
+    personality: "marites",
     classification: "chismis",
     chismisLevel: 85,
     message: "CHISMIS ALERT",

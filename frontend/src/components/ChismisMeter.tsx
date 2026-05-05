@@ -3,9 +3,10 @@ import { motion } from 'motion/react';
 interface ChismisMeterProps {
   level: number;
   classification: 'fact' | 'opinion' | 'chismis';
+  personality?: 'marites' | 'formal';
 }
 
-export function ChismisMeter({ level, classification }: ChismisMeterProps) {
+export function ChismisMeter({ level, classification, personality = 'marites' }: ChismisMeterProps) {
   const getColor = () => {
     if (classification === 'fact') return 'from-green-500 to-emerald-500';
     if (classification === 'opinion') return 'from-yellow-500 to-orange-500';
@@ -13,22 +14,36 @@ export function ChismisMeter({ level, classification }: ChismisMeterProps) {
   };
 
   const getLabel = () => {
-    if (level < 30) return 'Low Chismis';
-    if (level < 60) return 'Medium Chismis';
-    return 'HIGH CHISMIS';
+    if (personality === 'formal') {
+      if (level < 30) return 'High Credibility';
+      if (level < 60) return 'Mixed Credibility';
+      return 'Low Credibility';
+    } else {
+      if (level < 30) return 'Low Chismis';
+      if (level < 60) return 'Medium Chismis';
+      return 'HIGH CHISMIS';
+    }
   };
 
   const getEmoji = () => {
-    if (classification === 'fact') return '✅';
-    if (classification === 'opinion') return '🤔';
-    return '🫖';
+    if (personality === 'formal') {
+      if (classification === 'fact') return '✅';
+      if (classification === 'opinion') return '⚖️';
+      return '⚠️';
+    } else {
+      if (classification === 'fact') return '✅';
+      if (classification === 'opinion') return '🤔';
+      return '🫖';
+    }
   };
 
   return (
     <div className="bg-white rounded-xl p-6 shadow-lg">
       <div className="text-center mb-4">
         <div className="text-6xl mb-2">{getEmoji()}</div>
-        <h3 className="text-xl font-bold text-gray-800">Chismis Meter</h3>
+        <h3 className="text-xl font-bold text-gray-800">
+          {personality === 'formal' ? 'Credibility Meter' : 'Chismis Meter'}
+        </h3>
       </div>
 
       <div className="relative h-40 flex items-end justify-center">

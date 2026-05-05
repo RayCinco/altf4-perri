@@ -158,6 +158,7 @@ export default function Page() {
               <ChismisMeter
                 level={result.chismisLevel}
                 classification={result.classification}
+                personality={result.personality}
               />
             </div>
           </div>
@@ -178,20 +179,30 @@ export default function Page() {
               </p>
             </div>
 
-            {/* Marites Mode - The Hook */}
+            {/* AI Explanation */}
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.7 }}
-              className="bg-gradient-to-r from-red-100 to-orange-100 rounded-xl p-6 border-2 border-red-300 shadow-lg"
+              className={`rounded-xl p-6 border-2 shadow-lg ${
+                result.personality === 'formal'
+                  ? 'bg-gradient-to-r from-blue-100 to-indigo-100 border-blue-300'
+                  : 'bg-gradient-to-r from-red-100 to-orange-100 border-red-300'
+              }`}
             >
               <div className="flex items-start gap-3">
-                <div className="text-4xl">🫖</div>
+                <div className="text-4xl">
+                  {result.personality === 'formal' ? '📊' : '🫖'}
+                </div>
                 <div className="flex-1">
-                  <h4 className="font-bold text-lg text-red-900 mb-2">
-                    Marites Mode Says:
+                  <h4 className={`font-bold text-lg mb-2 ${
+                    result.personality === 'formal' ? 'text-blue-900' : 'text-red-900'
+                  }`}>
+                    {result.personality === 'formal' ? 'Analysis Summary:' : 'Marites Mode Says:'}
                   </h4>
-                  <p className="text-gray-800 text-lg italic">
+                  <p className={`text-lg italic ${
+                    result.personality === 'formal' ? 'text-blue-950' : 'text-gray-800'
+                  }`}>
                     &quot;{result.maritesMode}&quot;
                   </p>
                 </div>
@@ -212,7 +223,7 @@ export default function Page() {
                   </div>
                   <div className="flex-1">
                     <h4 className="font-bold text-lg text-emerald-900 mb-2">
-                      ✏️ Ang Totoo — Fact Correction:
+                      {result.personality === 'formal' ? '✏️ Fact Correction:' : '✏️ Ang Totoo — Fact Correction:'}
                     </h4>
                     <p className="text-gray-800 text-base leading-relaxed">
                       {result.factCorrection}
@@ -249,7 +260,7 @@ export default function Page() {
             <div className="bg-white rounded-xl p-6 border-2 border-gray-200 shadow">
               <h4 className="font-bold text-lg text-gray-800 mb-4 flex items-center gap-2">
                 <Search className="w-5 h-5 text-red-600" />
-                Chismis Breakdown - Here&apos;s WHY:
+                {result.personality === 'formal' ? "Analysis Breakdown - Here's WHY:" : "Chismis Breakdown - Here's WHY:"}
               </h4>
 
               <div className="space-y-4">

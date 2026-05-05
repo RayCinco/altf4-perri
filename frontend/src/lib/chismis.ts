@@ -362,6 +362,7 @@ function mapToAnalysisResult(
   }));
 
   return {
+    personality,
     classification,
     chismisLevel,
     message: getResultMessage(classification, personality),
