@@ -1,0 +1,265 @@
+{
+  "session": {
+    "id": "s1zk5l",
+    "mode": "text",
+    "startedAt": "2026-05-06T03:51:07.395Z",
+    "completedAt": "2026-05-06T03:51:15.032Z",
+    "durationMs": 7637
+  },
+  "pipeline": [
+    {
+      "timestamp": "2026-05-06T03:51:07.401Z",
+      "step": "PIPELINE",
+      "label": "Text pipeline started",
+      "data": {
+        "inputText": "Spurs won vs Minessota Timberwolves Game 1",
+        "inputTextLength": 42
+      }
+    },
+    {
+      "timestamp": "2026-05-06T03:51:08.619Z",
+      "step": "SEARCH",
+      "label": "Query generated from text",
+      "data": {
+        "inputTextPreview": "Spurs won vs Minessota Timberwolves Game 1",
+        "generatedQuery": "Spurs Timberwolves Game 1 result"
+      }
+    },
+    {
+      "timestamp": "2026-05-06T03:51:10.358Z",
+      "step": "SEARCH",
+      "label": "Search results retrieved",
+      "data": {
+        "query": "Spurs Timberwolves Game 1 result",
+        "resultCount": 9,
+        "results": [
+          {
+            "title": "4 takeaways: Timberwolves win despite dominant defense by Wemby",
+            "snippet": "There was nothing in the run-up or the result to negate the Timberwolves' 104-102 victory on the Spurs' court, good for a 1-0 lead in the best- ...",
+            "link": "https://www.nba.com/news/timberwolves-spurs-2026-playoffs-game-1-takeaways"
+          },
+          {
+            "title": "Timberwolves steal Game 1 in last-second thriller despite historic ...",
+            "snippet": "Such was the case in a tight Game 1, which the Wolves won 104-102 Monday night at Frost Bank Center. Advertisement. Anthony Edwards returned to ...",
+            "link": "https://www.nytimes.com/athletic/7254281/2026/05/05/timberwolves-spurs-result-score-game-1/"
+          },
+          {
+            "title": "Timberwolves survive last second surge by Spurs in Game 1 - NBA",
+            "snippet": "Game Recap: Timberwolves 104, Spurs 102.",
+            "link": "https://www.nba.com/watch/video/fantastic-finish-timberwolves-survive-last-second-surge-by-spurs-in-game-1"
+          },
+          {
+            "title": "Timberwolves hold off Spurs 104-102 in Game 1 of ... - YouTube",
+            "snippet": "Timberwolves hold off Spurs 104-102 in Game 1 of Western Conference Semifinals. 7.9K views · 13 hours ago ...more ...",
+            "link": "https://www.youtube.com/watch?v=gnfAenUi85s"
+          },
+          {
+            "title": "Western Semifinals - 2026 NBA Playoffs: 12 Points on 4/8 ... - Reddit",
+            "snippet": "[Highlights] 38-year-old Mike Conley Jr. full highlights vs. San Antonio Spurs last night (104-102 W) - Game 1 - Western Semifinals - 2026 ...",
+            "link": "https://www.reddit.com/r/nba/comments/1t4ajis/highlights_38yearold_mike_conley_jr_full/"
+          },
+          {
+            "title": "NBA | Timberwolves win Game 1 led by Julius Randle (21 PTS, 10 ...",
+            "snippet": "Despite Victor Wembanyama recording a triple-double with blocks, the Timberwolves stole Game 1 from the Spurs, 104-102!!!",
+            "link": "https://www.instagram.com/reel/DX8Yovvty_u/"
+          },
+          {
+            "title": "#6 TIMBERWOLVES at #2 SPURS | FULL GAME 1 HIGHLIGHTS",
+            "snippet": "The Timberwolves defeated the Spurs, 104-102 tonight in San Antonio. Julius Randle led the way for the Timberwolves with 21 points and 10 ...",
+            "link": "https://www.youtube.com/watch?v=R1ErdXotXUI"
+          },
+          {
+            "title": "Minnesota Timberwolves overcome big game by Wembanyama to ...",
+            "snippet": "Minnesota Timberwolves overcome big game by Wembanyama to beat San Antonio Spurs 104-102 in Game 1 · More from CBS News · Featured Local Savings.",
+            "link": "https://www.cbsnews.com/minnesota/news/timberwolves-spurs-game-1-edwards-wembanyama/"
+          },
+          {
+            "title": "Spark from Anthony Edwards off bench helps Timberwolves steal ...",
+            "snippet": "Spark from Anthony Edwards off bench helps Timberwolves steal Game 1 on road from Spurs, 104-102 ... With two top-10 defenses facing off, points ...",
+            "link": "https://www.nbcsports.com/nba/news/spark-from-anthony-edwards-off-bench-helps-timberwolves-steal-game-1-on-road-from-spurs-104-102"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-06T03:51:10.361Z",
+      "step": "FILTER",
+      "label": "Sources classified by credibility",
+      "data": {
+        "totalSources": 9,
+        "trustedCount": 3,
+        "semiTrustedCount": 2,
+        "untrustedCount": 4,
+        "credibilityScore": 42,
+        "sources": [
+          {
+            "domain": "nba.com",
+            "credibility": "trusted",
+            "title": "4 takeaways: Timberwolves win despite dominant defense by Wemby"
+          },
+          {
+            "domain": "nytimes.com",
+            "credibility": "trusted",
+            "title": "Timberwolves steal Game 1 in last-second thriller despite historic ..."
+          },
+          {
+            "domain": "nba.com",
+            "credibility": "trusted",
+            "title": "Timberwolves survive last second surge by Spurs in Game 1 - NBA"
+          },
+          {
+            "domain": "youtube.com",
+            "credibility": "semi-trusted",
+            "title": "Timberwolves hold off Spurs 104-102 in Game 1 of ... - YouTube"
+          },
+          {
+            "domain": "reddit.com",
+            "credibility": "untrusted",
+            "title": "Western Semifinals - 2026 NBA Playoffs: 12 Points on 4/8 ... - Reddit"
+          },
+          {
+            "domain": "instagram.com",
+            "credibility": "untrusted",
+            "title": "NBA | Timberwolves win Game 1 led by Julius Randle (21 PTS, 10 ..."
+          },
+          {
+            "domain": "youtube.com",
+            "credibility": "semi-trusted",
+            "title": "#6 TIMBERWOLVES at #2 SPURS | FULL GAME 1 HIGHLIGHTS"
+          },
+          {
+            "domain": "cbsnews.com",
+            "credibility": "untrusted",
+            "title": "Minnesota Timberwolves overcome big game by Wembanyama to ..."
+          },
+          {
+            "domain": "nbcsports.com",
+            "credibility": "untrusted",
+            "title": "Spark from Anthony Edwards off bench helps Timberwolves steal ..."
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-06T03:51:10.365Z",
+      "step": "AI",
+      "label": "Prompts constructed",
+      "data": {
+        "personality": "marites",
+        "userPrompt": "Analyze the following text and classify it:\n\n---\nSpurs won vs Minessota Timberwolves Game 1\n---\n\nAdditional search context for fact-checking:\nSource 1 [TRUSTED]:\nTitle: 4 takeaways: Timberwolves win despite dominant defense by Wemby\nSnippet: There was nothing in the run-up or the result to negate the Timberwolves' 104-102 victory on the Spurs' court, good for a 1-0 lead in the best- ...\nLink: https://www.nba.com/news/timberwolves-spurs-2026-playoffs-game-1-takeaways\nDomain: nba.com\n\nSource 2 [TRUSTED]:\nTitle: Timberwolves steal Game 1 in last-second thriller despite historic ...\nSnippet: Such was the case in a tight Game 1, which the Wolves won 104-102 Monday night at Frost Bank Center. Advertisement. Anthony Edwards returned to ...\nLink: https://www.nytimes.com/athletic/7254281/2026/05/05/timberwolves-spurs-result-score-game-1/\nDomain: nytimes.com\n\nSource 3 [TRUSTED]:\nTitle: Timberwolves survive last second surge by Spurs in Game 1 - NBA\nSnippet: Game Recap: Timberwolves 104, Spurs 102.\nLink: https://www.nba.com/watch/video/fantastic-finish-timberwolves-survive-last-second-surge-by-spurs-in-game-1\nDomain: nba.com\n\nSource 4 [SEMI-TRUSTED]:\nTitle: Timberwolves hold off Spurs 104-102 in Game 1 of ... - YouTube\nSnippet: Timberwolves hold off Spurs 104-102 in Game 1 of Western Conference Semifinals. 7.9K views · 13 hours ago ...more ...\nLink: https://www.youtube.com/watch?v=gnfAenUi85s\nDomain: youtube.com\n\nSource 5 [SEMI-TRUSTED]:\nTitle: #6 TIMBERWOLVES at #2 SPURS | FULL GAME 1 HIGHLIGHTS\nSnippet: The Timberwolves defeated the Spurs, 104-102 tonight in San Antonio. Julius Randle led the way for the Timberwolves with 21 points and 10 ...\nLink: https://www.youtube.com/watch?v=R1ErdXotXUI\nDomain: youtube.com\n",
+        "hasSearchContext": true
+      }
+    },
+    {
+      "timestamp": "2026-05-06T03:51:12.701Z",
+      "step": "AI",
+      "label": "Raw Gemini response received",
+      "data": {
+        "rawResponse": "```json\n{\n  \"label\": \"Fake\",\n  \"confidence\": 95,\n  \"marites_explanation\": \"Ayy girl, peyk yan! 😭 Akala ko ba Spurs nanalo? Eh, according sa mga balita, Timberwolves kaya ang nag-uwi ng Game 1. Kaloka!\",\n  \"claims\": [\n    \"Spurs won vs Minessota Timberwolves Game 1\"\n  ],\n  \"evidence\": [\n    \"Multiple trusted sources (nba.com, nytimes.com) confirm that the Timberwolves won Game 1 against the Spurs with a score of 104-102.\"\n  ],\n  \"linguistic_flags\": [],\n  \"fact_correction\": \"The claim says the Spurs won Game 1 against the Timberwolves, but according to nba.com and nytimes.com, the Timberwolves won with a score of 104-102.\"\n}\n```"
+      }
+    },
+    {
+      "timestamp": "2026-05-06T03:51:12.708Z",
+      "step": "AI",
+      "label": "Response parsed successfully",
+      "data": {
+        "label": "Fake",
+        "confidence": 95,
+        "explanation": "Ayy girl, peyk yan! 😭 Akala ko ba Spurs nanalo? Eh, according sa mga balita, Timberwolves kaya ang nag-uwi ng Game 1. Kaloka!",
+        "claims": [
+          "Spurs won vs Minessota Timberwolves Game 1"
+        ],
+        "evidence": [
+          "Multiple trusted sources (nba.com, nytimes.com) confirm that the Timberwolves won Game 1 against the Spurs with a score of 104-102."
+        ],
+        "linguisticFlags": [],
+        "factCorrection": "The claim says the Spurs won Game 1 against the Timberwolves, but according to nba.com and nytimes.com, the Timberwolves won with a score of 104-102."
+      }
+    },
+    {
+      "timestamp": "2026-05-06T03:51:12.713Z",
+      "step": "LITERACY",
+      "label": "Generating literacy lesson",
+      "data": {
+        "classification": "chismis",
+        "flagCount": 0,
+        "sourceCount": 3
+      }
+    },
+    {
+      "timestamp": "2026-05-06T03:51:15.026Z",
+      "step": "LITERACY",
+      "label": "Literacy lesson generated",
+      "data": {
+        "summary": "It's important to double-check sports news, especially the game results, because misinformation spreads fast.",
+        "pointCount": 2,
+        "tip": "Before sharing, always compare news from at least two different sources."
+      }
+    },
+    {
+      "timestamp": "2026-05-06T03:51:15.029Z",
+      "step": "OUTPUT",
+      "label": "Final result mapped for frontend",
+      "data": {
+        "classification": "chismis",
+        "chismisLevel": 95,
+        "message": "CHISMIS ALERT! 🚨",
+        "details": "Walang credible evidence na nahanap. Ingat sa pagsha-share!",
+        "breakdown": {
+          "reasons": [
+            "Spurs won vs Minessota Timberwolves Game 1"
+          ],
+          "redFlags": []
+        },
+        "harmScore": {
+          "level": "high",
+          "score": 95,
+          "explanation": "High risk of misinformation. Sharing this could mislead others."
+        },
+        "maritesMode": "Ayy girl, peyk yan! 😭 Akala ko ba Spurs nanalo? Eh, according sa mga balita, Timberwolves kaya ang nag-uwi ng Game 1. Kaloka!",
+        "resibo": {
+          "verdict": "Multiple trusted sources (nba.com, nytimes.com) confirm that the Timberwolves won Game 1 against the Spurs with a score of 104-102.",
+          "sources": [
+            {
+              "title": "4 takeaways: Timberwolves win despite dominant defense by Wemby",
+              "url": "https://www.nba.com/news/timberwolves-spurs-2026-playoffs-game-1-takeaways",
+              "credibility": "verified"
+            },
+            {
+              "title": "Timberwolves steal Game 1 in last-second thriller despite historic ...",
+              "url": "https://www.nytimes.com/athletic/7254281/2026/05/05/timberwolves-spurs-result-score-game-1/",
+              "credibility": "verified"
+            },
+            {
+              "title": "Timberwolves survive last second surge by Spurs in Game 1 - NBA",
+              "url": "https://www.nba.com/watch/video/fantastic-finish-timberwolves-survive-last-second-surge-by-spurs-in-game-1",
+              "credibility": "verified"
+            }
+          ]
+        },
+        "linguisticFlags": [],
+        "factCorrection": "The claim says the Spurs won Game 1 against the Timberwolves, but according to nba.com and nytimes.com, the Timberwolves won with a score of 104-102.",
+        "sourceCredibility": {
+          "score": 42,
+          "trustedCount": 3,
+          "semiTrustedCount": 2,
+          "untrustedCount": 4
+        },
+        "literacyLesson": {
+          "summary": "It's important to double-check sports news, especially the game results, because misinformation spreads fast.",
+          "points": [
+            {
+              "issue": "The claim says \"Spurs won,\" but maraming credible sources report na Timberwolves ang nanalo.",
+              "correction": "Tignan ang mga official sports websites like nba.com para sa accurate game results."
+            },
+            {
+              "issue": "The claim is too short and doesn't give enough details about the game.",
+              "correction": "A credible report includes the final score, key players, and highlights of the game."
+            }
+          ],
+          "tip": "Before sharing, always compare news from at least two different sources."
+        }
+      }
+    }
+  ]
+}

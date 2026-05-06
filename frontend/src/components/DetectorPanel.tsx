@@ -5,6 +5,8 @@ import { Link, ImageIcon, FileText, ChevronDown } from "lucide-react";
 import { ChismisMeter } from "./ChismisMeter";
 import { analyzeChismisAPI } from "@/lib/apiClient";
 import { useImageDropPaste } from "@/components/hooks/useImageDropPaste";
+import ResultsPanel, { type PopupResult } from "./Popup";
+// (AnalysisResult type is used via apiClient return type inference)
 
 /* ----------------- TYPES ----------------- */
 
@@ -27,6 +29,8 @@ export default function DetectorPanel() {
 
   const [result, setResult] = useState<ResultType | null>(null);
   const [loading, setLoading] = useState(false);
+  const [popupResult, setPopupResult] = useState<PopupResult | null>(null);
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -89,6 +93,19 @@ export default function DetectorPanel() {
         level: data.chismisLevel,
         classification: data.classification,
       });
+
+      // Pass raw API data directly to the popup
+      setPopupResult({
+        classification: data.classification,
+        chismisLevel: data.chismisLevel,
+        message: data.message,
+        details: data.details,
+        breakdown: data.breakdown,
+        harmScore: data.harmScore,
+        resibo: data.resibo,
+        literacyLesson: data.literacyLesson,
+      });
+      setIsPanelOpen(true);
     } catch {
       setError("Network error. Please check your connection and try again.");
     } finally {
@@ -97,126 +114,146 @@ export default function DetectorPanel() {
   };
 
   return (
-    <div className="w-full max-w-5xl mx-auto rounded-2xl border border-[#04356A] bg-[#000919] text-white p-4">
-      {/* ----------------- TOP BAR ----------------- */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
-        {/* Mode Dropdown */}
-        <div className="relative" ref={dropdownRef}>
-          <button
-            onClick={() => setOpen((prev) => !prev)}
-            className="flex items-center gap-2 px-4 py-2 bg-[#001D3F] border border-[#04356A] rounded-lg hover:bg-[#0a1a3a]"
-          >
-            Mode:
-            <span className="text-[#54A9FF] font-medium">
-              {mode === "genz" ? "GenZ Mode" : "Formal Mode"}
-            </span>
-            <ChevronDown size={16} />
-          </button>
+    <>
+      <div className="w-full max-w-5xl mx-auto rounded-2xl border border-[#04356A] bg-[#000919] text-white p-4">
+        {/* ----------------- TOP BAR ----------------- */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+          {/* Mode Dropdown */}
+          <div className="relative" ref={dropdownRef}>
+            <button
+              onClick={() => setOpen((prev) => !prev)}
+              className="flex items-center gap-2 px-4 py-2 bg-[#001D3F] border border-[#04356A] rounded-lg hover:bg-[#0a1a3a]"
+            >
+              Mode:
+              <span className="text-[#54A9FF] font-medium">
+                {mode === "genz" ? "GenZ Mode" : "Formal Mode"}
+              </span>
+              <ChevronDown size={16} />
+            </button>
 
-          {open && (
-            <div className="absolute mt-2 w-full bg-[#001D3F] border border-[#04356A] rounded-lg overflow-hidden z-10">
-              <button
-                onClick={() => {
-                  setMode("genz");
-                  setOpen(false);
-                }}
-                className="w-full px-4 py-2 text-left hover:bg-[#0a1a3a]"
-              >
-                GenZ Mode
-              </button>
-              <button
-                onClick={() => {
-                  setMode("formal");
-                  setOpen(false);
-                }}
-                className="w-full px-4 py-2 text-left hover:bg-[#0a1a3a]"
-              >
-                Formal Mode
-              </button>
-            </div>
-          )}
+            {open && (
+              <div className="absolute mt-2 w-full bg-[#001D3F] border border-[#04356A] rounded-lg overflow-hidden z-10">
+                <button
+                  onClick={() => {
+                    setMode("genz");
+                    setOpen(false);
+                  }}
+                  className="w-full px-4 py-2 text-left hover:bg-[#0a1a3a]"
+                >
+                  GenZ Mode
+                </button>
+                <button
+                  onClick={() => {
+                    setMode("formal");
+                    setOpen(false);
+                  }}
+                  className="w-full px-4 py-2 text-left hover:bg-[#0a1a3a]"
+                >
+                  Formal Mode
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Tabs */}
+          <div className="flex gap-2 flex-wrap">
+            <TabButton
+              active={activeTab === "url"}
+              onClick={() => setActiveTab("url")}
+              icon={<Link size={16} />}
+              label="URL"
+            />
+            <TabButton
+              active={activeTab === "image"}
+              onClick={() => setActiveTab("image")}
+              icon={<ImageIcon size={16} />}
+              label="Image"
+            />
+            <TabButton
+              active={activeTab === "text"}
+              onClick={() => setActiveTab("text")}
+              icon={<FileText size={16} />}
+              label="Text"
+            />
+          </div>
         </div>
 
-        {/* Tabs */}
-        <div className="flex gap-2 flex-wrap">
-          <TabButton
-            active={activeTab === "url"}
-            onClick={() => setActiveTab("url")}
-            icon={<Link size={16} />}
-            label="URL"
-          />
-          <TabButton
-            active={activeTab === "image"}
-            onClick={() => setActiveTab("image")}
-            icon={<ImageIcon size={16} />}
-            label="Image"
-          />
-          <TabButton
-            active={activeTab === "text"}
-            onClick={() => setActiveTab("text")}
-            icon={<FileText size={16} />}
-            label="Text"
-          />
+        {/* ----------------- GRID ----------------- */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 min-h-105">
+          {/* Left Panel */}
+          <div className="bg-[#001d3f49] border border-[#04356A] rounded-xl p-4 flex min-h-80">
+            {activeTab === "text" && (
+              <TextUI
+                onAnalyze={handleAnalyze}
+                loading={loading}
+                value={textInput}
+                onChange={setTextInput}
+              />
+            )}
+            {activeTab === "image" && (
+              <ImageUI
+                onAnalyze={handleAnalyze}
+                loading={loading}
+                file={imageFile}
+                onFileChange={setImageFile}
+              />
+            )}
+            {activeTab === "url" && (
+              <UrlUI
+                onAnalyze={handleAnalyze}
+                loading={loading}
+                value={urlInput}
+                onChange={setUrlInput}
+              />
+            )}
+          </div>
+
+          {/* Right Panel */}
+          <div className="bg-[#001d3f49] border border-[#04356A] rounded-xl p-4 flex flex-col items-center justify-center min-h-80 gap-2">
+            {loading && (
+              <div className="text-[#7FB3FF] animate-pulse text-sm">
+                Analyzing...
+              </div>
+            )}
+
+            {!loading && error && (
+              <div className="text-red-400 text-sm text-center px-4">
+                {error}
+              </div>
+            )}
+
+            {!loading && !error && !result && (
+              <div className="text-[#7FB3FF] text-sm">
+                Your analysis will appear here.
+              </div>
+            )}
+
+            {!loading && !error && result && (
+              <>
+                <ChismisMeter
+                  level={result.level}
+                  classification={result.classification}
+                />
+                <button
+                  onClick={() => setIsPanelOpen(true)}
+                  className="mt-3 px-5 py-2 bg-[#04356A] hover:bg-[#054E98] text-white text-sm rounded-lg border border-[#1e3a5f] transition"
+                >
+                  View Full Results
+                </button>
+              </>
+            )}
+          </div>
         </div>
       </div>
 
-      {/* ----------------- GRID ----------------- */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 min-h-105">
-        {/* Left Panel */}
-        <div className="bg-[#001d3f49] border border-[#04356A] rounded-xl p-4 flex min-h-80">
-          {activeTab === "text" && (
-            <TextUI
-              onAnalyze={handleAnalyze}
-              loading={loading}
-              value={textInput}
-              onChange={setTextInput}
-            />
-          )}
-          {activeTab === "image" && (
-            <ImageUI
-              onAnalyze={handleAnalyze}
-              loading={loading}
-              file={imageFile}
-              onFileChange={setImageFile}
-            />
-          )}
-          {activeTab === "url" && (
-            <UrlUI
-              onAnalyze={handleAnalyze}
-              loading={loading}
-              value={urlInput}
-              onChange={setUrlInput}
-            />
-          )}
-        </div>
-
-        {/* Right Panel */}
-        <div className="bg-[#001d3f49] border border-[#04356A] rounded-xl p-4 flex items-center justify-center min-h-80">
-          {loading && (
-            <div className="text-[#7FB3FF] animate-pulse text-sm">
-              Analyzing...
-            </div>
-          )}
-
-          {!loading && error && (
-            <div className="text-red-400 text-sm text-center px-4">{error}</div>
-          )}
-
-          {!loading && !error && !result && (
-            <div className="text-[#7FB3FF] text-sm">
-              Your analysis will appear here.
-            </div>
-          )}
-
-          {!loading && !error && result && (
-            <ChismisMeter
-              level={result.level}
-              classification={result.classification}
-            />
-          )}
-        </div>
-      </div>
-    </div>
+      {/* Results Panel Popup */}
+      <ResultsPanel
+        isOpen={isPanelOpen}
+        result={popupResult}
+        onClose={() => setIsPanelOpen(false)}
+        onToggle={() => setIsPanelOpen(!isPanelOpen)}
+      />
+    </>
   );
 }
 
@@ -269,7 +306,7 @@ function ImageUI({
   const dropRef = useRef<HTMLDivElement>(null);
   useImageDropPaste({
     onImage: onFileChange,
-    dropRef,
+    dropRef: dropRef as React.RefObject<HTMLElement>,
   });
   return (
     <div className="w-full h-full flex flex-col gap-3">

@@ -2,11 +2,10 @@ import "./globals.css";
 import MeshGradientBackground from "@/components/MeshGradientBackground";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import HeroHeading  from "@/components/Heading";
+import HeroHeading from "@/components/Heading";
 import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
-
 
 export default function RootLayout({
   children,
@@ -15,14 +14,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} relative bg-black text-white`}>
+      <body
+        className={`${inter.className} bg-black text-white flex flex-col min-h-screen`}
+      >
         <MeshGradientBackground />
 
         {/* Header */}
         <Header />
 
-        {/* Page Content */}
-        <main className="relative z-10">
+        {/* Page Content — flex-1 makes this fill the space between header and footer */}
+        <main className="relative z-10 flex-1 overflow-x-hidden">
           <HeroHeading />
           {children}
         </main>

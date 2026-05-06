@@ -1,0 +1,255 @@
+{
+  "session": {
+    "id": "nlnlhd",
+    "mode": "text",
+    "startedAt": "2026-05-06T03:44:48.500Z",
+    "completedAt": "2026-05-06T03:44:55.754Z",
+    "durationMs": 7254
+  },
+  "pipeline": [
+    {
+      "timestamp": "2026-05-06T03:44:48.505Z",
+      "step": "PIPELINE",
+      "label": "Text pipeline started",
+      "data": {
+        "inputText": "Spurs vs Minessota, Minnesota wins game 1",
+        "inputTextLength": 41
+      }
+    },
+    {
+      "timestamp": "2026-05-06T03:44:49.726Z",
+      "step": "SEARCH",
+      "label": "Query generated from text",
+      "data": {
+        "inputTextPreview": "Spurs vs Minessota, Minnesota wins game 1",
+        "generatedQuery": "Minnesota wins Spurs game 1"
+      }
+    },
+    {
+      "timestamp": "2026-05-06T03:44:51.326Z",
+      "step": "SEARCH",
+      "label": "Search results retrieved",
+      "data": {
+        "query": "Minnesota wins Spurs game 1",
+        "resultCount": 8,
+        "results": [
+          {
+            "title": "#6 TIMBERWOLVES at #2 SPURS | FULL GAME 1 HIGHLIGHTS",
+            "snippet": "The Timberwolves defeated the Spurs, 104-102 tonight in San Antonio. Julius Randle led the way for the Timberwolves with 21 points and 10 ...",
+            "link": "https://www.youtube.com/watch?v=R1ErdXotXUI"
+          },
+          {
+            "title": "Spurs' last minute rally falls short as Wolves win Game 1",
+            "snippet": "Game 1 didn't reveal a mismatch. It revealed how thin the line is. The Spurs proved they can go toe-to-toe with Minnesota's physicality ...",
+            "link": "https://www.poundingtherock.com/game-recaps/101173/spurs-last-minute-rally-falls-short-as-wolves-win-game-1"
+          },
+          {
+            "title": "[Highlight] The Minnesota Timberwolves get the final stop and take ...",
+            "snippet": "[Highlight] The Minnesota Timberwolves get the final stop and take Game 1 with a 104-102 victory over the San Antonio Spurs. Julius Randle ...",
+            "link": "https://www.reddit.com/r/nba/comments/1t44uqf/highlight_the_minnesota_timberwolves_get_the/"
+          },
+          {
+            "title": "Timberwolves hold off Spurs 104-102 in Game 1 of ... - YouTube",
+            "snippet": "Timberwolves coach Chris Finch spoke with reporters after Monday night's 104-102 win over the San Antonio Spurs in Game 1 of the Western ...",
+            "link": "https://www.youtube.com/watch?v=gnfAenUi85s"
+          },
+          {
+            "title": "Anthony Edwards' Perfect Reaction to Wolves' Game 1 Win Over ...",
+            "snippet": "The Minnesota Timberwolves overcame the San Antonio Spurs in Game 1 of the Western Conference Semifinals on Monday, but it wouldn't have ...",
+            "link": "https://rg.org/news/basketball/anthony-edwards-return-game-1-reaction-timberwolves-spurs"
+          },
+          {
+            "title": "Edwards returns in Minnesota's Game 1 win over Spurs | The Flag",
+            "snippet": "The Minnesota Timberwolves edged the San Antonio Spurs 104-102 in Game 1 of their Western Conference Semifinals series.",
+            "link": "https://www.am1100theflag.com/sports/edwards-returns-in-minnesotas-game-1-win-over-spurs/"
+          },
+          {
+            "title": "The Timberwolves get the 104-102 Game 1 WIN over the Spurs in ...",
+            "snippet": "The Minnesota Timberwolves win GAME 1 vs the San Antonio Spurs in their own arena. They lead the series 1-0… The spread was Spurs -11.5!",
+            "link": "https://www.instagram.com/p/DX8XJ5_gTvG/"
+          },
+          {
+            "title": "Spurs' last minute rally falls short as Wolves win Game 1",
+            "snippet": "San Antonio's defensive brilliance isn't enough as late miss seals 104-102 loss in physical series opener.",
+            "link": "https://sports.yahoo.com/articles/spurs-last-minute-rally-falls-054900535.html"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-06T03:44:51.330Z",
+      "step": "FILTER",
+      "label": "Sources classified by credibility",
+      "data": {
+        "totalSources": 8,
+        "trustedCount": 0,
+        "semiTrustedCount": 4,
+        "untrustedCount": 4,
+        "credibilityScore": 20,
+        "sources": [
+          {
+            "domain": "youtube.com",
+            "credibility": "semi-trusted",
+            "title": "#6 TIMBERWOLVES at #2 SPURS | FULL GAME 1 HIGHLIGHTS"
+          },
+          {
+            "domain": "poundingtherock.com",
+            "credibility": "untrusted",
+            "title": "Spurs' last minute rally falls short as Wolves win Game 1"
+          },
+          {
+            "domain": "reddit.com",
+            "credibility": "untrusted",
+            "title": "[Highlight] The Minnesota Timberwolves get the final stop and take ..."
+          },
+          {
+            "domain": "youtube.com",
+            "credibility": "semi-trusted",
+            "title": "Timberwolves hold off Spurs 104-102 in Game 1 of ... - YouTube"
+          },
+          {
+            "domain": "rg.org",
+            "credibility": "semi-trusted",
+            "title": "Anthony Edwards' Perfect Reaction to Wolves' Game 1 Win Over ..."
+          },
+          {
+            "domain": "am1100theflag.com",
+            "credibility": "untrusted",
+            "title": "Edwards returns in Minnesota's Game 1 win over Spurs | The Flag"
+          },
+          {
+            "domain": "instagram.com",
+            "credibility": "untrusted",
+            "title": "The Timberwolves get the 104-102 Game 1 WIN over the Spurs in ..."
+          },
+          {
+            "domain": "sports.yahoo.com",
+            "credibility": "semi-trusted",
+            "title": "Spurs' last minute rally falls short as Wolves win Game 1"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-06T03:44:51.340Z",
+      "step": "AI",
+      "label": "Prompts constructed",
+      "data": {
+        "personality": "marites",
+        "userPrompt": "Analyze the following text and classify it:\n\n---\nSpurs vs Minessota, Minnesota wins game 1\n---\n\nAdditional search context for fact-checking:\nSource 1 [SEMI-TRUSTED]:\nTitle: #6 TIMBERWOLVES at #2 SPURS | FULL GAME 1 HIGHLIGHTS\nSnippet: The Timberwolves defeated the Spurs, 104-102 tonight in San Antonio. Julius Randle led the way for the Timberwolves with 21 points and 10 ...\nLink: https://www.youtube.com/watch?v=R1ErdXotXUI\nDomain: youtube.com\n\nSource 2 [SEMI-TRUSTED]:\nTitle: Timberwolves hold off Spurs 104-102 in Game 1 of ... - YouTube\nSnippet: Timberwolves coach Chris Finch spoke with reporters after Monday night's 104-102 win over the San Antonio Spurs in Game 1 of the Western ...\nLink: https://www.youtube.com/watch?v=gnfAenUi85s\nDomain: youtube.com\n\nSource 3 [SEMI-TRUSTED]:\nTitle: Anthony Edwards' Perfect Reaction to Wolves' Game 1 Win Over ...\nSnippet: The Minnesota Timberwolves overcame the San Antonio Spurs in Game 1 of the Western Conference Semifinals on Monday, but it wouldn't have ...\nLink: https://rg.org/news/basketball/anthony-edwards-return-game-1-reaction-timberwolves-spurs\nDomain: rg.org\n\nSource 4 [SEMI-TRUSTED]:\nTitle: Spurs' last minute rally falls short as Wolves win Game 1\nSnippet: San Antonio's defensive brilliance isn't enough as late miss seals 104-102 loss in physical series opener.\nLink: https://sports.yahoo.com/articles/spurs-last-minute-rally-falls-054900535.html\nDomain: sports.yahoo.com\n",
+        "hasSearchContext": true
+      }
+    },
+    {
+      "timestamp": "2026-05-06T03:44:53.362Z",
+      "step": "AI",
+      "label": "Raw Gemini response received",
+      "data": {
+        "rawResponse": "```json\n{\n  \"label\": \"TRUE\",\n  \"confidence\": 95,\n  \"marites_explanation\": \"Ayy girl, totoo naman! Timberwolves nga nanalo laban sa Spurs sa Game 1. Check mo na lang yung mga balita, andami-dami oh! Suspetsa ko, maganda laban na naman yan sa Game 2 👀\",\n  \"claims\": [\n    \"Spurs vs Minnesota, Minnesota wins game 1\"\n  ],\n  \"evidence\": [\n    \"Multiple sources confirm the Minnesota Timberwolves won Game 1 against the San Antonio Spurs (104-102).\"\n  ],\n  \"linguistic_flags\": [],\n  \"fact_correction\": null\n}\n```"
+      }
+    },
+    {
+      "timestamp": "2026-05-06T03:44:53.368Z",
+      "step": "AI",
+      "label": "Response parsed successfully",
+      "data": {
+        "label": "True",
+        "confidence": 95,
+        "explanation": "Ayy girl, totoo naman! Timberwolves nga nanalo laban sa Spurs sa Game 1. Check mo na lang yung mga balita, andami-dami oh! Suspetsa ko, maganda laban na naman yan sa Game 2 👀",
+        "claims": [
+          "Spurs vs Minnesota, Minnesota wins game 1"
+        ],
+        "evidence": [
+          "Multiple sources confirm the Minnesota Timberwolves won Game 1 against the San Antonio Spurs (104-102)."
+        ],
+        "linguisticFlags": [],
+        "factCorrection": null
+      }
+    },
+    {
+      "timestamp": "2026-05-06T03:44:53.373Z",
+      "step": "LITERACY",
+      "label": "Generating literacy lesson",
+      "data": {
+        "classification": "fact",
+        "flagCount": 0,
+        "sourceCount": 3
+      }
+    },
+    {
+      "timestamp": "2026-05-06T03:44:55.743Z",
+      "step": "LITERACY",
+      "label": "Literacy lesson generated",
+      "data": {
+        "summary": "Learning to confirm sports results involves checking multiple reliable sources and cross-checking specific details.",
+        "pointCount": 2,
+        "tip": "When checking sports claims, look for consistent details (like scores and team names) across several sports news sources."
+      }
+    },
+    {
+      "timestamp": "2026-05-06T03:44:55.749Z",
+      "step": "OUTPUT",
+      "label": "Final result mapped for frontend",
+      "data": {
+        "classification": "fact",
+        "chismisLevel": 5,
+        "message": "Legit naman 'to ✅",
+        "details": "Mukhang totoo naman ito based sa analysis ni Marites.",
+        "breakdown": {
+          "reasons": [
+            "Spurs vs Minnesota, Minnesota wins game 1"
+          ],
+          "redFlags": []
+        },
+        "harmScore": {
+          "level": "low",
+          "score": 11,
+          "explanation": "This content appears to be factual. Safe to share with context."
+        },
+        "maritesMode": "Ayy girl, totoo naman! Timberwolves nga nanalo laban sa Spurs sa Game 1. Check mo na lang yung mga balita, andami-dami oh! Suspetsa ko, maganda laban na naman yan sa Game 2 👀",
+        "resibo": {
+          "verdict": "Multiple sources confirm the Minnesota Timberwolves won Game 1 against the San Antonio Spurs (104-102).",
+          "sources": [
+            {
+              "title": "#6 TIMBERWOLVES at #2 SPURS | FULL GAME 1 HIGHLIGHTS",
+              "url": "https://www.youtube.com/watch?v=R1ErdXotXUI",
+              "credibility": "questionable"
+            },
+            {
+              "title": "Timberwolves hold off Spurs 104-102 in Game 1 of ... - YouTube",
+              "url": "https://www.youtube.com/watch?v=gnfAenUi85s",
+              "credibility": "questionable"
+            },
+            {
+              "title": "Anthony Edwards' Perfect Reaction to Wolves' Game 1 Win Over ...",
+              "url": "https://rg.org/news/basketball/anthony-edwards-return-game-1-reaction-timberwolves-spurs",
+              "credibility": "questionable"
+            }
+          ]
+        },
+        "linguisticFlags": [],
+        "factCorrection": null,
+        "sourceCredibility": {
+          "score": 20,
+          "trustedCount": 0,
+          "semiTrustedCount": 4,
+          "untrustedCount": 4
+        },
+        "literacyLesson": {
+          "summary": "Learning to confirm sports results involves checking multiple reliable sources and cross-checking specific details.",
+          "points": [
+            {
+              "issue": "We verified that the Minnesota Timberwolves won Game 1 against the San Antonio Spurs with a score of 104-102.",
+              "correction": "Consistent reporting of the score and winning team across multiple sources strengthens the factuality of the claim."
+            },
+            {
+              "issue": "The claim is supported by game highlights and reports from different sports news outlets.",
+              "correction": "Checking various sources like YouTube highlights and sports news ensures a broad confirmation of the event."
+            }
+          ],
+          "tip": "When checking sports claims, look for consistent details (like scores and team names) across several sports news sources."
+        }
+      }
+    }
+  ]
+}
