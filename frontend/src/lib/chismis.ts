@@ -80,7 +80,7 @@ export async function analyzeChismis(
 
     // Step 5: Generate media literacy lesson
     console.log("[PIPELINE] ➡️ Step 5: Generating Media Literacy Lesson");
-    const topSources = getTopSources(filteredSources);
+    const topSources = getTopSources(filteredSources, extractedText);
     const literacyLesson = await generateLiteracyLesson(
       extractedText,
       mapClassification(geminiResult.label),
@@ -92,7 +92,7 @@ export async function analyzeChismis(
 
     // Step 6: Map the AI response to the frontend's AnalysisResult type
     console.log("[PIPELINE] ➡️ Step 6: Mapping output to AnalysisResult");
-    const finalResult = mapToAnalysisResult(geminiResult, filteredSources, literacyLesson, personality);
+    const finalResult = mapToAnalysisResult(geminiResult, filteredSources, literacyLesson, personality, extractedText);
 
     logger.log("OUTPUT", "Final result mapped for frontend", {
       classification: finalResult.classification,
@@ -167,7 +167,7 @@ export async function analyzeChismisText(
 
     // Step 4: Generate media literacy lesson
     console.log("[PIPELINE] ➡️ Step 4: Generating Media Literacy Lesson");
-    const topSources = getTopSources(filteredSources);
+    const topSources = getTopSources(filteredSources, text);
     const literacyLesson = await generateLiteracyLesson(
       text,
       mapClassification(geminiResult.label),
@@ -179,7 +179,7 @@ export async function analyzeChismisText(
 
     // Step 5: Map output
     console.log("[PIPELINE] ➡️ Step 5: Mapping output to AnalysisResult");
-    const finalResult = mapToAnalysisResult(geminiResult, filteredSources, literacyLesson, personality);
+    const finalResult = mapToAnalysisResult(geminiResult, filteredSources, literacyLesson, personality, text);
 
     logger.log("OUTPUT", "Final result mapped for frontend", {
       classification: finalResult.classification,
@@ -264,7 +264,7 @@ export async function analyzeChismisUrl(
 
     // Step 5: Generate media literacy lesson
     console.log("[PIPELINE] ➡️ Step 5: Generating Media Literacy Lesson");
-    const topSources = getTopSources(filteredSources);
+    const topSources = getTopSources(filteredSources, extractedText);
     const literacyLesson = await generateLiteracyLesson(
       extractedText,
       mapClassification(geminiResult.label),
@@ -276,7 +276,7 @@ export async function analyzeChismisUrl(
 
     // Step 6: Map output
     console.log("[PIPELINE] ➡️ Step 6: Mapping output to AnalysisResult");
-    const finalResult = mapToAnalysisResult(geminiResult, filteredSources, literacyLesson, personality);
+    const finalResult = mapToAnalysisResult(geminiResult, filteredSources, literacyLesson, personality, extractedText);
 
     logger.log("OUTPUT", "Final result mapped for frontend", {
       classification: finalResult.classification,
@@ -312,25 +312,61 @@ export async function analyzeChismisUrl(
 // ─── Source Selection ────────────────────────────────────────────────────────
 
 /**
- * Selects the top N most credible sources from filtered results.
- * Priority: trusted first, then semi-trusted, then untrusted.
- * Returns at most MAX_DISPLAY_SOURCES (3) sources.
+ * Selects the top N sources ranked by RELEVANCE to the original claim,
+ * weighted by source credibility tier.
+ *
+ * Score = (keyword overlap ratio) × credibility_weight
+ *   Trusted     = 3.0×
+ *   Semi-trusted = 1.5×
+ *   Untrusted   = 0.3×
+ *
+ * This prevents old/off-topic trusted articles from outranking highly
+ * relevant but semi-trusted sources, and ensures the displayed sources
+ * are the ones most closely related to the specific claim.
  */
 function getTopSources(
-  filteredSources: FilteredSources | null
+  filteredSources: FilteredSources | null,
+  originalText: string = ""
 ): CategorizedSource[] {
   if (!filteredSources || filteredSources.sources.length === 0) {
     return [];
   }
 
-  const priorityOrder = { trusted: 0, "semi-trusted": 1, untrusted: 2 };
+  const CREDIBILITY_WEIGHT: Record<string, number> = {
+    trusted: 3.0,
+    "semi-trusted": 1.5,
+    untrusted: 0.3,
+  };
 
-  // Sort by credibility tier (trusted first), then keep original order within tiers
-  const sorted = [...filteredSources.sources].sort(
-    (a, b) => priorityOrder[a.credibility] - priorityOrder[b.credibility]
-  );
+  // Filipino + English stop words
+  const stopWords = new Set([
+    "the", "and", "or", "for", "with", "this", "that", "from", "have",
+    "been", "will", "are", "was", "were", "but", "not", "its", "into",
+    "ang", "ng", "sa", "na", "mga", "ay", "at", "si", "ni", "hindi",
+  ]);
 
-  return sorted.slice(0, MAX_DISPLAY_SOURCES);
+  const queryWords = originalText
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, " ")
+    .split(/\s+/)
+    .filter((w) => w.length > 3 && !stopWords.has(w));
+
+  function relevanceScore(source: CategorizedSource): number {
+    if (queryWords.length === 0) return 0.5; // no query words → neutral score
+    const combined = `${source.title} ${source.snippet}`.toLowerCase();
+    const matches = queryWords.filter((w) => combined.includes(w)).length;
+    return matches / queryWords.length;
+  }
+
+  const scored = filteredSources.sources.map((s) => ({
+    source: s,
+    score: relevanceScore(s) * CREDIBILITY_WEIGHT[s.credibility],
+  }));
+
+  // Highest combined score first
+  scored.sort((a, b) => b.score - a.score);
+
+  return scored.slice(0, MAX_DISPLAY_SOURCES).map((item) => item.source);
 }
 
 // ─── Type Mapping ────────────────────────────────────────────────────────────
@@ -347,14 +383,15 @@ function mapToAnalysisResult(
   gemini: GeminiResponse,
   filteredSources: FilteredSources | null,
   literacyLesson: LiteracyLesson | null,
-  personality: "marites" | "formal" = "marites"
+  personality: "marites" | "formal" = "marites",
+  extractedText: string = ""
 ): AnalysisResult {
   const classification = mapClassification(gemini.label);
-  const chismisLevel = mapChismisLevel(gemini.label, gemini.confidence);
+  const chismisLevel = mapChismisLevel(gemini.label, gemini.confidence, filteredSources);
   const harmScore = calculateHarmScore(gemini.label, gemini.confidence);
 
-  // Get only the top 3 most credible sources for display
-  const topSources = getTopSources(filteredSources);
+  // Get top sources ranked by relevance to the original claim
+  const topSources = getTopSources(filteredSources, extractedText);
   const resiboSources = topSources.map((s) => ({
     title: s.title,
     url: s.link,
@@ -435,25 +472,62 @@ function mapClassification(
 }
 
 /**
- * Maps confidence to chismisLevel.
- * - For "True": low chismis (inverted confidence)
- * - For "Suspicious": moderate chismis
- * - For "Fake": high chismis (direct confidence)
+ * Maps Gemini confidence + SOURCE QUALITY to chismisLevel.
+ *
+ * Base level comes from the AI label, then a penalty is added when
+ * the evidence quality is poor (social media only, mostly untrusted,
+ * no sources at all while labelled "True").
+ *
+ * Penalty rules:
+ *   All sources untrusted (social media only) → +30
+ *   >70% untrusted                            → +20
+ *   No trusted sources (semi-trusted only)    → +10
+ *   No sources at all + "True" label          → +20
  */
 function mapChismisLevel(
   label: GeminiResponse["label"],
-  confidence: number
+  confidence: number,
+  filteredSources: FilteredSources | null
 ): number {
+  let base: number;
   switch (label) {
     case "True":
-      return Math.max(5, 100 - confidence); // Low chismis
+      base = Math.max(5, 100 - confidence);
+      break;
     case "Suspicious":
-      return Math.min(65, Math.max(35, confidence)); // Mid range
+      base = Math.min(65, Math.max(35, confidence));
+      break;
     case "Fake":
-      return Math.min(95, Math.max(60, confidence)); // High chismis
+      base = Math.min(95, Math.max(60, confidence));
+      break;
     default:
       return 50;
   }
+
+  if (filteredSources && filteredSources.sources.length > 0) {
+    const total = filteredSources.sources.length;
+    const trusted = filteredSources.trustedCount;
+    const semiTrusted = filteredSources.semiTrustedCount;
+    const untrusted = filteredSources.untrustedCount;
+
+    if (trusted === 0 && semiTrusted === 0) {
+      // All sources are social media / untrusted — zero credible corroboration
+      base = Math.min(90, base + 30);
+    } else if (untrusted / total > 0.7) {
+      // Predominantly untrusted sources
+      base = Math.min(80, base + 20);
+    } else if (trusted === 0) {
+      // Only semi-trusted sources, no fully trusted
+      base = Math.min(70, base + 10);
+    }
+  } else {
+    // No search results at all — unsupported claim shouldn't stay as "True"
+    if (label === "True") {
+      base = Math.min(65, base + 20);
+    }
+  }
+
+  return base;
 }
 
 /**

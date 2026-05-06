@@ -330,7 +330,7 @@ function ImageUI({
       >
         {file && previewUrl ? (
           <div className="relative w-full h-full group">
-            <img
+            <Image
               src={previewUrl}
               alt="Preview"
               className="w-full h-full object-contain"

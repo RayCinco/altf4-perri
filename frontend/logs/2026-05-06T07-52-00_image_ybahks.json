@@ -1,0 +1,176 @@
+{
+  "session": {
+    "id": "ybahks",
+    "mode": "image",
+    "startedAt": "2026-05-06T07:52:00.563Z",
+    "completedAt": "2026-05-06T07:52:12.798Z",
+    "durationMs": 12235
+  },
+  "pipeline": [
+    {
+      "timestamp": "2026-05-06T07:52:00.571Z",
+      "step": "PIPELINE",
+      "label": "Image pipeline started",
+      "data": {
+        "mimeType": "image/png",
+        "imageSizeBytes": 981115
+      }
+    },
+    {
+      "timestamp": "2026-05-06T07:52:03.904Z",
+      "step": "OCR",
+      "label": "Raw text extracted from image",
+      "data": {
+        "mimeType": "image/png",
+        "imageSizeBytes": 981115,
+        "ocrPrompt": "Extract ALL readable text from this image. Return ONLY the raw text content, exactly as it appears. Do not add commentary, analysis, or formatting. If there is no text in the image, return \"NO_TEXT_FOUND\". Preserve the original language (Filipino, English, Taglish, etc.)",
+        "rawExtractedText": "Mga Abangers,\nClasses in all levels (Public and Private) are suspended in the following\nareas, September 02, 2025 (Martes):\nList of affected areas: https://ln.run/gma-news-tv-announcement-of-\nno-classes-september-02-2025-list-html\n(This is a running list. Kindly refresh this post for updates.)\nStay safe everyone!\n#Walang Pasok\nWALANG\nPASOK\nALL CLASS LEVEL\nPUBLIC & PRIVATE SCHOOL\nSEPTEMBER 02, 2025",
+        "rawTextLength": 400
+      }
+    },
+    {
+      "timestamp": "2026-05-06T07:52:03.908Z",
+      "step": "OCR",
+      "label": "Text cleaned and finalized",
+      "data": {
+        "cleanedText": "Mga Abangers,\nClasses in all levels (Public and Private) are suspended in the following\nareas, September 02, 2025 (Martes):\nList of affected areas: https://ln.run/gma-news-tv-announcement-of-\nno-classes-september-02-2025-list-html\n(This is a running list. Kindly refresh this post for updates.)\nStay safe everyone!\n#Walang Pasok\nWALANG\nPASOK\nALL CLASS LEVEL\nPUBLIC & PRIVATE SCHOOL\nSEPTEMBER 02, 2025",
+        "cleanedTextLength": 400
+      }
+    },
+    {
+      "timestamp": "2026-05-06T07:52:05.218Z",
+      "step": "SEARCH",
+      "label": "Query generated from text",
+      "data": {
+        "inputTextPreview": "Mga Abangers,\nClasses in all levels (Public and Private) are suspended in the following\nareas, September 02, 2025 (Martes):\nList of affected areas: https://ln.run/gma-news-tv-announcement-of-\nno-class",
+        "generatedQuery": "\"September 02 2025 class suspension\""
+      }
+    },
+    {
+      "timestamp": "2026-05-06T07:52:06.541Z",
+      "step": "SEARCH",
+      "label": "No results found",
+      "data": {
+        "query": "\"September 02 2025 class suspension\""
+      }
+    },
+    {
+      "timestamp": "2026-05-06T07:52:06.549Z",
+      "step": "AI",
+      "label": "Prompts constructed",
+      "data": {
+        "personality": "marites",
+        "userPrompt": "Analyze the following text and classify it:\n\n---\nMga Abangers,\nClasses in all levels (Public and Private) are suspended in the following\nareas, September 02, 2025 (Martes):\nList of affected areas: https://ln.run/gma-news-tv-announcement-of-\nno-classes-september-02-2025-list-html\n(This is a running list. Kindly refresh this post for updates.)\nStay safe everyone!\n#Walang Pasok\nWALANG\nPASOK\nALL CLASS LEVEL\nPUBLIC & PRIVATE SCHOOL\nSEPTEMBER 02, 2025\n---",
+        "hasSearchContext": false
+      }
+    },
+    {
+      "timestamp": "2026-05-06T07:52:08.983Z",
+      "step": "AI",
+      "label": "Raw Gemini response received",
+      "data": {
+        "rawResponse": "```json\n{\n  \"label\": \"Suspicious\",\n  \"confidence\": 65,\n  \"marites_explanation\": \"Ayy te, mukhang may announcement na walang pasok sa September 02, 2025. Check mo yung link para sure, pero ingat ka baka clickbait yan ah. Basta always double check bago mag celebrate! 👀\",\n  \"claims\": [\n    \"Classes in all levels (Public and Private) are suspended September 02, 2025 in some areas.\"\n  ],\n  \"evidence\": [\n    \"The claim provides a link, but it's not directly accessible for verification.\",\n    \"The text contains some capitalization and repetition, which can be a sign of less credible sources.\"\n  ],\n  \"linguistic_flags\": [\n    \"ALL CAPS usage or excessive capitalization\",\n    \"Excessive punctuation (!!!)\"\n  ],\n  \"fact_correction\": null\n}\n```"
+      }
+    },
+    {
+      "timestamp": "2026-05-06T07:52:08.989Z",
+      "step": "AI",
+      "label": "Response parsed successfully",
+      "data": {
+        "label": "Suspicious",
+        "confidence": 65,
+        "explanation": "Ayy te, mukhang may announcement na walang pasok sa September 02, 2025. Check mo yung link para sure, pero ingat ka baka clickbait yan ah. Basta always double check bago mag celebrate! 👀",
+        "claims": [
+          "Classes in all levels (Public and Private) are suspended September 02, 2025 in some areas."
+        ],
+        "evidence": [
+          "The claim provides a link, but it's not directly accessible for verification.",
+          "The text contains some capitalization and repetition, which can be a sign of less credible sources."
+        ],
+        "linguisticFlags": [
+          "ALL CAPS usage or excessive capitalization",
+          "Excessive punctuation (!!!)"
+        ],
+        "factCorrection": null
+      }
+    },
+    {
+      "timestamp": "2026-05-06T07:52:08.994Z",
+      "step": "LITERACY",
+      "label": "Generating literacy lesson",
+      "data": {
+        "classification": "opinion",
+        "flagCount": 2,
+        "sourceCount": 0
+      }
+    },
+    {
+      "timestamp": "2026-05-06T07:52:12.789Z",
+      "step": "LITERACY",
+      "label": "Literacy lesson generated",
+      "data": {
+        "summary": "Dapat maging mapanuri sa mga posts online, lalo na pag galing sa unknown sources at nagkakalat ng importanteng impormasyon.",
+        "pointCount": 3,
+        "tip": "Bago maniwala at mag-share, siguraduhing galing sa lehitimong source ang impormasyon."
+      }
+    },
+    {
+      "timestamp": "2026-05-06T07:52:12.794Z",
+      "step": "OUTPUT",
+      "label": "Final result mapped for frontend",
+      "data": {
+        "classification": "opinion",
+        "chismisLevel": 65,
+        "message": "Hmm... hindi sure si Marites 🤔",
+        "details": "May mga questionable parts — double check muna bago i-share.",
+        "breakdown": {
+          "reasons": [
+            "Classes in all levels (Public and Private) are suspended September 02, 2025 in some areas."
+          ],
+          "redFlags": [
+            "The claim provides a link, but it's not directly accessible for verification."
+          ]
+        },
+        "harmScore": {
+          "level": "medium",
+          "score": 60,
+          "explanation": "This content has unclear or unverified claims. Verify before sharing."
+        },
+        "maritesMode": "Ayy te, mukhang may announcement na walang pasok sa September 02, 2025. Check mo yung link para sure, pero ingat ka baka clickbait yan ah. Basta always double check bago mag celebrate! 👀",
+        "resibo": {
+          "verdict": "The claim provides a link, but it's not directly accessible for verification. | The text contains some capitalization and repetition, which can be a sign of less credible sources.",
+          "sources": []
+        },
+        "linguisticFlags": [
+          "ALL CAPS usage or excessive capitalization",
+          "Excessive punctuation (!!!)"
+        ],
+        "factCorrection": null,
+        "sourceCredibility": {
+          "score": 0,
+          "trustedCount": 0,
+          "semiTrustedCount": 0,
+          "untrustedCount": 0
+        },
+        "literacyLesson": {
+          "summary": "Dapat maging mapanuri sa mga posts online, lalo na pag galing sa unknown sources at nagkakalat ng importanteng impormasyon.",
+          "points": [
+            {
+              "issue": "Pansinin ang paggamit ng ALL CAPS at maraming bantas (!!!), na madalas ginagamit para mang-akit ng atensyon pero hindi karaniwan sa mga seryosong news.",
+              "correction": "Hanapin ang parehong news sa mga verified news outlets tulad ng GMA News o ABS-CBN News para makasigurado."
+            },
+            {
+              "issue": "Ang link na binigay ay hindi direktang mapuntahan at mahirap i-verify kung saan talaga galing.",
+              "correction": "Dapat ang link ay direkta patungo sa official website ng news organization o government agency na nag-anunsyo."
+            },
+            {
+              "issue": "Walang credible sources na nagpapatunay na walang pasok sa September 02, 2025.",
+              "correction": "Tandaan na ang mga official announcements ay kadalasang galing sa DepEd o sa local government units."
+            }
+          ],
+          "tip": "Bago maniwala at mag-share, siguraduhing galing sa lehitimong source ang impormasyon."
+        }
+      }
+    }
+  ]
+}

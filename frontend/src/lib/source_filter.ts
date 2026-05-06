@@ -268,9 +268,25 @@ function calculateCredibilityScore(sources: CategorizedSource[]): number {
  */
 function formatCredibleContext(sources: CategorizedSource[]): string {
     const credible = sources.filter((s) => s.credibility !== "untrusted");
+    const untrusted = sources.filter((s) => s.credibility === "untrusted");
 
     if (credible.length === 0) {
-        return "NO CREDIBLE SEARCH RESULTS FOUND FOR THIS CLAIM.";
+        // Tell Gemini exactly what was (and wasn't) found
+        const socialMediaDomains = [
+            "facebook.com", "fb.com", "instagram.com", "tiktok.com",
+            "twitter.com", "x.com", "threads.net",
+        ];
+        const socialMedia = untrusted.filter((s) =>
+            socialMediaDomains.some((sm) => s.domain.includes(sm))
+        );
+
+        let msg = "NO CREDIBLE SEARCH RESULTS FOUND FOR THIS CLAIM.";
+        if (socialMedia.length > 0) {
+            msg += ` NOTE: ${socialMedia.length} social media source(s) were found but excluded as they are NOT credible evidence (domains: ${socialMedia.map((s) => s.domain).join(", ")}). Social media alone cannot confirm a claim as TRUE.`;
+        } else if (untrusted.length > 0) {
+            msg += ` NOTE: ${untrusted.length} untrusted source(s) were found and excluded from this context.`;
+        }
+        return msg;
     }
 
     return credible

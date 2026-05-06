@@ -72,12 +72,17 @@ Step 4: CONTEXT INTERPRETATION
 - Pay attention to source credibility tags ([TRUSTED] vs [SEMI-TRUSTED])
 - If no reliable sources exist, treat as weak or unverified claim
 - Give more weight to trusted sources than semi-trusted ones
+- CRITICAL — TEMPORAL RELEVANCE: Check the dates/years mentioned in each source snippet. An article from a DIFFERENT month or year about the same general topic does NOT confirm a current specific claim. For example, "no classes September 22, 2023" does NOT confirm "no classes today". Off-topic or stale sources must be ignored.
+- CRITICAL — SOCIAL MEDIA EVIDENCE: If the only supporting sources are Facebook, Twitter, TikTok, Instagram, or other social media platforms (flagged in context as untrusted or absent from context entirely), treat the claim as SUSPICIOUS at minimum. Social media posts are NOT credible evidence.
+- CRITICAL — SOURCE COUNT & QUALITY: A single semi-trusted source is weak evidence. Multiple credible, temporally-relevant, topically-matching sources are required to classify something as TRUE.
+- If context says "NO CREDIBLE SEARCH RESULTS FOUND" — do NOT classify as TRUE. Default to SUSPICIOUS unless the claim is a universally known fact with no room for doubt.
+- If context mentions social media sources were found but excluded — this is a signal the primary "evidence" is unverified; lean toward SUSPICIOUS.
 
 Step 5: CLASSIFICATION
 Classify into one:
-- TRUE → supported by credible sources or widely known facts
-- SUSPICIOUS → unclear, conflicting, or insufficient evidence
-- FAKE → no credible evidence or likely misinformation
+- TRUE → supported by MULTIPLE credible sources that are (a) from trusted/established outlets, (b) temporally relevant to the specific claim, and (c) directly address the claim — not just a related topic from a different period.
+- SUSPICIOUS → unclear, conflicting, or insufficient evidence. Use this when: only 1 source exists, sources are semi-trusted only, sources are off-topic or dated, primary evidence is social media, or context shows no credible sources.
+- FAKE → no credible evidence found, claim is contradicted by sources, or clear misinformation patterns are detected.
 
 Step 6: CONFIDENCE SCORING
 - Assign a confidence score (0–100)
