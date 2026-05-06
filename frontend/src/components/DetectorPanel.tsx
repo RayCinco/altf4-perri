@@ -303,31 +303,58 @@ function ImageUI({
   file: File | null;
   onFileChange: (f: File | null) => void;
 }) {
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const dropRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!file) {
+      setPreviewUrl(null);
+      return;
+    }
+    const url = URL.createObjectURL(file);
+    setPreviewUrl(url);
+    return () => URL.revokeObjectURL(url);
+  }, [file]);
+
   useImageDropPaste({
     onImage: onFileChange,
     dropRef: dropRef as React.RefObject<HTMLElement>,
   });
+
   return (
     <div className="w-full h-full flex flex-col gap-3">
       <div
         ref={dropRef}
-        className="flex-1 flex items-center justify-center border-2 border-dashed border-[#04356A] rounded-xl p-6 bg-[#001d3f33] transition-colors"
-        style={{ minHeight: 180 }}
+        className="relative flex items-center justify-center border-2 border-dashed border-[#04356A] rounded-xl overflow-hidden bg-[#001d3f33] transition-colors h-[400px] w-full"
         title="Drag & drop or paste an image here"
       >
-        {file ? (
-          <div className="text-center">
-            <p className="text-sm text-[#7FB3FF] font-medium">{file.name}</p>
-            <p className="text-xs text-[#7FB3FF]/60 mt-1">
-              {(file.size / 1024).toFixed(1)} KB
-            </p>
-            <button
-              onClick={() => onFileChange(null)}
-              className="mt-2 text-xs text-red-400 hover:text-red-300"
-            >
-              Remove
-            </button>
+        {file && previewUrl ? (
+          <div className="relative w-full h-full group">
+            <img
+              src={previewUrl}
+              alt="Preview"
+              className="w-full h-full object-contain"
+            />
+            {/* Hover overlay for info and remove action */}
+            <div className="absolute inset-0 bg-[#000919]/70 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center">
+              <div className="text-center p-4">
+                <p className="text-sm text-white font-medium mb-1 truncate max-w-[200px]">
+                  {file.name}
+                </p>
+                <p className="text-xs text-[#7FB3FF]/80 mb-4">
+                  {(file.size / 1024).toFixed(1)} KB
+                </p>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onFileChange(null);
+                  }}
+                  className="px-4 py-2 bg-red-500/20 border border-red-500/50 hover:bg-red-500/40 text-red-200 text-xs rounded-lg transition"
+                >
+                  Remove Image
+                </button>
+              </div>
+            </div>
           </div>
         ) : (
           <div className="flex flex-col items-center text-center pointer-events-none select-none">

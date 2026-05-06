@@ -1,0 +1,304 @@
+{
+  "session": {
+    "id": "qfvzrk",
+    "mode": "image",
+    "startedAt": "2026-05-06T06:27:10.961Z",
+    "completedAt": "2026-05-06T06:27:21.105Z",
+    "durationMs": 10144
+  },
+  "pipeline": [
+    {
+      "timestamp": "2026-05-06T06:27:10.963Z",
+      "step": "PIPELINE",
+      "label": "Image pipeline started",
+      "data": {
+        "mimeType": "image/png",
+        "imageSizeBytes": 981115
+      }
+    },
+    {
+      "timestamp": "2026-05-06T06:27:14.349Z",
+      "step": "OCR",
+      "label": "Raw text extracted from image",
+      "data": {
+        "mimeType": "image/png",
+        "imageSizeBytes": 981115,
+        "ocrPrompt": "Extract ALL readable text from this image. Return ONLY the raw text content, exactly as it appears. Do not add commentary, analysis, or formatting. If there is no text in the image, return \"NO_TEXT_FOUND\". Preserve the original language (Filipino, English, Taglish, etc.)",
+        "rawExtractedText": "Mga Abangers,\nClasses in all levels (Public and Private) are suspended in the following\nareas, September 02, 2025 (Martes):\nList of affected areas: https://ln.run/gma-news-tv-announcement-of-\nno-classes-september-02-2025-list-html\n(This is a running list. Kindly refresh this post for updates.)\nStay safe everyone!\n#WalangPasok\nWALANG\nPASOK\nALL CLASS LEVEL\nPUBLIC & PRIVATE SCHOOL\nSEPTEMBER 02, 2025",
+        "rawTextLength": 399
+      }
+    },
+    {
+      "timestamp": "2026-05-06T06:27:14.350Z",
+      "step": "OCR",
+      "label": "Text cleaned and finalized",
+      "data": {
+        "cleanedText": "Mga Abangers,\nClasses in all levels (Public and Private) are suspended in the following\nareas, September 02, 2025 (Martes):\nList of affected areas: https://ln.run/gma-news-tv-announcement-of-\nno-classes-september-02-2025-list-html\n(This is a running list. Kindly refresh this post for updates.)\nStay safe everyone!\n#WalangPasok\nWALANG\nPASOK\nALL CLASS LEVEL\nPUBLIC & PRIVATE SCHOOL\nSEPTEMBER 02, 2025",
+        "cleanedTextLength": 399
+      }
+    },
+    {
+      "timestamp": "2026-05-06T06:27:15.351Z",
+      "step": "SEARCH",
+      "label": "Query generated from text",
+      "data": {
+        "inputTextPreview": "Mga Abangers,\nClasses in all levels (Public and Private) are suspended in the following\nareas, September 02, 2025 (Martes):\nList of affected areas: https://ln.run/gma-news-tv-announcement-of-\nno-class",
+        "generatedQuery": "September 2 2025 class suspensions"
+      }
+    },
+    {
+      "timestamp": "2026-05-06T06:27:16.738Z",
+      "step": "SEARCH",
+      "label": "Search results retrieved",
+      "data": {
+        "query": "September 2 2025 class suspensions",
+        "resultCount": 10,
+        "results": [
+          {
+            "title": "UPDATE Classes are suspended tomorrow, September 2, 2025 due ...",
+            "snippet": "UPDATE Classes are suspended tomorrow, September 2, 2025 due to ongoing flooding in the school areas that are still not safe for the students.",
+            "link": "https://www.facebook.com/BulanNHS/posts/update-classes-are-suspended-tomorrow-september-2-2025-due-to-ongoing-flooding-i/1236516998274986/"
+          },
+          {
+            "title": "[Walang Pasok] Class suspensions, Monday, September 22, 2025",
+            "snippet": "Here is a list of areas where classes are suspended for Monday, September 22, 2025, due to Super Typhoon Nando (Ragasa) and the southwest ...",
+            "link": "https://www.rappler.com/philippines/class-suspensions-walang-pasok-september-22-2025/"
+          },
+          {
+            "title": "Jonvic admits class suspensions announced later than usual",
+            "snippet": "Classes and government office work was disrupted yesterday, after the DILG announced the suspension in various areas including Metro Manila. The ...",
+            "link": "https://www.philstar.com/headlines/2025/09/02/2469851/jonvic-admits-class-suspensions-announced-later-usual"
+          },
+          {
+            "title": "ADVISORY NO. 25 SUSPENSION OF CLASSES ON SEPT. 22, 2025",
+            "snippet": "326, s. 2012, classes are suspended on September 22, 2025 (Monday) from 1:00 to 5:00 PM only. This suspension is made in observance ...",
+            "link": "https://www.facebook.com/TarlacStateU/posts/advisory-no-25suspension-of-classes-on-sept-22-2025-100-500-pmpursuant-to-memora/1129223655978711/"
+          },
+          {
+            "title": "The DILG on Tuesday, September 2, stood by its class suspension ...",
+            "snippet": "READ: The DILG on Tuesday, September 2, stood by its class suspension orders, highlighting that safety is the top priority after private schools ...",
+            "link": "https://www.facebook.com/61569943349685/videos/read-the-dilg-on-tuesday-september-2-stood-by-its-class-suspension-orders-highli/1298212545319241/"
+          },
+          {
+            "title": "#WalangPasok: Class suspensions for Sept. 24, 2025 - ABS-CBN",
+            "snippet": "MANILA (2nd UPDATE) — Several local government units announced the suspension of classes in their respective areas on Wednesday, September 24, ...",
+            "link": "https://www.abs-cbn.com/news/nation/2025/9/23/-walangpasok-class-suspensions-for-sept-24-2025-2000"
+          },
+          {
+            "title": "Palace suspends gov't work, classes in several provinces on Sept ...",
+            "snippet": "Malacañang announced the suspension of government work and classes in several provinces on September 25, 2025, Thursday, due to Severe ...",
+            "link": "https://pco.gov.ph/news_releases/palace-suspends-govt-work-classes-in-several-provinces-on-sept-25-due-to-storm-opong/"
+          },
+          {
+            "title": "School Calendar and Closures · NYC311",
+            "snippet": "2025-2026 School Holiday Closures ; Tuesday, September 23 through Wednesday, September 24, Rosh Hashanah ; Thursday, October 2, Yom Kippur ; Monday, October 13 ...",
+            "link": "https://portal.311.nyc.gov/article/?kanumber=KA-02522&washelpful=True"
+          },
+          {
+            "title": "#WalangPasok: Class suspensions for Sept. 23, 2025",
+            "snippet": "#WalangPasok: Class suspensions for Sept. 23, 2025 | ABS-CBN News. www.abs-cbn.com. 0. 2. 5.",
+            "link": "https://x.com/ABSCBNNews/status/1970074343138058742"
+          },
+          {
+            "title": "Classes for Monday, September 15, 2025 have been suspended in ...",
+            "snippet": "Classes for Monday, September 15, 2025 have been suspended in some areas due to the effects of inclement weather. Refresh this post for updates.",
+            "link": "https://www.instagram.com/p/DOlIXdiksXf/"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-06T06:27:16.739Z",
+      "step": "FILTER",
+      "label": "Sources classified by credibility",
+      "data": {
+        "totalSources": 10,
+        "trustedCount": 4,
+        "semiTrustedCount": 0,
+        "untrustedCount": 6,
+        "credibilityScore": 40,
+        "sources": [
+          {
+            "domain": "facebook.com",
+            "credibility": "untrusted",
+            "title": "UPDATE Classes are suspended tomorrow, September 2, 2025 due ..."
+          },
+          {
+            "domain": "rappler.com",
+            "credibility": "trusted",
+            "title": "[Walang Pasok] Class suspensions, Monday, September 22, 2025"
+          },
+          {
+            "domain": "philstar.com",
+            "credibility": "trusted",
+            "title": "Jonvic admits class suspensions announced later than usual"
+          },
+          {
+            "domain": "facebook.com",
+            "credibility": "untrusted",
+            "title": "ADVISORY NO. 25 SUSPENSION OF CLASSES ON SEPT. 22, 2025"
+          },
+          {
+            "domain": "facebook.com",
+            "credibility": "untrusted",
+            "title": "The DILG on Tuesday, September 2, stood by its class suspension ..."
+          },
+          {
+            "domain": "abs-cbn.com",
+            "credibility": "trusted",
+            "title": "#WalangPasok: Class suspensions for Sept. 24, 2025 - ABS-CBN"
+          },
+          {
+            "domain": "pco.gov.ph",
+            "credibility": "trusted",
+            "title": "Palace suspends gov't work, classes in several provinces on Sept ..."
+          },
+          {
+            "domain": "portal.311.nyc.gov",
+            "credibility": "untrusted",
+            "title": "School Calendar and Closures · NYC311"
+          },
+          {
+            "domain": "x.com",
+            "credibility": "untrusted",
+            "title": "#WalangPasok: Class suspensions for Sept. 23, 2025"
+          },
+          {
+            "domain": "instagram.com",
+            "credibility": "untrusted",
+            "title": "Classes for Monday, September 15, 2025 have been suspended in ..."
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-06T06:27:16.742Z",
+      "step": "AI",
+      "label": "Prompts constructed",
+      "data": {
+        "personality": "marites",
+        "userPrompt": "Analyze the following text and classify it:\n\n---\nMga Abangers,\nClasses in all levels (Public and Private) are suspended in the following\nareas, September 02, 2025 (Martes):\nList of affected areas: https://ln.run/gma-news-tv-announcement-of-\nno-classes-september-02-2025-list-html\n(This is a running list. Kindly refresh this post for updates.)\nStay safe everyone!\n#WalangPasok\nWALANG\nPASOK\nALL CLASS LEVEL\nPUBLIC & PRIVATE SCHOOL\nSEPTEMBER 02, 2025\n---\n\nAdditional search context for fact-checking:\nSource 1 [TRUSTED]:\nTitle: [Walang Pasok] Class suspensions, Monday, September 22, 2025\nSnippet: Here is a list of areas where classes are suspended for Monday, September 22, 2025, due to Super Typhoon Nando (Ragasa) and the southwest ...\nLink: https://www.rappler.com/philippines/class-suspensions-walang-pasok-september-22-2025/\nDomain: rappler.com\n\nSource 2 [TRUSTED]:\nTitle: Jonvic admits class suspensions announced later than usual\nSnippet: Classes and government office work was disrupted yesterday, after the DILG announced the suspension in various areas including Metro Manila. The ...\nLink: https://www.philstar.com/headlines/2025/09/02/2469851/jonvic-admits-class-suspensions-announced-later-usual\nDomain: philstar.com\n\nSource 3 [TRUSTED]:\nTitle: #WalangPasok: Class suspensions for Sept. 24, 2025 - ABS-CBN\nSnippet: MANILA (2nd UPDATE) — Several local government units announced the suspension of classes in their respective areas on Wednesday, September 24, ...\nLink: https://www.abs-cbn.com/news/nation/2025/9/23/-walangpasok-class-suspensions-for-sept-24-2025-2000\nDomain: abs-cbn.com\n\nSource 4 [TRUSTED]:\nTitle: Palace suspends gov't work, classes in several provinces on Sept ...\nSnippet: Malacañang announced the suspension of government work and classes in several provinces on September 25, 2025, Thursday, due to Severe ...\nLink: https://pco.gov.ph/news_releases/palace-suspends-govt-work-classes-in-several-provinces-on-sept-25-due-to-storm-opong/\nDomain: pco.gov.ph\n",
+        "hasSearchContext": true
+      }
+    },
+    {
+      "timestamp": "2026-05-06T06:27:18.964Z",
+      "step": "AI",
+      "label": "Raw Gemini response received",
+      "data": {
+        "rawResponse": "```json\n{\n  \"label\": \"True\",\n  \"confidence\": 95,\n  \"marites_explanation\": \"Ayy girl, mukhang totoo nga na may mga walang pasok noong September 2, 2025! According sa Philstar, nag announce nga ang DILG ng class suspensions sa iba't ibang lugar. Kaya stay safe mga bagets!\",\n  \"claims\": [\n    \"Classes in all levels are suspended on September 02, 2025\"\n  ],\n  \"evidence\": [\n    \"Philstar.com reports class suspensions announced on September 2, 2025.\"\n  ],\n  \"linguistic_flags\": [\n    \"ALL CAPS usage\",\n    \"Excessive capitalization\"\n  ],\n  \"fact_correction\": null\n}\n```"
+      }
+    },
+    {
+      "timestamp": "2026-05-06T06:27:18.966Z",
+      "step": "AI",
+      "label": "Response parsed successfully",
+      "data": {
+        "label": "True",
+        "confidence": 95,
+        "explanation": "Ayy girl, mukhang totoo nga na may mga walang pasok noong September 2, 2025! According sa Philstar, nag announce nga ang DILG ng class suspensions sa iba't ibang lugar. Kaya stay safe mga bagets!",
+        "claims": [
+          "Classes in all levels are suspended on September 02, 2025"
+        ],
+        "evidence": [
+          "Philstar.com reports class suspensions announced on September 2, 2025."
+        ],
+        "linguisticFlags": [
+          "ALL CAPS usage",
+          "Excessive capitalization"
+        ],
+        "factCorrection": null
+      }
+    },
+    {
+      "timestamp": "2026-05-06T06:27:18.967Z",
+      "step": "LITERACY",
+      "label": "Generating literacy lesson",
+      "data": {
+        "classification": "fact",
+        "flagCount": 2,
+        "sourceCount": 3
+      }
+    },
+    {
+      "timestamp": "2026-05-06T06:27:21.102Z",
+      "step": "LITERACY",
+      "label": "Literacy lesson generated",
+      "data": {
+        "summary": "This post is factual because it's easy to check announcements about class suspensions, but be careful about how social media posts use capitalization.",
+        "pointCount": 2,
+        "tip": "Double-check the official sources, even if the post seems right."
+      }
+    },
+    {
+      "timestamp": "2026-05-06T06:27:21.104Z",
+      "step": "OUTPUT",
+      "label": "Final result mapped for frontend",
+      "data": {
+        "classification": "fact",
+        "chismisLevel": 5,
+        "message": "Legit naman 'to ✅",
+        "details": "Mukhang totoo naman ito based sa analysis ni Marites.",
+        "breakdown": {
+          "reasons": [
+            "Classes in all levels are suspended on September 02, 2025"
+          ],
+          "redFlags": [
+            "Philstar.com reports class suspensions announced on September 2, 2025."
+          ]
+        },
+        "harmScore": {
+          "level": "low",
+          "score": 11,
+          "explanation": "This content appears to be factual. Safe to share with context."
+        },
+        "maritesMode": "Ayy girl, mukhang totoo nga na may mga walang pasok noong September 2, 2025! According sa Philstar, nag announce nga ang DILG ng class suspensions sa iba't ibang lugar. Kaya stay safe mga bagets!",
+        "resibo": {
+          "verdict": "Philstar.com reports class suspensions announced on September 2, 2025.",
+          "sources": [
+            {
+              "title": "[Walang Pasok] Class suspensions, Monday, September 22, 2025",
+              "url": "https://www.rappler.com/philippines/class-suspensions-walang-pasok-september-22-2025/",
+              "credibility": "verified"
+            },
+            {
+              "title": "Jonvic admits class suspensions announced later than usual",
+              "url": "https://www.philstar.com/headlines/2025/09/02/2469851/jonvic-admits-class-suspensions-announced-later-usual",
+              "credibility": "verified"
+            },
+            {
+              "title": "#WalangPasok: Class suspensions for Sept. 24, 2025 - ABS-CBN",
+              "url": "https://www.abs-cbn.com/news/nation/2025/9/23/-walangpasok-class-suspensions-for-sept-24-2025-2000",
+              "credibility": "verified"
+            }
+          ]
+        },
+        "linguisticFlags": [
+          "ALL CAPS usage",
+          "Excessive capitalization"
+        ],
+        "factCorrection": null,
+        "sourceCredibility": {
+          "score": 40,
+          "trustedCount": 4,
+          "semiTrustedCount": 0,
+          "untrustedCount": 6
+        },
+        "literacyLesson": {
+          "summary": "This post is factual because it's easy to check announcements about class suspensions, but be careful about how social media posts use capitalization.",
+          "points": [
+            {
+              "issue": "The post announces class suspensions for September 2, 2025, and it matches official news from Philstar.com and ABS-CBN.",
+              "correction": "Checking announcements from news organizations is a good way to verify 'walang pasok' claims."
+            },
+            {
+              "issue": "The post uses ALL CAPS and excessive capitalization.",
+              "correction": "Official announcements are usually written in a normal, readable style."
+            }
+          ],
+          "tip": "Double-check the official sources, even if the post seems right."
+        }
+      }
+    }
+  ]
+}

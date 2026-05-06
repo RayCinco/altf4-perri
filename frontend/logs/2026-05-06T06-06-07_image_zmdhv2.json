@@ -1,0 +1,295 @@
+{
+  "session": {
+    "id": "zmdhv2",
+    "mode": "image",
+    "startedAt": "2026-05-06T06:06:07.963Z",
+    "completedAt": "2026-05-06T06:06:18.483Z",
+    "durationMs": 10520
+  },
+  "pipeline": [
+    {
+      "timestamp": "2026-05-06T06:06:07.965Z",
+      "step": "PIPELINE",
+      "label": "Image pipeline started",
+      "data": {
+        "mimeType": "image/jpeg",
+        "imageSizeBytes": 115867
+      }
+    },
+    {
+      "timestamp": "2026-05-06T06:06:11.240Z",
+      "step": "OCR",
+      "label": "Raw text extracted from image",
+      "data": {
+        "mimeType": "image/jpeg",
+        "imageSizeBytes": 115867,
+        "ocrPrompt": "Extract ALL readable text from this image. Return ONLY the raw text content, exactly as it appears. Do not add commentary, analysis, or formatting. If there is no text in the image, return \"NO_TEXT_FOUND\". Preserve the original language (Filipino, English, Taglish, etc.)",
+        "rawExtractedText": "ScienceKonek\n6h\n#SciFeature CAN YOU SWIM?\nDespite living in an archipelago, around 50% Filipinos grow up without learning how to swim.\nWhy is it that many Filipinos can't swim? According to the Organisation for Economic Co-operation\nand Development (OECD), poverty and limited access make swimming lessons unaffordable, while\npublic schools rarely include them.\nUrbanization also separates communities from natural water, and many cities lack safe, affordable\nfacilities. Cultural factors play a role too, as fear of water or lack of skills is often passed down within\nfamilies.\nAs a result, swimming is treated as a \"luxury,\" not a basic survival skill. The Philippines loses around\n10 people every day to drowning, making it a major yet often overlooked public health issue.\n#OceanMonth #swimming #survival\nMonth of the Ocean\nImage Credit: xinhuanet\nLAJOG UNG\nDespite being in a nation of 7,641 islands\nsurrounded by vast seas,\naround 50% of Filipinos\nstill cannot swim.\nSource: Organisation for Economic Co-operation and Development: Swimming skills\naround the world Evidence on inequalities in life skills across and within countries\nScienceKonek",
+        "rawTextLength": 1150
+      }
+    },
+    {
+      "timestamp": "2026-05-06T06:06:11.241Z",
+      "step": "OCR",
+      "label": "Text cleaned and finalized",
+      "data": {
+        "cleanedText": "ScienceKonek\n6h\n#SciFeature CAN YOU SWIM?\nDespite living in an archipelago, around 50% Filipinos grow up without learning how to swim.\nWhy is it that many Filipinos can't swim? According to the Organisation for Economic Co-operation\nand Development (OECD), poverty and limited access make swimming lessons unaffordable, while\npublic schools rarely include them.\nUrbanization also separates communities from natural water, and many cities lack safe, affordable\nfacilities. Cultural factors play a role too, as fear of water or lack of skills is often passed down within\nfamilies.\nAs a result, swimming is treated as a \"luxury,\" not a basic survival skill. The Philippines loses around\n10 people every day to drowning, making it a major yet often overlooked public health issue.\n#OceanMonth #swimming #survival\nMonth of the Ocean\nImage Credit: xinhuanet\nLAJOG UNG\nDespite being in a nation of 7,641 islands\nsurrounded by vast seas,\naround 50% of Filipinos\nstill cannot swim.\nSource: Organisation for Economic Co-operation and Development: Swimming skills\naround the world Evidence on inequalities in life skills across and within countries\nScienceKonek",
+        "cleanedTextLength": 1150
+      }
+    },
+    {
+      "timestamp": "2026-05-06T06:06:12.164Z",
+      "step": "SEARCH",
+      "label": "Query generated from text",
+      "data": {
+        "inputTextPreview": "ScienceKonek\n6h\n#SciFeature CAN YOU SWIM?\nDespite living in an archipelago, around 50% Filipinos grow up without learning how to swim.\nWhy is it that many Filipinos can't swim? According to the Organi",
+        "generatedQuery": "Filipinos cannot swim statistics"
+      }
+    },
+    {
+      "timestamp": "2026-05-06T06:06:13.402Z",
+      "step": "SEARCH",
+      "label": "Search results retrieved",
+      "data": {
+        "query": "Filipinos cannot swim statistics",
+        "resultCount": 9,
+        "results": [
+          {
+            "title": "50% Of Filipinos Still Can't Swim Despite Living In An Archipelago ...",
+            "snippet": "Did you know that 80% of our population doesn't know how to swim? That's almost 92 Million Filipino non- swimmers. Sad for an archipelagic ...",
+            "link": "https://www.facebook.com/TurismoCentralLuzon/posts/50-of-filipinos-still-cant-swim-despite-living-in-an-archipelagoaround-50-of-fil/1386873260151927/"
+          },
+          {
+            "title": "We live in an archipelago. Why can't Filipinos swim? - Diinsider Life",
+            "snippet": "The Philippines loses an average of 10 citizens to drowning every day. While debates about swimming education continue, bodies are being ...",
+            "link": "https://diinsiderlife.com/index.php/2025/03/18/we-live-in-an-archipelago-why-cant-filipinos-swim/"
+          },
+          {
+            "title": "50% Of Filipinos Still Can't Swim Despite Living In An Archipelago ...",
+            "snippet": "Around 50% of Filipinos grow up without learning how to swim, even though the country is surrounded by water. According to the Organisation for ...",
+            "link": "https://www.instagram.com/p/DX8H6wbiNyM/"
+          },
+          {
+            "title": "Statistically: Around 50% of Filipinos can't swim without ... - Instagram",
+            "snippet": "4 likes, 0 comments - _saaaaraaaah04 on April 7, 2026: \"Statistically: Around 50% of Filipinos can't swim without assistance and yes, ...",
+            "link": "https://www.instagram.com/reel/DW1X7Jkj-tR/"
+          },
+          {
+            "title": "Swimming and Gendered Vulnerabilities: Evidence from the ... - PMC",
+            "snippet": "There is substantial gender variation in swimming ability with 87% of men reporting swimming skills but only 51% of women – and swimmers tend to be younger (in ...",
+            "link": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4835034/"
+          },
+          {
+            "title": "It's awkward that the majority of Filipinos don't know how to swim ...",
+            "snippet": "It's awkward that the majority of Filipinos don't know how to swim despite being surrounded by water. ... But traumatic things happened and I ...",
+            "link": "https://www.reddit.com/r/Philippines/comments/12ssrxs/its_awkward_that_the_majority_of_filipinos_dont/"
+          },
+          {
+            "title": "Why don't more Filipinos swim in the Philippines? - Facebook",
+            "snippet": "Plenty of Filipinos can swim. It's just a lot of the Filipinos that make their way to the States are often not from the coast. My mom can't ...",
+            "link": "https://www.facebook.com/groups/socalfilipinos/posts/853887512120147/"
+          },
+          {
+            "title": "Most Filipino can't swim! Here's the proof   - YouTube",
+            "snippet": "Most Filipino can't swim! Here's the proof ... This content isn't available. Skip video.",
+            "link": "https://www.youtube.com/shorts/XkVdcNc0ozI"
+          },
+          {
+            "title": "Filipinos should know how to swim - Inquirer Opinion",
+            "snippet": "studies reveal that swimming ability is really low in the Philippines — even in coastal communities, where more boys can swim than girls ...",
+            "link": "https://opinion.inquirer.net/112088/filipinos-know-swim"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-06T06:06:13.404Z",
+      "step": "FILTER",
+      "label": "Sources classified by credibility",
+      "data": {
+        "totalSources": 9,
+        "trustedCount": 2,
+        "semiTrustedCount": 1,
+        "untrustedCount": 6,
+        "credibilityScore": 27,
+        "sources": [
+          {
+            "domain": "facebook.com",
+            "credibility": "untrusted",
+            "title": "50% Of Filipinos Still Can't Swim Despite Living In An Archipelago ..."
+          },
+          {
+            "domain": "diinsiderlife.com",
+            "credibility": "untrusted",
+            "title": "We live in an archipelago. Why can't Filipinos swim? - Diinsider Life"
+          },
+          {
+            "domain": "instagram.com",
+            "credibility": "untrusted",
+            "title": "50% Of Filipinos Still Can't Swim Despite Living In An Archipelago ..."
+          },
+          {
+            "domain": "instagram.com",
+            "credibility": "untrusted",
+            "title": "Statistically: Around 50% of Filipinos can't swim without ... - Instagram"
+          },
+          {
+            "domain": "pmc.ncbi.nlm.nih.gov",
+            "credibility": "trusted",
+            "title": "Swimming and Gendered Vulnerabilities: Evidence from the ... - PMC"
+          },
+          {
+            "domain": "reddit.com",
+            "credibility": "untrusted",
+            "title": "It's awkward that the majority of Filipinos don't know how to swim ..."
+          },
+          {
+            "domain": "facebook.com",
+            "credibility": "untrusted",
+            "title": "Why don't more Filipinos swim in the Philippines? - Facebook"
+          },
+          {
+            "domain": "youtube.com",
+            "credibility": "semi-trusted",
+            "title": "Most Filipino can't swim! Here's the proof   - YouTube"
+          },
+          {
+            "domain": "opinion.inquirer.net",
+            "credibility": "trusted",
+            "title": "Filipinos should know how to swim - Inquirer Opinion"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-06T06:06:13.406Z",
+      "step": "AI",
+      "label": "Prompts constructed",
+      "data": {
+        "personality": "marites",
+        "userPrompt": "Analyze the following text and classify it:\n\n---\nScienceKonek\n6h\n#SciFeature CAN YOU SWIM?\nDespite living in an archipelago, around 50% Filipinos grow up without learning how to swim.\nWhy is it that many Filipinos can't swim? According to the Organisation for Economic Co-operation\nand Development (OECD), poverty and limited access make swimming lessons unaffordable, while\npublic schools rarely include them.\nUrbanization also separates communities from natural water, and many cities lack safe, affordable\nfacilities. Cultural factors play a role too, as fear of water or lack of skills is often passed down within\nfamilies.\nAs a result, swimming is treated as a \"luxury,\" not a basic survival skill. The Philippines loses around\n10 people every day to drowning, making it a major yet often overlooked public health issue.\n#OceanMonth #swimming #survival\nMonth of the Ocean\nImage Credit: xinhuanet\nLAJOG UNG\nDespite being in a nation of 7,641 islands\nsurrounded by vast seas,\naround 50% of Filipinos\nstill cannot swim.\nSource: Organisation for Economic Co-operation and Development: Swimming skills\naround the world Evidence on inequalities in life skills across and within countries\nScienceKonek\n---\n\nAdditional search context for fact-checking:\nSource 1 [TRUSTED]:\nTitle: Swimming and Gendered Vulnerabilities: Evidence from the ... - PMC\nSnippet: There is substantial gender variation in swimming ability with 87% of men reporting swimming skills but only 51% of women – and swimmers tend to be younger (in ...\nLink: https://pmc.ncbi.nlm.nih.gov/articles/PMC4835034/\nDomain: pmc.ncbi.nlm.nih.gov\n\nSource 2 [SEMI-TRUSTED]:\nTitle: Most Filipino can't swim! Here's the proof   - YouTube\nSnippet: Most Filipino can't swim! Here's the proof ... This content isn't available. Skip video.\nLink: https://www.youtube.com/shorts/XkVdcNc0ozI\nDomain: youtube.com\n\nSource 3 [TRUSTED]:\nTitle: Filipinos should know how to swim - Inquirer Opinion\nSnippet: studies reveal that swimming ability is really low in the Philippines — even in coastal communities, where more boys can swim than girls ...\nLink: https://opinion.inquirer.net/112088/filipinos-know-swim\nDomain: opinion.inquirer.net\n",
+        "hasSearchContext": true
+      }
+    },
+    {
+      "timestamp": "2026-05-06T06:06:15.770Z",
+      "step": "AI",
+      "label": "Raw Gemini response received",
+      "data": {
+        "rawResponse": "```json\n{\n  \"label\": \"TRUE\",\n  \"confidence\": 90,\n  \"marites_explanation\": \"Ayy girl, true naman 'to! Around 50% of Filipinos daw di marunong lumangoy kahit archipelago tayo. Nakakaloka pero dahil daw sa poverty, lack of access, and cultural factors. Kaya ingat ingat sa dagat mga mare!\",\n  \"claims\": [\n    \"Around 50% of Filipinos grow up without learning how to swim.\",\n    \"The Philippines loses around 10 people every day to drowning.\"\n  ],\n  \"evidence\": [\n    \"OECD states poverty and limited access make swimming lessons unaffordable.\",\n    \"Public schools rarely include swimming lessons.\",\n    \"Studies reveal that swimming ability is really low in the Philippines.\",\n    \"The Philippines loses around 10 people every day to drowning (according to the text provided in the prompt).\"\n  ],\n  \"linguistic_flags\": [],\n  \"fact_correction\": null\n}\n```"
+      }
+    },
+    {
+      "timestamp": "2026-05-06T06:06:15.771Z",
+      "step": "AI",
+      "label": "Response parsed successfully",
+      "data": {
+        "label": "True",
+        "confidence": 90,
+        "explanation": "Ayy girl, true naman 'to! Around 50% of Filipinos daw di marunong lumangoy kahit archipelago tayo. Nakakaloka pero dahil daw sa poverty, lack of access, and cultural factors. Kaya ingat ingat sa dagat mga mare!",
+        "claims": [
+          "Around 50% of Filipinos grow up without learning how to swim.",
+          "The Philippines loses around 10 people every day to drowning."
+        ],
+        "evidence": [
+          "OECD states poverty and limited access make swimming lessons unaffordable.",
+          "Public schools rarely include swimming lessons.",
+          "Studies reveal that swimming ability is really low in the Philippines.",
+          "The Philippines loses around 10 people every day to drowning (according to the text provided in the prompt)."
+        ],
+        "linguisticFlags": [],
+        "factCorrection": null
+      }
+    },
+    {
+      "timestamp": "2026-05-06T06:06:15.772Z",
+      "step": "LITERACY",
+      "label": "Generating literacy lesson",
+      "data": {
+        "classification": "fact",
+        "flagCount": 0,
+        "sourceCount": 3
+      }
+    },
+    {
+      "timestamp": "2026-05-06T06:06:18.481Z",
+      "step": "LITERACY",
+      "label": "Literacy lesson generated",
+      "data": {
+        "summary": "This post is factual because it gives specific, verifiable reasons for low swimming rates in the Philippines, supported by credible sources.",
+        "pointCount": 3,
+        "tip": "When evaluating claims, check if they cite specific sources like organizations or studies, which add weight to the information."
+      }
+    },
+    {
+      "timestamp": "2026-05-06T06:06:18.482Z",
+      "step": "OUTPUT",
+      "label": "Final result mapped for frontend",
+      "data": {
+        "classification": "fact",
+        "chismisLevel": 10,
+        "message": "Legit naman 'to ✅",
+        "details": "Mukhang totoo naman ito based sa analysis ni Marites.",
+        "breakdown": {
+          "reasons": [
+            "Around 50% of Filipinos grow up without learning how to swim.",
+            "The Philippines loses around 10 people every day to drowning."
+          ],
+          "redFlags": []
+        },
+        "harmScore": {
+          "level": "low",
+          "score": 12,
+          "explanation": "This content appears to be factual. Safe to share with context."
+        },
+        "maritesMode": "Ayy girl, true naman 'to! Around 50% of Filipinos daw di marunong lumangoy kahit archipelago tayo. Nakakaloka pero dahil daw sa poverty, lack of access, and cultural factors. Kaya ingat ingat sa dagat mga mare!",
+        "resibo": {
+          "verdict": "OECD states poverty and limited access make swimming lessons unaffordable. | Public schools rarely include swimming lessons. | Studies reveal that swimming ability is really low in the Philippines. | The Philippines loses around 10 people every day to drowning (according to the text provided in the prompt).",
+          "sources": [
+            {
+              "title": "Swimming and Gendered Vulnerabilities: Evidence from the ... - PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4835034/",
+              "credibility": "verified"
+            },
+            {
+              "title": "Filipinos should know how to swim - Inquirer Opinion",
+              "url": "https://opinion.inquirer.net/112088/filipinos-know-swim",
+              "credibility": "verified"
+            },
+            {
+              "title": "Most Filipino can't swim! Here's the proof   - YouTube",
+              "url": "https://www.youtube.com/shorts/XkVdcNc0ozI",
+              "credibility": "questionable"
+            }
+          ]
+        },
+        "linguisticFlags": [],
+        "factCorrection": null,
+        "sourceCredibility": {
+          "score": 27,
+          "trustedCount": 2,
+          "semiTrustedCount": 1,
+          "untrustedCount": 6
+        },
+        "literacyLesson": {
+          "summary": "This post is factual because it gives specific, verifiable reasons for low swimming rates in the Philippines, supported by credible sources.",
+          "points": [
+            {
+              "issue": "The post mentions data from the Organisation for Economic Co-operation and Development (OECD).",
+              "correction": "OECD is a trusted international source for economic and social data, making this information reliable."
+            },
+            {
+              "issue": "The post claims public schools rarely include swimming lessons.",
+              "correction": "This aligns with common knowledge and is supported by opinion pieces in the Inquirer, adding credibility."
+            },
+            {
+              "issue": "The post identifies urbanization as a factor separating communities from natural water.",
+              "correction": "This is a logical explanation and is further supported by studies, increasing the post's reliability."
+            }
+          ],
+          "tip": "When evaluating claims, check if they cite specific sources like organizations or studies, which add weight to the information."
+        }
+      }
+    }
+  ]
+}

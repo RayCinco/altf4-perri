@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { ChismisMeter } from "./ChismisMeter";
 
 // ─── Types (mirrors AnalysisResult from analysis.ts + LiteracyLesson) ─────────
 
@@ -49,130 +50,6 @@ interface ResultsPanelProps {
   onToggle?: () => void;
 }
 
-// --- Gauge Component ---
-function ChismisGauge({ score }: { score: number }) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const W = canvas.width;
-    const H = canvas.height;
-    const cx = W / 2;
-    const cy = H - 20;
-    const r = Math.min(W, (H * 1.0) / 2 - 10);
-
-    ctx.clearRect(0, 0, W, H);
-
-    // Draw arc segments: red (0–40), yellow (40–60), green (60–100)
-    const segments = [
-      { from: Math.PI, to: Math.PI * 1.4, color: "#ef4444" }, // 0–40 red
-      { from: Math.PI * 1.4, to: Math.PI * 1.6, color: "#eab308" }, // 40–60 yellow
-      { from: Math.PI * 1.6, to: Math.PI * 2, color: "#22c55e" }, // 60–100 green
-    ];
-
-    segments.forEach(({ from, to, color }) => {
-      ctx.beginPath();
-      ctx.arc(cx, cy, r, from, to);
-      ctx.lineWidth = 20;
-      ctx.strokeStyle = color;
-      ctx.stroke();
-    });
-
-    // Tick marks
-    for (let i = 0; i <= 10; i++) {
-      const angle = Math.PI + (i / 10) * Math.PI;
-      const inner = r - 14;
-      const outer = r + 4;
-      const cos = Math.cos(angle);
-      const sin = Math.sin(angle);
-      ctx.beginPath();
-      ctx.moveTo(cx + cos * inner, cy + sin * inner);
-      ctx.lineTo(cx + cos * outer, cy + sin * outer);
-      ctx.lineWidth = i % 5 === 0 ? 2 : 1;
-      ctx.strokeStyle = "#94a3b8";
-      ctx.stroke();
-
-      // Labels at 0, 50, 100
-      if (i === 0 || i === 5 || i === 10) {
-        ctx.font = "11px sans-serif";
-        ctx.fillStyle = "#94a3b8";
-        ctx.textAlign = "center";
-        const labelR = r + 18;
-        ctx.fillText(
-          String(i * 10),
-          cx + Math.cos(angle) * labelR,
-          cy + Math.sin(angle) * labelR + 4,
-        );
-      }
-    }
-
-    // Needle
-    const clampedScore = Math.max(0, Math.min(100, score));
-    const needleAngle = Math.PI + (clampedScore / 100) * Math.PI;
-    const needleLen = r - 8;
-    ctx.beginPath();
-    ctx.moveTo(cx, cy);
-    ctx.lineTo(
-      cx + Math.cos(needleAngle) * needleLen,
-      cy + Math.sin(needleAngle) * needleLen,
-    );
-    ctx.lineWidth = 3;
-    ctx.strokeStyle = "#e2e8f0";
-    ctx.lineCap = "round";
-    ctx.stroke();
-
-    // Pivot dot
-    ctx.beginPath();
-    ctx.arc(cx, cy, 7, 0, Math.PI * 2);
-    ctx.fillStyle = "#60a5fa";
-    ctx.fill();
-  }, [score]);
-
-  return (
-    <div style={{ textAlign: "center" }}>
-      <canvas
-        ref={canvasRef}
-        width={260}
-        height={140}
-        style={{ maxWidth: "100%" }}
-      />
-      {/* Score label */}
-      <div style={{ marginTop: -8 }}>
-        <span
-          style={{
-            fontSize: 36,
-            fontWeight: 700,
-            color: score < 40 ? "#ef4444" : score < 60 ? "#eab308" : "#22c55e",
-          }}
-        >
-          {score}
-        </span>
-        <span style={{ fontSize: 18, color: "#64748b", marginLeft: 4 }}>
-          /100
-        </span>
-      </div>
-      <div
-        style={{
-          fontSize: 12,
-          color: "#64748b",
-          marginTop: 2,
-          letterSpacing: "0.05em",
-          textTransform: "uppercase",
-        }}
-      >
-        {score < 40
-          ? "Highly Likely Rumor"
-          : score < 60
-            ? "Uncertain — Verify"
-            : "Likely Credible"}
-      </div>
-    </div>
-  );
-}
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -384,7 +261,7 @@ export default function ResultsPanel({
                         marginBottom: 4,
                       }}
                     >
-                      <span
+                       <span
                         style={{
                           fontSize: 11,
                           fontWeight: 700,
@@ -394,7 +271,7 @@ export default function ResultsPanel({
                             CLASSIFICATION_COLOR[result.classification].color,
                         }}
                       >
-                        Verdict
+                        Analysis Summary
                       </span>
                       <p
                         style={{
@@ -410,98 +287,137 @@ export default function ResultsPanel({
                     </div>
                   )}
 
-                  <p
-                    style={{
-                      color: "#94a3b8",
-                      fontSize: 13,
-                      margin: "0 0 2px",
-                    }}
-                  >
-                    {result.resibo.sources.length > 0
-                      ? "Relevant sources found for this claim:"
-                      : "No sources were found for this claim."}
-                  </p>
+                  {(() => {
+                    const trusted = result.resibo.sources.filter(s => s.credibility === "verified");
+                    const others = result.resibo.sources.filter(s => s.credibility !== "verified");
 
-                  {result.resibo.sources.map((src, i) => {
-                    const cred = CREDIBILITY_CONFIG[src.credibility];
-                    let hostname = src.url;
-                    try {
-                      hostname = new URL(src.url).hostname.replace("www.", "");
-                    } catch {}
-                    return (
-                      <div
-                        key={i}
-                        style={{
-                          background: "#0f2340",
-                          border: "1px solid #1e3a5f",
-                          borderRadius: 10,
-                          padding: "14px 16px",
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: 6,
-                        }}
-                      >
+                    const renderSource = (src: PopupSource, i: number) => {
+                      const cred = CREDIBILITY_CONFIG[src.credibility];
+                      let hostname = src.url;
+                      try {
+                        hostname = new URL(src.url).hostname.replace("www.", "");
+                      } catch {}
+                      return (
                         <div
+                          key={i}
                           style={{
+                            background: "rgba(15, 35, 64, 0.4)",
+                            border: "1px solid #1e3a5f",
+                            borderRadius: 12,
+                            padding: "14px 16px",
                             display: "flex",
-                            alignItems: "flex-start",
-                            justifyContent: "space-between",
-                            gap: 8,
-                          }}
-                        >
-                          <span
-                            style={{
-                              color: "#cbd5e1",
-                              fontSize: 14,
-                              fontWeight: 500,
-                              lineHeight: 1.4,
-                              flex: 1,
-                            }}
-                          >
-                            {src.title}
-                          </span>
-                          <span
-                            style={{
-                              background: cred.bg,
-                              color: cred.color,
-                              fontSize: 11,
-                              fontWeight: 600,
-                              padding: "3px 10px",
-                              borderRadius: 20,
-                              flexShrink: 0,
-                              letterSpacing: "0.03em",
-                            }}
-                          >
-                            {cred.label}
-                          </span>
-                        </div>
-                        <div
-                          style={{
-                            display: "flex",
-                            alignItems: "center",
+                            flexDirection: "column",
                             gap: 6,
+                            transition: "transform 0.2s ease, background 0.2s ease",
                           }}
                         >
-                          <span style={{ fontSize: 12, color: "#475569" }}>
-                            {hostname}
-                          </span>
-                          <span style={{ color: "#1e3a5f" }}>·</span>
-                          <a
-                            href={src.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                          <div
                             style={{
-                              fontSize: 12,
-                              color: "#3b82f6",
-                              textDecoration: "none",
+                              display: "flex",
+                              alignItems: "flex-start",
+                              justifyContent: "space-between",
+                              gap: 8,
                             }}
                           >
-                            View source
-                          </a>
+                            <span
+                              style={{
+                                color: "#cbd5e1",
+                                fontSize: 13,
+                                fontWeight: 500,
+                                lineHeight: 1.4,
+                                flex: 1,
+                              }}
+                            >
+                              {src.title}
+                            </span>
+                            <span
+                              style={{
+                                background: cred.bg,
+                                color: cred.color,
+                                fontSize: 10,
+                                fontWeight: 700,
+                                padding: "2px 8px",
+                                borderRadius: 6,
+                                flexShrink: 0,
+                                textTransform: "uppercase",
+                                letterSpacing: "0.02em",
+                              }}
+                            >
+                              {cred.label}
+                            </span>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "space-between",
+                              marginTop: 2,
+                            }}
+                          >
+                            <span style={{ fontSize: 12, color: "#64748b" }}>
+                              {hostname}
+                            </span>
+                            <a
+                              href={src.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              style={{
+                                fontSize: 12,
+                                color: "#60a5fa",
+                                textDecoration: "none",
+                                fontWeight: 500,
+                                display: "flex",
+                                alignItems: "center",
+                                gap: 4,
+                              }}
+                            >
+                              View Source ↗
+                            </a>
+                          </div>
                         </div>
+                      );
+                    };
+
+                    return (
+                      <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+                        {/* Trusted Section */}
+                        {trusted.length > 0 && (
+                          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                            <div style={{ display: "flex", alignItems: "center", gap: 8, paddingLeft: 4 }}>
+                              <span style={{ fontSize: 14 }}>🛡️</span>
+                              <span style={{ fontSize: 11, fontWeight: 700, color: "#86efac", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                                Verified Evidence
+                              </span>
+                            </div>
+                            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                              {trusted.map((src, i) => renderSource(src, i))}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Others Section */}
+                        {others.length > 0 && (
+                          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                            <div style={{ display: "flex", alignItems: "center", gap: 8, paddingLeft: 4 }}>
+                              <span style={{ fontSize: 14 }}>🌐</span>
+                              <span style={{ fontSize: 11, fontWeight: 700, color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                                General Mentions & Sources
+                              </span>
+                            </div>
+                            <div style={{ display: "flex", flexDirection: "column", gap: 10, opacity: 0.85 }}>
+                              {others.map((src, i) => renderSource(src, i))}
+                            </div>
+                          </div>
+                        )}
+
+                        {result.resibo.sources.length === 0 && (
+                          <p style={{ color: "#64748b", fontSize: 13, textAlign: "center", marginTop: 20 }}>
+                            No relevant sources were found for this claim.
+                          </p>
+                        )}
                       </div>
                     );
-                  })}
+                  })()}
                 </div>
               )}
 
@@ -523,43 +439,50 @@ export default function ResultsPanel({
                     </div>
                   ) : (
                     <>
-                      {/* Summary card */}
+                      {/* Summary card with enhanced glassmorphism */}
                       <div
                         style={{
-                          background:
-                            "linear-gradient(135deg, #1e1b4b 0%, #312e81 100%)",
-                          border: "1px solid #4338ca",
-                          borderRadius: 12,
-                          padding: "16px 18px",
+                          background: "linear-gradient(135deg, rgba(67, 56, 202, 0.2) 0%, rgba(124, 58, 237, 0.2) 100%)",
+                          backdropFilter: "blur(12px)",
+                          border: "1px solid rgba(139, 92, 246, 0.3)",
+                          borderRadius: 16,
+                          padding: "20px",
                           display: "flex",
-                          gap: 12,
+                          gap: 16,
                           alignItems: "flex-start",
+                          boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)",
                         }}
                       >
-                        <span
-                          style={{ fontSize: 18, flexShrink: 0, marginTop: 1 }}
-                        >
-                          📋
-                        </span>
+                        <div style={{
+                          background: "rgba(139, 92, 246, 0.2)",
+                          borderRadius: "12px",
+                          padding: "10px",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center"
+                        }}>
+                          <span style={{ fontSize: 20 }}>🎓</span>
+                        </div>
                         <div>
                           <div
                             style={{
-                              color: "#a5b4fc",
-                              fontSize: 12,
-                              fontWeight: 700,
-                              letterSpacing: "0.06em",
+                              color: "#c4b5fd",
+                              fontSize: 11,
+                              fontWeight: 800,
+                              letterSpacing: "0.1em",
                               textTransform: "uppercase",
-                              marginBottom: 6,
+                              marginBottom: 8,
                             }}
                           >
-                            Media Literacy Check
+                            Learning Insights
                           </div>
                           <p
                             style={{
-                              color: "#e0e7ff",
-                              fontSize: 13,
+                              color: "#e9d5ff",
+                              fontSize: 14,
                               lineHeight: 1.6,
                               margin: 0,
+                              fontWeight: 450,
                             }}
                           >
                             {result.literacyLesson.summary}
@@ -567,127 +490,98 @@ export default function ResultsPanel({
                         </div>
                       </div>
 
-                      {/* Teaching points (issue → correction pairs) */}
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: 10,
-                        }}
-                      >
-                        {result.literacyLesson.points.map((point, i) => (
-                          <div
-                            key={i}
-                            style={{ display: "flex", flexDirection: "column" }}
-                          >
+                        {/* Compact teaching points with refined aesthetics */}
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: 12,
+                          }}
+                        >
+                          {result.literacyLesson.points.map((point, i) => (
                             <div
+                              key={i}
                               style={{
-                                background: "#0f2340",
-                                border: "1px solid #1e3a5f",
-                                borderRadius: "10px 10px 0 0",
-                                padding: "12px 16px",
+                                background: "rgba(30, 41, 59, 0.3)",
+                                border: "1px solid rgba(71, 85, 105, 0.3)",
+                                borderRadius: "14px",
+                                padding: "16px",
                                 display: "flex",
+                                flexDirection: "column",
                                 gap: 10,
-                                alignItems: "flex-start",
+                                position: "relative",
+                                overflow: "hidden",
                               }}
                             >
-                              <span
+                              <div
                                 style={{
-                                  fontSize: 14,
-                                  flexShrink: 0,
-                                  marginTop: 1,
+                                  position: "absolute",
+                                  left: 0,
+                                  top: 0,
+                                  bottom: 0,
+                                  width: "3px",
+                                  background: "linear-gradient(to bottom, #6366f1, #a855f7)",
                                 }}
-                              >
-                                🔍
-                              </span>
-                              <p
-                                style={{
-                                  color: "#94a3b8",
-                                  fontSize: 13,
-                                  lineHeight: 1.5,
-                                  margin: 0,
-                                }}
-                              >
-                                {point.issue}
-                              </p>
+                              />
+                              <div style={{ display: "flex", gap: 12 }}>
+                                <span style={{ fontSize: 16, flexShrink: 0, opacity: 0.8 }}>🔍</span>
+                                <p style={{ color: "#cbd5e1", fontSize: 13, lineHeight: 1.5, margin: 0 }}>
+                                  {point.issue}
+                                </p>
+                              </div>
+                              <div style={{ 
+                                display: "flex", 
+                                gap: 12, 
+                                background: "rgba(34, 197, 94, 0.05)",
+                                padding: "10px 12px",
+                                borderRadius: "8px",
+                                marginTop: 4
+                              }}>
+                                <span style={{ color: "#4ade80", fontSize: 15, flexShrink: 0 }}>✓</span>
+                                <p style={{ color: "#bbf7d0", fontSize: 13, lineHeight: 1.5, margin: 0, fontWeight: 500 }}>
+                                  {point.correction}
+                                </p>
+                              </div>
                             </div>
-                            <div
-                              style={{
-                                display: "flex",
-                                justifyContent: "center",
-                                padding: "4px 0",
-                                background: "#0a1929",
-                              }}
-                            >
-                              <span style={{ color: "#1e3a5f", fontSize: 16 }}>
-                                ↓
-                              </span>
-                            </div>
-                            <div
-                              style={{
-                                background: "#071a0a",
-                                border: "1px solid #14532d",
-                                borderRadius: "0 0 10px 10px",
-                                padding: "12px 16px",
-                                display: "flex",
-                                gap: 10,
-                                alignItems: "flex-start",
-                              }}
-                            >
-                              <span
-                                style={{
-                                  fontSize: 14,
-                                  flexShrink: 0,
-                                  marginTop: 1,
-                                  color: "#22c55e",
-                                }}
-                              >
-                                ✓
-                              </span>
-                              <p
-                                style={{
-                                  color: "#86efac",
-                                  fontSize: 13,
-                                  lineHeight: 1.5,
-                                  margin: 0,
-                                }}
-                              >
-                                {point.correction}
-                              </p>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
+                          ))}
+                        </div>
 
-                      {/* Quick tip */}
+                      {/* Quick tip with warmer amber palette */}
                       <div
                         style={{
-                          background: "#2d1f00",
-                          border: "1px solid #713f12",
-                          borderRadius: 10,
-                          padding: "14px 16px",
+                          background: "linear-gradient(135deg, rgba(251, 191, 36, 0.08) 0%, rgba(245, 158, 11, 0.08) 100%)",
+                          border: "1px solid rgba(245, 158, 11, 0.2)",
+                          borderRadius: 14,
+                          padding: "16px 20px",
                           display: "flex",
-                          gap: 10,
+                          gap: 14,
                           alignItems: "flex-start",
                         }}
                       >
-                        <span style={{ fontSize: 16, flexShrink: 0 }}>💡</span>
+                        <div style={{
+                          background: "rgba(245, 158, 11, 0.15)",
+                          borderRadius: "10px",
+                          padding: "8px",
+                          display: "flex"
+                        }}>
+                          <span style={{ fontSize: 18 }}>💡</span>
+                        </div>
                         <div>
                           <div
                             style={{
-                              color: "#fde047",
-                              fontSize: 12,
-                              fontWeight: 700,
-                              letterSpacing: "0.05em",
+                              color: "#fbbf24",
+                              fontSize: 11,
+                              fontWeight: 800,
+                              letterSpacing: "0.08em",
                               textTransform: "uppercase",
                               marginBottom: 4,
                             }}
                           >
-                            Quick Tip
+                            Pro Tip
                           </div>
                           <p
                             style={{
-                              color: "#fef9c3",
+                              color: "#fef3c7",
                               fontSize: 13,
                               lineHeight: 1.5,
                               margin: 0,
@@ -708,7 +602,12 @@ export default function ResultsPanel({
                   style={{ display: "flex", flexDirection: "column", gap: 14 }}
                 >
                   {/* Gauge */}
-                  <ChismisGauge score={result.chismisLevel} />
+                  <div style={{ marginBottom: 20 }}>
+                    <ChismisMeter
+                      level={result.chismisLevel}
+                      classification={result.classification}
+                    />
+                  </div>
 
                   {/* Details */}
                   <div
