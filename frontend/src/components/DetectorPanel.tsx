@@ -325,12 +325,12 @@ function ImageUI({
     <div className="w-full h-full flex flex-col gap-3">
       <div
         ref={dropRef}
-        className="relative flex items-center justify-center border-2 border-dashed border-[#04356A] rounded-xl overflow-hidden bg-[#001d3f33] transition-colors h-[400px] w-full"
+        className="relative flex items-center justify-center border-2 border-dashed border-[#04356A] rounded-xl overflow-hidden bg-[#001d3f33] transition-colors h-100 w-full"
         title="Drag & drop or paste an image here"
       >
         {file && previewUrl ? (
           <div className="relative w-full h-full group">
-            <Image
+            <img
               src={previewUrl}
               alt="Preview"
               className="w-full h-full object-contain"
@@ -338,7 +338,7 @@ function ImageUI({
             {/* Hover overlay for info and remove action */}
             <div className="absolute inset-0 bg-[#000919]/70 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center">
               <div className="text-center p-4">
-                <p className="text-sm text-white font-medium mb-1 truncate max-w-[200px]">
+                <p className="text-sm text-white font-medium mb-1 truncate max-w-50">
                   {file.name}
                 </p>
                 <p className="text-xs text-[#7FB3FF]/80 mb-4">
