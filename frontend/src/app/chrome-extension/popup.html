@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Chismis Detector</title>
+
+  <!-- Inter Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="popup.css" />
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- Top Controls -->
+    <div class="top">
+      <select id="modeSelect" class="select">
+        <option value="genz">GenZ Mode</option>
+        <option value="formal">Formal Mode</option>
+      </select>
+
+      <select id="typeSelect" class="select">
+        <option value="text">Text</option>
+        <option value="url">URL</option>
+        <option value="image">Image</option>
+      </select>
+    </div>
+
+    <!-- Center Input -->
+    <div class="center-box">
+      <textarea id="textInput" class="input active" placeholder="Paste chismis..."></textarea>
+      <input id="urlInput" class="input" placeholder="Paste URL (https://...)" />
+      <input type="file" id="imageInput" class="input" />
+    </div>
+
+    <!-- Analyze -->
+    <button id="analyzeBtn" class="primary-btn">Analyze</button>
+
+    <!-- Results -->
+    <div id="resultBox" class="result">
+      <div id="status">Your analysis will appear here.</div>
+
+      <div id="analysisUI" class="hidden">
+        <div class="meter">
+          <div id="meterFill"></div>
+        </div>
+
+        <div class="percent-row">
+          <span id="chismisPercent"></span>
+          <span id="realPercent"></span>
+        </div>
+
+        <div id="classification"></div>
+        <div id="comparison"></div>
+        <div id="sources"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
