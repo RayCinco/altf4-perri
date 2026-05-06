@@ -1,0 +1,301 @@
+{
+  "session": {
+    "id": "fv42ul",
+    "mode": "image",
+    "startedAt": "2026-05-06T09:45:02.877Z",
+    "completedAt": "2026-05-06T09:45:14.067Z",
+    "durationMs": 11190
+  },
+  "pipeline": [
+    {
+      "timestamp": "2026-05-06T09:45:02.884Z",
+      "step": "PIPELINE",
+      "label": "Image pipeline started",
+      "data": {
+        "mimeType": "image/jpeg",
+        "imageSizeBytes": 100335
+      }
+    },
+    {
+      "timestamp": "2026-05-06T09:45:06.580Z",
+      "step": "OCR",
+      "label": "Raw text extracted from image",
+      "data": {
+        "mimeType": "image/jpeg",
+        "imageSizeBytes": 100335,
+        "ocrPrompt": "Extract ALL readable text from this image. Return ONLY the raw text content, exactly as it appears. Do not add commentary, analysis, or formatting. If there is no text in the image, return \"NO_TEXT_FOUND\". Preserve the original language (Filipino, English, Taglish, etc.)",
+        "rawExtractedText": "Bongbong Marcos\n19h\nSa oras ng panganib, hindi dapat madagdagan ang hirap ng ating mga kababayan.\nKaya ipinag-utos ko ang agarang pagkilos ng mga ahensya ng pamahalaan upang tumugon sa\nashfall mula sa Mayon Volcano eruption.\nNililinis ang mga kalsada, namamahagi ng N95 masks, at naglalagay ng water stations, mobile\nclinics, at tulong para sa mga lumikas upang maprotektahan ang ating mga komunidad.\nPatuloy nating binabantayan ang sitwasyon, kabilang ang panganib ng lahar.\n...\nAlam nating may epekto ito sa kalusugan at kabuhayan ng ating mga kababayan, kaya't tuloy-\ntuloy ang tulong ng pamahalaan hanggang makabalik sa normal ang pang-araw-araw na buhay ng\nbawat pamilyang apektado.\nCOURTESY DOST-PHIVOLCS\nMay 2, 2026\nDOST-PHIV RTVM\nPHILIPPINE INSTITUTE OF\nVOLCANOLOGY AND SEISMOLOGY\nOneDOST4U: Solutions and Opportunities for All\nPRESIDENTIAL BROADCAST\nMayo:02 Valcano 2026-05-02 05:41 PM",
+        "rawTextLength": 894
+      }
+    },
+    {
+      "timestamp": "2026-05-06T09:45:06.583Z",
+      "step": "OCR",
+      "label": "Text cleaned and finalized",
+      "data": {
+        "cleanedText": "Bongbong Marcos\n19h\nSa oras ng panganib, hindi dapat madagdagan ang hirap ng ating mga kababayan.\nKaya ipinag-utos ko ang agarang pagkilos ng mga ahensya ng pamahalaan upang tumugon sa\nashfall mula sa Mayon Volcano eruption.\nNililinis ang mga kalsada, namamahagi ng N95 masks, at naglalagay ng water stations, mobile\nclinics, at tulong para sa mga lumikas upang maprotektahan ang ating mga komunidad.\nPatuloy nating binabantayan ang sitwasyon, kabilang ang panganib ng lahar.\n...\nAlam nating may epekto ito sa kalusugan at kabuhayan ng ating mga kababayan, kaya't tuloy-\ntuloy ang tulong ng pamahalaan hanggang makabalik sa normal ang pang-araw-araw na buhay ng\nbawat pamilyang apektado.\nCOURTESY DOST-PHIVOLCS\nMay 2, 2026\nDOST-PHIV RTVM\nPHILIPPINE INSTITUTE OF\nVOLCANOLOGY AND SEISMOLOGY\nOneDOST4U: Solutions and Opportunities for All\nPRESIDENTIAL BROADCAST\nMayo:02 Valcano 2026-05-02 05:41 PM",
+        "cleanedTextLength": 894
+      }
+    },
+    {
+      "timestamp": "2026-05-06T09:45:07.400Z",
+      "step": "SEARCH",
+      "label": "Query generated from text",
+      "data": {
+        "inputTextPreview": "Bongbong Marcos\n19h\nSa oras ng panganib, hindi dapat madagdagan ang hirap ng ating mga kababayan.\nKaya ipinag-utos ko ang agarang pagkilos ng mga ahensya ng pamahalaan upang tumugon sa\nashfall mula sa",
+        "generatedQuery": "Mayon Volcano eruption ashfall response"
+      }
+    },
+    {
+      "timestamp": "2026-05-06T09:45:08.634Z",
+      "step": "SEARCH",
+      "label": "Search results retrieved",
+      "data": {
+        "query": "Mayon Volcano eruption ashfall response",
+        "resultCount": 9,
+        "results": [
+          {
+            "title": "Heavy Mayon ashfall affects thousands in Albay - Rappler",
+            "snippet": "Local government units in Albay launch relief and recovery operations following Mayon's recent heavy ashfall.",
+            "link": "https://www.rappler.com/philippines/luzon/mayon-ashfall-affects-thousands-albay-may-2026/"
+          },
+          {
+            "title": "Restless Mayon Volcano Disrupts Philippines With Massive Ashfall",
+            "snippet": "In the Philippines, Mayon volcano recently spewed out huge deposits of lava, hot rocks, ash, and gas, triggering an evacuation that had more ...",
+            "link": "http://www.asisonline.org/security-management-magazine/latest-news/today-in-security/2026/may/mayon-volcano-ashfall-eruption/"
+          },
+          {
+            "title": "Over 50,000 families affected by Mayon volcano ashfall in Bicol region",
+            "snippet": "Here are the stories on ANC's The World Tonight (April 4, 2026). - The Philippine House Justice Committee votes to send to the House plenary ...",
+            "link": "https://www.youtube.com/watch?v=s9uu6KeuQLI"
+          },
+          {
+            "title": "Mayon eruption displaces over 100,000 in Philippines as ashfall ...",
+            "snippet": "Mayon eruption displaces over 100,000 in Philippines as ashfall strains water, health, and relief systems · Water shortages and health risks.",
+            "link": "https://theonlinecitizen.com/2026/05/04/mayon-eruption-displaces-over-100-000-in-philippines-as-ashfall-strains-water-health-and-relief-systems"
+          },
+          {
+            "title": "Over 300 Families Evacuate Philippines Due To Ashfall From Volcano",
+            "snippet": "More than 300 families have been evacuated after massive amounts of ash billowed from the Mayon volcano over the weekend due to the collapse of ...",
+            "link": "https://www.ndtv.com/world-news/mayon-volcano-eruption-over-300-families-evacuate-philippines-due-to-ashfall-from-volcano-11445208"
+          },
+          {
+            "title": "Thick ashfall from Mayon affects 52 Albay villages",
+            "snippet": "Personnel are delivering emergency response, evacuation assistance, search-and-rescue operations, and other critical services to ensure the ...",
+            "link": "https://www.pna.gov.ph/articles/1274172"
+          },
+          {
+            "title": "PNP mobilizes cops, resources for Mayon ashfall response",
+            "snippet": "Mayon emitted thick clouds of gas and ashes late Saturday afternoon, May 2, sending local residents and motorists into panic as volcanic ...",
+            "link": "https://mb.com.ph/2026/05/03/pnp-mobilizes-cops-resources-for-mayon-ashfall-response"
+          },
+          {
+            "title": "Updates on Government Response Efforts to the Mayon Volcano ...",
+            "snippet": "... ashfall. Connect with RTVM Website: http://rtvm.gov.ph Facebook ... Updates on Government Response Efforts to the Mayon Volcano Eruption.",
+            "link": "https://www.youtube.com/watch?v=9wb3DaOmLqU"
+          },
+          {
+            "title": "PBBM orders full government response to Mayon ashfall",
+            "snippet": "Following the President's directive, response operations are now in full swing to protect public health, ensure safety, and keep roads and ...",
+            "link": "https://pco.gov.ph/news_releases/pbbm-orders-full-government-response-to-mayon-ashfall-aid-clearing-and-evacuations-underway/"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-06T09:45:08.636Z",
+      "step": "FILTER",
+      "label": "Sources classified by credibility",
+      "data": {
+        "totalSources": 9,
+        "trustedCount": 4,
+        "semiTrustedCount": 3,
+        "untrustedCount": 2,
+        "credibilityScore": 58,
+        "sources": [
+          {
+            "domain": "rappler.com",
+            "credibility": "trusted",
+            "title": "Heavy Mayon ashfall affects thousands in Albay - Rappler"
+          },
+          {
+            "domain": "asisonline.org",
+            "credibility": "semi-trusted",
+            "title": "Restless Mayon Volcano Disrupts Philippines With Massive Ashfall"
+          },
+          {
+            "domain": "youtube.com",
+            "credibility": "semi-trusted",
+            "title": "Over 50,000 families affected by Mayon volcano ashfall in Bicol region"
+          },
+          {
+            "domain": "theonlinecitizen.com",
+            "credibility": "untrusted",
+            "title": "Mayon eruption displaces over 100,000 in Philippines as ashfall ..."
+          },
+          {
+            "domain": "ndtv.com",
+            "credibility": "untrusted",
+            "title": "Over 300 Families Evacuate Philippines Due To Ashfall From Volcano"
+          },
+          {
+            "domain": "pna.gov.ph",
+            "credibility": "trusted",
+            "title": "Thick ashfall from Mayon affects 52 Albay villages"
+          },
+          {
+            "domain": "mb.com.ph",
+            "credibility": "trusted",
+            "title": "PNP mobilizes cops, resources for Mayon ashfall response"
+          },
+          {
+            "domain": "youtube.com",
+            "credibility": "semi-trusted",
+            "title": "Updates on Government Response Efforts to the Mayon Volcano ..."
+          },
+          {
+            "domain": "pco.gov.ph",
+            "credibility": "trusted",
+            "title": "PBBM orders full government response to Mayon ashfall"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-06T09:45:08.644Z",
+      "step": "AI",
+      "label": "Prompts constructed",
+      "data": {
+        "personality": "marites",
+        "userPrompt": "Analyze the following text and classify it:\n\n---\nBongbong Marcos\n19h\nSa oras ng panganib, hindi dapat madagdagan ang hirap ng ating mga kababayan.\nKaya ipinag-utos ko ang agarang pagkilos ng mga ahensya ng pamahalaan upang tumugon sa\nashfall mula sa Mayon Volcano eruption.\nNililinis ang mga kalsada, namamahagi ng N95 masks, at naglalagay ng water stations, mobile\nclinics, at tulong para sa mga lumikas upang maprotektahan ang ating mga komunidad.\nPatuloy nating binabantayan ang sitwasyon, kabilang ang panganib ng lahar.\n...\nAlam nating may epekto ito sa kalusugan at kabuhayan ng ating mga kababayan, kaya't tuloy-\ntuloy ang tulong ng pamahalaan hanggang makabalik sa normal ang pang-araw-araw na buhay ng\nbawat pamilyang apektado.\nCOURTESY DOST-PHIVOLCS\nMay 2, 2026\nDOST-PHIV RTVM\nPHILIPPINE INSTITUTE OF\nVOLCANOLOGY AND SEISMOLOGY\nOneDOST4U: Solutions and Opportunities for All\nPRESIDENTIAL BROADCAST\nMayo:02 Valcano 2026-05-02 05:41 PM\n---\n\nAdditional search context for fact-checking:\nSource 1 [TRUSTED]:\nTitle: Heavy Mayon ashfall affects thousands in Albay - Rappler\nSnippet: Local government units in Albay launch relief and recovery operations following Mayon's recent heavy ashfall.\nLink: https://www.rappler.com/philippines/luzon/mayon-ashfall-affects-thousands-albay-may-2026/\nDomain: rappler.com\n\nSource 2 [SEMI-TRUSTED]:\nTitle: Restless Mayon Volcano Disrupts Philippines With Massive Ashfall\nSnippet: In the Philippines, Mayon volcano recently spewed out huge deposits of lava, hot rocks, ash, and gas, triggering an evacuation that had more ...\nLink: http://www.asisonline.org/security-management-magazine/latest-news/today-in-security/2026/may/mayon-volcano-ashfall-eruption/\nDomain: asisonline.org\n\nSource 3 [SEMI-TRUSTED]:\nTitle: Over 50,000 families affected by Mayon volcano ashfall in Bicol region\nSnippet: Here are the stories on ANC's The World Tonight (April 4, 2026). - The Philippine House Justice Committee votes to send to the House plenary ...\nLink: https://www.youtube.com/watch?v=s9uu6KeuQLI\nDomain: youtube.com\n\nSource 4 [TRUSTED]:\nTitle: Thick ashfall from Mayon affects 52 Albay villages\nSnippet: Personnel are delivering emergency response, evacuation assistance, search-and-rescue operations, and other critical services to ensure the ...\nLink: https://www.pna.gov.ph/articles/1274172\nDomain: pna.gov.ph\n\nSource 5 [TRUSTED]:\nTitle: PNP mobilizes cops, resources for Mayon ashfall response\nSnippet: Mayon emitted thick clouds of gas and ashes late Saturday afternoon, May 2, sending local residents and motorists into panic as volcanic ...\nLink: https://mb.com.ph/2026/05/03/pnp-mobilizes-cops-resources-for-mayon-ashfall-response\nDomain: mb.com.ph\n\nSource 6 [SEMI-TRUSTED]:\nTitle: Updates on Government Response Efforts to the Mayon Volcano ...\nSnippet: ... ashfall. Connect with RTVM Website: http://rtvm.gov.ph Facebook ... Updates on Government Response Efforts to the Mayon Volcano Eruption.\nLink: https://www.youtube.com/watch?v=9wb3DaOmLqU\nDomain: youtube.com\n\nSource 7 [TRUSTED]:\nTitle: PBBM orders full government response to Mayon ashfall\nSnippet: Following the President's directive, response operations are now in full swing to protect public health, ensure safety, and keep roads and ...\nLink: https://pco.gov.ph/news_releases/pbbm-orders-full-government-response-to-mayon-ashfall-aid-clearing-and-evacuations-underway/\nDomain: pco.gov.ph\n",
+        "hasSearchContext": true
+      }
+    },
+    {
+      "timestamp": "2026-05-06T09:45:11.607Z",
+      "step": "AI",
+      "label": "Raw Gemini response received",
+      "data": {
+        "rawResponse": "```json\n{\n  \"label\": \"True\",\n  \"confidence\": 95,\n  \"marites_explanation\": \"Ayy girl, totoo yan! Mayon Volcano erupted nga nung May 2026 and nag-cause ng ashfall. Si BBM mismo nag-utos na tumulong ang government agencies para sa mga apektado. Mabuti naman!\",\n  \"claims\": [\n    \"Government agencies are responding to Mayon Volcano ashfall.\",\n    \"Roads are being cleaned, N95 masks distributed, and water stations/mobile clinics are being set up.\",\n    \"The government is providing assistance to evacuees.\",\n    \"The situation is being monitored, including the risk of lahar.\"\n  ],\n  \"evidence\": [\n    \"Multiple trusted sources confirm Mayon Volcano eruption and subsequent government response (Rappler, PNA, Manila Bulletin, pco.gov.ph).\",\n    \"Sources mention ashfall affecting thousands in Albay (Rappler).\",\n    \"Government response operations are underway (pco.gov.ph, PNA).\"\n  ],\n  \"linguistic_flags\": [],\n  \"fact_correction\": null\n}\n```"
+      }
+    },
+    {
+      "timestamp": "2026-05-06T09:45:11.610Z",
+      "step": "AI",
+      "label": "Response parsed successfully",
+      "data": {
+        "label": "True",
+        "confidence": 95,
+        "explanation": "Ayy girl, totoo yan! Mayon Volcano erupted nga nung May 2026 and nag-cause ng ashfall. Si BBM mismo nag-utos na tumulong ang government agencies para sa mga apektado. Mabuti naman!",
+        "claims": [
+          "Government agencies are responding to Mayon Volcano ashfall.",
+          "Roads are being cleaned, N95 masks distributed, and water stations/mobile clinics are being set up.",
+          "The government is providing assistance to evacuees.",
+          "The situation is being monitored, including the risk of lahar."
+        ],
+        "evidence": [
+          "Multiple trusted sources confirm Mayon Volcano eruption and subsequent government response (Rappler, PNA, Manila Bulletin, pco.gov.ph).",
+          "Sources mention ashfall affecting thousands in Albay (Rappler).",
+          "Government response operations are underway (pco.gov.ph, PNA)."
+        ],
+        "linguisticFlags": [],
+        "factCorrection": null
+      }
+    },
+    {
+      "timestamp": "2026-05-06T09:45:11.615Z",
+      "step": "LITERACY",
+      "label": "Generating literacy lesson",
+      "data": {
+        "classification": "fact",
+        "flagCount": 0,
+        "sourceCount": 3,
+        "personality": "marites"
+      }
+    },
+    {
+      "timestamp": "2026-05-06T09:45:14.059Z",
+      "step": "LITERACY",
+      "label": "Literacy lesson generated",
+      "data": {
+        "summary": "Verifying factual claims involves checking if government actions match reports from trusted news sources.",
+        "pointCount": 3,
+        "tip": "Always look for multiple sources to back up claims, especially from government officials."
+      }
+    },
+    {
+      "timestamp": "2026-05-06T09:45:14.063Z",
+      "step": "OUTPUT",
+      "label": "Final result mapped for frontend",
+      "data": {
+        "classification": "fact",
+        "chismisLevel": 5,
+        "message": "Totoo yan besh! ✅",
+        "details": "Ayy girl, totoo yan! Mayon Volcano erupted nga nung May 2026 and nag-cause ng ashfall. Si BBM mismo nag-utos na tumulong ang government agencies para sa mga apektado. Mabuti naman!",
+        "breakdown": {
+          "reasons": [
+            "Government agencies are responding to Mayon Volcano ashfall.",
+            "Roads are being cleaned, N95 masks distributed, and water stations/mobile clinics are being set up.",
+            "The government is providing assistance to evacuees.",
+            "The situation is being monitored, including the risk of lahar."
+          ],
+          "redFlags": [
+            "Multiple trusted sources confirm Mayon Volcano eruption and subsequent government response (Rappler, PNA, Manila Bulletin, pco.gov.ph)."
+          ]
+        },
+        "harmScore": {
+          "level": "low",
+          "score": 11,
+          "explanation": "This content appears to be factual. Safe to share with context."
+        },
+        "maritesMode": "Ayy girl, totoo yan! Mayon Volcano erupted nga nung May 2026 and nag-cause ng ashfall. Si BBM mismo nag-utos na tumulong ang government agencies para sa mga apektado. Mabuti naman!",
+        "resibo": {
+          "verdict": "Multiple trusted sources confirm Mayon Volcano eruption and subsequent government response (Rappler, PNA, Manila Bulletin, pco.gov.ph). | Sources mention ashfall affecting thousands in Albay (Rappler). | Government response operations are underway (pco.gov.ph, PNA).",
+          "sources": [
+            {
+              "title": "Over 50,000 families affected by Mayon volcano ashfall in Bicol region",
+              "url": "https://www.youtube.com/watch?v=s9uu6KeuQLI",
+              "credibility": "questionable"
+            },
+            {
+              "title": "Heavy Mayon ashfall affects thousands in Albay - Rappler",
+              "url": "https://www.rappler.com/philippines/luzon/mayon-ashfall-affects-thousands-albay-may-2026/",
+              "credibility": "verified"
+            },
+            {
+              "title": "Thick ashfall from Mayon affects 52 Albay villages",
+              "url": "https://www.pna.gov.ph/articles/1274172",
+              "credibility": "verified"
+            }
+          ]
+        },
+        "linguisticFlags": [],
+        "factCorrection": null,
+        "sourceCredibility": {
+          "score": 58,
+          "trustedCount": 4,
+          "semiTrustedCount": 3,
+          "untrustedCount": 2
+        },
+        "literacyLesson": {
+          "summary": "Verifying factual claims involves checking if government actions match reports from trusted news sources.",
+          "points": [
+            {
+              "issue": "BBM's post says government agencies are responding to the Mayon ashfall.",
+              "correction": "News from Rappler and PNA confirm the same thing, making the claim credible."
+            },
+            {
+              "issue": "The post mentions specific actions like cleaning roads and distributing masks.",
+              "correction": "PCO.gov.ph (official government website) also reports these actions, backing up the claim."
+            },
+            {
+              "issue": "Marcos mentioned that they're watching out for lahar.",
+              "correction": "Media outlets are also reporting about the lahar, which shows the claim is consistent with other information."
+            }
+          ],
+          "tip": "Always look for multiple sources to back up claims, especially from government officials."
+        }
+      }
+    }
+  ]
+}

@@ -11,6 +11,7 @@
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import type { PipelineLogger } from "./logger";
+import { MARITES_PERSONALITY, FORMAL_PERSONALITY } from "./ai_personality";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -34,7 +35,7 @@ export interface LiteracyLesson {
 
 // ─── Literacy Generator ──────────────────────────────────────────────────────
 
-const LITERACY_PROMPT = `You are a media literacy educator inside "Chismis AI", a Filipino fact-checking tool.
+const LITERACY_SYSTEM_INSTRUCTION = `You are a media literacy educator inside "Chismis AI", a Filipino fact-checking tool.
 
 Your job: Given the analysis results of a claim, generate a SHORT, EDUCATIONAL breakdown that teaches the user how to evaluate claims and sources.
 
@@ -44,9 +45,8 @@ RULES:
 3. ADAPT TO CLASSIFICATION:
    - If the claim is FACTUAL: Highlight WHY it is factual. Your points should be "Observation -> Credibility" pairs. Point out the credible sources, exact wording, or evidence that makes it reliable. Do NOT invent errors or downgrade its factuality.
    - If the claim is NOT FACTUAL (chismis/suspicious/opinion): Highlight the errors. Your points should be "Issue -> Correction" pairs showing what's wrong and what a credible source would look like.
-4. Use simple, accessible language (Taglish OK but keep it clear).
-5. Maximum 4 teaching points.
-6. Do NOT repeat the classification or verdict — focus on TEACHING.
+4. Maximum 4 teaching points.
+5. Do NOT repeat the classification or verdict — focus on TEACHING.
 
 Return ONLY this JSON, no other text:
 
@@ -60,6 +60,14 @@ Return ONLY this JSON, no other text:
   ],
   "tip": "One quick actionable tip for next time"
 }`;
+
+function getLiteracyPrompt(personality: "marites" | "formal") {
+  const style =
+    personality === "marites"
+      ? `\n\nLANGUAGE/TONE: Use Taglish, casual, and friendly.\n${MARITES_PERSONALITY}`
+      : `\n\nLANGUAGE/TONE: Use clear, formal English.\n${FORMAL_PERSONALITY}`;
+  return `You are a media literacy educator inside \"Chismis AI\", a Filipino fact-checking tool.\n\nYour job: Given the analysis results of a claim, generate a SHORT, EDUCATIONAL breakdown that teaches the user how to evaluate claims and sources.\n\nRULES:\n1. Be concise — each point should be 1 sentence max.\n2. Be specific — point to the EXACT words, patterns, or sources.\n3. ADAPT TO CLASSIFICATION:\n   - If the claim is FACTUAL: Highlight WHY it is factual. Your points should be \"Observation -> Credibility\" pairs. Point out the credible sources, exact wording, or evidence that makes it reliable. Do NOT invent errors or downgrade its factuality.\n   - If the claim is NOT FACTUAL (chismis/suspicious/opinion): Highlight the errors. Your points should be \"Issue -> Correction\" pairs showing what's wrong and what a credible source would look like.\n4. Use simple, accessible language.\n5. Maximum 4 teaching points.\n6. Do NOT repeat the classification or verdict — focus on TEACHING.\n${style}\n\nReturn ONLY this JSON, no other text:\n\n{\n  \"summary\": \"One sentence summary of the media literacy lesson\",\n  \"points\": [\n    {\n      \"issue\": \"If factual: What we verified (e.g. the specific source or exact wording). If not factual: What the user should notice is wrong (specific, 1 sentence).\",\n      \"correction\": \"If factual: Why this makes it credible (1 sentence). If not factual: What a credible version looks like (specific, 1 sentence).\"\n    }\n  ],\n  \"tip\": \"One quick actionable tip for next time\"\n}`;
+}
 
 /**
  * Generates a media literacy lesson based on the analysis results.
@@ -78,7 +86,8 @@ export async function generateLiteracyLesson(
   linguisticFlags: string[],
   evidence: string[],
   topSources: Array<{ title: string; url: string; credibility: string }>,
-  logger?: PipelineLogger
+  personality: "marites" | "formal" = "marites",
+  logger?: PipelineLogger,
 ): Promise<LiteracyLesson | null> {
   const apiKey = process.env.GEMINI_API_KEY;
 
@@ -93,7 +102,7 @@ export async function generateLiteracyLesson(
     const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({
       model: "gemini-2.0-flash",
-      systemInstruction: LITERACY_PROMPT,
+      systemInstruction: getLiteracyPrompt(personality),
     });
 
     const userPrompt = `Analyze this claim and generate a media literacy lesson:
@@ -118,6 +127,7 @@ Generate the teaching breakdown now.`;
       classification,
       flagCount: linguisticFlags.length,
       sourceCount: topSources.length,
+      personality,
     });
 
     const result = await model.generateContent(userPrompt);
@@ -149,7 +159,9 @@ Generate the teaching breakdown now.`;
       tip: lesson.tip,
     });
 
-    console.log(`[LITERACY] ✅ Generated ${lesson.points.length} teaching points`);
+    console.log(
+      `[LITERACY] ✅ Generated ${lesson.points.length} teaching points`,
+    );
 
     return lesson;
   } catch (error) {

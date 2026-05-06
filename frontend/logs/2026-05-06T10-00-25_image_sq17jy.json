@@ -1,0 +1,309 @@
+{
+  "session": {
+    "id": "sq17jy",
+    "mode": "image",
+    "startedAt": "2026-05-06T10:00:25.381Z",
+    "completedAt": "2026-05-06T10:00:36.568Z",
+    "durationMs": 11187
+  },
+  "pipeline": [
+    {
+      "timestamp": "2026-05-06T10:00:25.389Z",
+      "step": "PIPELINE",
+      "label": "Image pipeline started",
+      "data": {
+        "mimeType": "image/jpeg",
+        "imageSizeBytes": 100335
+      }
+    },
+    {
+      "timestamp": "2026-05-06T10:00:28.565Z",
+      "step": "OCR",
+      "label": "Raw text extracted from image",
+      "data": {
+        "mimeType": "image/jpeg",
+        "imageSizeBytes": 100335,
+        "ocrPrompt": "Extract ALL readable text from this image. Return ONLY the raw text content, exactly as it appears. Do not add commentary, analysis, or formatting. If there is no text in the image, return \"NO_TEXT_FOUND\". Preserve the original language (Filipino, English, Taglish, etc.)",
+        "rawExtractedText": "Bongbong Marcos\n19h\nSa oras ng panganib, hindi dapat madagdagan ang hirap ng ating mga kababayan.\nKaya ipinag-utos ko ang agarang pagkilos ng mga ahensya ng pamahalaan upang tumugon sa\nashfall mula sa Mayon Volcano eruption.\nNililinis ang mga kalsada, namamahagi ng N95 masks, at naglalagay ng water stations, mobile\nclinics, at tulong para sa mga lumikas upang maprotektahan ang ating mga komunidad.\nPatuloy nating binabantayan ang sitwasyon, kabilang ang panganib ng lahar.\n...\nAlam nating may epekto ito sa kalusugan at kabuhayan ng ating mga kababayan, kaya't tuloy-\ntuloy ang tulong ng pamahalaan hanggang makabalik sa normal ang pang-araw-araw na buhay ng\nbawat pamilyang apektado.\nCOURTESY\nDOST-PHIVOLCS\nMay 2, 2026\nDOST-PHIV RTVM\nPHILIPPINE INSTITUTE OF\nVOLCANOLOGY AND SEISMOLOGY\nOneDOST4U: Solutions and Opportunities for All\nPRESIDENTIAL BROADCAST\nMayo:02 Valcano 2026-05-02 05:41 PM",
+        "rawTextLength": 894
+      }
+    },
+    {
+      "timestamp": "2026-05-06T10:00:28.569Z",
+      "step": "OCR",
+      "label": "Text cleaned and finalized",
+      "data": {
+        "cleanedText": "Bongbong Marcos\n19h\nSa oras ng panganib, hindi dapat madagdagan ang hirap ng ating mga kababayan.\nKaya ipinag-utos ko ang agarang pagkilos ng mga ahensya ng pamahalaan upang tumugon sa\nashfall mula sa Mayon Volcano eruption.\nNililinis ang mga kalsada, namamahagi ng N95 masks, at naglalagay ng water stations, mobile\nclinics, at tulong para sa mga lumikas upang maprotektahan ang ating mga komunidad.\nPatuloy nating binabantayan ang sitwasyon, kabilang ang panganib ng lahar.\n...\nAlam nating may epekto ito sa kalusugan at kabuhayan ng ating mga kababayan, kaya't tuloy-\ntuloy ang tulong ng pamahalaan hanggang makabalik sa normal ang pang-araw-araw na buhay ng\nbawat pamilyang apektado.\nCOURTESY\nDOST-PHIVOLCS\nMay 2, 2026\nDOST-PHIV RTVM\nPHILIPPINE INSTITUTE OF\nVOLCANOLOGY AND SEISMOLOGY\nOneDOST4U: Solutions and Opportunities for All\nPRESIDENTIAL BROADCAST\nMayo:02 Valcano 2026-05-02 05:41 PM",
+        "cleanedTextLength": 894
+      }
+    },
+    {
+      "timestamp": "2026-05-06T10:00:29.822Z",
+      "step": "SEARCH",
+      "label": "Query generated from text",
+      "data": {
+        "inputTextPreview": "Bongbong Marcos\n19h\nSa oras ng panganib, hindi dapat madagdagan ang hirap ng ating mga kababayan.\nKaya ipinag-utos ko ang agarang pagkilos ng mga ahensya ng pamahalaan upang tumugon sa\nashfall mula sa",
+        "generatedQuery": "Mayon Volcano eruption 2026"
+      }
+    },
+    {
+      "timestamp": "2026-05-06T10:00:32.052Z",
+      "step": "SEARCH",
+      "label": "Search results retrieved",
+      "data": {
+        "query": "Mayon Volcano eruption 2026",
+        "resultCount": 10,
+        "results": [
+          {
+            "title": "Large Pyroclastic Flow Races Down Mayon Volcano",
+            "snippet": "At approximately 6:00 PM on May 2, 2026, Mayon Volcano produced a pyroclastic density current (PDC) that rapidly descended the volcano's ...",
+            "link": "https://www.youtube.com/watch?v=hvE2jp_2g7w"
+          },
+          {
+            "title": "Volcano erupts in the Philippines, filling the sky with ash ...",
+            "snippet": "Video showed large ash clouds billowing from the Mayon volcano on Luzon island in the Philippines over the weekend.",
+            "link": "https://www.theguardian.com/world/video/2026/may/04/volcano-erupts-philippines-ash-evacuations-video"
+          },
+          {
+            "title": "🌋 Mayon Volcano in the Philippines erupted on May 2 ...",
+            "snippet": "Mayon Volcano in the Philippines erupted on May 2, 2026, generating a massive pyroclastic flow—a fast- moving mixture of hot gas, ash, and ...",
+            "link": "https://www.facebook.com/geologypage/posts/-mayon-volcano-in-the-philippines-erupted-on-may-2-2026-generating-a-massive-pyr/1381104100714478/"
+          },
+          {
+            "title": "Philippines volcano erupts, blanketing ash across the sky",
+            "snippet": "The Mayon Volcano has erupted, spewing a cloud of ash and debris across Bicol, in the Philippines. Emergency services have issued alerts to ...",
+            "link": "https://www.aljazeera.com/video/newsfeed/2026/5/2/philippines-volcano-erupts-blanketing-ash-across-the-sky"
+          },
+          {
+            "title": "May 2, 2026: Merapi Dome Collapse Sends Lava Surging ...",
+            "snippet": "Between 3:00–4:00 AM on May 2, 2026, a lava dome collapse at Mount Merapi sent incandescent lava cascading far down the volcano, ...",
+            "link": "https://www.youtube.com/watch?v=frrQjuNzR3s"
+          },
+          {
+            "title": "Philippines Says Thousands Evacuated as Mayon Volcano ...",
+            "snippet": "The Philippines said on Sunday that thousands of people have evacuated the area south of Manila after Mayon Volcano erupted, and authorities ...",
+            "link": "https://www.bloomberg.com/news/articles/2026-05-03/philippines-says-thousands-evacuated-as-mayon-volcano-erupts"
+          },
+          {
+            "title": "Mayon Volcano May Soon Rock the World with a Mega- ...",
+            "snippet": "January 6th 2026, and the latest huge eruption on May 2nd 2026 ... My report on the May 2nd 2026 eruption of Mayon Volcano (from my clips channel): ...",
+            "link": "https://www.youtube.com/watch?v=o8WHTO5olk8"
+          },
+          {
+            "title": "Active volcano in Philippines unleashes huge ash cloud",
+            "snippet": "The Mayon Volcano in the northeast of the country spewed a huge cloud of ash and debris. Saturday 2 May 2026 ... 2026 Sky UK.",
+            "link": "https://news.sky.com/video/active-volcano-in-philippines-unleashes-huge-ash-cloud-13539492"
+          },
+          {
+            "title": "Mayon",
+            "snippet": "A new eruption was reported during late April 2023 and has included lava flows, pyroclastic density currents, ash emissions, and seismicity. This report covers ...",
+            "link": "https://volcano.si.edu/volcano.cfm?vn=273030"
+          },
+          {
+            "title": "Mayon Volcano erupts, spreads ash to nearby areas",
+            "snippet": "Mayon Volcano in Albay emits a thick plume of ash following its eruption on May 2, 2026. Footage shows a dense column of grey ash rising ...",
+            "link": "https://www.manilatimes.net/2026/05/02/videos/mayon-volcano-erupts-spreads-ash-to-nearby-areas/2334252"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-06T10:00:32.054Z",
+      "step": "FILTER",
+      "label": "Sources classified by credibility",
+      "data": {
+        "totalSources": 10,
+        "trustedCount": 4,
+        "semiTrustedCount": 4,
+        "untrustedCount": 2,
+        "credibilityScore": 56,
+        "sources": [
+          {
+            "domain": "youtube.com",
+            "credibility": "semi-trusted",
+            "title": "Large Pyroclastic Flow Races Down Mayon Volcano"
+          },
+          {
+            "domain": "theguardian.com",
+            "credibility": "trusted",
+            "title": "Volcano erupts in the Philippines, filling the sky with ash ..."
+          },
+          {
+            "domain": "facebook.com",
+            "credibility": "untrusted",
+            "title": "🌋 Mayon Volcano in the Philippines erupted on May 2 ..."
+          },
+          {
+            "domain": "aljazeera.com",
+            "credibility": "trusted",
+            "title": "Philippines volcano erupts, blanketing ash across the sky"
+          },
+          {
+            "domain": "youtube.com",
+            "credibility": "semi-trusted",
+            "title": "May 2, 2026: Merapi Dome Collapse Sends Lava Surging ..."
+          },
+          {
+            "domain": "bloomberg.com",
+            "credibility": "trusted",
+            "title": "Philippines Says Thousands Evacuated as Mayon Volcano ..."
+          },
+          {
+            "domain": "youtube.com",
+            "credibility": "semi-trusted",
+            "title": "Mayon Volcano May Soon Rock the World with a Mega- ..."
+          },
+          {
+            "domain": "news.sky.com",
+            "credibility": "untrusted",
+            "title": "Active volcano in Philippines unleashes huge ash cloud"
+          },
+          {
+            "domain": "volcano.si.edu",
+            "credibility": "semi-trusted",
+            "title": "Mayon"
+          },
+          {
+            "domain": "manilatimes.net",
+            "credibility": "trusted",
+            "title": "Mayon Volcano erupts, spreads ash to nearby areas"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-06T10:00:32.067Z",
+      "step": "AI",
+      "label": "Prompts constructed",
+      "data": {
+        "personality": "formal",
+        "userPrompt": "Analyze the following text and classify it:\n\n---\nBongbong Marcos\n19h\nSa oras ng panganib, hindi dapat madagdagan ang hirap ng ating mga kababayan.\nKaya ipinag-utos ko ang agarang pagkilos ng mga ahensya ng pamahalaan upang tumugon sa\nashfall mula sa Mayon Volcano eruption.\nNililinis ang mga kalsada, namamahagi ng N95 masks, at naglalagay ng water stations, mobile\nclinics, at tulong para sa mga lumikas upang maprotektahan ang ating mga komunidad.\nPatuloy nating binabantayan ang sitwasyon, kabilang ang panganib ng lahar.\n...\nAlam nating may epekto ito sa kalusugan at kabuhayan ng ating mga kababayan, kaya't tuloy-\ntuloy ang tulong ng pamahalaan hanggang makabalik sa normal ang pang-araw-araw na buhay ng\nbawat pamilyang apektado.\nCOURTESY\nDOST-PHIVOLCS\nMay 2, 2026\nDOST-PHIV RTVM\nPHILIPPINE INSTITUTE OF\nVOLCANOLOGY AND SEISMOLOGY\nOneDOST4U: Solutions and Opportunities for All\nPRESIDENTIAL BROADCAST\nMayo:02 Valcano 2026-05-02 05:41 PM\n---\n\nAdditional search context for fact-checking:\nSource 1 [SEMI-TRUSTED]:\nTitle: Large Pyroclastic Flow Races Down Mayon Volcano\nSnippet: At approximately 6:00 PM on May 2, 2026, Mayon Volcano produced a pyroclastic density current (PDC) that rapidly descended the volcano's ...\nLink: https://www.youtube.com/watch?v=hvE2jp_2g7w\nDomain: youtube.com\n\nSource 2 [TRUSTED]:\nTitle: Volcano erupts in the Philippines, filling the sky with ash ...\nSnippet: Video showed large ash clouds billowing from the Mayon volcano on Luzon island in the Philippines over the weekend.\nLink: https://www.theguardian.com/world/video/2026/may/04/volcano-erupts-philippines-ash-evacuations-video\nDomain: theguardian.com\n\nSource 3 [TRUSTED]:\nTitle: Philippines volcano erupts, blanketing ash across the sky\nSnippet: The Mayon Volcano has erupted, spewing a cloud of ash and debris across Bicol, in the Philippines. Emergency services have issued alerts to ...\nLink: https://www.aljazeera.com/video/newsfeed/2026/5/2/philippines-volcano-erupts-blanketing-ash-across-the-sky\nDomain: aljazeera.com\n\nSource 4 [SEMI-TRUSTED]:\nTitle: May 2, 2026: Merapi Dome Collapse Sends Lava Surging ...\nSnippet: Between 3:00–4:00 AM on May 2, 2026, a lava dome collapse at Mount Merapi sent incandescent lava cascading far down the volcano, ...\nLink: https://www.youtube.com/watch?v=frrQjuNzR3s\nDomain: youtube.com\n\nSource 5 [TRUSTED]:\nTitle: Philippines Says Thousands Evacuated as Mayon Volcano ...\nSnippet: The Philippines said on Sunday that thousands of people have evacuated the area south of Manila after Mayon Volcano erupted, and authorities ...\nLink: https://www.bloomberg.com/news/articles/2026-05-03/philippines-says-thousands-evacuated-as-mayon-volcano-erupts\nDomain: bloomberg.com\n\nSource 6 [SEMI-TRUSTED]:\nTitle: Mayon Volcano May Soon Rock the World with a Mega- ...\nSnippet: January 6th 2026, and the latest huge eruption on May 2nd 2026 ... My report on the May 2nd 2026 eruption of Mayon Volcano (from my clips channel): ...\nLink: https://www.youtube.com/watch?v=o8WHTO5olk8\nDomain: youtube.com\n\nSource 7 [SEMI-TRUSTED]:\nTitle: Mayon\nSnippet: A new eruption was reported during late April 2023 and has included lava flows, pyroclastic density currents, ash emissions, and seismicity. This report covers ...\nLink: https://volcano.si.edu/volcano.cfm?vn=273030\nDomain: volcano.si.edu\n\nSource 8 [TRUSTED]:\nTitle: Mayon Volcano erupts, spreads ash to nearby areas\nSnippet: Mayon Volcano in Albay emits a thick plume of ash following its eruption on May 2, 2026. Footage shows a dense column of grey ash rising ...\nLink: https://www.manilatimes.net/2026/05/02/videos/mayon-volcano-erupts-spreads-ash-to-nearby-areas/2334252\nDomain: manilatimes.net\n",
+        "hasSearchContext": true
+      }
+    },
+    {
+      "timestamp": "2026-05-06T10:00:34.412Z",
+      "step": "AI",
+      "label": "Raw Gemini response received",
+      "data": {
+        "rawResponse": "```json\n{\n  \"label\": \"True\",\n  \"confidence\": 95,\n  \"marites_explanation\": \"The claim describes actions taken by the government in response to the Mayon Volcano eruption on May 2, 2026. Multiple news sources confirm the eruption and subsequent government response, including evacuations, ashfall, and provision of aid. These reports support the claim that the government is providing assistance to those affected by the eruption.\",\n  \"claims\": [\n    \"Government agencies are responding to the ashfall from the Mayon Volcano eruption.\",\n    \"Roads are being cleaned.\",\n    \"N95 masks are being distributed.\",\n    \"Water stations and mobile clinics are being set up.\",\n    \"Help is being provided to evacuees.\"\n  ],\n  \"evidence\": [\n    \"The Guardian, Al Jazeera, Bloomberg, and The Manila Times reported on the Mayon Volcano eruption on May 2, 2026.\",\n    \"These sources confirm ashfall and government response.\",\n    \"Bloomberg reported thousands evacuated as a result of the eruption.\"\n  ],\n  \"linguistic_flags\": [],\n  \"fact_correction\": null\n}\n```"
+      }
+    },
+    {
+      "timestamp": "2026-05-06T10:00:34.416Z",
+      "step": "AI",
+      "label": "Response parsed successfully",
+      "data": {
+        "label": "True",
+        "confidence": 95,
+        "explanation": "The claim describes actions taken by the government in response to the Mayon Volcano eruption on May 2, 2026. Multiple news sources confirm the eruption and subsequent government response, including evacuations, ashfall, and provision of aid. These reports support the claim that the government is providing assistance to those affected by the eruption.",
+        "claims": [
+          "Government agencies are responding to the ashfall from the Mayon Volcano eruption.",
+          "Roads are being cleaned.",
+          "N95 masks are being distributed.",
+          "Water stations and mobile clinics are being set up.",
+          "Help is being provided to evacuees."
+        ],
+        "evidence": [
+          "The Guardian, Al Jazeera, Bloomberg, and The Manila Times reported on the Mayon Volcano eruption on May 2, 2026.",
+          "These sources confirm ashfall and government response.",
+          "Bloomberg reported thousands evacuated as a result of the eruption."
+        ],
+        "linguisticFlags": [],
+        "factCorrection": null
+      }
+    },
+    {
+      "timestamp": "2026-05-06T10:00:34.421Z",
+      "step": "LITERACY",
+      "label": "Generating literacy lesson",
+      "data": {
+        "classification": "fact",
+        "flagCount": 0,
+        "sourceCount": 3,
+        "personality": "formal"
+      }
+    },
+    {
+      "timestamp": "2026-05-06T10:00:36.558Z",
+      "step": "LITERACY",
+      "label": "Literacy lesson generated",
+      "data": {
+        "summary": "This post is factual because multiple news outlets corroborate the government's response to the Mayon Volcano eruption.",
+        "pointCount": 2,
+        "tip": "Cross-reference claims with multiple news sources to confirm the accuracy of the information."
+      }
+    },
+    {
+      "timestamp": "2026-05-06T10:00:36.563Z",
+      "step": "OUTPUT",
+      "label": "Final result mapped for frontend",
+      "data": {
+        "classification": "fact",
+        "chismisLevel": 5,
+        "message": "Verified Fact ✅",
+        "details": "This claim is supported by credible evidence and sources.",
+        "breakdown": {
+          "reasons": [
+            "Government agencies are responding to the ashfall from the Mayon Volcano eruption.",
+            "Roads are being cleaned.",
+            "N95 masks are being distributed.",
+            "Water stations and mobile clinics are being set up.",
+            "Help is being provided to evacuees."
+          ],
+          "redFlags": [
+            "The Guardian, Al Jazeera, Bloomberg, and The Manila Times reported on the Mayon Volcano eruption on May 2, 2026."
+          ]
+        },
+        "harmScore": {
+          "level": "low",
+          "score": 11,
+          "explanation": "This content appears to be factual. Safe to share with context."
+        },
+        "maritesMode": "The claim describes actions taken by the government in response to the Mayon Volcano eruption on May 2, 2026. Multiple news sources confirm the eruption and subsequent government response, including evacuations, ashfall, and provision of aid. These reports support the claim that the government is providing assistance to those affected by the eruption.",
+        "resibo": {
+          "verdict": "The Guardian, Al Jazeera, Bloomberg, and The Manila Times reported on the Mayon Volcano eruption on May 2, 2026. | These sources confirm ashfall and government response. | Bloomberg reported thousands evacuated as a result of the eruption.",
+          "sources": [
+            {
+              "title": "Mayon Volcano erupts, spreads ash to nearby areas",
+              "url": "https://www.manilatimes.net/2026/05/02/videos/mayon-volcano-erupts-spreads-ash-to-nearby-areas/2334252",
+              "credibility": "verified"
+            },
+            {
+              "title": "Volcano erupts in the Philippines, filling the sky with ash ...",
+              "url": "https://www.theguardian.com/world/video/2026/may/04/volcano-erupts-philippines-ash-evacuations-video",
+              "credibility": "verified"
+            },
+            {
+              "title": "Philippines volcano erupts, blanketing ash across the sky",
+              "url": "https://www.aljazeera.com/video/newsfeed/2026/5/2/philippines-volcano-erupts-blanketing-ash-across-the-sky",
+              "credibility": "verified"
+            }
+          ]
+        },
+        "linguisticFlags": [],
+        "factCorrection": null,
+        "sourceCredibility": {
+          "score": 56,
+          "trustedCount": 4,
+          "semiTrustedCount": 4,
+          "untrustedCount": 2
+        },
+        "literacyLesson": {
+          "summary": "This post is factual because multiple news outlets corroborate the government's response to the Mayon Volcano eruption.",
+          "points": [
+            {
+              "issue": "The post describes specific actions like cleaning roads and distributing masks, which can be verified in news reports.",
+              "correction": "Reports from The Guardian, Al Jazeera, Bloomberg, and The Manila Times confirm these actions, supporting the post's credibility."
+            },
+            {
+              "issue": "The claim mentions evacuating communities due to ashfall.",
+              "correction": "Bloomberg reported that thousands were evacuated, which confirms the government response is necessary and proportional to the threat."
+            }
+          ],
+          "tip": "Cross-reference claims with multiple news sources to confirm the accuracy of the information."
+        }
+      }
+    }
+  ]
+}

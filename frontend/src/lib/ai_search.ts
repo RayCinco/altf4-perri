@@ -7,6 +7,7 @@
  */
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { MARITES_PERSONALITY, FORMAL_PERSONALITY } from "./ai_personality";
 import type { PipelineLogger } from "./logger";
 import type { SearchSource } from "./source_filter";
 
@@ -33,7 +34,8 @@ export interface FactCheckResult {
  */
 export async function executeFactCheck(
   text: string,
-  logger?: PipelineLogger
+  logger?: PipelineLogger,
+  personality: "marites" | "formal" = "marites"
 ): Promise<FactCheckResult | null> {
   const serperApiKey = process.env.SERPER_API_KEY;
 
@@ -46,7 +48,7 @@ export async function executeFactCheck(
 
   try {
     console.log("[SEARCH] 🧠 Generating search query from text...");
-    const query = await generateSearchQuery(text);
+    const query = await generateSearchQuery(text, personality);
 
     logger?.log("SEARCH", "Query generated from text", {
       inputTextPreview: text.substring(0, 200),
@@ -131,14 +133,23 @@ export async function executeFactCheck(
 /**
  * Uses Gemini to extract a concise search query from the chismis.
  */
-async function generateSearchQuery(text: string): Promise<string> {
+async function generateSearchQuery(
+  text: string,
+  personality: "marites" | "formal" = "marites"
+): Promise<string> {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) return "NO_SEARCH_NEEDED";
 
   const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
+  const personalityInstruction =
+    personality === "formal" ? FORMAL_PERSONALITY : MARITES_PERSONALITY;
+
   const prompt = `You are a fact-checking assistant. Your job is to read a piece of gossip, news, or a claim, and extract the single most effective Google Search query to verify if it is true or fake.
+
+Personality context (use this to understand the tone and framing of the analysis):
+${personalityInstruction}
 
 Rules:
 1. Extract the main subject and the core claim (e.g., "Taylor Swift pregnant").

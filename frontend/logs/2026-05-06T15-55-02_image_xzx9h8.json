@@ -1,0 +1,301 @@
+{
+  "session": {
+    "id": "xzx9h8",
+    "mode": "image",
+    "startedAt": "2026-05-06T15:55:02.019Z",
+    "completedAt": "2026-05-06T15:55:13.721Z",
+    "durationMs": 11702
+  },
+  "pipeline": [
+    {
+      "timestamp": "2026-05-06T15:55:02.021Z",
+      "step": "PIPELINE",
+      "label": "Image pipeline started",
+      "data": {
+        "mimeType": "image/jpeg",
+        "imageSizeBytes": 100335
+      }
+    },
+    {
+      "timestamp": "2026-05-06T15:55:05.228Z",
+      "step": "OCR",
+      "label": "Raw text extracted from image",
+      "data": {
+        "mimeType": "image/jpeg",
+        "imageSizeBytes": 100335,
+        "ocrPrompt": "Extract ALL readable text from this image. Return ONLY the raw text content, exactly as it appears. Do not add commentary, analysis, or formatting. If there is no text in the image, return \"NO_TEXT_FOUND\". Preserve the original language (Filipino, English, Taglish, etc.)",
+        "rawExtractedText": "Bongbong Marcos\n19h\nSa oras ng panganib, hindi dapat madagdagan ang hirap ng ating mga kababayan.\nKaya ipinag-utos ko ang agarang pagkilos ng mga ahensya ng pamahalaan upang tumugon sa\nashfall mula sa Mayon Volcano eruption.\nNililinis ang mga kalsada, namamahagi ng N95 masks, at naglalagay ng water stations, mobile\nclinics, at tulong para sa mga lumikas upang maprotektahan ang ating mga komunidad.\nPatuloy nating binabantayan ang sitwasyon, kabilang ang panganib ng lahar.\nAlam nating may epekto ito sa kalusugan at kabuhayan ng ating mga kababayan, kaya't tuloy-\ntuloy ang tulong ng pamahalaan hanggang makabalik sa normal ang pang-araw-araw na buhay ng\nbawat pamilyang apektado.\nCOURTESY\nDOST-PHIVOLCS\nMay 2, 2026\nDOST-PHIV RTVM\nPHILIPPINE INSTITUTE OF\nVOLCANOLOGY AND SEISMOLOGY\nOneDOST4U: Solutions and Opportunities for All\nPRESIDENTIAL BROADCAST\nMayo:02 Valcano 2026-05-02 05:41 PM",
+        "rawTextLength": 890
+      }
+    },
+    {
+      "timestamp": "2026-05-06T15:55:05.229Z",
+      "step": "OCR",
+      "label": "Text cleaned and finalized",
+      "data": {
+        "cleanedText": "Bongbong Marcos\n19h\nSa oras ng panganib, hindi dapat madagdagan ang hirap ng ating mga kababayan.\nKaya ipinag-utos ko ang agarang pagkilos ng mga ahensya ng pamahalaan upang tumugon sa\nashfall mula sa Mayon Volcano eruption.\nNililinis ang mga kalsada, namamahagi ng N95 masks, at naglalagay ng water stations, mobile\nclinics, at tulong para sa mga lumikas upang maprotektahan ang ating mga komunidad.\nPatuloy nating binabantayan ang sitwasyon, kabilang ang panganib ng lahar.\nAlam nating may epekto ito sa kalusugan at kabuhayan ng ating mga kababayan, kaya't tuloy-\ntuloy ang tulong ng pamahalaan hanggang makabalik sa normal ang pang-araw-araw na buhay ng\nbawat pamilyang apektado.\nCOURTESY\nDOST-PHIVOLCS\nMay 2, 2026\nDOST-PHIV RTVM\nPHILIPPINE INSTITUTE OF\nVOLCANOLOGY AND SEISMOLOGY\nOneDOST4U: Solutions and Opportunities for All\nPRESIDENTIAL BROADCAST\nMayo:02 Valcano 2026-05-02 05:41 PM",
+        "cleanedTextLength": 890
+      }
+    },
+    {
+      "timestamp": "2026-05-06T15:55:06.164Z",
+      "step": "SEARCH",
+      "label": "Query generated from text",
+      "data": {
+        "inputTextPreview": "Bongbong Marcos\n19h\nSa oras ng panganib, hindi dapat madagdagan ang hirap ng ating mga kababayan.\nKaya ipinag-utos ko ang agarang pagkilos ng mga ahensya ng pamahalaan upang tumugon sa\nashfall mula sa",
+        "generatedQuery": "Mayon Volcano eruption ashfall response"
+      }
+    },
+    {
+      "timestamp": "2026-05-06T15:55:07.478Z",
+      "step": "SEARCH",
+      "label": "Search results retrieved",
+      "data": {
+        "query": "Mayon Volcano eruption ashfall response",
+        "resultCount": 9,
+        "results": [
+          {
+            "title": "Heavy Mayon ashfall affects thousands in Albay - Rappler",
+            "snippet": "Local government units in Albay launch relief and recovery operations following Mayon's recent heavy ashfall.",
+            "link": "https://www.rappler.com/philippines/luzon/mayon-ashfall-affects-thousands-albay-may-2026/"
+          },
+          {
+            "title": "In response to the recent eruption of Mayon Volcano and ... - Facebook",
+            "snippet": "Alert Level 2 currently prevails over Mayon Volcano. This means that Mayon is at a moderate level of unrest. DOST-PHIVOLCS reminds the public ...",
+            "link": "https://www.facebook.com/bfpbicolregion/posts/in-response-to-the-recent-eruption-of-mayon-volcano-and-the-widespread-ash-fall-/122299532294031868/"
+          },
+          {
+            "title": "Over 50,000 families affected by Mayon volcano ashfall in Bicol region",
+            "snippet": "Over 50,000 families affected by Mayon volcano ashfall in Bicol region | ANC ... 0 Quake Hits Eastern Coast As Mayon ERUPTS Day 119 On The West!",
+            "link": "https://www.youtube.com/watch?v=s9uu6KeuQLI"
+          },
+          {
+            "title": "Mayon unrest: Marcos orders full gov't response - Cebu Daily News",
+            "snippet": "President Ferdinand R. Marcos Jr. ordered full government help for communities affected by ashfall from the ongoing unrest of Mayon Volcano.",
+            "link": "https://cebudailynews.inquirer.net/723785/mayon-unrest-marcos-orders-full-govt-response"
+          },
+          {
+            "title": "than 300 families evacuate in Philippines due to ashfall from volcano",
+            "snippet": "Philippine officials say more than 300 families have evacuated after massive amounts of ash billowed from the Mayon volcano over the weekend ...",
+            "link": "https://www.kens5.com/article/syndication/associatedpress/more-than-300-families-evacuate-in-philippines-due-to-ashfall-from-volcano/616-bb9c52b5-4c11-431e-8827-5d08dd03b382"
+          },
+          {
+            "title": "Gov't steps up aid as Mayon spews ash - Daily Tribune",
+            "snippet": "President Ferdinand Marcos Jr. assures full government response as ashfall from Mayon Volcano affects Albay, with evacuations, road clearing ...",
+            "link": "https://tribune.net.ph/2026/05/04/govt-steps-up-aid-as-mayon-spews-ash"
+          },
+          {
+            "title": "Ashfall from Mayon eruption triggers illness in Albay | ANC - YouTube",
+            "snippet": "Here are the stories on ANC's The World Tonight (May 5, 2026). - High confidence among Philippine House Justice panel members of getting ...",
+            "link": "https://www.youtube.com/watch?v=Xtv8ZrlM4-o"
+          },
+          {
+            "title": "PNP steps up disaster response due to Mayon ashfall - SunStar",
+            "snippet": "The Philippine National Police has intensified its disaster response and security operations in Albay following an ashfall from Mayon Volcano.",
+            "link": "https://www.sunstar.com.ph/manila/pnp-steps-up-disaster-response-as-mayon-ashfall-forces-evacuations-in-albay"
+          },
+          {
+            "title": "PBBM has ordered a full government response to areas affected by ...",
+            "snippet": "The public was urged to stay indoors during ash fall when possible, wear masks or cloth to prevent ash inhalation, and secure water sources and ...",
+            "link": "https://www.facebook.com/UNTVNewsRescue/posts/pbbm-has-ordered-a-full-government-response-to-areas-affected-by-mayon-volcanos-/1444918281010229/"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-06T15:55:07.480Z",
+      "step": "FILTER",
+      "label": "Sources classified by credibility",
+      "data": {
+        "totalSources": 9,
+        "trustedCount": 3,
+        "semiTrustedCount": 2,
+        "untrustedCount": 4,
+        "credibilityScore": 42,
+        "sources": [
+          {
+            "domain": "rappler.com",
+            "credibility": "trusted",
+            "title": "Heavy Mayon ashfall affects thousands in Albay - Rappler"
+          },
+          {
+            "domain": "facebook.com",
+            "credibility": "untrusted",
+            "title": "In response to the recent eruption of Mayon Volcano and ... - Facebook"
+          },
+          {
+            "domain": "youtube.com",
+            "credibility": "semi-trusted",
+            "title": "Over 50,000 families affected by Mayon volcano ashfall in Bicol region"
+          },
+          {
+            "domain": "cebudailynews.inquirer.net",
+            "credibility": "trusted",
+            "title": "Mayon unrest: Marcos orders full gov't response - Cebu Daily News"
+          },
+          {
+            "domain": "kens5.com",
+            "credibility": "untrusted",
+            "title": "than 300 families evacuate in Philippines due to ashfall from volcano"
+          },
+          {
+            "domain": "tribune.net.ph",
+            "credibility": "untrusted",
+            "title": "Gov't steps up aid as Mayon spews ash - Daily Tribune"
+          },
+          {
+            "domain": "youtube.com",
+            "credibility": "semi-trusted",
+            "title": "Ashfall from Mayon eruption triggers illness in Albay | ANC - YouTube"
+          },
+          {
+            "domain": "sunstar.com.ph",
+            "credibility": "trusted",
+            "title": "PNP steps up disaster response due to Mayon ashfall - SunStar"
+          },
+          {
+            "domain": "facebook.com",
+            "credibility": "untrusted",
+            "title": "PBBM has ordered a full government response to areas affected by ..."
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-06T15:55:07.483Z",
+      "step": "AI",
+      "label": "Prompts constructed",
+      "data": {
+        "personality": "marites",
+        "userPrompt": "Analyze the following text and classify it:\n\n---\nBongbong Marcos\n19h\nSa oras ng panganib, hindi dapat madagdagan ang hirap ng ating mga kababayan.\nKaya ipinag-utos ko ang agarang pagkilos ng mga ahensya ng pamahalaan upang tumugon sa\nashfall mula sa Mayon Volcano eruption.\nNililinis ang mga kalsada, namamahagi ng N95 masks, at naglalagay ng water stations, mobile\nclinics, at tulong para sa mga lumikas upang maprotektahan ang ating mga komunidad.\nPatuloy nating binabantayan ang sitwasyon, kabilang ang panganib ng lahar.\nAlam nating may epekto ito sa kalusugan at kabuhayan ng ating mga kababayan, kaya't tuloy-\ntuloy ang tulong ng pamahalaan hanggang makabalik sa normal ang pang-araw-araw na buhay ng\nbawat pamilyang apektado.\nCOURTESY\nDOST-PHIVOLCS\nMay 2, 2026\nDOST-PHIV RTVM\nPHILIPPINE INSTITUTE OF\nVOLCANOLOGY AND SEISMOLOGY\nOneDOST4U: Solutions and Opportunities for All\nPRESIDENTIAL BROADCAST\nMayo:02 Valcano 2026-05-02 05:41 PM\n---\n\nAdditional search context for fact-checking:\nSource 1 [TRUSTED]:\nTitle: Heavy Mayon ashfall affects thousands in Albay - Rappler\nSnippet: Local government units in Albay launch relief and recovery operations following Mayon's recent heavy ashfall.\nLink: https://www.rappler.com/philippines/luzon/mayon-ashfall-affects-thousands-albay-may-2026/\nDomain: rappler.com\n\nSource 2 [SEMI-TRUSTED]:\nTitle: Over 50,000 families affected by Mayon volcano ashfall in Bicol region\nSnippet: Over 50,000 families affected by Mayon volcano ashfall in Bicol region | ANC ... 0 Quake Hits Eastern Coast As Mayon ERUPTS Day 119 On The West!\nLink: https://www.youtube.com/watch?v=s9uu6KeuQLI\nDomain: youtube.com\n\nSource 3 [TRUSTED]:\nTitle: Mayon unrest: Marcos orders full gov't response - Cebu Daily News\nSnippet: President Ferdinand R. Marcos Jr. ordered full government help for communities affected by ashfall from the ongoing unrest of Mayon Volcano.\nLink: https://cebudailynews.inquirer.net/723785/mayon-unrest-marcos-orders-full-govt-response\nDomain: cebudailynews.inquirer.net\n\nSource 4 [SEMI-TRUSTED]:\nTitle: Ashfall from Mayon eruption triggers illness in Albay | ANC - YouTube\nSnippet: Here are the stories on ANC's The World Tonight (May 5, 2026). - High confidence among Philippine House Justice panel members of getting ...\nLink: https://www.youtube.com/watch?v=Xtv8ZrlM4-o\nDomain: youtube.com\n\nSource 5 [TRUSTED]:\nTitle: PNP steps up disaster response due to Mayon ashfall - SunStar\nSnippet: The Philippine National Police has intensified its disaster response and security operations in Albay following an ashfall from Mayon Volcano.\nLink: https://www.sunstar.com.ph/manila/pnp-steps-up-disaster-response-as-mayon-ashfall-forces-evacuations-in-albay\nDomain: sunstar.com.ph\n",
+        "hasSearchContext": true
+      }
+    },
+    {
+      "timestamp": "2026-05-06T15:55:10.187Z",
+      "step": "AI",
+      "label": "Raw Gemini response received",
+      "data": {
+        "rawResponse": "```json\n{\n  \"label\": \"True\",\n  \"confidence\": 95,\n  \"marites_explanation\": \"Sis, mukhang true naman ito. According to the news, nag-utos nga si BBM na tumulong ang government dahil sa ashfall ng Mayon Volcano. May pa-N95 masks at water stations pa daw para sa mga apektado. Good job naman!\",\n  \"claims\": [\n    \"Bongbong Marcos ordered government agencies to respond to ashfall from Mayon Volcano eruption\",\n    \"Government is cleaning roads, distributing N95 masks, setting up water stations and mobile clinics\",\n    \"Government is providing assistance to evacuees\",\n    \"The situation is being monitored, including the risk of lahar\",\n    \"Government will continue to provide assistance until daily life returns to normal\"\n  ],\n  \"evidence\": [\n    \"Rappler reports local government units in Albay are launching relief operations due to Mayon ashfall (May 2026).\",\n    \"Cebu Daily News reports President Marcos ordered full government help for communities affected by Mayon ashfall.\",\n    \"SunStar reports PNP intensified disaster response in Albay following ashfall.\"\n  ],\n  \"linguistic_flags\": [],\n  \"fact_correction\": null\n}\n```"
+      }
+    },
+    {
+      "timestamp": "2026-05-06T15:55:10.192Z",
+      "step": "AI",
+      "label": "Response parsed successfully",
+      "data": {
+        "label": "True",
+        "confidence": 95,
+        "explanation": "Sis, mukhang true naman ito. According to the news, nag-utos nga si BBM na tumulong ang government dahil sa ashfall ng Mayon Volcano. May pa-N95 masks at water stations pa daw para sa mga apektado. Good job naman!",
+        "claims": [
+          "Bongbong Marcos ordered government agencies to respond to ashfall from Mayon Volcano eruption",
+          "Government is cleaning roads, distributing N95 masks, setting up water stations and mobile clinics",
+          "Government is providing assistance to evacuees",
+          "The situation is being monitored, including the risk of lahar",
+          "Government will continue to provide assistance until daily life returns to normal"
+        ],
+        "evidence": [
+          "Rappler reports local government units in Albay are launching relief operations due to Mayon ashfall (May 2026).",
+          "Cebu Daily News reports President Marcos ordered full government help for communities affected by Mayon ashfall.",
+          "SunStar reports PNP intensified disaster response in Albay following ashfall."
+        ],
+        "linguisticFlags": [],
+        "factCorrection": null
+      }
+    },
+    {
+      "timestamp": "2026-05-06T15:55:10.198Z",
+      "step": "LITERACY",
+      "label": "Generating literacy lesson",
+      "data": {
+        "classification": "fact",
+        "flagCount": 0,
+        "sourceCount": 3,
+        "personality": "marites"
+      }
+    },
+    {
+      "timestamp": "2026-05-06T15:55:13.718Z",
+      "step": "LITERACY",
+      "label": "Literacy lesson generated",
+      "data": {
+        "summary": "Mhie, swak na swak itong claim na to kasi may mga solid sources na nagpapatunay ng mga aksyon ng gobyerno regarding Mayon ashfall!",
+        "pointCount": 3,
+        "tip": "Always check kung yung claim eh sinusuportahan ng maraming established news sources para sure na fact, hindi fake!"
+      }
+    },
+    {
+      "timestamp": "2026-05-06T15:55:13.720Z",
+      "step": "OUTPUT",
+      "label": "Final result mapped for frontend",
+      "data": {
+        "classification": "fact",
+        "chismisLevel": 5,
+        "message": "Legit naman 'to ✅",
+        "details": "Mukhang totoo naman ito based sa analysis ni Marites.",
+        "breakdown": {
+          "reasons": [
+            "Bongbong Marcos ordered government agencies to respond to ashfall from Mayon Volcano eruption",
+            "Government is cleaning roads, distributing N95 masks, setting up water stations and mobile clinics",
+            "Government is providing assistance to evacuees",
+            "The situation is being monitored, including the risk of lahar",
+            "Government will continue to provide assistance until daily life returns to normal"
+          ],
+          "redFlags": []
+        },
+        "harmScore": {
+          "level": "low",
+          "score": 11,
+          "explanation": "This content appears to be factual. Safe to share with context."
+        },
+        "maritesMode": "Sis, mukhang true naman ito. According to the news, nag-utos nga si BBM na tumulong ang government dahil sa ashfall ng Mayon Volcano. May pa-N95 masks at water stations pa daw para sa mga apektado. Good job naman!",
+        "resibo": {
+          "verdict": "Rappler reports local government units in Albay are launching relief operations due to Mayon ashfall (May 2026). | Cebu Daily News reports President Marcos ordered full government help for communities affected by Mayon ashfall. | SunStar reports PNP intensified disaster response in Albay following ashfall.",
+          "sources": [
+            {
+              "title": "Mayon unrest: Marcos orders full gov't response - Cebu Daily News",
+              "url": "https://cebudailynews.inquirer.net/723785/mayon-unrest-marcos-orders-full-govt-response",
+              "credibility": "verified"
+            },
+            {
+              "title": "PNP steps up disaster response due to Mayon ashfall - SunStar",
+              "url": "https://www.sunstar.com.ph/manila/pnp-steps-up-disaster-response-as-mayon-ashfall-forces-evacuations-in-albay",
+              "credibility": "verified"
+            },
+            {
+              "title": "Ashfall from Mayon eruption triggers illness in Albay | ANC - YouTube",
+              "url": "https://www.youtube.com/watch?v=Xtv8ZrlM4-o",
+              "credibility": "questionable"
+            }
+          ]
+        },
+        "linguisticFlags": [],
+        "factCorrection": null,
+        "sourceCredibility": {
+          "score": 42,
+          "trustedCount": 3,
+          "semiTrustedCount": 2,
+          "untrustedCount": 4
+        },
+        "literacyLesson": {
+          "summary": "Mhie, swak na swak itong claim na to kasi may mga solid sources na nagpapatunay ng mga aksyon ng gobyerno regarding Mayon ashfall!",
+          "points": [
+            {
+              "issue": "Sis, confirmed na nag-utos si BBM ng government response sa Mayon ashfall, as reported by Cebu Daily News!",
+              "correction": "Ibig sabihin, reliable 'tong claim kasi galing sa trusted news outlet na may record of fact-checking."
+            },
+            {
+              "issue": "Tsaka, yung paglilinis ng kalsada at pagbibigay ng masks, totoo yan kasi SunStar din ang nagbalita na pinalakas ng PNP ang disaster response nila.",
+              "correction": "Dahil credible ang source, mas kapanipaniwala yung mga detalye na binanggit sa claim."
+            },
+            {
+              "issue": "May report din ang Rappler about sa relief operations ng local government units sa Albay dahil sa ashfall.",
+              "correction": "Kung maraming credible sources na nagko-corroborate, mas matibay ang claim!"
+            }
+          ],
+          "tip": "Always check kung yung claim eh sinusuportahan ng maraming established news sources para sure na fact, hindi fake!"
+        }
+      }
+    }
+  ]
+}

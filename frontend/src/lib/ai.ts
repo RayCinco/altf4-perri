@@ -140,15 +140,17 @@ export async function analyzeWithGemini(
   text: string,
   searchContext?: string,
   logger?: PipelineLogger,
-  personality: "marites" | "formal" = "marites"
+  personality: "marites" | "formal" = "marites",
 ): Promise<GeminiResponse> {
-  console.log(`[AI] 🧠 Starting AI analysis pipeline... (Personality: ${personality})`);
+  console.log(
+    `[AI] 🧠 Starting AI analysis pipeline... (Personality: ${personality})`,
+  );
   console.log(`[AI] 📝 Text to analyze: "${text.substring(0, 50)}..."`);
   const apiKey = process.env.GEMINI_API_KEY;
 
   if (!apiKey || apiKey === "your_gemini_api_key_here") {
     throw new Error(
-      "GEMINI_API_KEY is not configured. Please set it in your .env.local file."
+      "GEMINI_API_KEY is not configured. Please set it in your .env.local file.",
     );
   }
 
@@ -178,7 +180,9 @@ export async function analyzeWithGemini(
   const result = await model.generateContent(userPrompt);
   const responseText = result.response.text().trim();
   console.log("[AI] 📩 Received response from Gemini");
-  console.log(`[AI] 📜 Raw Response Preview: ${responseText.substring(0, 100).replace(/\n/g, ' ')}...`);
+  console.log(
+    `[AI] 📜 Raw Response Preview: ${responseText.substring(0, 100).replace(/\n/g, " ")}...`,
+  );
 
   logger?.log("AI", "Raw Gemini response received", {
     rawResponse: responseText,
@@ -224,14 +228,20 @@ function parseGeminiResponse(responseText: string): GeminiResponse {
 
     // Normalize the label to expected values
     const normalizedLabel = normalizeLabel(parsed.label);
-    console.log(`[AI] ✅ Final Verdict: ${normalizedLabel} (Confidence: ${parsed.confidence}%)`);
+    console.log(
+      `[AI] ✅ Final Verdict: ${normalizedLabel} (Confidence: ${parsed.confidence}%)`,
+    );
 
     if (parsed.linguistic_flags?.length > 0) {
-      console.log(`[AI] 🔍 Linguistic flags: ${parsed.linguistic_flags.join(", ")}`);
+      console.log(
+        `[AI] 🔍 Linguistic flags: ${parsed.linguistic_flags.join(", ")}`,
+      );
     }
 
     if (parsed.fact_correction) {
-      console.log(`[AI] ✏️ Fact correction: ${parsed.fact_correction.substring(0, 80)}...`);
+      console.log(
+        `[AI] ✏️ Fact correction: ${parsed.fact_correction.substring(0, 80)}...`,
+      );
     }
 
     return {
@@ -241,13 +251,18 @@ function parseGeminiResponse(responseText: string): GeminiResponse {
         parsed.marites_explanation || "Walang masabi si Marites... 🤔",
       claims: Array.isArray(parsed.claims) ? parsed.claims : [],
       evidence: Array.isArray(parsed.evidence) ? parsed.evidence : [],
-      linguistic_flags: Array.isArray(parsed.linguistic_flags) ? parsed.linguistic_flags : [],
-      fact_correction: typeof parsed.fact_correction === "string" ? parsed.fact_correction : null,
+      linguistic_flags: Array.isArray(parsed.linguistic_flags)
+        ? parsed.linguistic_flags
+        : [],
+      fact_correction:
+        typeof parsed.fact_correction === "string"
+          ? parsed.fact_correction
+          : null,
     };
   } catch (error) {
     console.error("Failed to parse Gemini response:", responseText);
     throw new Error(
-      `Failed to parse AI response. Raw output: ${responseText.substring(0, 200)}`
+      `Failed to parse AI response. Raw output: ${responseText.substring(0, 200)}`,
     );
   }
 }
