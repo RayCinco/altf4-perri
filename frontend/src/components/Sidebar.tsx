@@ -28,19 +28,16 @@ export default function Sidebar() {
         <button
           type="button"
           onClick={() => setSidebarOpen((open) => !open)}
-          className="group relative mt-2 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/10 shadow-lg transition hover:scale-105"
+          className="group relative mt-2 flex h-11 w-11 items-center justify-center rounded-full shadow-lg transition hover:scale-105"
           aria-label="Toggle sidebar"
         >
           <img
-            src="/Perri.png"
+            src="/logo/Perri.png"
             alt="Perri"
-            className="mt-6 mb-6 h-11 w-11 rounded-full border-2 border-white bg-white object-cover p-0.5 transition-opacity duration-200 group-hover:opacity-0"
+            className="mt-6 mb-6 h-11 w-11 rounded-full  object-cover p-0.5 transition-opacity duration-200 group-hover:opacity-0"
           />
           <div className="absolute inset-0 rounded-full flex items-center justify-center bg-black/0 transition group-hover:bg-black/35">
             <Menu className="h-5 w-5 text-white opacity-0 transition group-hover:opacity-100" />
-          </div>
-          <div className="pointer-events-none absolute left-full top-1/2 ml-3 hidden -translate-y-1/2 whitespace-nowrap rounded-lg bg-white px-3 py-2 text-sm font-medium text-black shadow-lg group-hover:block">
-            {sidebarOpen ? "Close Sidebar" : "Open Sidebar"}
           </div>
         </button>
 

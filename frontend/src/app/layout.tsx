@@ -6,7 +6,7 @@ import HeroHeading from "@/components/Heading";
 import { Inter } from "next/font/google";
 import Sidebar from "@/components/Sidebar";
 const inter = Inter({ subsets: ["latin"] });
-
+import PerriChatbot from "@/components/PerriChatbot";
 export default function RootLayout({
   children,
 }: {
@@ -29,7 +29,8 @@ export default function RootLayout({
           <HeroHeading />
           {children}
         </main>
-
+        {/* Chatbot (global) */}
+        <PerriChatbot />
         {/* Footer */}
         <Footer />
       </body>

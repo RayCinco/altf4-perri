@@ -1,0 +1,308 @@
+{
+  "session": {
+    "id": "gcj381",
+    "mode": "image",
+    "startedAt": "2026-05-06T17:36:22.496Z",
+    "completedAt": "2026-05-06T17:36:33.644Z",
+    "durationMs": 11148
+  },
+  "pipeline": [
+    {
+      "timestamp": "2026-05-06T17:36:22.499Z",
+      "step": "PIPELINE",
+      "label": "Image pipeline started",
+      "data": {
+        "mimeType": "image/png",
+        "imageSizeBytes": 1082678
+      }
+    },
+    {
+      "timestamp": "2026-05-06T17:36:25.767Z",
+      "step": "OCR",
+      "label": "Raw text extracted from image",
+      "data": {
+        "mimeType": "image/png",
+        "imageSizeBytes": 1082678,
+        "ocrPrompt": "Extract ALL readable text from this image. Return ONLY the raw text content, exactly as it appears. Do not add commentary, analysis, or formatting. If there is no text in the image, return \"NO_TEXT_FOUND\". Preserve the original language (Filipino, English, Taglish, etc.)",
+        "rawExtractedText": "Department of Health (Philippines) is with DepEd Philippines and 15 others.\n• Follow\n9h\n...\nX\n!! DOH: MAHIGPIT NA PAGPAPATUPAD NG BATAS NA NAGTATANGGAL SA VAPE FLAVORS, DAPAT\nUNAHIN HABANG HINIHINTAY ANG TOTAL BAN NG VAPE SA BANSA!!\nDetalye sa comment section.\nMAY 6, 2026\nDOH: MAHIGPIT NA\nSa Bagong Pilipinas,\nBawat Buhay\nMahalaga\nPAGPAPATUPAD NG BATAS NA\nNAGTATANGGAL SA VAPE\nFLAVORS, DAPAT UNAHIN HABANG\nHINIHINTAY ANG TOTAL BAN NG\nVAPE SA BANSA\nUEBERRY SWEET\nDRANGE\nENTHOL STRAWBERRY CREAM\n0",
+        "rawTextLength": 495
+      }
+    },
+    {
+      "timestamp": "2026-05-06T17:36:25.769Z",
+      "step": "OCR",
+      "label": "Text cleaned and finalized",
+      "data": {
+        "cleanedText": "Department of Health (Philippines) is with DepEd Philippines and 15 others.\n• Follow\n9h\n...\nX\n!! DOH: MAHIGPIT NA PAGPAPATUPAD NG BATAS NA NAGTATANGGAL SA VAPE FLAVORS, DAPAT\nUNAHIN HABANG HINIHINTAY ANG TOTAL BAN NG VAPE SA BANSA!!\nDetalye sa comment section.\nMAY 6, 2026\nDOH: MAHIGPIT NA\nSa Bagong Pilipinas,\nBawat Buhay\nMahalaga\nPAGPAPATUPAD NG BATAS NA\nNAGTATANGGAL SA VAPE\nFLAVORS, DAPAT UNAHIN HABANG\nHINIHINTAY ANG TOTAL BAN NG\nVAPE SA BANSA\nUEBERRY SWEET\nDRANGE\nENTHOL STRAWBERRY CREAM\n0",
+        "cleanedTextLength": 495
+      }
+    },
+    {
+      "timestamp": "2026-05-06T17:36:26.712Z",
+      "step": "SEARCH",
+      "label": "Query generated from text",
+      "data": {
+        "inputTextPreview": "Department of Health (Philippines) is with DepEd Philippines and 15 others.\n• Follow\n9h\n...\nX\n!! DOH: MAHIGPIT NA PAGPAPATUPAD NG BATAS NA NAGTATANGGAL SA VAPE FLAVORS, DAPAT\nUNAHIN HABANG HINIHINTAY ",
+        "generatedQuery": "DOH vape flavors total ban"
+      }
+    },
+    {
+      "timestamp": "2026-05-06T17:36:28.034Z",
+      "step": "SEARCH",
+      "label": "Search results retrieved",
+      "data": {
+        "query": "DOH vape flavors total ban",
+        "resultCount": 10,
+        "results": [
+          {
+            "title": "DOH, health experts push for total vape ban to protect youth - Rappler",
+            "snippet": "Calling vape products 'poison,' the Department of Health urges lawmakers to prohibit — not just regulate — vaping in the Philippines.",
+            "link": "https://www.rappler.com/philippines/doh-health-experts-proposal-total-vape-ban-protect-youth/"
+          },
+          {
+            "title": "DOH floats total ban on vape | ABS-CBN News",
+            "snippet": "In a statement, the DOH warned that e-cigarettes and tobacco products could lead to cardiovascular disease, cancer, and other lung illnesses.",
+            "link": "https://www.abs-cbn.com/news/health-science/2025/11/24/doh-calls-for-total-ban-on-vape-1009"
+          },
+          {
+            "title": "DOH seeks total vape ban over health risks | Business 360 - YouTube",
+            "snippet": "With youth addiction surging and health risks growing, the government says the country may be facing a new public health crisis, ...",
+            "link": "https://www.youtube.com/watch?v=wK3zhW_7LXI"
+          },
+          {
+            "title": "DOH pushes for total vape ban, warns public of severe health risks",
+            "snippet": "I'm a former smoker and vapor, you can buy vapes of all different flavors and substances besides tobacco that is still legal. You can also buy ...",
+            "link": "https://www.reddit.com/r/Expats_PH/comments/1p4izyj/doh_pushes_for_total_vape_ban_warns_public_of/"
+          },
+          {
+            "title": "TOTAL BAN ON VAPE The Department of Health called for a ...",
+            "snippet": "TOTAL BAN ON VAPE The Department of Health called for a nationwide ban on vape products, saying aggressive marketing has misled the public into ...",
+            "link": "https://www.facebook.com/News5Everywhere/posts/total-ban-on-vape-the-department-of-health-called-for-a-nationwide-ban-on-vape-p/1346290034196193/"
+          },
+          {
+            "title": "DOH pushes for total vape ban, warns public of severe health risks",
+            "snippet": "MANILA – The Department of Health (DOH) has called for a nationwide total ban on vape products as it criticized advertisements misleadingly ...",
+            "link": "https://seatca.org/doh-pushes-for-total-vape-ban-warns-public-of-severe-health-risks/"
+          },
+          {
+            "title": "DOH pushes for total vape ban, warns public of severe health risks",
+            "snippet": "The DOH has called for a nationwide total ban on vape products as it criticized ads portraying vaping as safe.",
+            "link": "https://newsinfo.inquirer.net/2144668/doh-pushes-for-total-vape-ban-warns-public-of-severe-health-risks"
+          },
+          {
+            "title": "DOH Calls For Total Vape Ban, Labels Products As “Poison” The ...",
+            "snippet": "DOH Calls For Total Vape Ban, Labels Products As “Poison”",
+            "link": "https://www.instagram.com/p/DWyht9KiJnJ/"
+          },
+          {
+            "title": "The impact of flavored e-cigarette bans on e-cigarette use in three ...",
+            "snippet": "After the ban, 8.1% of respondents (N=1624) quit using e-cigarettes, those primarily used banned menthol or other flavors declined from 74.4% to 50.8, those ...",
+            "link": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10246123/"
+          },
+          {
+            "title": "Health Talk: PH health dept. mulls total vape ban | ANC - YouTube",
+            "snippet": "Top Story: Denice Dinsay talks to DOH Spokesperson, Assistant Secretary Albert Domingo, as the agency is floating a total ban on vaping in ...",
+            "link": "https://www.youtube.com/watch?v=vgRwXZqKkyo"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-06T17:36:28.036Z",
+      "step": "FILTER",
+      "label": "Sources classified by credibility",
+      "data": {
+        "totalSources": 10,
+        "trustedCount": 4,
+        "semiTrustedCount": 3,
+        "untrustedCount": 3,
+        "credibilityScore": 52,
+        "sources": [
+          {
+            "domain": "rappler.com",
+            "credibility": "trusted",
+            "title": "DOH, health experts push for total vape ban to protect youth - Rappler"
+          },
+          {
+            "domain": "abs-cbn.com",
+            "credibility": "trusted",
+            "title": "DOH floats total ban on vape | ABS-CBN News"
+          },
+          {
+            "domain": "youtube.com",
+            "credibility": "semi-trusted",
+            "title": "DOH seeks total vape ban over health risks | Business 360 - YouTube"
+          },
+          {
+            "domain": "reddit.com",
+            "credibility": "untrusted",
+            "title": "DOH pushes for total vape ban, warns public of severe health risks"
+          },
+          {
+            "domain": "facebook.com",
+            "credibility": "untrusted",
+            "title": "TOTAL BAN ON VAPE The Department of Health called for a ..."
+          },
+          {
+            "domain": "seatca.org",
+            "credibility": "semi-trusted",
+            "title": "DOH pushes for total vape ban, warns public of severe health risks"
+          },
+          {
+            "domain": "newsinfo.inquirer.net",
+            "credibility": "trusted",
+            "title": "DOH pushes for total vape ban, warns public of severe health risks"
+          },
+          {
+            "domain": "instagram.com",
+            "credibility": "untrusted",
+            "title": "DOH Calls For Total Vape Ban, Labels Products As “Poison” The ..."
+          },
+          {
+            "domain": "pmc.ncbi.nlm.nih.gov",
+            "credibility": "trusted",
+            "title": "The impact of flavored e-cigarette bans on e-cigarette use in three ..."
+          },
+          {
+            "domain": "youtube.com",
+            "credibility": "semi-trusted",
+            "title": "Health Talk: PH health dept. mulls total vape ban | ANC - YouTube"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-06T17:36:28.039Z",
+      "step": "AI",
+      "label": "Prompts constructed",
+      "data": {
+        "personality": "marites",
+        "userPrompt": "Analyze the following text and classify it:\n\n---\nDepartment of Health (Philippines) is with DepEd Philippines and 15 others.\n• Follow\n9h\n...\nX\n!! DOH: MAHIGPIT NA PAGPAPATUPAD NG BATAS NA NAGTATANGGAL SA VAPE FLAVORS, DAPAT\nUNAHIN HABANG HINIHINTAY ANG TOTAL BAN NG VAPE SA BANSA!!\nDetalye sa comment section.\nMAY 6, 2026\nDOH: MAHIGPIT NA\nSa Bagong Pilipinas,\nBawat Buhay\nMahalaga\nPAGPAPATUPAD NG BATAS NA\nNAGTATANGGAL SA VAPE\nFLAVORS, DAPAT UNAHIN HABANG\nHINIHINTAY ANG TOTAL BAN NG\nVAPE SA BANSA\nUEBERRY SWEET\nDRANGE\nENTHOL STRAWBERRY CREAM\n0\n---\n\nAdditional search context for fact-checking:\nSource 1 [TRUSTED]:\nTitle: DOH, health experts push for total vape ban to protect youth - Rappler\nSnippet: Calling vape products 'poison,' the Department of Health urges lawmakers to prohibit — not just regulate — vaping in the Philippines.\nLink: https://www.rappler.com/philippines/doh-health-experts-proposal-total-vape-ban-protect-youth/\nDomain: rappler.com\n\nSource 2 [TRUSTED]:\nTitle: DOH floats total ban on vape | ABS-CBN News\nSnippet: In a statement, the DOH warned that e-cigarettes and tobacco products could lead to cardiovascular disease, cancer, and other lung illnesses.\nLink: https://www.abs-cbn.com/news/health-science/2025/11/24/doh-calls-for-total-ban-on-vape-1009\nDomain: abs-cbn.com\n\nSource 3 [SEMI-TRUSTED]:\nTitle: DOH seeks total vape ban over health risks | Business 360 - YouTube\nSnippet: With youth addiction surging and health risks growing, the government says the country may be facing a new public health crisis, ...\nLink: https://www.youtube.com/watch?v=wK3zhW_7LXI\nDomain: youtube.com\n\nSource 4 [SEMI-TRUSTED]:\nTitle: DOH pushes for total vape ban, warns public of severe health risks\nSnippet: MANILA – The Department of Health (DOH) has called for a nationwide total ban on vape products as it criticized advertisements misleadingly ...\nLink: https://seatca.org/doh-pushes-for-total-vape-ban-warns-public-of-severe-health-risks/\nDomain: seatca.org\n\nSource 5 [TRUSTED]:\nTitle: DOH pushes for total vape ban, warns public of severe health risks\nSnippet: The DOH has called for a nationwide total ban on vape products as it criticized ads portraying vaping as safe.\nLink: https://newsinfo.inquirer.net/2144668/doh-pushes-for-total-vape-ban-warns-public-of-severe-health-risks\nDomain: newsinfo.inquirer.net\n\nSource 6 [TRUSTED]:\nTitle: The impact of flavored e-cigarette bans on e-cigarette use in three ...\nSnippet: After the ban, 8.1% of respondents (N=1624) quit using e-cigarettes, those primarily used banned menthol or other flavors declined from 74.4% to 50.8, those ...\nLink: https://pmc.ncbi.nlm.nih.gov/articles/PMC10246123/\nDomain: pmc.ncbi.nlm.nih.gov\n\nSource 7 [SEMI-TRUSTED]:\nTitle: Health Talk: PH health dept. mulls total vape ban | ANC - YouTube\nSnippet: Top Story: Denice Dinsay talks to DOH Spokesperson, Assistant Secretary Albert Domingo, as the agency is floating a total ban on vaping in ...\nLink: https://www.youtube.com/watch?v=vgRwXZqKkyo\nDomain: youtube.com\n",
+        "hasSearchContext": true
+      }
+    },
+    {
+      "timestamp": "2026-05-06T17:36:30.470Z",
+      "step": "AI",
+      "label": "Raw Gemini response received",
+      "data": {
+        "rawResponse": "```json\n{\n  \"label\": \"True\",\n  \"confidence\": 85,\n  \"marites_explanation\": \"Sis, mukhang legit naman ‘to! The DOH is serious about a total vape ban and removing those flavors. According to the sources, they see vaping as a health risk, especially sa mga kabataan. Kaya todo push sila na tanggalin ang vape!\",\n  \"claims\": [\n    \"DOH wants stricter enforcement of the law removing vape flavors while awaiting a total vape ban in the country\"\n  ],\n  \"evidence\": [\n    \"Multiple trusted sources (Rappler, ABS-CBN, Inquirer) confirm the DOH is pushing for a total vape ban.\",\n    \"The DOH warns of health risks associated with vaping.\"\n  ],\n  \"linguistic_flags\": [\n    \"ALL CAPS usage\",\n    \"Excessive punctuation (!!)\"\n  ],\n  \"fact_correction\": null\n}\n```"
+      }
+    },
+    {
+      "timestamp": "2026-05-06T17:36:30.472Z",
+      "step": "AI",
+      "label": "Response parsed successfully",
+      "data": {
+        "label": "True",
+        "confidence": 85,
+        "explanation": "Sis, mukhang legit naman ‘to! The DOH is serious about a total vape ban and removing those flavors. According to the sources, they see vaping as a health risk, especially sa mga kabataan. Kaya todo push sila na tanggalin ang vape!",
+        "claims": [
+          "DOH wants stricter enforcement of the law removing vape flavors while awaiting a total vape ban in the country"
+        ],
+        "evidence": [
+          "Multiple trusted sources (Rappler, ABS-CBN, Inquirer) confirm the DOH is pushing for a total vape ban.",
+          "The DOH warns of health risks associated with vaping."
+        ],
+        "linguisticFlags": [
+          "ALL CAPS usage",
+          "Excessive punctuation (!!)"
+        ],
+        "factCorrection": null
+      }
+    },
+    {
+      "timestamp": "2026-05-06T17:36:30.476Z",
+      "step": "LITERACY",
+      "label": "Generating literacy lesson",
+      "data": {
+        "classification": "fact",
+        "flagCount": 2,
+        "sourceCount": 3,
+        "personality": "marites"
+      }
+    },
+    {
+      "timestamp": "2026-05-06T17:36:33.640Z",
+      "step": "LITERACY",
+      "label": "Literacy lesson generated",
+      "data": {
+        "summary": "Sis, this post is legit! It's all about the Department of Health (DOH) pushing for stricter vape rules, so let's break down why we can trust it.",
+        "pointCount": 3,
+        "tip": "Next time, sis, always look for other reputable news sources reporting the same info before believing anything you see online!"
+      }
+    },
+    {
+      "timestamp": "2026-05-06T17:36:33.642Z",
+      "step": "OUTPUT",
+      "label": "Final result mapped for frontend",
+      "data": {
+        "classification": "fact",
+        "chismisLevel": 15,
+        "message": "Legit naman 'to ✅",
+        "details": "Mukhang totoo naman ito based sa analysis ni Marites.",
+        "breakdown": {
+          "reasons": [
+            "DOH wants stricter enforcement of the law removing vape flavors while awaiting a total vape ban in the country"
+          ],
+          "redFlags": []
+        },
+        "harmScore": {
+          "level": "low",
+          "score": 13,
+          "explanation": "This content appears to be factual. Safe to share with context."
+        },
+        "maritesMode": "Sis, mukhang legit naman ‘to! The DOH is serious about a total vape ban and removing those flavors. According to the sources, they see vaping as a health risk, especially sa mga kabataan. Kaya todo push sila na tanggalin ang vape!",
+        "resibo": {
+          "verdict": "Multiple trusted sources (Rappler, ABS-CBN, Inquirer) confirm the DOH is pushing for a total vape ban. | The DOH warns of health risks associated with vaping.",
+          "sources": [
+            {
+              "title": "DOH, health experts push for total vape ban to protect youth - Rappler",
+              "url": "https://www.rappler.com/philippines/doh-health-experts-proposal-total-vape-ban-protect-youth/",
+              "credibility": "verified"
+            },
+            {
+              "title": "DOH pushes for total vape ban, warns public of severe health risks",
+              "url": "https://newsinfo.inquirer.net/2144668/doh-pushes-for-total-vape-ban-warns-public-of-severe-health-risks",
+              "credibility": "verified"
+            },
+            {
+              "title": "DOH floats total ban on vape | ABS-CBN News",
+              "url": "https://www.abs-cbn.com/news/health-science/2025/11/24/doh-calls-for-total-ban-on-vape-1009",
+              "credibility": "verified"
+            }
+          ]
+        },
+        "linguisticFlags": [
+          "ALL CAPS usage",
+          "Excessive punctuation (!!)"
+        ],
+        "factCorrection": null,
+        "sourceCredibility": {
+          "score": 52,
+          "trustedCount": 4,
+          "semiTrustedCount": 3,
+          "untrustedCount": 3
+        },
+        "literacyLesson": {
+          "summary": "Sis, this post is legit! It's all about the Department of Health (DOH) pushing for stricter vape rules, so let's break down why we can trust it.",
+          "points": [
+            {
+              "issue": "Teh, the post says DOH is serious about removing vape flavors while waiting for a total ban, and guess what? Major news outlets like Rappler and ABS-CBN are backing it up!",
+              "correction": "Mhie, seeing multiple trusted sources report the same thing is a super good sign the info is legit and not just chismis."
+            },
+            {
+              "issue": "The post mentions 'mahigpit na pagpapatupad ng batas,' which is exactly what news orgs are reporting.",
+              "correction": "When the details match between a social media post and credible news, it strengthens the post's reliability."
+            },
+            {
+              "issue": "The post has some ALL CAPS and !! going on, which can sometimes be a red flag.",
+              "correction": "Even with the 'shouting,' the core info is still factual because credible sources confirm it, so don't dismiss it right away, but always double check!"
+            }
+          ],
+          "tip": "Next time, sis, always look for other reputable news sources reporting the same info before believing anything you see online!"
+        }
+      }
+    }
+  ]
+}
