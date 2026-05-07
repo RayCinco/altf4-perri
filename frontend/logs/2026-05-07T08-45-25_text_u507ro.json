@@ -1,0 +1,143 @@
+{
+  "session": {
+    "id": "u507ro",
+    "mode": "text",
+    "startedAt": "2026-05-07T08:45:25.252Z",
+    "completedAt": "2026-05-07T08:45:31.427Z",
+    "durationMs": 6175
+  },
+  "pipeline": [
+    {
+      "timestamp": "2026-05-07T08:45:25.254Z",
+      "step": "PIPELINE",
+      "label": "Text pipeline started",
+      "data": {
+        "inputText": "Test",
+        "inputTextLength": 4
+      }
+    },
+    {
+      "timestamp": "2026-05-07T08:45:26.332Z",
+      "step": "SEARCH",
+      "label": "Query generated from text",
+      "data": {
+        "inputTextPreview": "Test",
+        "generatedQuery": "NO_SEARCH_NEEDED"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T08:45:26.333Z",
+      "step": "SEARCH",
+      "label": "No search needed — AI decided to skip",
+      "data": {}
+    },
+    {
+      "timestamp": "2026-05-07T08:45:26.336Z",
+      "step": "AI",
+      "label": "Prompts constructed",
+      "data": {
+        "personality": "marites",
+        "userPrompt": "Analyze the following text and classify it:\n\n---\nTest\n---",
+        "hasSearchContext": false
+      }
+    },
+    {
+      "timestamp": "2026-05-07T08:45:28.650Z",
+      "step": "AI",
+      "label": "Raw Gemini response received",
+      "data": {
+        "rawResponse": "```json\n{\n  \"label\": \"Suspicious\",\n  \"confidence\": 90,\n  \"marites_explanation\": \"Sis, parang test lang 'to eh. Walang specific claim or statement na pwedeng i-verify. So, for now, classified as suspicious since walang concrete na chismis na mapiga.\",\n  \"claims\": [],\n  \"evidence\": [],\n  \"linguistic_flags\": [],\n  \"fact_correction\": null,\n  \"chismis_level\": 92,\n  \"harm_score\": {\n    \"level\": \"low\",\n    \"score\": 10,\n    \"explanation\": \"A simple test input has no inherent harm as it doesn't spread misinformation.\"\n  }\n}\n```"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T08:45:28.652Z",
+      "step": "AI",
+      "label": "Response parsed successfully",
+      "data": {
+        "label": "Suspicious",
+        "confidence": 90,
+        "explanation": "Sis, parang test lang 'to eh. Walang specific claim or statement na pwedeng i-verify. So, for now, classified as suspicious since walang concrete na chismis na mapiga.",
+        "claims": [],
+        "evidence": [],
+        "linguisticFlags": [],
+        "factCorrection": null,
+        "chismisLevel": 92,
+        "harmScore": {
+          "level": "low",
+          "score": 10,
+          "explanation": "A simple test input has no inherent harm as it doesn't spread misinformation."
+        }
+      }
+    },
+    {
+      "timestamp": "2026-05-07T08:45:28.654Z",
+      "step": "LITERACY",
+      "label": "Generating literacy lesson",
+      "data": {
+        "classification": "opinion",
+        "flagCount": 0,
+        "sourceCount": 0,
+        "personality": "marites"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T08:45:31.425Z",
+      "step": "LITERACY",
+      "label": "Literacy lesson generated",
+      "data": {
+        "summary": "Sis, mukhang opinion lang ‘to, walang facts na sinusuporta kaya dapat mag-ingat tayo!",
+        "pointCount": 2,
+        "tip": "Always look for proof and reliable sources before believing or sharing anything online, okay?"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T08:45:31.426Z",
+      "step": "OUTPUT",
+      "label": "Final result mapped for frontend",
+      "data": {
+        "classification": "opinion",
+        "chismisLevel": 92,
+        "message": "Hmm... hindi sure si Marites 🤔",
+        "details": "May mga questionable parts — double check muna bago i-share.",
+        "breakdown": {
+          "reasons": [
+            "No specific claims extracted"
+          ],
+          "redFlags": []
+        },
+        "harmScore": {
+          "level": "low",
+          "score": 10,
+          "explanation": "A simple test input has no inherent harm as it doesn't spread misinformation."
+        },
+        "maritesMode": "Sis, parang test lang 'to eh. Walang specific claim or statement na pwedeng i-verify. So, for now, classified as suspicious since walang concrete na chismis na mapiga.",
+        "resibo": {
+          "verdict": "Walang mahanap na resibo si Perri... 👀",
+          "sources": []
+        },
+        "linguisticFlags": [],
+        "factCorrection": null,
+        "sourceCredibility": {
+          "score": 0,
+          "trustedCount": 0,
+          "semiTrustedCount": 0,
+          "untrustedCount": 0
+        },
+        "literacyLesson": {
+          "summary": "Sis, mukhang opinion lang ‘to, walang facts na sinusuporta kaya dapat mag-ingat tayo!",
+          "points": [
+            {
+              "issue": "Walang ebidensya na sumusuporta dito, puro opinyon lang ang nakikita ko, mhie.",
+              "correction": "Dapat may specific facts, figures, o expert opinions para masabi nating credible ang claim."
+            },
+            {
+              "issue": "Wala tayong makitang credible sources na nagpapatunay nito, teh.",
+              "correction": "Check natin kung may news articles, studies, or eksperto na nag-validate ng claim na ito para mas sigurado."
+            }
+          ],
+          "tip": "Always look for proof and reliable sources before believing or sharing anything online, okay?"
+        }
+      }
+    }
+  ]
+}

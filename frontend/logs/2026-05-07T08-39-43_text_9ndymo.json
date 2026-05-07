@@ -1,0 +1,145 @@
+{
+  "session": {
+    "id": "9ndymo",
+    "mode": "text",
+    "startedAt": "2026-05-07T08:39:43.677Z",
+    "completedAt": "2026-05-07T08:39:49.812Z",
+    "durationMs": 6135
+  },
+  "pipeline": [
+    {
+      "timestamp": "2026-05-07T08:39:43.680Z",
+      "step": "PIPELINE",
+      "label": "Text pipeline started",
+      "data": {
+        "inputText": "Test",
+        "inputTextLength": 4
+      }
+    },
+    {
+      "timestamp": "2026-05-07T08:39:44.637Z",
+      "step": "SEARCH",
+      "label": "Query generated from text",
+      "data": {
+        "inputTextPreview": "Test",
+        "generatedQuery": "NO_SEARCH_NEEDED"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T08:39:44.638Z",
+      "step": "SEARCH",
+      "label": "No search needed — AI decided to skip",
+      "data": {}
+    },
+    {
+      "timestamp": "2026-05-07T08:39:44.640Z",
+      "step": "AI",
+      "label": "Prompts constructed",
+      "data": {
+        "personality": "marites",
+        "userPrompt": "Analyze the following text and classify it:\n\n---\nTest\n---",
+        "hasSearchContext": false
+      }
+    },
+    {
+      "timestamp": "2026-05-07T08:39:46.904Z",
+      "step": "AI",
+      "label": "Raw Gemini response received",
+      "data": {
+        "rawResponse": "```json\n{\n  \"label\": \"Suspicious\",\n  \"confidence\": 50,\n  \"marites_explanation\": \"Sis, 'test' lang daw? Walang context, walang details. Parang nagpapakita lang, pero walang sinasabi. Default muna natin sa suspicious 'yan, mhie.\",\n  \"claims\": [\n    \"Test\"\n  ],\n  \"evidence\": \"No credible search results found.\",\n  \"linguistic_flags\": [],\n  \"fact_correction\": null,\n  \"chismis_level\": 70,\n  \"harm_score\": {\n    \"level\": \"low\",\n    \"score\": 10,\n    \"explanation\": \"Since the text is just 'test' and lacks any specific claim, it poses minimal harm as it doesn't promote misinformation or manipulate emotions.\"\n  }\n}\n```"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T08:39:46.906Z",
+      "step": "AI",
+      "label": "Response parsed successfully",
+      "data": {
+        "label": "Suspicious",
+        "confidence": 50,
+        "explanation": "Sis, 'test' lang daw? Walang context, walang details. Parang nagpapakita lang, pero walang sinasabi. Default muna natin sa suspicious 'yan, mhie.",
+        "claims": [
+          "Test"
+        ],
+        "evidence": [],
+        "linguisticFlags": [],
+        "factCorrection": null,
+        "chismisLevel": 70,
+        "harmScore": {
+          "level": "low",
+          "score": 10,
+          "explanation": "Since the text is just 'test' and lacks any specific claim, it poses minimal harm as it doesn't promote misinformation or manipulate emotions."
+        }
+      }
+    },
+    {
+      "timestamp": "2026-05-07T08:39:46.907Z",
+      "step": "LITERACY",
+      "label": "Generating literacy lesson",
+      "data": {
+        "classification": "opinion",
+        "flagCount": 0,
+        "sourceCount": 0,
+        "personality": "marites"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T08:39:49.809Z",
+      "step": "LITERACY",
+      "label": "Literacy lesson generated",
+      "data": {
+        "summary": "Mhie, opinion lang ito, walang fact-checking na naganap. Dapat may proof or source para masabi nating totoo!",
+        "pointCount": 2,
+        "tip": "Next time, sis, hanap ka ng matibay na ebidensya bago mo i-share. 'Wag basta-basta maniwala sa sabi-sabi!"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T08:39:49.811Z",
+      "step": "OUTPUT",
+      "label": "Final result mapped for frontend",
+      "data": {
+        "classification": "opinion",
+        "chismisLevel": 70,
+        "message": "Hmm... hindi sure si Marites 🤔",
+        "details": "May mga questionable parts — double check muna bago i-share.",
+        "breakdown": {
+          "reasons": [
+            "Test"
+          ],
+          "redFlags": []
+        },
+        "harmScore": {
+          "level": "low",
+          "score": 10,
+          "explanation": "Since the text is just 'test' and lacks any specific claim, it poses minimal harm as it doesn't promote misinformation or manipulate emotions."
+        },
+        "maritesMode": "Sis, 'test' lang daw? Walang context, walang details. Parang nagpapakita lang, pero walang sinasabi. Default muna natin sa suspicious 'yan, mhie.",
+        "resibo": {
+          "verdict": "Walang mahanap na resibo si Perri... 👀",
+          "sources": []
+        },
+        "linguisticFlags": [],
+        "factCorrection": null,
+        "sourceCredibility": {
+          "score": 0,
+          "trustedCount": 0,
+          "semiTrustedCount": 0,
+          "untrustedCount": 0
+        },
+        "literacyLesson": {
+          "summary": "Mhie, opinion lang ito, walang fact-checking na naganap. Dapat may proof or source para masabi nating totoo!",
+          "points": [
+            {
+              "issue": "Walang concrete evidence na sinusuportahan ang claim, puro 'test' lang ang sinabi.",
+              "correction": "Dapat may specific details or research para mas credible, like galing sa expert or studies."
+            },
+            {
+              "issue": "Walang credible sources na binanggit para patunayan ang claim.",
+              "correction": "Check kung may reputable news outlets, government reports, or academic journals na sumusuporta."
+            }
+          ],
+          "tip": "Next time, sis, hanap ka ng matibay na ebidensya bago mo i-share. 'Wag basta-basta maniwala sa sabi-sabi!"
+        }
+      }
+    }
+  ]
+}

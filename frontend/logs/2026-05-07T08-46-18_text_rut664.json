@@ -1,0 +1,273 @@
+{
+  "session": {
+    "id": "rut664",
+    "mode": "text",
+    "startedAt": "2026-05-07T08:46:18.310Z",
+    "completedAt": "2026-05-07T08:46:25.667Z",
+    "durationMs": 7357
+  },
+  "pipeline": [
+    {
+      "timestamp": "2026-05-07T08:46:18.311Z",
+      "step": "PIPELINE",
+      "label": "Text pipeline started",
+      "data": {
+        "inputText": "Si BBM ay presidente ng Pilipinas",
+        "inputTextLength": 33
+      }
+    },
+    {
+      "timestamp": "2026-05-07T08:46:19.454Z",
+      "step": "SEARCH",
+      "label": "Query generated from text",
+      "data": {
+        "inputTextPreview": "Si BBM ay presidente ng Pilipinas",
+        "generatedQuery": "BBM president of Philippines"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T08:46:20.951Z",
+      "step": "SEARCH",
+      "label": "Search results retrieved",
+      "data": {
+        "query": "BBM president of Philippines",
+        "resultCount": 9,
+        "results": [
+          {
+            "title": "Bongbong Marcos - Wikipedia",
+            "snippet": "BBM or PBBM, is a Filipino politician who has served as the 17th president of the Philippines since 2022. He is the second child and only son of ...",
+            "link": "https://en.wikipedia.org/wiki/Bongbong_Marcos"
+          },
+          {
+            "title": "About | President Bongbong Marcos",
+            "snippet": "Ferdinand R. Marcos Jr., known to many as Bongbong or BBM, was born on September 13, 1957 in Batac, Ilocos Norte.",
+            "link": "https://pbbm.com.ph/president-bongbong-marcos/"
+          },
+          {
+            "title": "The President - PHILIPPINE CONSULATE GENERAL - CHICAGO",
+            "snippet": "President Ferdinand Romualdez Marcos Jr., commonly referred to as Bongbong and by the initials BBM, was born on the 13th of September 1957 in the town of ...",
+            "link": "https://www.chicagopcg.com/thepresident.html"
+          },
+          {
+            "title": "Bongbong Marcos (@BongbongMarcos) - Facebook",
+            "snippet": "Bongbong Marcos. 7419484 likes · 716042 talking about this. 17th President of the Republic of the Philippines.",
+            "link": "https://www.facebook.com/BongbongMarcos/"
+          },
+          {
+            "title": "Official Website - President Bongbong Marcos",
+            "snippet": "Rebuilding the Nation. Bongbong Marcos is the 17th President of the Republic of the Philippines.",
+            "link": "https://pbbm.com.ph/home/"
+          },
+          {
+            "title": "Bongbong Marcos - YouTube",
+            "snippet": "17th President of the Republic of the Philippines ...more 17th ... The BBM Vlog (Episodes) · 3:45. BBM VLOG #280: Bayanihan | Bongbong Marcos.",
+            "link": "https://www.youtube.com/bongbongmarcos"
+          },
+          {
+            "title": "Ferdinand ('Bongbong') Marcos, Jr. | Biography, Father, Election ...",
+            "snippet": "Ferdinand Marcos, Jr. (born September 13, 1957, Batac, Ilocos Norte, Philippines) is a Filipino politician who has been president of the Philippines since 2022.",
+            "link": "https://www.britannica.com/biography/Bongbong-Marcos"
+          },
+          {
+            "title": "Bongbong Marcos (@bongbongmarcos) - Instagram",
+            "snippet": "927K followers · 53 following · 3972 posts · @bongbongmarcos: “17th President of the Republic of the Philippines ”",
+            "link": "https://www.instagram.com/bongbongmarcos/"
+          },
+          {
+            "title": "Bongbong Marcos: The Philippine president battling the Dutertes",
+            "snippet": "Born in 1957 to Ferdinand and Imelda Marcos, Bongbong was just eight years old when his father became president. He was the second of three ...",
+            "link": "https://www.bbc.com/news/articles/c3wd62y9xydo"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-07T08:46:20.952Z",
+      "step": "FILTER",
+      "label": "Sources classified by credibility",
+      "data": {
+        "totalSources": 9,
+        "trustedCount": 1,
+        "semiTrustedCount": 2,
+        "untrustedCount": 6,
+        "credibilityScore": 20,
+        "sources": [
+          {
+            "domain": "en.wikipedia.org",
+            "credibility": "semi-trusted",
+            "title": "Bongbong Marcos - Wikipedia"
+          },
+          {
+            "domain": "pbbm.com.ph",
+            "credibility": "untrusted",
+            "title": "About | President Bongbong Marcos"
+          },
+          {
+            "domain": "chicagopcg.com",
+            "credibility": "untrusted",
+            "title": "The President - PHILIPPINE CONSULATE GENERAL - CHICAGO"
+          },
+          {
+            "domain": "facebook.com",
+            "credibility": "untrusted",
+            "title": "Bongbong Marcos (@BongbongMarcos) - Facebook"
+          },
+          {
+            "domain": "pbbm.com.ph",
+            "credibility": "untrusted",
+            "title": "Official Website - President Bongbong Marcos"
+          },
+          {
+            "domain": "youtube.com",
+            "credibility": "semi-trusted",
+            "title": "Bongbong Marcos - YouTube"
+          },
+          {
+            "domain": "britannica.com",
+            "credibility": "untrusted",
+            "title": "Ferdinand ('Bongbong') Marcos, Jr. | Biography, Father, Election ..."
+          },
+          {
+            "domain": "instagram.com",
+            "credibility": "untrusted",
+            "title": "Bongbong Marcos (@bongbongmarcos) - Instagram"
+          },
+          {
+            "domain": "bbc.com",
+            "credibility": "trusted",
+            "title": "Bongbong Marcos: The Philippine president battling the Dutertes"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-07T08:46:20.955Z",
+      "step": "AI",
+      "label": "Prompts constructed",
+      "data": {
+        "personality": "marites",
+        "userPrompt": "Analyze the following text and classify it:\n\n---\nSi BBM ay presidente ng Pilipinas\n---\n\nAdditional search context for fact-checking:\nSource 1 [SEMI-TRUSTED]:\nTitle: Bongbong Marcos - Wikipedia\nSnippet: BBM or PBBM, is a Filipino politician who has served as the 17th president of the Philippines since 2022. He is the second child and only son of ...\nLink: https://en.wikipedia.org/wiki/Bongbong_Marcos\nDomain: en.wikipedia.org\n\nSource 2 [SEMI-TRUSTED]:\nTitle: Bongbong Marcos - YouTube\nSnippet: 17th President of the Republic of the Philippines ...more 17th ... The BBM Vlog (Episodes) · 3:45. BBM VLOG #280: Bayanihan | Bongbong Marcos.\nLink: https://www.youtube.com/bongbongmarcos\nDomain: youtube.com\n\nSource 3 [TRUSTED]:\nTitle: Bongbong Marcos: The Philippine president battling the Dutertes\nSnippet: Born in 1957 to Ferdinand and Imelda Marcos, Bongbong was just eight years old when his father became president. He was the second of three ...\nLink: https://www.bbc.com/news/articles/c3wd62y9xydo\nDomain: bbc.com\n",
+        "hasSearchContext": true
+      }
+    },
+    {
+      "timestamp": "2026-05-07T08:46:23.266Z",
+      "step": "AI",
+      "label": "Raw Gemini response received",
+      "data": {
+        "rawResponse": "```json\n{\n  \"label\": \"True\",\n  \"confidence\": 78,\n  \"marites_explanation\": \"Sis, true naman 'yan. BBM is the current president of the Philippines. May pa-Wikipedia and BBC pa tayong source, kaya gets na gets natin 'yan!\",\n  \"claims\": [\n    \"BBM is the president of the Philippines\"\n  ],\n  \"evidence\": [\n    \"Bongbong Marcos has served as the 17th president of the Philippines since 2022 (Wikipedia)\",\n    \"BBC News confirms Bongbong Marcos is the Philippine president\"\n  ],\n  \"linguistic_flags\": [],\n  \"fact_correction\": null,\n  \"chismis_level\": 15,\n  \"harm_score\": {\n    \"level\": \"low\",\n    \"score\": 10,\n    \"explanation\": \"This is a true statement, verified by multiple sources, so the potential for harm is low.\"\n  }\n}\n```"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T08:46:23.267Z",
+      "step": "AI",
+      "label": "Response parsed successfully",
+      "data": {
+        "label": "True",
+        "confidence": 78,
+        "explanation": "Sis, true naman 'yan. BBM is the current president of the Philippines. May pa-Wikipedia and BBC pa tayong source, kaya gets na gets natin 'yan!",
+        "claims": [
+          "BBM is the president of the Philippines"
+        ],
+        "evidence": [
+          "Bongbong Marcos has served as the 17th president of the Philippines since 2022 (Wikipedia)",
+          "BBC News confirms Bongbong Marcos is the Philippine president"
+        ],
+        "linguisticFlags": [],
+        "factCorrection": null,
+        "chismisLevel": 15,
+        "harmScore": {
+          "level": "low",
+          "score": 10,
+          "explanation": "This is a true statement, verified by multiple sources, so the potential for harm is low."
+        }
+      }
+    },
+    {
+      "timestamp": "2026-05-07T08:46:23.268Z",
+      "step": "LITERACY",
+      "label": "Generating literacy lesson",
+      "data": {
+        "classification": "fact",
+        "flagCount": 0,
+        "sourceCount": 3,
+        "personality": "marites"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T08:46:25.663Z",
+      "step": "LITERACY",
+      "label": "Literacy lesson generated",
+      "data": {
+        "summary": "Sis, true to the max ang claim na 'to kasi si BBM nga ang president natin ngayon, and we have witnesses to prove it!",
+        "pointCount": 2,
+        "tip": "Next time, look for multiple credible sources to back up a claim para sureball na walang chismis!"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T08:46:25.665Z",
+      "step": "OUTPUT",
+      "label": "Final result mapped for frontend",
+      "data": {
+        "classification": "fact",
+        "chismisLevel": 15,
+        "message": "Legit naman 'to ✅",
+        "details": "Mukhang totoo naman ito based sa analysis ni Marites.",
+        "breakdown": {
+          "reasons": [
+            "BBM is the president of the Philippines"
+          ],
+          "redFlags": []
+        },
+        "harmScore": {
+          "level": "low",
+          "score": 10,
+          "explanation": "This is a true statement, verified by multiple sources, so the potential for harm is low."
+        },
+        "maritesMode": "Sis, true naman 'yan. BBM is the current president of the Philippines. May pa-Wikipedia and BBC pa tayong source, kaya gets na gets natin 'yan!",
+        "resibo": {
+          "verdict": "Bongbong Marcos has served as the 17th president of the Philippines since 2022 (Wikipedia) | BBC News confirms Bongbong Marcos is the Philippine president",
+          "sources": [
+            {
+              "title": "Bongbong Marcos - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Bongbong_Marcos",
+              "credibility": "questionable"
+            },
+            {
+              "title": "About | President Bongbong Marcos",
+              "url": "https://pbbm.com.ph/president-bongbong-marcos/",
+              "credibility": "unknown"
+            },
+            {
+              "title": "The President - PHILIPPINE CONSULATE GENERAL - CHICAGO",
+              "url": "https://www.chicagopcg.com/thepresident.html",
+              "credibility": "unknown"
+            }
+          ]
+        },
+        "linguisticFlags": [],
+        "factCorrection": null,
+        "sourceCredibility": {
+          "score": 20,
+          "trustedCount": 1,
+          "semiTrustedCount": 2,
+          "untrustedCount": 6
+        },
+        "literacyLesson": {
+          "summary": "Sis, true to the max ang claim na 'to kasi si BBM nga ang president natin ngayon, and we have witnesses to prove it!",
+          "points": [
+            {
+              "issue": "Wikipedia says that Bongbong Marcos has been the 17th president of the Philippines since 2022.",
+              "correction": "Teh, Wikipedia is a good starting point kasi it summarizes info, but always double-check with more trusted news outlets ha!"
+            },
+            {
+              "issue": "BBC News also confirms that Bongbong Marcos is indeed the Philippine president.",
+              "correction": "Mhie, reputable news sources like BBC are more credible dahil they follow strict journalistic standards."
+            }
+          ],
+          "tip": "Next time, look for multiple credible sources to back up a claim para sureball na walang chismis!"
+        }
+      }
+    }
+  ]
+}
