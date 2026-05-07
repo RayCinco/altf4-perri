@@ -1,32 +1,17 @@
-import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { getUserHistories } from "@/lib/supabaseClient";
 
 export function useGetHistories(userId: string | undefined) {
-  const [histories, setHistories] = useState<any[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
+  const {
+    data: histories,
+    isLoading: loading,
+    error,
+  } = useQuery({
+    queryKey: ["histories", userId],
+    queryFn: () => getUserHistories(userId!),
+    enabled: !!userId,
+    staleTime: 30 * 1000,
+  });
 
-  useEffect(() => {
-    if (!userId) {
-      setHistories([]);
-      return;
-    }
-
-    const fetchHistories = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const data = await getUserHistories(userId);
-        setHistories(data || []);
-      } catch (err) {
-        setError(err instanceof Error ? err : new Error("Failed to fetch histories"));
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchHistories();
-  }, [userId]);
-
-  return { histories, loading, error };
+  return { histories: histories ?? [], loading, error };
 }

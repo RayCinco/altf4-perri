@@ -1,0 +1,137 @@
+{
+  "session": {
+    "id": "n6dt1i",
+    "mode": "text",
+    "startedAt": "2026-05-07T05:54:16.707Z",
+    "completedAt": "2026-05-07T05:54:21.427Z",
+    "durationMs": 4720
+  },
+  "pipeline": [
+    {
+      "timestamp": "2026-05-07T05:54:16.708Z",
+      "step": "PIPELINE",
+      "label": "Text pipeline started",
+      "data": {
+        "inputText": "Hello po",
+        "inputTextLength": 8
+      }
+    },
+    {
+      "timestamp": "2026-05-07T05:54:17.569Z",
+      "step": "SEARCH",
+      "label": "Query generated from text",
+      "data": {
+        "inputTextPreview": "Hello po",
+        "generatedQuery": "NO_SEARCH_NEEDED"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T05:54:17.570Z",
+      "step": "SEARCH",
+      "label": "No search needed — AI decided to skip",
+      "data": {}
+    },
+    {
+      "timestamp": "2026-05-07T05:54:17.572Z",
+      "step": "AI",
+      "label": "Prompts constructed",
+      "data": {
+        "personality": "marites",
+        "userPrompt": "Analyze the following text and classify it:\n\n---\nHello po\n---",
+        "hasSearchContext": false
+      }
+    },
+    {
+      "timestamp": "2026-05-07T05:54:19.120Z",
+      "step": "AI",
+      "label": "Raw Gemini response received",
+      "data": {
+        "rawResponse": "```json\n{\n  \"label\": \"Suspicious\",\n  \"confidence\": 20,\n  \"marites_explanation\": \"Mhie, ang vague naman nito. 'Hello po' lang? Walang context, walang chika. Parang naghahanap lang ng kausap, not necessarily fake, pero suspicious pa rin.\",\n  \"claims\": [],\n  \"evidence\": \"No specific claim to verify.\",\n  \"linguistic_flags\": [],\n  \"fact_correction\": null\n}\n```"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T05:54:19.121Z",
+      "step": "AI",
+      "label": "Response parsed successfully",
+      "data": {
+        "label": "Suspicious",
+        "confidence": 20,
+        "explanation": "Mhie, ang vague naman nito. 'Hello po' lang? Walang context, walang chika. Parang naghahanap lang ng kausap, not necessarily fake, pero suspicious pa rin.",
+        "claims": [],
+        "evidence": [],
+        "linguisticFlags": [],
+        "factCorrection": null
+      }
+    },
+    {
+      "timestamp": "2026-05-07T05:54:19.121Z",
+      "step": "LITERACY",
+      "label": "Generating literacy lesson",
+      "data": {
+        "classification": "opinion",
+        "flagCount": 0,
+        "sourceCount": 0,
+        "personality": "marites"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T05:54:21.425Z",
+      "step": "LITERACY",
+      "label": "Literacy lesson generated",
+      "data": {
+        "summary": "Mhie, mukhang opinion lang yan kasi walang specific claim na pwedeng i-fact-check or pagbasehan ng evidence.",
+        "pointCount": 2,
+        "tip": "Next time, sis, hanapin mo yung mga claims na may konkretong detalye at pwedeng i-verify bago mo i-share."
+      }
+    },
+    {
+      "timestamp": "2026-05-07T05:54:21.426Z",
+      "step": "OUTPUT",
+      "label": "Final result mapped for frontend",
+      "data": {
+        "classification": "opinion",
+        "chismisLevel": 35,
+        "message": "Hmm... hindi sure si Marites 🤔",
+        "details": "May mga questionable parts — double check muna bago i-share.",
+        "breakdown": {
+          "reasons": [
+            "No specific claims extracted"
+          ],
+          "redFlags": []
+        },
+        "harmScore": {
+          "level": "medium",
+          "score": 30,
+          "explanation": "This content has unclear or unverified claims. Verify before sharing."
+        },
+        "maritesMode": "Mhie, ang vague naman nito. 'Hello po' lang? Walang context, walang chika. Parang naghahanap lang ng kausap, not necessarily fake, pero suspicious pa rin.",
+        "resibo": {
+          "verdict": "Walang mahanap na resibo si Perri... 👀",
+          "sources": []
+        },
+        "linguisticFlags": [],
+        "factCorrection": null,
+        "sourceCredibility": {
+          "score": 0,
+          "trustedCount": 0,
+          "semiTrustedCount": 0,
+          "untrustedCount": 0
+        },
+        "literacyLesson": {
+          "summary": "Mhie, mukhang opinion lang yan kasi walang specific claim na pwedeng i-fact-check or pagbasehan ng evidence.",
+          "points": [
+            {
+              "issue": "Walang specific info na binibigay, so paano natin malalaman kung totoo o hindi?",
+              "correction": "Dapat may specific detail para ma-verify, like sino nagsabi, kailan nangyari, or saan nangyari."
+            },
+            {
+              "issue": "Mukhang walang source or basis yung statement.",
+              "correction": "Dapat may pinanggalingan yung info, like news article, research, or expert testimony, para mas credible."
+            }
+          ],
+          "tip": "Next time, sis, hanapin mo yung mga claims na may konkretong detalye at pwedeng i-verify bago mo i-share."
+        }
+      }
+    }
+  ]
+}

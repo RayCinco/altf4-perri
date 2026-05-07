@@ -1,0 +1,147 @@
+{
+  "session": {
+    "id": "jkbayj",
+    "mode": "text",
+    "startedAt": "2026-05-07T05:51:49.928Z",
+    "completedAt": "2026-05-07T05:51:56.225Z",
+    "durationMs": 6297
+  },
+  "pipeline": [
+    {
+      "timestamp": "2026-05-07T05:51:49.930Z",
+      "step": "PIPELINE",
+      "label": "Text pipeline started",
+      "data": {
+        "inputText": "test",
+        "inputTextLength": 4
+      }
+    },
+    {
+      "timestamp": "2026-05-07T05:51:51.060Z",
+      "step": "SEARCH",
+      "label": "Query generated from text",
+      "data": {
+        "inputTextPreview": "test",
+        "generatedQuery": "NO_SEARCH_NEEDED"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T05:51:51.061Z",
+      "step": "SEARCH",
+      "label": "No search needed — AI decided to skip",
+      "data": {}
+    },
+    {
+      "timestamp": "2026-05-07T05:51:51.063Z",
+      "step": "AI",
+      "label": "Prompts constructed",
+      "data": {
+        "personality": "marites",
+        "userPrompt": "Analyze the following text and classify it:\n\n---\ntest\n---",
+        "hasSearchContext": false
+      }
+    },
+    {
+      "timestamp": "2026-05-07T05:51:53.176Z",
+      "step": "AI",
+      "label": "Raw Gemini response received",
+      "data": {
+        "rawResponse": "```json\n{\n  \"label\": \"Suspicious\",\n  \"confidence\": 50,\n  \"marites_explanation\": \"Teh, 'test' lang ang binigay? Walang specific claim kaya mahirap i-verify. Mukhang kulang sa detalye para masabi kung true or fake. Default muna tayo sa suspicious, mhie.\",\n  \"claims\": [\n    \"test\"\n  ],\n  \"evidence\": [\n    \"No specific claim provided for verification.\"\n  ],\n  \"linguistic_flags\": [],\n  \"fact_correction\": null\n}\n```"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T05:51:53.178Z",
+      "step": "AI",
+      "label": "Response parsed successfully",
+      "data": {
+        "label": "Suspicious",
+        "confidence": 50,
+        "explanation": "Teh, 'test' lang ang binigay? Walang specific claim kaya mahirap i-verify. Mukhang kulang sa detalye para masabi kung true or fake. Default muna tayo sa suspicious, mhie.",
+        "claims": [
+          "test"
+        ],
+        "evidence": [
+          "No specific claim provided for verification."
+        ],
+        "linguisticFlags": [],
+        "factCorrection": null
+      }
+    },
+    {
+      "timestamp": "2026-05-07T05:51:53.179Z",
+      "step": "LITERACY",
+      "label": "Generating literacy lesson",
+      "data": {
+        "classification": "opinion",
+        "flagCount": 0,
+        "sourceCount": 0,
+        "personality": "marites"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T05:51:56.221Z",
+      "step": "LITERACY",
+      "label": "Literacy lesson generated",
+      "data": {
+        "summary": "Naku, mhie, walang specific claim kaya mahirap i-fact check. Dapat mas malinaw para mabusisi natin!",
+        "pointCount": 3,
+        "tip": "Before believing anything, siguraduhin na may specific claim, ebidensya, at galing sa mapagkakatiwalaang sources, okay?"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T05:51:56.223Z",
+      "step": "OUTPUT",
+      "label": "Final result mapped for frontend",
+      "data": {
+        "classification": "opinion",
+        "chismisLevel": 50,
+        "message": "Hmm... hindi sure si Marites 🤔",
+        "details": "May mga questionable parts — double check muna bago i-share.",
+        "breakdown": {
+          "reasons": [
+            "test"
+          ],
+          "redFlags": [
+            "No specific claim provided for verification."
+          ]
+        },
+        "harmScore": {
+          "level": "medium",
+          "score": 50,
+          "explanation": "This content has unclear or unverified claims. Verify before sharing."
+        },
+        "maritesMode": "Teh, 'test' lang ang binigay? Walang specific claim kaya mahirap i-verify. Mukhang kulang sa detalye para masabi kung true or fake. Default muna tayo sa suspicious, mhie.",
+        "resibo": {
+          "verdict": "No specific claim provided for verification.",
+          "sources": []
+        },
+        "linguisticFlags": [],
+        "factCorrection": null,
+        "sourceCredibility": {
+          "score": 0,
+          "trustedCount": 0,
+          "semiTrustedCount": 0,
+          "untrustedCount": 0
+        },
+        "literacyLesson": {
+          "summary": "Naku, mhie, walang specific claim kaya mahirap i-fact check. Dapat mas malinaw para mabusisi natin!",
+          "points": [
+            {
+              "issue": "Sis, walang specific na statement na pwedeng i-verify dito. Paano natin malalaman kung true or false?",
+              "correction": "Dapat may konkretong claim, like \"Si ganito ay nag-resign\" para masigurado natin sa credible sources."
+            },
+            {
+              "issue": "Walang ebidensya na nakalakip, puro \"test\" lang.",
+              "correction": "Dapat may supporting evidence like news articles or official statements para mas kapanipaniwala."
+            },
+            {
+              "issue": "Teh, walang credible sources na available para suportahan ito.",
+              "correction": "Maghanap tayo ng verified news organizations or government websites para makasigurado."
+            }
+          ],
+          "tip": "Before believing anything, siguraduhin na may specific claim, ebidensya, at galing sa mapagkakatiwalaang sources, okay?"
+        }
+      }
+    }
+  ]
+}

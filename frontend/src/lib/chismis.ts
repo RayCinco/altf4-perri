@@ -67,7 +67,11 @@ export async function analyzeChismis(
 
     // Step 2: Query SerperDev Search API for raw results
     console.log("[PIPELINE] ➡️ Step 2: Running Search Fact-Check");
-    const searchResult = await executeFactCheck(extractedText, logger, personality);
+    const searchResult = await executeFactCheck(
+      extractedText,
+      logger,
+      personality,
+    );
 
     // Step 3: Filter and classify sources by credibility
     console.log("[PIPELINE] ➡️ Step 3: Filtering Sources by Credibility");
@@ -115,7 +119,7 @@ export async function analyzeChismis(
       personality,
       extractedText,
       "image",
-      "Image Analysis" // For images, we can just use a placeholder or image filename if available
+      "Image Analysis", // For images, we can just use a placeholder or image filename if available
     );
 
     logger.log("OUTPUT", "Final result mapped for frontend", {
@@ -220,7 +224,7 @@ export async function analyzeChismisText(
       personality,
       text,
       "text",
-      text
+      text,
     );
 
     logger.log("OUTPUT", "Final result mapped for frontend", {
@@ -290,7 +294,11 @@ export async function analyzeChismisUrl(
 
     // Step 2: Query SerperDev Search API for raw results
     console.log("[PIPELINE] ➡️ Step 2: Running Search Fact-Check");
-    const searchResult = await executeFactCheck(extractedText, logger, personality);
+    const searchResult = await executeFactCheck(
+      extractedText,
+      logger,
+      personality,
+    );
 
     // Step 3: Filter and classify sources by credibility
     console.log("[PIPELINE] ➡️ Step 3: Filtering Sources by Credibility");
@@ -337,7 +345,7 @@ export async function analyzeChismisUrl(
       personality,
       extractedText,
       "url",
-      url
+      url,
     );
 
     logger.log("OUTPUT", "Final result mapped for frontend", {
@@ -476,12 +484,10 @@ function mapToAnalysisResult(
   originalInput: string = "",
 ): AnalysisResult {
   const classification = mapClassification(gemini.label);
-  const chismisLevel = mapChismisLevel(
-    gemini.label,
-    gemini.confidence,
-    filteredSources,
-  );
-  const harmScore = calculateHarmScore(gemini.label, gemini.confidence);
+
+  // Use AI-calculated scores directly from Gemini instead of static formulas
+  const chismisLevel = gemini.chismis_level;
+  const harmScore = gemini.harm_score;
 
   // Get top sources ranked by relevance to the original claim
   const topSources = getTopSources(filteredSources, extractedText);
@@ -571,18 +577,15 @@ function mapClassification(
   }
 }
 
+// ───────────────────────────────────────────────────────────────────────────
+// DEPRECATED STATIC CALCULATION FUNCTIONS
+// These are no longer used — Gemini now calculates chismis_level and harm_score
+// dynamically based on context. Kept here for reference only.
+// ───────────────────────────────────────────────────────────────────────────
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /**
+ * @deprecated - Gemini now calculates chismis_level dynamically.
  * Maps Gemini confidence + SOURCE QUALITY to chismisLevel.
- *
- * Base level comes from the AI label, then a penalty is added when
- * the evidence quality is poor (social media only, mostly untrusted,
- * no sources at all while labelled "True").
- *
- * Penalty rules:
- *   All sources untrusted (social media only) → +30
- *   >70% untrusted                            → +20
- *   No trusted sources (semi-trusted only)    → +10
- *   No sources at all + "True" label          → +20
  */
 function mapChismisLevel(
   label: GeminiResponse["label"],
@@ -631,6 +634,7 @@ function mapChismisLevel(
 }
 
 /**
+ * @deprecated - Gemini now calculates harm_score dynamically.
  * Calculates a harm score based on classification and confidence.
  */
 function calculateHarmScore(

@@ -1,0 +1,149 @@
+{
+  "session": {
+    "id": "d2z72c",
+    "mode": "text",
+    "startedAt": "2026-05-07T06:08:52.121Z",
+    "completedAt": "2026-05-07T06:08:58.594Z",
+    "durationMs": 6473
+  },
+  "pipeline": [
+    {
+      "timestamp": "2026-05-07T06:08:52.122Z",
+      "step": "PIPELINE",
+      "label": "Text pipeline started",
+      "data": {
+        "inputText": "Hello po , what do you think of me",
+        "inputTextLength": 34
+      }
+    },
+    {
+      "timestamp": "2026-05-07T06:08:53.138Z",
+      "step": "SEARCH",
+      "label": "Query generated from text",
+      "data": {
+        "inputTextPreview": "Hello po , what do you think of me",
+        "generatedQuery": "NO_SEARCH_NEEDED"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T06:08:53.139Z",
+      "step": "SEARCH",
+      "label": "No search needed — AI decided to skip",
+      "data": {}
+    },
+    {
+      "timestamp": "2026-05-07T06:08:53.140Z",
+      "step": "AI",
+      "label": "Prompts constructed",
+      "data": {
+        "personality": "marites",
+        "userPrompt": "Analyze the following text and classify it:\n\n---\nHello po , what do you think of me\n---",
+        "hasSearchContext": false
+      }
+    },
+    {
+      "timestamp": "2026-05-07T06:08:55.521Z",
+      "step": "AI",
+      "label": "Raw Gemini response received",
+      "data": {
+        "rawResponse": "```json\n{\n  \"label\": \"Suspicious\",\n  \"confidence\": 30,\n  \"marites_explanation\": \"Sis, parang naghahanap lang ng opinion 'to about themself. Walang specific claim na pwede i-verify, kaya suspicious ang dating. More on personal question lang siya.\",\n  \"claims\": [\n    \"Asks for opinions about themselves\"\n  ],\n  \"evidence\": \"No credible search results found.\",\n  \"linguistic_flags\": [],\n  \"fact_correction\": null,\n  \"chismis_level\": 40,\n  \"harm_score\": {\n    \"level\": \"low\",\n    \"score\": 10,\n    \"explanation\": \"This is a harmless question seeking personal opinions, posing minimal risk of harm.\"\n  }\n}\n```"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T06:08:55.521Z",
+      "step": "AI",
+      "label": "Response parsed successfully",
+      "data": {
+        "label": "Suspicious",
+        "confidence": 30,
+        "explanation": "Sis, parang naghahanap lang ng opinion 'to about themself. Walang specific claim na pwede i-verify, kaya suspicious ang dating. More on personal question lang siya.",
+        "claims": [
+          "Asks for opinions about themselves"
+        ],
+        "evidence": [],
+        "linguisticFlags": [],
+        "factCorrection": null,
+        "chismisLevel": 40,
+        "harmScore": {
+          "level": "low",
+          "score": 10,
+          "explanation": "This is a harmless question seeking personal opinions, posing minimal risk of harm."
+        }
+      }
+    },
+    {
+      "timestamp": "2026-05-07T06:08:55.522Z",
+      "step": "LITERACY",
+      "label": "Generating literacy lesson",
+      "data": {
+        "classification": "opinion",
+        "flagCount": 0,
+        "sourceCount": 0,
+        "personality": "marites"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T06:08:58.592Z",
+      "step": "LITERACY",
+      "label": "Literacy lesson generated",
+      "data": {
+        "summary": "Sis, 'wag basta-basta magtanong ng opinion sa lahat, lalo na kung di mo kilala! Opinions are subjective kaya iba-iba ang sagot.",
+        "pointCount": 3,
+        "tip": "Next time, teh, be specific sa gusto mong malaman. Kung opinion, okay lang. Kung facts, hanap ng proof!"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T06:08:58.593Z",
+      "step": "OUTPUT",
+      "label": "Final result mapped for frontend",
+      "data": {
+        "classification": "opinion",
+        "chismisLevel": 40,
+        "message": "Hmm... hindi sure si Marites 🤔",
+        "details": "May mga questionable parts — double check muna bago i-share.",
+        "breakdown": {
+          "reasons": [
+            "Asks for opinions about themselves"
+          ],
+          "redFlags": []
+        },
+        "harmScore": {
+          "level": "low",
+          "score": 10,
+          "explanation": "This is a harmless question seeking personal opinions, posing minimal risk of harm."
+        },
+        "maritesMode": "Sis, parang naghahanap lang ng opinion 'to about themself. Walang specific claim na pwede i-verify, kaya suspicious ang dating. More on personal question lang siya.",
+        "resibo": {
+          "verdict": "Walang mahanap na resibo si Perri... 👀",
+          "sources": []
+        },
+        "linguisticFlags": [],
+        "factCorrection": null,
+        "sourceCredibility": {
+          "score": 0,
+          "trustedCount": 0,
+          "semiTrustedCount": 0,
+          "untrustedCount": 0
+        },
+        "literacyLesson": {
+          "summary": "Sis, 'wag basta-basta magtanong ng opinion sa lahat, lalo na kung di mo kilala! Opinions are subjective kaya iba-iba ang sagot.",
+          "points": [
+            {
+              "issue": "Ang tanong na 'what do you think of me' ay opinion-based, meaning walang 'tama' o 'mali' na sagot.",
+              "correction": "Kung gusto mo ng constructive feedback, magtanong sa mga taong pinagkakatiwalaan mo at kilala ka talaga."
+            },
+            {
+              "issue": "Walang evidence na pwedeng mag-back up sa claim na 'to kasi personal opinion nga siya, mhie.",
+              "correction": "Tandaan, ang opinion ay base sa feelings at paniniwala ng isang tao, hindi sa facts."
+            },
+            {
+              "issue": "Walang credible source na kailangan dito kasi sariling pagtingin lang naman 'to.",
+              "correction": "Mas okay na maghanap ng facts kung gusto mo malaman ang totoo tungkol sa isang bagay."
+            }
+          ],
+          "tip": "Next time, teh, be specific sa gusto mong malaman. Kung opinion, okay lang. Kung facts, hanap ng proof!"
+        }
+      }
+    }
+  ]
+}

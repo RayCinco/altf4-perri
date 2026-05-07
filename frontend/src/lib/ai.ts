@@ -25,6 +25,14 @@ export interface GeminiResponse {
   linguistic_flags: string[];
   /** Factual correction when label is "Fake" — null if no correction available */
   fact_correction: string | null;
+  /** AI-calculated chismis level (1-100) based on claim, evidence quality, and source credibility */
+  chismis_level: number;
+  /** AI-calculated harm score with level, numeric score, and explanation */
+  harm_score: {
+    level: "low" | "medium" | "high";
+    score: number;
+    explanation: string;
+  };
 }
 
 // ─── System Prompt ────────────────────────────────────────────────────────────
@@ -90,7 +98,38 @@ Step 6: CONFIDENCE SCORING
 
 ${personalityInstruction}
 
-Step 8: FACT CORRECTION (ONLY when label is "Fake")
+Step 8: CHISMIS LEVEL CALCULATION (1-100)
+Calculate a chismis_level score representing how "chismis-like" the claim is:
+- Lower score (1-30): Solid facts with multiple trusted sources, no red flags
+- Medium score (31-65): Unverified claims, opinion pieces, partial evidence, questionable sources
+- High score (66-100): Misinformation, fake news, no credible sources, heavy linguistic manipulation
+
+Consider ALL these factors:
+- Source quality: Trusted sources (news outlets, government, academic) lower the score; social media-only sources raise it significantly
+- Source count: Multiple independent trusted sources → lower score; single source or no sources → higher score  
+- Temporal relevance: Recent, topic-specific sources → lower score; old/off-topic sources → higher score
+- Linguistic red flags: ALL CAPS, excessive punctuation, emotional manipulation, vague attribution → raise score
+- Claim clarity: Specific, verifiable details → lower score; vague, sensationalist → higher score
+- Evidence consistency: Sources agree → lower score; contradictory or absent evidence → higher score
+
+Step 9: HARM SCORE CALCULATION (1-100 + level + explanation)
+Calculate a harm_score representing the potential damage from sharing this content:
+- level: "low" (1-30), "medium" (31-65), "high" (66-100)
+- score: Numeric 1-100
+- explanation: 1-2 sentence reasoning for the harm level
+
+Consider:
+- Misinformation severity: How misleading is it? Could it cause real-world harm?
+- Urgency/manipulation: Does it pressure people to act/share quickly?
+- Target vulnerability: Does it exploit emotions, fear, or specific groups?
+- Verifiability: How easy is it for an average person to fact-check?
+
+Examples:
+- TRUE + trusted sources → low harm (5-15)
+- SUSPICIOUS + unclear claims → medium harm (35-55)  
+- FAKE + emotional manipulation + no sources → high harm (75-95)
+
+Step 10: FACT CORRECTION (ONLY when label is "Fake")
 When a claim is classified as FAKE, you MUST provide a factual correction:
 - State what the claim says vs what the evidence actually shows
 - Base the correction ONLY on the provided search sources — do NOT invent facts
@@ -111,7 +150,13 @@ Return ONLY this JSON structure, no other text:
   "claims": ["list of extracted claims"],
   "evidence": ["key findings or lack of sources"],
   "linguistic_flags": ["list of detected suspicious writing patterns, or empty array"],
-  "fact_correction": "factual correction string when label is Fake, or null"
+  "fact_correction": "factual correction string when label is Fake, or null",
+  "chismis_level": number (1-100),
+  "harm_score": {
+    "level": "low | medium | high",
+    "score": number (1-100),
+    "explanation": "1-2 sentence harm reasoning"
+  }
 }
 
 ========================================
@@ -198,6 +243,8 @@ export async function analyzeWithGemini(
     evidence: parsed.evidence,
     linguisticFlags: parsed.linguistic_flags,
     factCorrection: parsed.fact_correction,
+    chismisLevel: parsed.chismis_level,
+    harmScore: parsed.harm_score,
   });
 
   return parsed;
@@ -258,6 +305,13 @@ function parseGeminiResponse(responseText: string): GeminiResponse {
         typeof parsed.fact_correction === "string"
           ? parsed.fact_correction
           : null,
+      chismis_level: Math.min(100, Math.max(1, parsed.chismis_level || 50)),
+      harm_score: {
+        level: parsed.harm_score?.level || "medium",
+        score: Math.min(100, Math.max(1, parsed.harm_score?.score || 50)),
+        explanation:
+          parsed.harm_score?.explanation || "Unable to assess harm level.",
+      },
     };
   } catch (error) {
     console.error("Failed to parse Gemini response:", responseText);
