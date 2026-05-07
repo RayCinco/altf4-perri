@@ -9,7 +9,34 @@
  * Pipeline: Input → Extract → Search → AI Analysis → AnalysisResult JSON
  */
 
-import { analyzeChismis, analyzeChismisText, analyzeChismisUrl } from "@/lib/chismis";
+import {
+  analyzeChismis,
+  analyzeChismisText,
+  analyzeChismisUrl,
+} from "@/lib/chismis";
+
+const CORS_HEADERS = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+};
+
+function jsonWithCors(body: unknown, init?: ResponseInit) {
+  return Response.json(body, {
+    ...init,
+    headers: {
+      ...CORS_HEADERS,
+      ...(init?.headers ?? {}),
+    },
+  });
+}
+
+export async function OPTIONS() {
+  return new Response(null, {
+    status: 204,
+    headers: CORS_HEADERS,
+  });
+}
 
 /** Max file size: 10MB */
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
@@ -31,14 +58,16 @@ export async function POST(req: Request) {
     const text = formData.get("text") as string | null;
     const url = formData.get("url") as string | null;
     const rawPersonality = formData.get("personality") as string | null;
-    const personality = (rawPersonality === "formal" ? "formal" : "marites") as "marites" | "formal";
+    const personality = (rawPersonality === "formal" ? "formal" : "marites") as
+      | "marites"
+      | "formal";
 
     // ─── URL Input Path ───────────────────────────────────────────────
     if (url && url.trim().length > 0) {
       console.log(`[API] 🌐 Detected URL input: ${url.trim()}`);
       const result = await analyzeChismisUrl(url.trim(), personality);
       console.log("[API] ✅ Returning URL analysis result");
-      return Response.json(result);
+      return jsonWithCors(result);
     }
 
     // ─── Text Input Path ──────────────────────────────────────────────
@@ -46,15 +75,18 @@ export async function POST(req: Request) {
       console.log("[API] 📝 Detected text input");
       const result = await analyzeChismisText(text.trim(), personality);
       console.log("[API] ✅ Returning text analysis result");
-      return Response.json(result);
+      return jsonWithCors(result);
     }
 
     // ─── Image Upload Path ────────────────────────────────────────────
     if (!file) {
       console.log("[API] ❌ No file or text provided");
-      return Response.json(
-        { error: "No file or text provided. Please upload an image or enter text." },
-        { status: 400 }
+      return jsonWithCors(
+        {
+          error:
+            "No file or text provided. Please upload an image or enter text.",
+        },
+        { status: 400 },
       );
     }
 
@@ -63,20 +95,20 @@ export async function POST(req: Request) {
     // Validate file type
     if (!ALLOWED_TYPES.includes(file.type)) {
       console.log(`[API] ❌ Unsupported file type: ${file.type}`);
-      return Response.json(
+      return jsonWithCors(
         {
           error: `Unsupported file type: ${file.type}. Please upload a PNG, JPEG, WebP, or GIF image.`,
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     // Validate file size
     if (file.size > MAX_FILE_SIZE) {
       console.log(`[API] ❌ File too large: ${file.size} bytes`);
-      return Response.json(
+      return jsonWithCors(
         { error: "File too large. Maximum size is 10MB." },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -86,9 +118,9 @@ export async function POST(req: Request) {
 
     // Run the full pipeline: OCR → AI → Result
     const result = await analyzeChismis(buffer, file.type, personality);
-    
+
     console.log("[API] ✅ Returning image analysis result");
-    return Response.json(result);
+    return jsonWithCors(result);
   } catch (error) {
     console.error("❌ [API] Error in /api/analyze:", error);
 
@@ -96,13 +128,13 @@ export async function POST(req: Request) {
       error instanceof Error ? error.message : "An unexpected error occurred";
 
     // Return user-friendly error
-    return Response.json(
+    return jsonWithCors(
       {
         error: message.includes("API_KEY")
           ? "Server configuration error. Please contact the administrator."
           : `Analysis failed: ${message}`,
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
