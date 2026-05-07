@@ -97,8 +97,8 @@ export default function Sidebar() {
                   <h2 className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
                     Recent
                   </h2>
-                  <div className="space-y-2">
-                    {histories.slice(0, 5).map((item) => (
+                  <div>
+                    {histories.slice(0, 10).map((item) => (
                       <Link
                         key={item.id}
                         href={`/history/${item.id}`}
