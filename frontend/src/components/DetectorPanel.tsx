@@ -150,7 +150,7 @@ export default function DetectorPanel() {
             >
               Mode:
               <span className="text-[#54A9FF] font-medium">
-                {mode === "genz" ? "GenZ Mode" : "Formal Mode"}
+                {mode === "genz" ? "GenZ" : "Formal"}
               </span>
               <ChevronDown size={16} />
             </button>
@@ -164,7 +164,7 @@ export default function DetectorPanel() {
                   }}
                   className="w-full px-4 py-2 text-left hover:bg-[#0a1a3a]"
                 >
-                  GenZ Mode
+                  GenZ
                 </button>
                 <button
                   onClick={() => {
@@ -173,7 +173,7 @@ export default function DetectorPanel() {
                   }}
                   className="w-full px-4 py-2 text-left hover:bg-[#0a1a3a]"
                 >
-                  Formal Mode
+                  Formal
                 </button>
               </div>
             )}

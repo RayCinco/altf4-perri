@@ -50,7 +50,6 @@ interface ResultsPanelProps {
   onToggle?: () => void;
 }
 
-
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 const CREDIBILITY_CONFIG = {
@@ -156,339 +155,434 @@ export default function ResultsPanel({
         </button>
 
         {/* Inner wrapper for overflow control */}
-        <div style={{ display: "flex", flexDirection: "column", height: "100%", width: "100%", overflow: "hidden" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            height: "100%",
+            width: "100%",
+            overflow: "hidden",
+          }}
+        >
           {/* ── Header ── */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            padding: "16px 20px",
-            borderBottom: "1px solid #1e3a5f",
-            flexShrink: 0,
-          }}
-        >
-          <span style={{ color: "#e2e8f0", fontWeight: 600, fontSize: 15 }}>
-            Analysis Results
-          </span>
-          <button
-            onClick={onClose}
+          <div
             style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              color: "#64748b",
-              fontSize: 22,
-              lineHeight: 1,
-              padding: "2px 6px",
-              borderRadius: 6,
-              transition: "color 0.15s",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: "16px 20px",
+              borderBottom: "1px solid #1e3a5f",
+              flexShrink: 0,
             }}
-            onMouseEnter={(e) =>
-              ((e.currentTarget as HTMLElement).style.color = "#e2e8f0")
-            }
-            onMouseLeave={(e) =>
-              ((e.currentTarget as HTMLElement).style.color = "#64748b")
-            }
-            aria-label="Close panel"
           >
-            ×
-          </button>
-        </div>
-
-        {/* ── Tabs ── */}
-        <div
-          style={{
-            display: "flex",
-            borderBottom: "1px solid #1e3a5f",
-            flexShrink: 0,
-          }}
-        >
-          {tabs.map((tab) => (
+            <span style={{ color: "#e2e8f0", fontWeight: 600, fontSize: 15 }}>
+              Analysis Results
+            </span>
             <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={onClose}
               style={{
-                flex: 1,
-                background: activeTab === tab.id ? "#132338" : "transparent",
+                background: "none",
                 border: "none",
-                borderBottom:
-                  activeTab === tab.id
-                    ? "2px solid #3b82f6"
-                    : "2px solid transparent",
-                color: activeTab === tab.id ? "#60a5fa" : "#64748b",
                 cursor: "pointer",
-                padding: "12px 8px",
-                fontSize: 13,
-                fontWeight: activeTab === tab.id ? 600 : 400,
-                transition: "all 0.15s",
+                color: "#64748b",
+                fontSize: 22,
+                lineHeight: 1,
+                padding: "2px 6px",
+                borderRadius: 6,
+                transition: "color 0.15s",
               }}
+              onMouseEnter={(e) =>
+                ((e.currentTarget as HTMLElement).style.color = "#e2e8f0")
+              }
+              onMouseLeave={(e) =>
+                ((e.currentTarget as HTMLElement).style.color = "#64748b")
+              }
+              aria-label="Close panel"
             >
-              {tab.label}
+              ×
             </button>
-          ))}
-        </div>
+          </div>
 
-        {/* ── Body ── */}
-        <div style={{ flex: 1, padding: "20px", overflowY: "auto" }}>
-          {!result ? (
-            <div
-              style={{
-                color: "#475569",
-                fontSize: 14,
-                textAlign: "center",
-                marginTop: 40,
-              }}
-            >
-              Run an analysis to see results here.
-            </div>
-          ) : (
-            <>
-              {/* ════════ SOURCES TAB ════════ */}
-              {activeTab === "sources" && (
-                <div
-                  style={{ display: "flex", flexDirection: "column", gap: 12 }}
-                >
-                  {/* Verdict banner */}
-                  {result.resibo.verdict && (
-                    <div
-                      style={{
-                        background:
-                          CLASSIFICATION_COLOR[result.classification].bg,
-                        border: `1px solid ${CLASSIFICATION_COLOR[result.classification].border}`,
-                        borderRadius: 10,
-                        padding: "12px 16px",
-                        marginBottom: 4,
-                      }}
-                    >
-                       <span
+          {/* ── Tabs ── */}
+          <div
+            style={{
+              display: "flex",
+              borderBottom: "1px solid #1e3a5f",
+              flexShrink: 0,
+            }}
+          >
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                style={{
+                  flex: 1,
+                  background: activeTab === tab.id ? "#132338" : "transparent",
+                  border: "none",
+                  borderBottom:
+                    activeTab === tab.id
+                      ? "2px solid #3b82f6"
+                      : "2px solid transparent",
+                  color: activeTab === tab.id ? "#60a5fa" : "#64748b",
+                  cursor: "pointer",
+                  padding: "12px 8px",
+                  fontSize: 13,
+                  fontWeight: activeTab === tab.id ? 600 : 400,
+                  transition: "all 0.15s",
+                }}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          {/* ── Body ── */}
+          <div style={{ flex: 1, padding: "20px", overflowY: "auto" }}>
+            {!result ? (
+              <div
+                style={{
+                  color: "#475569",
+                  fontSize: 14,
+                  textAlign: "center",
+                  marginTop: 40,
+                }}
+              >
+                Run an analysis to see results here.
+              </div>
+            ) : (
+              <>
+                {/* ════════ SOURCES TAB ════════ */}
+                {activeTab === "sources" && (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: 12,
+                    }}
+                  >
+                    {/* Verdict banner */}
+                    {result.resibo.verdict && (
+                      <div
                         style={{
-                          fontSize: 11,
-                          fontWeight: 700,
-                          letterSpacing: "0.07em",
-                          textTransform: "uppercase",
-                          color:
-                            CLASSIFICATION_COLOR[result.classification].color,
+                          background:
+                            CLASSIFICATION_COLOR[result.classification].bg,
+                          border: `1px solid ${CLASSIFICATION_COLOR[result.classification].border}`,
+                          borderRadius: 10,
+                          padding: "12px 16px",
+                          marginBottom: 4,
                         }}
                       >
-                        Analysis Summary
-                      </span>
-                      <p
-                        style={{
-                          color: "#cbd5e1",
-                          fontSize: 13,
-                          marginTop: 4,
-                          lineHeight: 1.5,
-                          marginBottom: 0,
-                        }}
-                      >
-                        {result.resibo.verdict}
-                      </p>
-                    </div>
-                  )}
+                        <span
+                          style={{
+                            fontSize: 11,
+                            fontWeight: 700,
+                            letterSpacing: "0.07em",
+                            textTransform: "uppercase",
+                            color:
+                              CLASSIFICATION_COLOR[result.classification].color,
+                          }}
+                        >
+                          Analysis Summary
+                        </span>
+                        <p
+                          style={{
+                            color: "#cbd5e1",
+                            fontSize: 13,
+                            marginTop: 4,
+                            lineHeight: 1.5,
+                            marginBottom: 0,
+                          }}
+                        >
+                          {result.resibo.verdict}
+                        </p>
+                      </div>
+                    )}
 
-                  {(() => {
-                    const trusted = result.resibo.sources.filter(s => s.credibility === "verified");
-                    const others = result.resibo.sources.filter(s => s.credibility !== "verified");
+                    {(() => {
+                      const trusted = result.resibo.sources.filter(
+                        (s) => s.credibility === "verified",
+                      );
+                      const others = result.resibo.sources.filter(
+                        (s) => s.credibility !== "verified",
+                      );
 
-                    const renderSource = (src: PopupSource, i: number) => {
-                      const cred = CREDIBILITY_CONFIG[src.credibility];
-                      let hostname = src.url;
-                      try {
-                        hostname = new URL(src.url).hostname.replace("www.", "");
-                      } catch {}
+                      const renderSource = (src: PopupSource, i: number) => {
+                        const cred = CREDIBILITY_CONFIG[src.credibility];
+                        let hostname = src.url;
+                        try {
+                          hostname = new URL(src.url).hostname.replace(
+                            "www.",
+                            "",
+                          );
+                        } catch {}
+                        return (
+                          <div
+                            key={i}
+                            style={{
+                              background: "rgba(15, 35, 64, 0.4)",
+                              border: "1px solid #1e3a5f",
+                              borderRadius: 12,
+                              padding: "14px 16px",
+                              display: "flex",
+                              flexDirection: "column",
+                              gap: 6,
+                              transition:
+                                "transform 0.2s ease, background 0.2s ease",
+                            }}
+                          >
+                            <div
+                              style={{
+                                display: "flex",
+                                alignItems: "flex-start",
+                                justifyContent: "space-between",
+                                gap: 8,
+                              }}
+                            >
+                              <span
+                                style={{
+                                  color: "#cbd5e1",
+                                  fontSize: 13,
+                                  fontWeight: 500,
+                                  lineHeight: 1.4,
+                                  flex: 1,
+                                }}
+                              >
+                                {src.title}
+                              </span>
+                              <span
+                                style={{
+                                  background: cred.bg,
+                                  color: cred.color,
+                                  fontSize: 10,
+                                  fontWeight: 700,
+                                  padding: "2px 8px",
+                                  borderRadius: 6,
+                                  flexShrink: 0,
+                                  textTransform: "uppercase",
+                                  letterSpacing: "0.02em",
+                                }}
+                              >
+                                {cred.label}
+                              </span>
+                            </div>
+                            <div
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "space-between",
+                                marginTop: 2,
+                              }}
+                            >
+                              <span style={{ fontSize: 12, color: "#64748b" }}>
+                                {hostname}
+                              </span>
+                              <a
+                                href={src.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{
+                                  fontSize: 12,
+                                  color: "#60a5fa",
+                                  textDecoration: "none",
+                                  fontWeight: 500,
+                                  display: "flex",
+                                  alignItems: "center",
+                                  gap: 4,
+                                }}
+                              >
+                                View Source ↗
+                              </a>
+                            </div>
+                          </div>
+                        );
+                      };
+
                       return (
                         <div
-                          key={i}
                           style={{
-                            background: "rgba(15, 35, 64, 0.4)",
-                            border: "1px solid #1e3a5f",
-                            borderRadius: 12,
-                            padding: "14px 16px",
                             display: "flex",
                             flexDirection: "column",
-                            gap: 6,
-                            transition: "transform 0.2s ease, background 0.2s ease",
+                            gap: 20,
+                          }}
+                        >
+                          {/* Trusted Section */}
+                          {trusted.length > 0 && (
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: 10,
+                              }}
+                            >
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  gap: 8,
+                                  paddingLeft: 4,
+                                }}
+                              >
+                                <span style={{ fontSize: 14 }}>🛡️</span>
+                                <span
+                                  style={{
+                                    fontSize: 11,
+                                    fontWeight: 700,
+                                    color: "#86efac",
+                                    textTransform: "uppercase",
+                                    letterSpacing: "0.05em",
+                                  }}
+                                >
+                                  Verified Evidence
+                                </span>
+                              </div>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  flexDirection: "column",
+                                  gap: 10,
+                                }}
+                              >
+                                {trusted.map((src, i) => renderSource(src, i))}
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Others Section */}
+                          {others.length > 0 && (
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: 10,
+                              }}
+                            >
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  gap: 8,
+                                  paddingLeft: 4,
+                                }}
+                              >
+                                <span style={{ fontSize: 14 }}>🌐</span>
+                                <span
+                                  style={{
+                                    fontSize: 11,
+                                    fontWeight: 700,
+                                    color: "#94a3b8",
+                                    textTransform: "uppercase",
+                                    letterSpacing: "0.05em",
+                                  }}
+                                >
+                                  General Mentions & Sources
+                                </span>
+                              </div>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  flexDirection: "column",
+                                  gap: 10,
+                                  opacity: 0.85,
+                                }}
+                              >
+                                {others.map((src, i) => renderSource(src, i))}
+                              </div>
+                            </div>
+                          )}
+
+                          {result.resibo.sources.length === 0 && (
+                            <p
+                              style={{
+                                color: "#64748b",
+                                fontSize: 13,
+                                textAlign: "center",
+                                marginTop: 20,
+                              }}
+                            >
+                              No relevant sources were found for this claim.
+                            </p>
+                          )}
+                        </div>
+                      );
+                    })()}
+                  </div>
+                )}
+
+                {/* ════════ MEDIA LITERACY TAB ════════ */}
+                {activeTab === "literacy" && (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: 14,
+                    }}
+                  >
+                    {!result.literacyLesson ? (
+                      <div
+                        style={{
+                          color: "#475569",
+                          fontSize: 14,
+                          textAlign: "center",
+                          marginTop: 40,
+                        }}
+                      >
+                        No media literacy lesson available for this analysis.
+                      </div>
+                    ) : (
+                      <>
+                        {/* Summary card with enhanced glassmorphism */}
+                        <div
+                          style={{
+                            background:
+                              "linear-gradient(135deg, rgba(67, 56, 202, 0.2) 0%, rgba(124, 58, 237, 0.2) 100%)",
+                            backdropFilter: "blur(12px)",
+                            border: "1px solid rgba(139, 92, 246, 0.3)",
+                            borderRadius: 16,
+                            padding: "20px",
+                            display: "flex",
+                            gap: 16,
+                            alignItems: "flex-start",
+                            boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)",
                           }}
                         >
                           <div
                             style={{
-                              display: "flex",
-                              alignItems: "flex-start",
-                              justifyContent: "space-between",
-                              gap: 8,
-                            }}
-                          >
-                            <span
-                              style={{
-                                color: "#cbd5e1",
-                                fontSize: 13,
-                                fontWeight: 500,
-                                lineHeight: 1.4,
-                                flex: 1,
-                              }}
-                            >
-                              {src.title}
-                            </span>
-                            <span
-                              style={{
-                                background: cred.bg,
-                                color: cred.color,
-                                fontSize: 10,
-                                fontWeight: 700,
-                                padding: "2px 8px",
-                                borderRadius: 6,
-                                flexShrink: 0,
-                                textTransform: "uppercase",
-                                letterSpacing: "0.02em",
-                              }}
-                            >
-                              {cred.label}
-                            </span>
-                          </div>
-                          <div
-                            style={{
+                              background: "rgba(139, 92, 246, 0.2)",
+                              borderRadius: "12px",
+                              padding: "10px",
                               display: "flex",
                               alignItems: "center",
-                              justifyContent: "space-between",
-                              marginTop: 2,
+                              justifyContent: "center",
                             }}
                           >
-                            <span style={{ fontSize: 12, color: "#64748b" }}>
-                              {hostname}
-                            </span>
-                            <a
-                              href={src.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
+                            <span style={{ fontSize: 20 }}>🎓</span>
+                          </div>
+                          <div>
+                            <div
                               style={{
-                                fontSize: 12,
-                                color: "#60a5fa",
-                                textDecoration: "none",
-                                fontWeight: 500,
-                                display: "flex",
-                                alignItems: "center",
-                                gap: 4,
+                                color: "#c4b5fd",
+                                fontSize: 11,
+                                fontWeight: 800,
+                                letterSpacing: "0.1em",
+                                textTransform: "uppercase",
+                                marginBottom: 8,
                               }}
                             >
-                              View Source ↗
-                            </a>
+                              Learning Insights
+                            </div>
+                            <p
+                              style={{
+                                color: "#e9d5ff",
+                                fontSize: 14,
+                                lineHeight: 1.6,
+                                margin: 0,
+                                fontWeight: 450,
+                              }}
+                            >
+                              {result.literacyLesson.summary}
+                            </p>
                           </div>
                         </div>
-                      );
-                    };
-
-                    return (
-                      <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-                        {/* Trusted Section */}
-                        {trusted.length > 0 && (
-                          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                            <div style={{ display: "flex", alignItems: "center", gap: 8, paddingLeft: 4 }}>
-                              <span style={{ fontSize: 14 }}>🛡️</span>
-                              <span style={{ fontSize: 11, fontWeight: 700, color: "#86efac", textTransform: "uppercase", letterSpacing: "0.05em" }}>
-                                Verified Evidence
-                              </span>
-                            </div>
-                            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                              {trusted.map((src, i) => renderSource(src, i))}
-                            </div>
-                          </div>
-                        )}
-
-                        {/* Others Section */}
-                        {others.length > 0 && (
-                          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                            <div style={{ display: "flex", alignItems: "center", gap: 8, paddingLeft: 4 }}>
-                              <span style={{ fontSize: 14 }}>🌐</span>
-                              <span style={{ fontSize: 11, fontWeight: 700, color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.05em" }}>
-                                General Mentions & Sources
-                              </span>
-                            </div>
-                            <div style={{ display: "flex", flexDirection: "column", gap: 10, opacity: 0.85 }}>
-                              {others.map((src, i) => renderSource(src, i))}
-                            </div>
-                          </div>
-                        )}
-
-                        {result.resibo.sources.length === 0 && (
-                          <p style={{ color: "#64748b", fontSize: 13, textAlign: "center", marginTop: 20 }}>
-                            No relevant sources were found for this claim.
-                          </p>
-                        )}
-                      </div>
-                    );
-                  })()}
-                </div>
-              )}
-
-              {/* ════════ MEDIA LITERACY TAB ════════ */}
-              {activeTab === "literacy" && (
-                <div
-                  style={{ display: "flex", flexDirection: "column", gap: 14 }}
-                >
-                  {!result.literacyLesson ? (
-                    <div
-                      style={{
-                        color: "#475569",
-                        fontSize: 14,
-                        textAlign: "center",
-                        marginTop: 40,
-                      }}
-                    >
-                      No media literacy lesson available for this analysis.
-                    </div>
-                  ) : (
-                    <>
-                      {/* Summary card with enhanced glassmorphism */}
-                      <div
-                        style={{
-                          background: "linear-gradient(135deg, rgba(67, 56, 202, 0.2) 0%, rgba(124, 58, 237, 0.2) 100%)",
-                          backdropFilter: "blur(12px)",
-                          border: "1px solid rgba(139, 92, 246, 0.3)",
-                          borderRadius: 16,
-                          padding: "20px",
-                          display: "flex",
-                          gap: 16,
-                          alignItems: "flex-start",
-                          boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)",
-                        }}
-                      >
-                        <div style={{
-                          background: "rgba(139, 92, 246, 0.2)",
-                          borderRadius: "12px",
-                          padding: "10px",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center"
-                        }}>
-                          <span style={{ fontSize: 20 }}>🎓</span>
-                        </div>
-                        <div>
-                          <div
-                            style={{
-                              color: "#c4b5fd",
-                              fontSize: 11,
-                              fontWeight: 800,
-                              letterSpacing: "0.1em",
-                              textTransform: "uppercase",
-                              marginBottom: 8,
-                            }}
-                          >
-                            Learning Insights
-                          </div>
-                          <p
-                            style={{
-                              color: "#e9d5ff",
-                              fontSize: 14,
-                              lineHeight: 1.6,
-                              margin: 0,
-                              fontWeight: 450,
-                            }}
-                          >
-                            {result.literacyLesson.summary}
-                          </p>
-                        </div>
-                      </div>
 
                         {/* Compact teaching points with refined aesthetics */}
                         <div
@@ -520,25 +614,57 @@ export default function ResultsPanel({
                                   top: 0,
                                   bottom: 0,
                                   width: "3px",
-                                  background: "linear-gradient(to bottom, #6366f1, #a855f7)",
                                 }}
                               />
                               <div style={{ display: "flex", gap: 12 }}>
-                                <span style={{ fontSize: 16, flexShrink: 0, opacity: 0.8 }}>🔍</span>
-                                <p style={{ color: "#cbd5e1", fontSize: 13, lineHeight: 1.5, margin: 0 }}>
+                                <span
+                                  style={{
+                                    fontSize: 16,
+                                    flexShrink: 0,
+                                    opacity: 0.8,
+                                  }}
+                                >
+                                  🔍
+                                </span>
+                                <p
+                                  style={{
+                                    color: "#cbd5e1",
+                                    fontSize: 13,
+                                    lineHeight: 1.5,
+                                    margin: 0,
+                                  }}
+                                >
                                   {point.issue}
                                 </p>
                               </div>
-                              <div style={{ 
-                                display: "flex", 
-                                gap: 12, 
-                                background: "rgba(34, 197, 94, 0.05)",
-                                padding: "10px 12px",
-                                borderRadius: "8px",
-                                marginTop: 4
-                              }}>
-                                <span style={{ color: "#4ade80", fontSize: 15, flexShrink: 0 }}>✓</span>
-                                <p style={{ color: "#bbf7d0", fontSize: 13, lineHeight: 1.5, margin: 0, fontWeight: 500 }}>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  gap: 12,
+                                  background: "rgba(34, 197, 94, 0.05)",
+                                  padding: "10px 12px",
+                                  borderRadius: "8px",
+                                  marginTop: 4,
+                                }}
+                              >
+                                <span
+                                  style={{
+                                    color: "#4ade80",
+                                    fontSize: 15,
+                                    flexShrink: 0,
+                                  }}
+                                >
+                                  ✓
+                                </span>
+                                <p
+                                  style={{
+                                    color: "#bbf7d0",
+                                    fontSize: 13,
+                                    lineHeight: 1.5,
+                                    margin: 0,
+                                    fontWeight: 500,
+                                  }}
+                                >
                                   {point.correction}
                                 </p>
                               </div>
@@ -546,104 +672,77 @@ export default function ResultsPanel({
                           ))}
                         </div>
 
-                      {/* Quick tip with warmer amber palette */}
-                      <div
-                        style={{
-                          background: "linear-gradient(135deg, rgba(251, 191, 36, 0.08) 0%, rgba(245, 158, 11, 0.08) 100%)",
-                          border: "1px solid rgba(245, 158, 11, 0.2)",
-                          borderRadius: 14,
-                          padding: "16px 20px",
-                          display: "flex",
-                          gap: 14,
-                          alignItems: "flex-start",
-                        }}
-                      >
-                        <div style={{
-                          background: "rgba(245, 158, 11, 0.15)",
-                          borderRadius: "10px",
-                          padding: "8px",
-                          display: "flex"
-                        }}>
-                          <span style={{ fontSize: 18 }}>💡</span>
-                        </div>
-                        <div>
+                        {/* Quick tip with warmer amber palette */}
+                        <div
+                          style={{
+                            background:
+                              "linear-gradient(135deg, rgba(251, 191, 36, 0.08) 0%, rgba(245, 158, 11, 0.08) 100%)",
+                            border: "1px solid rgba(245, 158, 11, 0.2)",
+                            borderRadius: 14,
+                            padding: "16px 20px",
+                            display: "flex",
+                            gap: 14,
+                            alignItems: "flex-start",
+                          }}
+                        >
                           <div
                             style={{
-                              color: "#fbbf24",
-                              fontSize: 11,
-                              fontWeight: 800,
-                              letterSpacing: "0.08em",
-                              textTransform: "uppercase",
-                              marginBottom: 4,
+                              background: "rgba(245, 158, 11, 0.15)",
+                              borderRadius: "10px",
+                              padding: "8px",
+                              display: "flex",
                             }}
                           >
-                            Pro Tip
+                            <span style={{ fontSize: 18 }}>💡</span>
                           </div>
-                          <p
-                            style={{
-                              color: "#fef3c7",
-                              fontSize: 13,
-                              lineHeight: 1.5,
-                              margin: 0,
-                            }}
-                          >
-                            {result.literacyLesson.tip}
-                          </p>
+                          <div>
+                            <div
+                              style={{
+                                color: "#fbbf24",
+                                fontSize: 11,
+                                fontWeight: 800,
+                                letterSpacing: "0.08em",
+                                textTransform: "uppercase",
+                                marginBottom: 4,
+                              }}
+                            >
+                              Pro Tip
+                            </div>
+                            <p
+                              style={{
+                                color: "#fef3c7",
+                                fontSize: 13,
+                                lineHeight: 1.5,
+                                margin: 0,
+                              }}
+                            >
+                              {result.literacyLesson.tip}
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                    </>
-                  )}
-                </div>
-              )}
-
-              {/* ════════ ANALYSIS TAB ════════ */}
-              {activeTab === "analysis" && (
-                <div
-                  style={{ display: "flex", flexDirection: "column", gap: 14 }}
-                >
-                  {/* Gauge */}
-                  <div style={{ marginBottom: 20 }}>
-                    <ChismisMeter
-                      level={result.chismisLevel}
-                      classification={result.classification}
-                    />
+                      </>
+                    )}
                   </div>
+                )}
 
-                  {/* Details */}
+                {/* ════════ ANALYSIS TAB ════════ */}
+                {activeTab === "analysis" && (
                   <div
                     style={{
-                      background: "#0f2340",
-                      border: "1px solid #1e3a5f",
-                      borderRadius: 10,
-                      padding: "14px 16px",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: 14,
                     }}
                   >
-                    <div
-                      style={{
-                        color: "#94a3b8",
-                        fontSize: 11,
-                        fontWeight: 700,
-                        letterSpacing: "0.06em",
-                        textTransform: "uppercase",
-                        marginBottom: 8,
-                      }}
-                    >
-                      Summary
+                    {/* Gauge */}
+                    <div style={{ marginBottom: 20 }}>
+                      <ChismisMeter
+                        level={result.chismisLevel}
+                        classification={result.classification}
+                      />
                     </div>
-                    <p
-                      style={{
-                        color: "#cbd5e1",
-                        fontSize: 13,
-                        lineHeight: 1.6,
-                        margin: 0,
-                      }}
-                    >
-                      {result.details}
-                    </p>
-                  </div>
 
-                  {/* Supporting reasons */}
-                  {result.breakdown.reasons.length > 0 && (
+                    {/* Details */}
                     <div
                       style={{
                         background: "#0f2340",
@@ -659,174 +758,209 @@ export default function ResultsPanel({
                           fontWeight: 700,
                           letterSpacing: "0.06em",
                           textTransform: "uppercase",
-                          marginBottom: 10,
+                          marginBottom: 8,
                         }}
                       >
-                        Supporting Reasons
+                        Summary
                       </div>
+                      <p
+                        style={{
+                          color: "#cbd5e1",
+                          fontSize: 13,
+                          lineHeight: 1.6,
+                          margin: 0,
+                        }}
+                      >
+                        {result.details}
+                      </p>
+                    </div>
+
+                    {/* Supporting reasons */}
+                    {result.breakdown.reasons.length > 0 && (
                       <div
                         style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: 8,
+                          background: "#0f2340",
+                          border: "1px solid #1e3a5f",
+                          borderRadius: 10,
+                          padding: "14px 16px",
                         }}
                       >
-                        {result.breakdown.reasons.map((r, i) => (
-                          <div
-                            key={i}
-                            style={{
-                              display: "flex",
-                              gap: 10,
-                              alignItems: "flex-start",
-                            }}
-                          >
-                            <span
+                        <div
+                          style={{
+                            color: "#94a3b8",
+                            fontSize: 11,
+                            fontWeight: 700,
+                            letterSpacing: "0.06em",
+                            textTransform: "uppercase",
+                            marginBottom: 10,
+                          }}
+                        >
+                          Supporting Reasons
+                        </div>
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: 8,
+                          }}
+                        >
+                          {result.breakdown.reasons.map((r, i) => (
+                            <div
+                              key={i}
                               style={{
-                                color: "#22c55e",
-                                fontSize: 14,
-                                flexShrink: 0,
-                                marginTop: 1,
+                                display: "flex",
+                                gap: 10,
+                                alignItems: "flex-start",
                               }}
                             >
-                              ✓
-                            </span>
-                            <span
-                              style={{
-                                color: "#94a3b8",
-                                fontSize: 13,
-                                lineHeight: 1.5,
-                              }}
-                            >
-                              {r}
-                            </span>
-                          </div>
-                        ))}
+                              <span
+                                style={{
+                                  color: "#22c55e",
+                                  fontSize: 14,
+                                  flexShrink: 0,
+                                  marginTop: 1,
+                                }}
+                              >
+                                ✓
+                              </span>
+                              <span
+                                style={{
+                                  color: "#94a3b8",
+                                  fontSize: 13,
+                                  lineHeight: 1.5,
+                                }}
+                              >
+                                {r}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    )}
 
-                  {/* Red flags */}
-                  {result.breakdown.redFlags.length > 0 && (
+                    {/* Red flags */}
+                    {result.breakdown.redFlags.length > 0 && (
+                      <div
+                        style={{
+                          background: "#2d0a0a",
+                          border: "1px solid #7f1d1d",
+                          borderRadius: 10,
+                          padding: "14px 16px",
+                        }}
+                      >
+                        <div
+                          style={{
+                            color: "#fca5a5",
+                            fontSize: 11,
+                            fontWeight: 700,
+                            letterSpacing: "0.06em",
+                            textTransform: "uppercase",
+                            marginBottom: 10,
+                          }}
+                        >
+                          Red Flags
+                        </div>
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: 8,
+                          }}
+                        >
+                          {result.breakdown.redFlags.map((flag, i) => (
+                            <div
+                              key={i}
+                              style={{
+                                display: "flex",
+                                gap: 10,
+                                alignItems: "flex-start",
+                              }}
+                            >
+                              <span
+                                style={{
+                                  color: "#ef4444",
+                                  fontSize: 14,
+                                  flexShrink: 0,
+                                  marginTop: 1,
+                                }}
+                              >
+                                ⚑
+                              </span>
+                              <span
+                                style={{
+                                  color: "#fca5a5",
+                                  fontSize: 13,
+                                  lineHeight: 1.5,
+                                }}
+                              >
+                                {flag}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Harm score */}
                     <div
                       style={{
-                        background: "#2d0a0a",
-                        border: "1px solid #7f1d1d",
+                        background: HARM_COLOR[result.harmScore.level].bg,
+                        border: `1px solid ${HARM_COLOR[result.harmScore.level].border}`,
                         borderRadius: 10,
                         padding: "14px 16px",
                       }}
                     >
                       <div
                         style={{
-                          color: "#fca5a5",
-                          fontSize: 11,
-                          fontWeight: 700,
-                          letterSpacing: "0.06em",
-                          textTransform: "uppercase",
-                          marginBottom: 10,
-                        }}
-                      >
-                        Red Flags
-                      </div>
-                      <div
-                        style={{
                           display: "flex",
-                          flexDirection: "column",
-                          gap: 8,
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                          marginBottom: 8,
                         }}
                       >
-                        {result.breakdown.redFlags.map((flag, i) => (
-                          <div
-                            key={i}
-                            style={{
-                              display: "flex",
-                              gap: 10,
-                              alignItems: "flex-start",
-                            }}
-                          >
-                            <span
-                              style={{
-                                color: "#ef4444",
-                                fontSize: 14,
-                                flexShrink: 0,
-                                marginTop: 1,
-                              }}
-                            >
-                              ⚑
-                            </span>
-                            <span
-                              style={{
-                                color: "#fca5a5",
-                                fontSize: 13,
-                                lineHeight: 1.5,
-                              }}
-                            >
-                              {flag}
-                            </span>
-                          </div>
-                        ))}
+                        <div
+                          style={{
+                            color: "#94a3b8",
+                            fontSize: 11,
+                            fontWeight: 700,
+                            letterSpacing: "0.06em",
+                            textTransform: "uppercase",
+                          }}
+                        >
+                          Harm Score
+                        </div>
+                        <span
+                          style={{
+                            background:
+                              HARM_COLOR[result.harmScore.level].badgeBg,
+                            color: HARM_COLOR[result.harmScore.level].badge,
+                            fontSize: 11,
+                            fontWeight: 700,
+                            padding: "3px 10px",
+                            borderRadius: 20,
+                            letterSpacing: "0.04em",
+                            textTransform: "uppercase",
+                          }}
+                        >
+                          {result.harmScore.level} — {result.harmScore.score}
+                          /100
+                        </span>
                       </div>
-                    </div>
-                  )}
-
-                  {/* Harm score */}
-                  <div
-                    style={{
-                      background: HARM_COLOR[result.harmScore.level].bg,
-                      border: `1px solid ${HARM_COLOR[result.harmScore.level].border}`,
-                      borderRadius: 10,
-                      padding: "14px 16px",
-                    }}
-                  >
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        marginBottom: 8,
-                      }}
-                    >
-                      <div
+                      <p
                         style={{
-                          color: "#94a3b8",
-                          fontSize: 11,
-                          fontWeight: 700,
-                          letterSpacing: "0.06em",
-                          textTransform: "uppercase",
+                          color: "#cbd5e1",
+                          fontSize: 13,
+                          lineHeight: 1.6,
+                          margin: 0,
                         }}
                       >
-                        Harm Score
-                      </div>
-                      <span
-                        style={{
-                          background:
-                            HARM_COLOR[result.harmScore.level].badgeBg,
-                          color: HARM_COLOR[result.harmScore.level].badge,
-                          fontSize: 11,
-                          fontWeight: 700,
-                          padding: "3px 10px",
-                          borderRadius: 20,
-                          letterSpacing: "0.04em",
-                          textTransform: "uppercase",
-                        }}
-                      >
-                        {result.harmScore.level} — {result.harmScore.score}/100
-                      </span>
+                        {result.harmScore.explanation}
+                      </p>
                     </div>
-                    <p
-                      style={{
-                        color: "#cbd5e1",
-                        fontSize: 13,
-                        lineHeight: 1.6,
-                        margin: 0,
-                      }}
-                    >
-                      {result.harmScore.explanation}
-                    </p>
                   </div>
-                </div>
-              )}
-            </>
-          )}
+                )}
+              </>
+            )}
           </div>
         </div>
       </div>
