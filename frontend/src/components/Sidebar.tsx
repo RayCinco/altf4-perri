@@ -8,6 +8,7 @@ import { useGetRecentHistories } from "@/components/hooks/useGetRecentHistories"
 import AuthModal from "@/components/AuthModal";
 import { LoginForm } from "@/components/LoginForm";
 import { SignupForm } from "@/components/SignupForm";
+import { useSidebar } from "@/components/SidebarContext";
 
 const CLASSIFICATION_COLORS: Record<string, string> = {
   fact: "text-green-400",
@@ -16,7 +17,12 @@ const CLASSIFICATION_COLORS: Record<string, string> = {
 };
 
 export default function Sidebar() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  // Desktop uses local state; mobile state comes from shared context (toggled by Header hamburger)
+  const {
+    sidebarOpen: mobileSidebarOpen,
+    setSidebarOpen: setMobileSidebarOpen,
+  } = useSidebar();
+  const [desktopOpen, setDesktopOpen] = useState(false);
   const [modal, setModal] = useState<"login" | "signup" | null>(null);
   const { user } = useGetUser();
   const { histories } = useGetRecentHistories(user?.id);
@@ -30,14 +36,147 @@ export default function Sidebar() {
 
   return (
     <>
+      {/* ── MOBILE OVERLAY ─────────────────────────────────────────── */}
+      {/* Backdrop */}
+      {mobileSidebarOpen && (
+        <div
+          className="sm:hidden fixed inset-0 z-40 bg-black/60"
+          onClick={() => setMobileSidebarOpen(false)}
+        />
+      )}
+
+      {/* Mobile slide-in panel */}
+      <div
+        className={`sm:hidden fixed left-0 top-0 z-50 h-full w-72 flex flex-col bg-[#000919] border-r border-white/10 transition-transform duration-300 ${
+          mobileSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        {/* Mobile panel header */}
+        <div className="flex items-center justify-between px-4 py-4 border-b border-white/10">
+          <div className="flex items-center gap-2">
+            <img
+              src="/logo/Perri.png"
+              alt="Perri"
+              className="h-8 w-8 rounded-full object-cover"
+            />
+            <span className="text-white font-semibold text-base">
+              ChismiScan
+            </span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setMobileSidebarOpen(false)}
+            className="flex items-center justify-center h-8 w-8 rounded-lg text-white/60 hover:text-white hover:bg-white/10 transition"
+            aria-label="Close menu"
+          >
+            <Menu className="h-4 w-4" />
+          </button>
+        </div>
+
+        {/* Mobile nav items */}
+        <div className="flex flex-1 flex-col overflow-y-auto px-3 py-4 space-y-1 text-sm text-white/80">
+          <Link
+            href="/"
+            onClick={() => setMobileSidebarOpen(false)}
+            className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-white hover:bg-white/5 transition"
+          >
+            <Home className="h-4 w-4" />
+            <span className="font-medium">Home</span>
+          </Link>
+          {user && (
+            <Link
+              href="/history"
+              onClick={() => setMobileSidebarOpen(false)}
+              className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-white hover:bg-white/5 transition"
+            >
+              <History className="h-4 w-4" />
+              <span className="font-medium">History</span>
+            </Link>
+          )}
+          {user && histories.length > 0 && (
+            <div className="pt-2">
+              <h2 className="mb-1 px-3 text-xs font-semibold uppercase tracking-widest text-white/40">
+                Recent
+              </h2>
+              {histories.slice(0, 6).map((item) => (
+                <Link
+                  key={item.id}
+                  href={`/history/${item.id}`}
+                  onClick={() => setMobileSidebarOpen(false)}
+                  className="flex flex-col rounded-lg px-3 py-2 hover:bg-white/5 hover:text-white"
+                >
+                  <div className="flex items-center gap-2">
+                    <Clock3 className="h-3.5 w-3.5 shrink-0" />
+                    <span className="truncate text-xs">
+                      {item.analysisResult?.originalInput || "Scan"}
+                    </span>
+                  </div>
+                  <span
+                    className={`ml-6 text-[10px] capitalize ${
+                      CLASSIFICATION_COLORS[item.classification] ??
+                      "text-white/50"
+                    }`}
+                  >
+                    {item.classification}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Mobile panel footer */}
+        <div className="px-3 pb-4">
+          {user ? (
+            <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-3">
+              <div className="flex items-center gap-3">
+                <div className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/10">
+                  <UserRound className="h-4 w-4" />
+                </div>
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-semibold text-white">
+                    {displayName}
+                  </p>
+                  <p className="truncate text-xs text-white/60">
+                    {displayEmail}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="flex flex-col gap-2">
+              <button
+                onClick={() => {
+                  setModal("login");
+                  setMobileSidebarOpen(false);
+                }}
+                className="w-full rounded-lg border border-white/20 px-4 py-2 text-sm font-medium text-white hover:bg-white/5 transition"
+              >
+                Login
+              </button>
+              <button
+                onClick={() => {
+                  setModal("signup");
+                  setMobileSidebarOpen(false);
+                }}
+                className="w-full rounded-lg bg-[#054E98] px-4 py-2 text-sm font-medium text-white hover:bg-[#04356A] transition"
+              >
+                Sign Up
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* ── DESKTOP SIDEBAR (unchanged) ─────────────────────────────── */}
       <aside
-        className={`fixed left-0 top-0 z-50 flex h-screen flex-col overflow-visible border-r border-white/10 bg-[#000919]/95 backdrop-blur-[100px] transition-all duration-300 ${
-          sidebarOpen ? "w-64 p-5" : "w-16 p-3"
+        className={`hidden sm:flex fixed left-0 top-0 z-50 h-screen flex-col overflow-visible border-r border-white/10 bg-[#000919]/95 backdrop-blur-[100px] transition-all duration-300 ${
+          desktopOpen ? "w-64 p-5" : "w-16 p-3"
         }`}
       >
         <button
           type="button"
-          onClick={() => setSidebarOpen((open) => !open)}
+          onClick={() => setDesktopOpen((open) => !open)}
           className="group relative mt-2 flex h-11 w-11 items-center justify-center rounded-full shadow-lg transition hover:scale-105"
           aria-label="Toggle sidebar"
         >
@@ -51,7 +190,7 @@ export default function Sidebar() {
           </div>
         </button>
 
-        {sidebarOpen && (
+        {desktopOpen && (
           <div className="mt-12 flex flex-1 flex-col space-y-1 text-sm text-white/80">
             <div>
               <Link
@@ -163,7 +302,7 @@ export default function Sidebar() {
           </div>
         )}
 
-        {!sidebarOpen && (
+        {!desktopOpen && (
           <div className="mt-8 flex flex-1 flex-col items-center text-white/80">
             <div className="flex flex-col items-center gap-4">
               <Link

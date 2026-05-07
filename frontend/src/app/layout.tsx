@@ -8,6 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 import PerriChatbot from "@/components/PerriChatbot";
 import { ToastProvider } from "@/components/ToastProvider";
 import { QueryProvider } from "@/components/QueryProvider";
+import { SidebarProvider } from "@/components/SidebarContext";
 export default function RootLayout({
   children,
 }: {
@@ -19,22 +20,24 @@ export default function RootLayout({
         className={`${inter.className} bg-black text-white flex flex-col min-h-screen`}
       >
         <QueryProvider>
-          <MeshGradientBackground />
+          <SidebarProvider>
+            <MeshGradientBackground />
 
-          {/* Header */}
-          <Header />
-          <aside>
-            <Sidebar />
-          </aside>
-          {/* Page Content — flex-1 makes this fill the space between header and footer */}
-          <main className="relative z-10 flex-1 overflow-x-hidden">
-            {children}
-          </main>
-          {/* Chatbot (global) */}
-          <PerriChatbot />
-          {/* Footer */}
-          <Footer />
-          <ToastProvider />
+            {/* Header */}
+            <Header />
+            <aside>
+              <Sidebar />
+            </aside>
+            {/* Page Content — flex-1 makes this fill the space between header and footer */}
+            <main className="relative z-10 flex-1 overflow-x-hidden">
+              {children}
+            </main>
+            {/* Chatbot (global) */}
+            <PerriChatbot />
+            {/* Footer */}
+            <Footer />
+            <ToastProvider />
+          </SidebarProvider>
         </QueryProvider>
       </body>
     </html>
