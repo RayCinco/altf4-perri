@@ -35,3 +35,33 @@ export const getUser = async (): Promise<User | null> => {
   const { data } = await supabase.auth.getUser();
   return data.user;
 };
+
+export const saveHistory = async (userId: string, analysisResult: any) => {
+  const { data, error } = await supabase.from("history").insert({
+    user_id: userId,
+    classification: analysisResult.classification,
+    analysisResult: analysisResult,
+  });
+  if (error) throw error;
+  return data;
+};
+
+export const getRecentHistories = async (userId: string) => {
+  const { data, error } = await supabase
+    .from("history")
+    .select("*")
+    .eq("user_id", userId)
+    .order("created_at", { ascending: false })
+    .limit(5);
+  if (error) throw error;
+  return data;
+};
+
+export const getUserHistories = async (userId: string) => {
+  const { data, error } = await supabase
+    .from("history")
+    .select("*")
+    .eq("user_id", userId);
+  if (error) throw error;
+  return data;
+};

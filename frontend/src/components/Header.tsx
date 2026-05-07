@@ -5,9 +5,12 @@ import { Scan } from "lucide-react";
 import AuthModal from "@/components/AuthModal";
 import { LoginForm } from "@/components/LoginForm";
 import { SignupForm } from "@/components/SignupForm";
+import { useGetUser } from "@/components/hooks/useGetUser";
+import { signOut } from "@/lib/supabaseClient";
 
 export function Header() {
   const [modal, setModal] = useState<"login" | "signup" | null>(null);
+  const { user, loading } = useGetUser();
 
   return (
     <>
@@ -27,21 +30,34 @@ export function Header() {
             </div>
 
             {/* RIGHT SIDE */}
-            <div className="flex items-center gap-3">
-              <button
-                onClick={() => setModal("login")}
-                className="px-4 py-1.5 rounded-lg border border-[#001D3F] text-white hover:bg-[#0a1a3a] transition"
-              >
-                Login
-              </button>
+            {!loading && (
+              <div className="flex items-center gap-3">
+                {user ? (
+                  <button
+                    onClick={() => signOut()}
+                    className="px-4 py-1.5 rounded-lg border border-[#001D3F] text-white hover:bg-[#0a1a3a] transition"
+                  >
+                    Logout
+                  </button>
+                ) : (
+                  <>
+                    <button
+                      onClick={() => setModal("login")}
+                      className="px-4 py-1.5 rounded-lg border border-[#001D3F] text-white hover:bg-[#0a1a3a] transition"
+                    >
+                      Login
+                    </button>
 
-              <button
-                onClick={() => setModal("signup")}
-                className="px-4 py-1.5 rounded-lg bg-[#054E98] text-white hover:bg-[#04356A] transition"
-              >
-                Sign Up
-              </button>
-            </div>
+                    <button
+                      onClick={() => setModal("signup")}
+                      className="px-4 py-1.5 rounded-lg bg-[#054E98] text-white hover:bg-[#04356A] transition"
+                    >
+                      Sign Up
+                    </button>
+                  </>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </header>

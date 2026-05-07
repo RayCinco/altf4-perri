@@ -1,0 +1,267 @@
+{
+  "session": {
+    "id": "dcp9fb",
+    "mode": "text",
+    "startedAt": "2026-05-07T03:13:41.674Z",
+    "completedAt": "2026-05-07T03:13:48.838Z",
+    "durationMs": 7164
+  },
+  "pipeline": [
+    {
+      "timestamp": "2026-05-07T03:13:41.676Z",
+      "step": "PIPELINE",
+      "label": "Text pipeline started",
+      "data": {
+        "inputText": "Spurs won against minesotta timberwolves",
+        "inputTextLength": 40
+      }
+    },
+    {
+      "timestamp": "2026-05-07T03:13:42.687Z",
+      "step": "SEARCH",
+      "label": "Query generated from text",
+      "data": {
+        "inputTextPreview": "Spurs won against minesotta timberwolves",
+        "generatedQuery": "Spurs vs Timberwolves result"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T03:13:44.279Z",
+      "step": "SEARCH",
+      "label": "Search results retrieved",
+      "data": {
+        "query": "Spurs vs Timberwolves result",
+        "resultCount": 9,
+        "results": [
+          {
+            "title": "Minnesota Timberwolves vs San Antonio Spurs May 4, 2026 ... - NBA",
+            "snippet": "Minnesota Timberwolves vs San Antonio Spurs May 4, 2026 player box scores including video and shot charts.",
+            "link": "https://www.nba.com/game/min-vs-sas-0042500231/box-score"
+          },
+          {
+            "title": "Minnesota Timberwolves Empty Flare vs San Antonio Spurs - Reddit",
+            "snippet": "[Highlight] The Minnesota Timberwolves defeat the Denver Nuggets 110-98 in Game 6 to win their series 4-2 and advance to the Western Conference ...",
+            "link": "https://www.reddit.com/r/nba/comments/1t5nd98/minnesota_timberwolves_empty_flare_vs_san_antonio/"
+          },
+          {
+            "title": "Spurs vs Timberwolves Highlights Today 1st Qtr | May 6 - YouTube",
+            "snippet": "Spurs vs Timberwolves Highlights Today 1st Qtr | May 6 | 2026 NBA Playoffs Full Highlights Game 2 #nba #nbahighlights #nbahighlightstoday ...",
+            "link": "https://www.youtube.com/watch?v=YlBBVuW23dI"
+          },
+          {
+            "title": "Game Recap: Timberwolves 104, Spurs 102 | NBA.com",
+            "snippet": "Game Recap: Timberwolves 104, Spurs 102 ... The Timberwolves defeated the Spurs, 104-102, to take Game 1 of their conference semifinal series and ...",
+            "link": "https://www.nba.com/watch/video/game-recap-timberwolves-104-spurs-102"
+          },
+          {
+            "title": "Wolves Vs Spurs Last 5 Games By Result - StatMuse",
+            "snippet": "The Minnesota Timberwolves were defeated by the San Antonio Spurs, 126 to 123, on January 17.",
+            "link": "https://www.statmuse.com/nba/ask/wolves-vs-spurs-last-5-games-by-result"
+          },
+          {
+            "title": "Timberwolves 104-102 Spurs (May 4, 2026) Final Score - ESPN",
+            "snippet": "Edwards returns and Timberwolves overcome big game by Wembanyama to beat Spurs 104-102 in Game 1 ; Timberwolves. MIN. 24, 21 ; Spurs. SA. 23, 22 ...",
+            "link": "https://www.espn.com/nba/game/_/gameId/401871152/timberwolves-spurs"
+          },
+          {
+            "title": "The Timberwolves get the 104-102 Game 1 WIN over the Spurs in ...",
+            "snippet": "Minnesota Timberwolves held off the San Antonio Spurs in Game 1, 104-102, behind MASSIVE performances from Julius Randle & Anthony Edwards in ...",
+            "link": "https://www.instagram.com/p/DX8XJ5_gTvG/"
+          },
+          {
+            "title": "Minnesota Timberwolves vs. San Antonio Spurs Live Score and Stats",
+            "snippet": "Edwards returns and Timberwolves overcome big game by Wembanyama to beat Spurs 104-102 in Game 1 · MIN · SA · Team.",
+            "link": "https://www.cbssports.com/nba/gametracker/boxscore/NBA_20260504_MIN@SA/"
+          },
+          {
+            "title": "[Highlight] The Minnesota Timberwolves get the final stop and take ...",
+            "snippet": "[Highlight] The Minnesota Timberwolves get the final stop and take Game 1 with a 104-102 victory over the San Antonio Spurs. Julius Randle ...",
+            "link": "https://www.reddit.com/r/nba/comments/1t44uqf/highlight_the_minnesota_timberwolves_get_the/"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-07T03:13:44.280Z",
+      "step": "FILTER",
+      "label": "Sources classified by credibility",
+      "data": {
+        "totalSources": 9,
+        "trustedCount": 3,
+        "semiTrustedCount": 1,
+        "untrustedCount": 5,
+        "credibilityScore": 38,
+        "sources": [
+          {
+            "domain": "nba.com",
+            "credibility": "trusted",
+            "title": "Minnesota Timberwolves vs San Antonio Spurs May 4, 2026 ... - NBA"
+          },
+          {
+            "domain": "reddit.com",
+            "credibility": "untrusted",
+            "title": "Minnesota Timberwolves Empty Flare vs San Antonio Spurs - Reddit"
+          },
+          {
+            "domain": "youtube.com",
+            "credibility": "semi-trusted",
+            "title": "Spurs vs Timberwolves Highlights Today 1st Qtr | May 6 - YouTube"
+          },
+          {
+            "domain": "nba.com",
+            "credibility": "trusted",
+            "title": "Game Recap: Timberwolves 104, Spurs 102 | NBA.com"
+          },
+          {
+            "domain": "statmuse.com",
+            "credibility": "untrusted",
+            "title": "Wolves Vs Spurs Last 5 Games By Result - StatMuse"
+          },
+          {
+            "domain": "espn.com",
+            "credibility": "trusted",
+            "title": "Timberwolves 104-102 Spurs (May 4, 2026) Final Score - ESPN"
+          },
+          {
+            "domain": "instagram.com",
+            "credibility": "untrusted",
+            "title": "The Timberwolves get the 104-102 Game 1 WIN over the Spurs in ..."
+          },
+          {
+            "domain": "cbssports.com",
+            "credibility": "untrusted",
+            "title": "Minnesota Timberwolves vs. San Antonio Spurs Live Score and Stats"
+          },
+          {
+            "domain": "reddit.com",
+            "credibility": "untrusted",
+            "title": "[Highlight] The Minnesota Timberwolves get the final stop and take ..."
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-07T03:13:44.283Z",
+      "step": "AI",
+      "label": "Prompts constructed",
+      "data": {
+        "personality": "marites",
+        "userPrompt": "Analyze the following text and classify it:\n\n---\nSpurs won against minesotta timberwolves\n---\n\nAdditional search context for fact-checking:\nSource 1 [TRUSTED]:\nTitle: Minnesota Timberwolves vs San Antonio Spurs May 4, 2026 ... - NBA\nSnippet: Minnesota Timberwolves vs San Antonio Spurs May 4, 2026 player box scores including video and shot charts.\nLink: https://www.nba.com/game/min-vs-sas-0042500231/box-score\nDomain: nba.com\n\nSource 2 [SEMI-TRUSTED]:\nTitle: Spurs vs Timberwolves Highlights Today 1st Qtr | May 6 - YouTube\nSnippet: Spurs vs Timberwolves Highlights Today 1st Qtr | May 6 | 2026 NBA Playoffs Full Highlights Game 2 #nba #nbahighlights #nbahighlightstoday ...\nLink: https://www.youtube.com/watch?v=YlBBVuW23dI\nDomain: youtube.com\n\nSource 3 [TRUSTED]:\nTitle: Game Recap: Timberwolves 104, Spurs 102 | NBA.com\nSnippet: Game Recap: Timberwolves 104, Spurs 102 ... The Timberwolves defeated the Spurs, 104-102, to take Game 1 of their conference semifinal series and ...\nLink: https://www.nba.com/watch/video/game-recap-timberwolves-104-spurs-102\nDomain: nba.com\n\nSource 4 [TRUSTED]:\nTitle: Timberwolves 104-102 Spurs (May 4, 2026) Final Score - ESPN\nSnippet: Edwards returns and Timberwolves overcome big game by Wembanyama to beat Spurs 104-102 in Game 1 ; Timberwolves. MIN. 24, 21 ; Spurs. SA. 23, 22 ...\nLink: https://www.espn.com/nba/game/_/gameId/401871152/timberwolves-spurs\nDomain: espn.com\n",
+        "hasSearchContext": true
+      }
+    },
+    {
+      "timestamp": "2026-05-07T03:13:46.592Z",
+      "step": "AI",
+      "label": "Raw Gemini response received",
+      "data": {
+        "rawResponse": "```json\n{\n  \"label\": \"Fake\",\n  \"confidence\": 95,\n  \"marites_explanation\": \"Naku, mhie, mukhang baliktad ang chismis! According to reliable sources like NBA.com and ESPN, the Timberwolves won against the Spurs, not the other way around. So, baka may nagkamali lang ng sabi-sabi dito.\",\n  \"claims\": [\n    \"Spurs won against Minnesota Timberwolves\"\n  ],\n  \"evidence\": [\n    \"Multiple sources (NBA.com, ESPN) report Timberwolves defeated the Spurs.\",\n    \"Game on May 4, 2026, resulted in Timberwolves winning 104-102.\"\n  ],\n  \"linguistic_flags\": [],\n  \"fact_correction\": \"The claim says the Spurs won against the Timberwolves, but according to NBA.com and ESPN, the Timberwolves won against the Spurs with a score of 104-102 on May 4, 2026.\"\n}\n```"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T03:13:46.594Z",
+      "step": "AI",
+      "label": "Response parsed successfully",
+      "data": {
+        "label": "Fake",
+        "confidence": 95,
+        "explanation": "Naku, mhie, mukhang baliktad ang chismis! According to reliable sources like NBA.com and ESPN, the Timberwolves won against the Spurs, not the other way around. So, baka may nagkamali lang ng sabi-sabi dito.",
+        "claims": [
+          "Spurs won against Minnesota Timberwolves"
+        ],
+        "evidence": [
+          "Multiple sources (NBA.com, ESPN) report Timberwolves defeated the Spurs.",
+          "Game on May 4, 2026, resulted in Timberwolves winning 104-102."
+        ],
+        "linguisticFlags": [],
+        "factCorrection": "The claim says the Spurs won against the Timberwolves, but according to NBA.com and ESPN, the Timberwolves won against the Spurs with a score of 104-102 on May 4, 2026."
+      }
+    },
+    {
+      "timestamp": "2026-05-07T03:13:46.596Z",
+      "step": "LITERACY",
+      "label": "Generating literacy lesson",
+      "data": {
+        "classification": "chismis",
+        "flagCount": 0,
+        "sourceCount": 3,
+        "personality": "marites"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T03:13:48.834Z",
+      "step": "LITERACY",
+      "label": "Literacy lesson generated",
+      "data": {
+        "summary": "Mhie, this claim is chismis kasi baliktad yung nangyari—Timberwolves nga ang nanalo, not Spurs!",
+        "pointCount": 2,
+        "tip": "Next time, double check sa official sources before maniwala agad, okay?"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T03:13:48.837Z",
+      "step": "OUTPUT",
+      "label": "Final result mapped for frontend",
+      "data": {
+        "classification": "chismis",
+        "chismisLevel": 95,
+        "message": "CHISMIS ALERT! 🚨",
+        "details": "Walang credible evidence na nahanap. Ingat sa pagsha-share!",
+        "breakdown": {
+          "reasons": [
+            "Spurs won against Minnesota Timberwolves"
+          ],
+          "redFlags": []
+        },
+        "harmScore": {
+          "level": "high",
+          "score": 95,
+          "explanation": "High risk of misinformation. Sharing this could mislead others."
+        },
+        "maritesMode": "Naku, mhie, mukhang baliktad ang chismis! According to reliable sources like NBA.com and ESPN, the Timberwolves won against the Spurs, not the other way around. So, baka may nagkamali lang ng sabi-sabi dito.",
+        "resibo": {
+          "verdict": "Multiple sources (NBA.com, ESPN) report Timberwolves defeated the Spurs. | Game on May 4, 2026, resulted in Timberwolves winning 104-102.",
+          "sources": [
+            {
+              "title": "Minnesota Timberwolves vs San Antonio Spurs May 4, 2026 ... - NBA",
+              "url": "https://www.nba.com/game/min-vs-sas-0042500231/box-score",
+              "credibility": "verified"
+            },
+            {
+              "title": "Game Recap: Timberwolves 104, Spurs 102 | NBA.com",
+              "url": "https://www.nba.com/watch/video/game-recap-timberwolves-104-spurs-102",
+              "credibility": "verified"
+            },
+            {
+              "title": "Timberwolves 104-102 Spurs (May 4, 2026) Final Score - ESPN",
+              "url": "https://www.espn.com/nba/game/_/gameId/401871152/timberwolves-spurs",
+              "credibility": "verified"
+            }
+          ]
+        },
+        "linguisticFlags": [],
+        "factCorrection": "The claim says the Spurs won against the Timberwolves, but according to NBA.com and ESPN, the Timberwolves won against the Spurs with a score of 104-102 on May 4, 2026.",
+        "sourceCredibility": {
+          "score": 38,
+          "trustedCount": 3,
+          "semiTrustedCount": 1,
+          "untrustedCount": 5
+        },
+        "literacyLesson": {
+          "summary": "Mhie, this claim is chismis kasi baliktad yung nangyari—Timberwolves nga ang nanalo, not Spurs!",
+          "points": [
+            {
+              "issue": "Sis, sinabi dito na Spurs nanalo, pero according to NBA.com and ESPN, Timberwolves ang nag-uwi ng panalo.",
+              "correction": "Dapat tignan mo yung official results from trusted sports sites para sure na tama yung claim."
+            },
+            {
+              "issue": "Walang specific details like score or date yung claim, kaya mahirap i-verify agad.",
+              "correction": "Hanapin yung mga claims na may specific details para mas madali ma-check kung totoo."
+            }
+          ],
+          "tip": "Next time, double check sa official sources before maniwala agad, okay?"
+        }
+      }
+    }
+  ]
+}

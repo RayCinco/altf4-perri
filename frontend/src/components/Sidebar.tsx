@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Clock3, History, Home, Menu, UserRound } from "lucide-react";
+import { useGetUser } from "@/components/hooks/useGetUser";
 
 const recentItems = [
   "Screenshot scan",
@@ -17,6 +18,14 @@ const historyItems = [
 
 export default function Sidebar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { user } = useGetUser();
+
+  const displayName =
+    user?.user_metadata?.full_name ||
+    user?.user_metadata?.name ||
+    user?.email?.split("@")[0] ||
+    "Account";
+  const displayEmail = user?.email || "Perri account center";
 
   return (
     <>
@@ -91,10 +100,10 @@ export default function Sidebar() {
                 </div>
                 <div className="min-w-0">
                   <p className="truncate text-sm font-semibold text-white">
-                    Account
+                    {displayName}
                   </p>
                   <p className="truncate text-xs text-white/60">
-                    Perri account center
+                    {displayEmail}
                   </p>
                 </div>
               </div>
@@ -126,7 +135,7 @@ export default function Sidebar() {
             <div className="group relative mt-auto rounded-full border border-white/10 bg-white/5 p-2">
               <UserRound className="h-5 w-5" />
               <div className="pointer-events-none absolute left-full top-1/2 z-[70] ml-3 hidden -translate-y-1/2 whitespace-nowrap rounded-lg bg-white px-3 py-2 text-sm font-medium text-black shadow-2xl group-hover:block">
-                Account
+                {displayName}
               </div>
             </div>
           </div>

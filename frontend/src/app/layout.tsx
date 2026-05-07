@@ -7,6 +7,7 @@ import { Inter } from "next/font/google";
 import Sidebar from "@/components/Sidebar";
 const inter = Inter({ subsets: ["latin"] });
 import PerriChatbot from "@/components/PerriChatbot";
+import { ToastProvider } from "@/components/ToastProvider";
 export default function RootLayout({
   children,
 }: {
@@ -33,6 +34,7 @@ export default function RootLayout({
         <PerriChatbot />
         {/* Footer */}
         <Footer />
+        <ToastProvider />
       </body>
     </html>
   );

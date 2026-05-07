@@ -1,0 +1,271 @@
+{
+  "session": {
+    "id": "e1rfiu",
+    "mode": "text",
+    "startedAt": "2026-05-07T03:40:46.909Z",
+    "completedAt": "2026-05-07T03:40:54.480Z",
+    "durationMs": 7571
+  },
+  "pipeline": [
+    {
+      "timestamp": "2026-05-07T03:40:46.911Z",
+      "step": "PIPELINE",
+      "label": "Text pipeline started",
+      "data": {
+        "inputText": "Spurs won game 1 against timberwolves",
+        "inputTextLength": 37
+      }
+    },
+    {
+      "timestamp": "2026-05-07T03:40:47.925Z",
+      "step": "SEARCH",
+      "label": "Query generated from text",
+      "data": {
+        "inputTextPreview": "Spurs won game 1 against timberwolves",
+        "generatedQuery": "Spurs Timberwolves game 1 score"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T03:40:49.349Z",
+      "step": "SEARCH",
+      "label": "Search results retrieved",
+      "data": {
+        "query": "Spurs Timberwolves game 1 score",
+        "resultCount": 9,
+        "results": [
+          {
+            "title": "Timberwolves 104-102 Spurs (May 4, 2026) Final Score - ESPN",
+            "snippet": "Edwards returns and Timberwolves overcome big game by Wembanyama to beat Spurs 104-102 in Game 1 ; Timberwolves. MIN. 24, 21 ; Spurs. SA. 23, 22 ...",
+            "link": "https://www.espn.com/nba/game/_/gameId/401871152/timberwolves-spurs"
+          },
+          {
+            "title": "Timberwolves steal Game 1 in last-second thriller despite historic ...",
+            "snippet": "Such was the case in a tight Game 1, which the Wolves won 104-102 Monday night at Frost Bank Center. Advertisement. Anthony Edwards returned to ...",
+            "link": "https://www.nytimes.com/athletic/7254281/2026/05/05/timberwolves-spurs-result-score-game-1/"
+          },
+          {
+            "title": "Timberwolves survive last second surge by Spurs in Game 1 - NBA",
+            "snippet": "Game Recap: Timberwolves 104, Spurs 102.",
+            "link": "https://www.nba.com/watch/video/fantastic-finish-timberwolves-survive-last-second-surge-by-spurs-in-game-1"
+          },
+          {
+            "title": "#6 TIMBERWOLVES at #2 SPURS | FULL GAME 1 HIGHLIGHTS",
+            "snippet": "The Timberwolves defeated the Spurs, 104-102 tonight in San Antonio. Julius Randle led the way for the Timberwolves with 21 points and 10 ...",
+            "link": "https://www.youtube.com/watch?v=R1ErdXotXUI"
+          },
+          {
+            "title": "The Timberwolves get the 104-102 Game 1 WIN over the Spurs in ...",
+            "snippet": "Minnesota Timberwolves held off the San Antonio Spurs in Game 1, 104-102, behind MASSIVE performances from Julius Randle & Anthony Edwards in ...",
+            "link": "https://www.instagram.com/p/DX8XJ5_gTvG/"
+          },
+          {
+            "title": "[Highlight] The Minnesota Timberwolves get the final stop and take ...",
+            "snippet": "[Highlight] The Minnesota Timberwolves get the final stop and take Game 1 with a 104-102 victory over the San Antonio Spurs. Julius Randle ...",
+            "link": "https://www.reddit.com/r/nba/comments/1t44uqf/highlight_the_minnesota_timberwolves_get_the/"
+          },
+          {
+            "title": "Anthony Edwards' return propels Wolves past Spurs in Game 1 - ESPN",
+            "snippet": "The Minnesota Timberwolves, entering this series as heavy underdogs to the 62-win San Antonio Spurs, pulled off a stunning 104-102 road win ...",
+            "link": "https://www.espn.com/nba/story/_/id/48682145/edwards-returns-propels-wolves-spurs-game-1-stunner"
+          },
+          {
+            "title": "Offensive Struggles Sink Spurs as Wolves Steal Game 1",
+            "snippet": "\"It felt solid,\" the forward said, visibly upset at the San Antonio Spurs' 104-102 loss to the Minnesota Timberwolves Monday night. \"That's all ...",
+            "link": "https://www.si.com/nba/spurs/onsi/offensive-struggles-sink-san-antonio-spurs-undermanned-minnesota-timberwolves-steal-game-1"
+          },
+          {
+            "title": "San Antonio vs. Minnesota, Final Score: Spurs fall in defensive slug ...",
+            "snippet": "Minnesota, Final Score: Spurs fall in defensive slug-fest to Timberwolves, 102-104 ... What We Learned from the Spurs Game 1 loss to the Wolves.",
+            "link": "https://www.poundingtherock.com/game-recaps/101151/san-antonio-vs-minnesota-final-score-spurs-fall-in-defensive-slug-fest-to-timberwolves-102-104"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-07T03:40:49.350Z",
+      "step": "FILTER",
+      "label": "Sources classified by credibility",
+      "data": {
+        "totalSources": 9,
+        "trustedCount": 4,
+        "semiTrustedCount": 1,
+        "untrustedCount": 4,
+        "credibilityScore": 49,
+        "sources": [
+          {
+            "domain": "espn.com",
+            "credibility": "trusted",
+            "title": "Timberwolves 104-102 Spurs (May 4, 2026) Final Score - ESPN"
+          },
+          {
+            "domain": "nytimes.com",
+            "credibility": "trusted",
+            "title": "Timberwolves steal Game 1 in last-second thriller despite historic ..."
+          },
+          {
+            "domain": "nba.com",
+            "credibility": "trusted",
+            "title": "Timberwolves survive last second surge by Spurs in Game 1 - NBA"
+          },
+          {
+            "domain": "youtube.com",
+            "credibility": "semi-trusted",
+            "title": "#6 TIMBERWOLVES at #2 SPURS | FULL GAME 1 HIGHLIGHTS"
+          },
+          {
+            "domain": "instagram.com",
+            "credibility": "untrusted",
+            "title": "The Timberwolves get the 104-102 Game 1 WIN over the Spurs in ..."
+          },
+          {
+            "domain": "reddit.com",
+            "credibility": "untrusted",
+            "title": "[Highlight] The Minnesota Timberwolves get the final stop and take ..."
+          },
+          {
+            "domain": "espn.com",
+            "credibility": "trusted",
+            "title": "Anthony Edwards' return propels Wolves past Spurs in Game 1 - ESPN"
+          },
+          {
+            "domain": "si.com",
+            "credibility": "untrusted",
+            "title": "Offensive Struggles Sink Spurs as Wolves Steal Game 1"
+          },
+          {
+            "domain": "poundingtherock.com",
+            "credibility": "untrusted",
+            "title": "San Antonio vs. Minnesota, Final Score: Spurs fall in defensive slug ..."
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-07T03:40:49.352Z",
+      "step": "AI",
+      "label": "Prompts constructed",
+      "data": {
+        "personality": "marites",
+        "userPrompt": "Analyze the following text and classify it:\n\n---\nSpurs won game 1 against timberwolves\n---\n\nAdditional search context for fact-checking:\nSource 1 [TRUSTED]:\nTitle: Timberwolves 104-102 Spurs (May 4, 2026) Final Score - ESPN\nSnippet: Edwards returns and Timberwolves overcome big game by Wembanyama to beat Spurs 104-102 in Game 1 ; Timberwolves. MIN. 24, 21 ; Spurs. SA. 23, 22 ...\nLink: https://www.espn.com/nba/game/_/gameId/401871152/timberwolves-spurs\nDomain: espn.com\n\nSource 2 [TRUSTED]:\nTitle: Timberwolves steal Game 1 in last-second thriller despite historic ...\nSnippet: Such was the case in a tight Game 1, which the Wolves won 104-102 Monday night at Frost Bank Center. Advertisement. Anthony Edwards returned to ...\nLink: https://www.nytimes.com/athletic/7254281/2026/05/05/timberwolves-spurs-result-score-game-1/\nDomain: nytimes.com\n\nSource 3 [TRUSTED]:\nTitle: Timberwolves survive last second surge by Spurs in Game 1 - NBA\nSnippet: Game Recap: Timberwolves 104, Spurs 102.\nLink: https://www.nba.com/watch/video/fantastic-finish-timberwolves-survive-last-second-surge-by-spurs-in-game-1\nDomain: nba.com\n\nSource 4 [SEMI-TRUSTED]:\nTitle: #6 TIMBERWOLVES at #2 SPURS | FULL GAME 1 HIGHLIGHTS\nSnippet: The Timberwolves defeated the Spurs, 104-102 tonight in San Antonio. Julius Randle led the way for the Timberwolves with 21 points and 10 ...\nLink: https://www.youtube.com/watch?v=R1ErdXotXUI\nDomain: youtube.com\n\nSource 5 [TRUSTED]:\nTitle: Anthony Edwards' return propels Wolves past Spurs in Game 1 - ESPN\nSnippet: The Minnesota Timberwolves, entering this series as heavy underdogs to the 62-win San Antonio Spurs, pulled off a stunning 104-102 road win ...\nLink: https://www.espn.com/nba/story/_/id/48682145/edwards-returns-propels-wolves-spurs-game-1-stunner\nDomain: espn.com\n",
+        "hasSearchContext": true
+      }
+    },
+    {
+      "timestamp": "2026-05-07T03:40:51.778Z",
+      "step": "AI",
+      "label": "Raw Gemini response received",
+      "data": {
+        "rawResponse": "```json\n{\n  \"label\": \"Fake\",\n  \"confidence\": 100,\n  \"marites_explanation\": \"Ay naku, sis, baliktad ata yung chismis! According to the news, Timberwolves nga ang nanalo sa Game 1, hindi ang Spurs. Grabe, wrong info!\",\n  \"claims\": [\n    \"Spurs won game 1 against timberwolves\"\n  ],\n  \"evidence\": [\n    \"Multiple sources confirm that the Timberwolves won Game 1 against the Spurs with a score of 104-102.\",\n    \"ESPN, New York Times, and NBA.com all reported the Timberwolves' victory.\"\n  ],\n  \"linguistic_flags\": [],\n  \"fact_correction\": \"The claim says the Spurs won Game 1 against the Timberwolves, but according to ESPN, the Timberwolves won 104-102.\"\n}\n```"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T03:40:51.780Z",
+      "step": "AI",
+      "label": "Response parsed successfully",
+      "data": {
+        "label": "Fake",
+        "confidence": 100,
+        "explanation": "Ay naku, sis, baliktad ata yung chismis! According to the news, Timberwolves nga ang nanalo sa Game 1, hindi ang Spurs. Grabe, wrong info!",
+        "claims": [
+          "Spurs won game 1 against timberwolves"
+        ],
+        "evidence": [
+          "Multiple sources confirm that the Timberwolves won Game 1 against the Spurs with a score of 104-102.",
+          "ESPN, New York Times, and NBA.com all reported the Timberwolves' victory."
+        ],
+        "linguisticFlags": [],
+        "factCorrection": "The claim says the Spurs won Game 1 against the Timberwolves, but according to ESPN, the Timberwolves won 104-102."
+      }
+    },
+    {
+      "timestamp": "2026-05-07T03:40:51.781Z",
+      "step": "LITERACY",
+      "label": "Generating literacy lesson",
+      "data": {
+        "classification": "chismis",
+        "flagCount": 0,
+        "sourceCount": 3,
+        "personality": "marites"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T03:40:54.477Z",
+      "step": "LITERACY",
+      "label": "Literacy lesson generated",
+      "data": {
+        "summary": "Naku, sis, baliktad ata yung chismis! Timberwolves pala ang nanalo, hindi Spurs!",
+        "pointCount": 3,
+        "tip": "Always double-check sa mga credible sports websites para iwas fake news!"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T03:40:54.479Z",
+      "step": "OUTPUT",
+      "label": "Final result mapped for frontend",
+      "data": {
+        "classification": "chismis",
+        "chismisLevel": 95,
+        "message": "CHISMIS ALERT! 🚨",
+        "details": "Walang credible evidence na nahanap. Ingat sa pagsha-share!",
+        "breakdown": {
+          "reasons": [
+            "Spurs won game 1 against timberwolves"
+          ],
+          "redFlags": []
+        },
+        "harmScore": {
+          "level": "high",
+          "score": 95,
+          "explanation": "High risk of misinformation. Sharing this could mislead others."
+        },
+        "maritesMode": "Ay naku, sis, baliktad ata yung chismis! According to the news, Timberwolves nga ang nanalo sa Game 1, hindi ang Spurs. Grabe, wrong info!",
+        "resibo": {
+          "verdict": "Multiple sources confirm that the Timberwolves won Game 1 against the Spurs with a score of 104-102. | ESPN, New York Times, and NBA.com all reported the Timberwolves' victory.",
+          "sources": [
+            {
+              "title": "Timberwolves 104-102 Spurs (May 4, 2026) Final Score - ESPN",
+              "url": "https://www.espn.com/nba/game/_/gameId/401871152/timberwolves-spurs",
+              "credibility": "verified"
+            },
+            {
+              "title": "Timberwolves survive last second surge by Spurs in Game 1 - NBA",
+              "url": "https://www.nba.com/watch/video/fantastic-finish-timberwolves-survive-last-second-surge-by-spurs-in-game-1",
+              "credibility": "verified"
+            },
+            {
+              "title": "Anthony Edwards' return propels Wolves past Spurs in Game 1 - ESPN",
+              "url": "https://www.espn.com/nba/story/_/id/48682145/edwards-returns-propels-wolves-spurs-game-1-stunner",
+              "credibility": "verified"
+            }
+          ]
+        },
+        "linguisticFlags": [],
+        "factCorrection": "The claim says the Spurs won Game 1 against the Timberwolves, but according to ESPN, the Timberwolves won 104-102.",
+        "sourceCredibility": {
+          "score": 49,
+          "trustedCount": 4,
+          "semiTrustedCount": 1,
+          "untrustedCount": 4
+        },
+        "literacyLesson": {
+          "summary": "Naku, sis, baliktad ata yung chismis! Timberwolves pala ang nanalo, hindi Spurs!",
+          "points": [
+            {
+              "issue": "Mhie, sabi dito Spurs daw ang nanalo, which is totally wrong!",
+              "correction": "Dapat tiningnan muna sa mga legit news sites like ESPN or NBA.com para sure kung sino talaga ang nag-champion."
+            },
+            {
+              "issue": "Ang claim na 'to ay walang binibigay na source kung saan nanggaling yung info.",
+              "correction": "Dapat may link or at least name nung news organization para mas credible, gets mo?"
+            },
+            {
+              "issue": "Walang specific details like score or important plays na binanggit.",
+              "correction": "Pag factual claim, dapat complete details para convincing, hindi yung basta sabi-sabi lang."
+            }
+          ],
+          "tip": "Always double-check sa mga credible sports websites para iwas fake news!"
+        }
+      }
+    }
+  ]
+}

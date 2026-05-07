@@ -114,6 +114,8 @@ export async function analyzeChismis(
       literacyLesson,
       personality,
       extractedText,
+      "image",
+      "Image Analysis" // For images, we can just use a placeholder or image filename if available
     );
 
     logger.log("OUTPUT", "Final result mapped for frontend", {
@@ -217,6 +219,8 @@ export async function analyzeChismisText(
       literacyLesson,
       personality,
       text,
+      "text",
+      text
     );
 
     logger.log("OUTPUT", "Final result mapped for frontend", {
@@ -332,6 +336,8 @@ export async function analyzeChismisUrl(
       literacyLesson,
       personality,
       extractedText,
+      "url",
+      url
     );
 
     logger.log("OUTPUT", "Final result mapped for frontend", {
@@ -466,6 +472,8 @@ function mapToAnalysisResult(
   literacyLesson: LiteracyLesson | null,
   personality: "marites" | "formal" = "marites",
   extractedText: string = "",
+  inputType: AnalysisResult["inputType"] = "text",
+  originalInput: string = "",
 ): AnalysisResult {
   const classification = mapClassification(gemini.label);
   const chismisLevel = mapChismisLevel(
@@ -524,6 +532,8 @@ function mapToAnalysisResult(
         }
       : { score: 0, trustedCount: 0, semiTrustedCount: 0, untrustedCount: 0 },
     literacyLesson,
+    inputType,
+    originalInput,
   };
 }
 

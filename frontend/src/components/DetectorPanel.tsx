@@ -6,6 +6,8 @@ import { ChismisMeter } from "./ChismisMeter";
 import { analyzeChismisAPI } from "@/lib/apiClient";
 import { useImageDropPaste } from "@/components/hooks/useImageDropPaste";
 import ResultsPanel, { type PopupResult } from "./Popup";
+import { useGetUser } from "@/components/hooks/useGetUser";
+import { useCreateHistory } from "@/components/hooks/useCreateHistory";
 // (AnalysisResult type is used via apiClient return type inference)
 
 /* ----------------- TYPES ----------------- */
@@ -31,6 +33,9 @@ export default function DetectorPanel() {
   const [loading, setLoading] = useState(false);
   const [popupResult, setPopupResult] = useState<PopupResult | null>(null);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
+  const { createHistory } = useCreateHistory();
+  const { user } = useGetUser();
+
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -106,6 +111,21 @@ export default function DetectorPanel() {
         literacyLesson: data.literacyLesson,
       });
       setIsPanelOpen(true);
+
+      // Save to history if user is logged in
+      try {
+        if (user) {
+          // For images, update originalInput to the filename if it was "Image Analysis"
+          const finalData = { ...data };
+          if (activeTab === "image" && imageFile) {
+            finalData.originalInput = imageFile.name;
+          }
+          await createHistory(user.id, finalData);
+          console.log("[DetectorPanel] ✅ History saved");
+        }
+      } catch (err) {
+        console.error("[DetectorPanel] ❌ Failed to save history:", err);
+      }
     } catch {
       setError("Network error. Please check your connection and try again.");
     } finally {
@@ -437,11 +457,10 @@ function TabButton({
   return (
     <button
       onClick={onClick}
-      className={`flex items-center gap-2 px-4 py-2 rounded-lg border text-sm transition ${
-        active
+      className={`flex items-center gap-2 px-4 py-2 rounded-lg border text-sm transition ${active
           ? "bg-[#04356A] text-white border-[#054E98]"
           : "bg-[#001D3F] border-[#04356A] hover:bg-[#0a1a3a] text-[#7FB3FF]"
-      }`}
+        }`}
     >
       {icon}
       {label}

@@ -38,6 +38,9 @@ export interface AnalysisResult {
   };
   /** Media literacy lesson generated after analysis */
   literacyLesson: LiteracyLesson | null;
+  /** Metadata for history tracking */
+  inputType: 'text' | 'url' | 'image';
+  originalInput: string;
 }
 
 export async function analyzeImage(imageBase64: string): Promise<AnalysisResult> {
@@ -78,6 +81,8 @@ export async function analyzeImage(imageBase64: string): Promise<AnalysisResult>
       factCorrection: null,
       sourceCredibility: { score: 80, trustedCount: 2, semiTrustedCount: 1, untrustedCount: 0 },
       literacyLesson: null,
+      inputType: "image",
+      originalInput: "Mock Image",
     };
   }
 
@@ -106,6 +111,8 @@ export async function analyzeImage(imageBase64: string): Promise<AnalysisResult>
       factCorrection: null,
       sourceCredibility: { score: 0, trustedCount: 0, semiTrustedCount: 0, untrustedCount: 0 },
       literacyLesson: null,
+      inputType: "image",
+      originalInput: "Mock Image",
     };
   }
 
@@ -133,5 +140,7 @@ export async function analyzeImage(imageBase64: string): Promise<AnalysisResult>
     factCorrection: "Mock correction: This claim has no supporting evidence.",
     sourceCredibility: { score: 0, trustedCount: 0, semiTrustedCount: 0, untrustedCount: 0 },
     literacyLesson: null,
+    inputType: "image",
+    originalInput: "Mock Image",
   };
 }

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -22,27 +23,25 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(null);
-    setSuccess(false);
     if (password !== confirmPassword) {
-      setError("Passwords do not match.");
+      toast.error("Passwords do not match.");
       return;
     }
     if (password.length < 8) {
-      setError("Password must be at least 8 characters.");
+      toast.error("Password must be at least 8 characters.");
       return;
     }
     setLoading(true);
     try {
       await signUp(email, password);
-      setSuccess(true);
+      toast.success(
+        "Signup successful! Please check your email to verify your account.",
+      );
     } catch (err: any) {
-      setError(err.message || "Signup failed");
+      toast.error(err.message || "Signup failed");
     } finally {
       setLoading(false);
     }
@@ -111,17 +110,6 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
               />
               <FieldDescription>Please confirm your password.</FieldDescription>
             </Field>
-            {error && (
-              <FieldDescription className="text-red-400 text-center">
-                {error}
-              </FieldDescription>
-            )}
-            {success && (
-              <FieldDescription className="text-green-400 text-center">
-                Signup successful! Please check your email to verify your
-                account.
-              </FieldDescription>
-            )}
             <FieldGroup>
               <Field>
                 <Button type="submit" disabled={loading}>

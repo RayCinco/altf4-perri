@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,19 +25,15 @@ export function LoginForm({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(null);
-    setSuccess(false);
     setLoading(true);
     try {
       await signIn(email, password);
-      setSuccess(true);
+      toast.success("Login successful!");
     } catch (err: any) {
-      setError(err.message || "Login failed");
+      toast.error(err.message || "Login failed");
     } finally {
       setLoading(false);
     }
@@ -83,16 +80,6 @@ export function LoginForm({
                   required
                 />
               </Field>
-              {error && (
-                <FieldDescription className="text-red-400 text-center">
-                  {error}
-                </FieldDescription>
-              )}
-              {success && (
-                <FieldDescription className="text-green-400 text-center">
-                  Login successful!
-                </FieldDescription>
-              )}
               <Field>
                 <Button type="submit" disabled={loading}>
                   {loading ? "Logging in..." : "Login"}

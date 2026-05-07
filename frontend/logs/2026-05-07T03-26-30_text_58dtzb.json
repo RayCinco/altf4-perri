@@ -1,0 +1,137 @@
+{
+  "session": {
+    "id": "58dtzb",
+    "mode": "text",
+    "startedAt": "2026-05-07T03:26:30.994Z",
+    "completedAt": "2026-05-07T03:26:36.332Z",
+    "durationMs": 5338
+  },
+  "pipeline": [
+    {
+      "timestamp": "2026-05-07T03:26:30.996Z",
+      "step": "PIPELINE",
+      "label": "Text pipeline started",
+      "data": {
+        "inputText": "Hello",
+        "inputTextLength": 5
+      }
+    },
+    {
+      "timestamp": "2026-05-07T03:26:31.879Z",
+      "step": "SEARCH",
+      "label": "Query generated from text",
+      "data": {
+        "inputTextPreview": "Hello",
+        "generatedQuery": "NO_SEARCH_NEEDED"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T03:26:31.880Z",
+      "step": "SEARCH",
+      "label": "No search needed — AI decided to skip",
+      "data": {}
+    },
+    {
+      "timestamp": "2026-05-07T03:26:31.883Z",
+      "step": "AI",
+      "label": "Prompts constructed",
+      "data": {
+        "personality": "marites",
+        "userPrompt": "Analyze the following text and classify it:\n\n---\nHello\n---",
+        "hasSearchContext": false
+      }
+    },
+    {
+      "timestamp": "2026-05-07T03:26:33.432Z",
+      "step": "AI",
+      "label": "Raw Gemini response received",
+      "data": {
+        "rawResponse": "```json\n{\n  \"label\": \"Suspicious\",\n  \"confidence\": 50,\n  \"marites_explanation\": \"Teh, hello lang? Walang claim, walang chismis. Parang nag-hi lang talaga. Baka nagkamali ng send?\",\n  \"claims\": [],\n  \"evidence\": \"No claims detected.\",\n  \"linguistic_flags\": [],\n  \"fact_correction\": null\n}\n```"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T03:26:33.434Z",
+      "step": "AI",
+      "label": "Response parsed successfully",
+      "data": {
+        "label": "Suspicious",
+        "confidence": 50,
+        "explanation": "Teh, hello lang? Walang claim, walang chismis. Parang nag-hi lang talaga. Baka nagkamali ng send?",
+        "claims": [],
+        "evidence": [],
+        "linguisticFlags": [],
+        "factCorrection": null
+      }
+    },
+    {
+      "timestamp": "2026-05-07T03:26:33.435Z",
+      "step": "LITERACY",
+      "label": "Generating literacy lesson",
+      "data": {
+        "classification": "opinion",
+        "flagCount": 0,
+        "sourceCount": 0,
+        "personality": "marites"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T03:26:36.329Z",
+      "step": "LITERACY",
+      "label": "Literacy lesson generated",
+      "data": {
+        "summary": "Sis, walang fact dito, opinion lang! Dapat hanapan natin ng matibay na basehan bago paniwalaan.",
+        "pointCount": 2,
+        "tip": "Next time, mhie, hanapin yung 'sino, ano, saan, kailan' para mas sure na hindi tayo nagpapaniwala sa haka-haka lang!"
+      }
+    },
+    {
+      "timestamp": "2026-05-07T03:26:36.331Z",
+      "step": "OUTPUT",
+      "label": "Final result mapped for frontend",
+      "data": {
+        "classification": "opinion",
+        "chismisLevel": 50,
+        "message": "Hmm... hindi sure si Marites 🤔",
+        "details": "May mga questionable parts — double check muna bago i-share.",
+        "breakdown": {
+          "reasons": [
+            "No specific claims extracted"
+          ],
+          "redFlags": []
+        },
+        "harmScore": {
+          "level": "medium",
+          "score": 50,
+          "explanation": "This content has unclear or unverified claims. Verify before sharing."
+        },
+        "maritesMode": "Teh, hello lang? Walang claim, walang chismis. Parang nag-hi lang talaga. Baka nagkamali ng send?",
+        "resibo": {
+          "verdict": "Walang mahanap na resibo si Perri... 👀",
+          "sources": []
+        },
+        "linguisticFlags": [],
+        "factCorrection": null,
+        "sourceCredibility": {
+          "score": 0,
+          "trustedCount": 0,
+          "semiTrustedCount": 0,
+          "untrustedCount": 0
+        },
+        "literacyLesson": {
+          "summary": "Sis, walang fact dito, opinion lang! Dapat hanapan natin ng matibay na basehan bago paniwalaan.",
+          "points": [
+            {
+              "issue": "Walang specific details or facts na binibigay yung claim, puro general idea lang.",
+              "correction": "Ang factual claim dapat may concrete details like numbers, dates, or names para ma-verify."
+            },
+            {
+              "issue": "Teh, walang source na binanggit, kaya di natin alam kung saan galing yung info.",
+              "correction": "Dapat may credible source lagi para masigurado natin na reliable yung claim, like reputable news sites or expert opinions."
+            }
+          ],
+          "tip": "Next time, mhie, hanapin yung 'sino, ano, saan, kailan' para mas sure na hindi tayo nagpapaniwala sa haka-haka lang!"
+        }
+      }
+    }
+  ]
+}
