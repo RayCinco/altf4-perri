@@ -138,6 +138,16 @@ export default function DetectorPanel() {
     }
   };
 
+  const handleAnalyzeAgain = () => {
+    setTextInput("");
+    setUrlInput("");
+    setImageFile(null);
+    setError(null);
+    setResult(null);
+    setPopupResult(null);
+    setIsPanelOpen(false);
+  };
+
   return (
     <>
       <div className="w-full max-w-5xl mx-auto rounded-2xl border border-[#04356A] bg-[#000919] text-white p-4">
@@ -151,7 +161,7 @@ export default function DetectorPanel() {
             >
               Mode:
               <span className="text-[#54A9FF] font-medium">
-                {mode === "genz" ? "GenZ" : "Formal"}
+                {mode === "genz" ? "Perri" : "Formal"}
               </span>
               <ChevronDown size={16} />
             </button>
@@ -165,7 +175,7 @@ export default function DetectorPanel() {
                   }}
                   className="w-full px-4 py-2 text-left hover:bg-[#0a1a3a]"
                 >
-                  GenZ
+                  Perri
                 </button>
                 <button
                   onClick={() => {
@@ -260,12 +270,20 @@ export default function DetectorPanel() {
                   classification={result.classification}
                   personality={mode === "genz" ? "marites" : "formal"}
                 />
-                <button
-                  onClick={() => setIsPanelOpen(true)}
-                  className="mt-3 px-5 py-2 bg-[#04356A] hover:bg-[#054E98] text-white text-sm rounded-lg border border-[#1e3a5f] transition"
-                >
-                  View Full Results
-                </button>
+                <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
+                  <button
+                    onClick={() => setIsPanelOpen(true)}
+                    className="px-5 py-2 bg-[#04356A] hover:bg-[#054E98] text-white text-sm rounded-lg border border-[#1e3a5f] transition"
+                  >
+                    View Full Results
+                  </button>
+                  <button
+                    onClick={handleAnalyzeAgain}
+                    className="px-5 py-2 bg-[#001D3F] hover:bg-[#0a1a3a] text-[#7FB3FF] text-sm rounded-lg border border-[#04356A] transition"
+                  >
+                    Analyze Again
+                  </button>
+                </div>
               </>
             )}
           </div>
