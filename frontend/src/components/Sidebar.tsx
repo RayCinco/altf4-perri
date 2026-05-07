@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { Clock3, History, Home, Menu, UserRound } from "lucide-react";
 import { useGetUser } from "@/components/hooks/useGetUser";
@@ -51,14 +52,27 @@ export default function Sidebar() {
         </button>
 
         {sidebarOpen && (
-          <div className="mt-12 flex flex-1 flex-col space-y-5 text-sm text-white/80">
+          <div className="mt-12 flex flex-1 flex-col space-y-1 text-sm text-white/80">
             <div>
-              <div className="mb-2 flex items-center gap-2 text-white">
+              <Link
+                href="/"
+                className="mb-2 flex items-center gap-2 rounded-lg px-2 py-2 text-white transition hover:bg-white/5"
+              >
                 <Home className="h-4 w-4" />
                 <span className="font-semibold">Home</span>
-              </div>
+              </Link>
             </div>
-
+            {user && (
+              <div>
+                <Link
+                  href="/history"
+                  className="mb-2 flex items-center gap-2 rounded-lg px-2 py-2 text-white transition hover:bg-white/5"
+                >
+                  <History className="h-4 w-4" />
+                  <span className="font-semibold">History</span>
+                </Link>
+              </div>
+            )}
             {!user && (
               <div className="mb-2">
                 <h2 className="text-xl font-bold text-white mb-1">
@@ -85,8 +99,9 @@ export default function Sidebar() {
                   </h2>
                   <div className="space-y-2">
                     {histories.slice(0, 5).map((item) => (
-                      <div
+                      <Link
                         key={item.id}
+                        href={`/history/${item.id}`}
                         className="flex flex-col rounded-lg px-2 py-2 hover:bg-white/5 hover:text-white"
                       >
                         <div className="flex items-center gap-2">
@@ -103,45 +118,11 @@ export default function Sidebar() {
                         >
                           {item.classification}
                         </span>
-                      </div>
+                      </Link>
                     ))}
                     {histories.length === 0 && (
                       <p className="px-2 text-xs text-white/30">
                         No recent scans yet.
-                      </p>
-                    )}
-                  </div>
-                </div>
-
-                <div>
-                  <h2 className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
-                    History
-                  </h2>
-                  <div className="space-y-2">
-                    {histories.map((item) => (
-                      <div
-                        key={item.id}
-                        className="flex flex-col rounded-lg px-2 py-2 hover:bg-white/5 hover:text-white"
-                      >
-                        <div className="flex items-center gap-2">
-                          <History className="h-4 w-4 shrink-0" />
-                          <span className="truncate">
-                            {item.analysisResult?.originalInput || "Scan"}
-                          </span>
-                        </div>
-                        <span
-                          className={`ml-6 text-xs capitalize ${
-                            CLASSIFICATION_COLORS[item.classification] ??
-                            "text-white/50"
-                          }`}
-                        >
-                          {item.classification}
-                        </span>
-                      </div>
-                    ))}
-                    {histories.length === 0 && (
-                      <p className="px-2 text-xs text-white/30">
-                        No history yet.
                       </p>
                     )}
                   </div>
@@ -185,24 +166,30 @@ export default function Sidebar() {
         {!sidebarOpen && (
           <div className="mt-8 flex flex-1 flex-col items-center text-white/80">
             <div className="flex flex-col items-center gap-4">
-              <div className="group relative flex items-center justify-center">
+              <Link
+                href="/"
+                className="group relative flex items-center justify-center"
+              >
                 <Home className="h-5 w-5 hover:text-white" />
                 <div className="pointer-events-none absolute left-full top-1/2 z-[70] ml-3 hidden -translate-y-1/2 whitespace-nowrap rounded-lg bg-white px-3 py-2 text-sm font-medium text-black shadow-2xl group-hover:block">
                   Home
                 </div>
-              </div>
+              </Link>
               {user && (
                 <>
+                  <Link
+                    href="/history"
+                    className="group relative flex items-center justify-center"
+                  >
+                    <History className="h-5 w-5 hover:text-white" />
+                    <div className="pointer-events-none absolute left-full top-1/2 z-[70] ml-3 hidden -translate-y-1/2 whitespace-nowrap rounded-lg bg-white px-3 py-2 text-sm font-medium text-black shadow-2xl group-hover:block">
+                      History
+                    </div>
+                  </Link>
                   <div className="group relative flex items-center justify-center">
                     <Clock3 className="h-5 w-5 hover:text-white" />
                     <div className="pointer-events-none absolute left-full top-1/2 z-[70] ml-3 hidden -translate-y-1/2 whitespace-nowrap rounded-lg bg-white px-3 py-2 text-sm font-medium text-black shadow-2xl group-hover:block">
                       Recent
-                    </div>
-                  </div>
-                  <div className="group relative flex items-center justify-center">
-                    <History className="h-5 w-5 hover:text-white" />
-                    <div className="pointer-events-none absolute left-full top-1/2 z-[70] ml-3 hidden -translate-y-1/2 whitespace-nowrap rounded-lg bg-white px-3 py-2 text-sm font-medium text-black shadow-2xl group-hover:block">
-                      History
                     </div>
                   </div>
                 </>
