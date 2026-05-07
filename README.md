@@ -13,7 +13,7 @@ The project also includes a Chrome Extension that allows users to quickly analyz
 - 📈 Real vs Fake News Comparison
 - 🌐 Chrome Extension Integration
 - 📰 Verified Resource Suggestions
-- 🎨 Interactive and Modern UI
+- 🎨 Interactive and Modern 
 - ⚡ Real-time Analysis Feedback
 - 📱 Responsive Design
 
@@ -42,9 +42,9 @@ The Chrome Extension allows users to perform the same analysis directly while br
 # 🛠️ Technologies Used
 
 - **Frontend:** Next.js, React, TypeScript
-- **Backend:** 
-- **Database:** 
-- **AI:** 
+- **Backend:** Next.js
+- **Database:** Supabase
+- **AI:** GeminiAI, SurperDevAI
 - **Styling:** Tailwind CSS
 - **Animations:** Framer Motion
 - **Browser Extension:** Chrome Extension API
@@ -54,18 +54,40 @@ The Chrome Extension allows users to perform the same analysis directly while br
 
 # 📂 Project Structure
 
+# Project Structure
+
 ```bash
-chismiscan/
+public/
+├── logo/
+└── showcase/
+
+src/
+├── app/
+│   ├── api/
+│   ├── chrome-extension/
+│   ├── history/
+│   ├── types/
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
 │
-├── app/                 # Main application pages
-├── components/          # Reusable UI components
-├── public/              # Static assets
-├── extension/           # Chrome extension files
-├── styles/              # Global styles
-├── utils/               # Helper functions
-├── README.md
-└── package.json
-```
+├── components/
+│
+└── lib/
+    ├── ai/
+    ├── pipeline/
+    ├── search/
+    ├── ai_chatbot.ts
+    ├── ai_personality.ts
+    ├── ai_search.ts
+    ├── ai.ts
+    ├── apiClient.ts
+    ├── chismis.ts
+    ├── media_literacy.ts
+    ├── ocr.ts
+    ├── source_filter.ts
+    └── supabaseClient.ts
 
 ---
 
@@ -74,13 +96,13 @@ chismiscan/
 ## 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/chismiscan.git
+git clone https://github.com/your-username/altf4-perri.git
 ```
 
 ## 2. Navigate to the Project Folder
 
 ```bash
-cd chismiscan
+cd frontend
 ```
 
 ## 3. Install Dependencies
@@ -114,13 +136,18 @@ chrome://extensions/
 
 3. Enable **Developer Mode**
 4. Click **Load Unpacked**
-5. Select the `extension` folder from the project
+5. Select the `chrome-extension` folder from the project
 
 ---
 
-# 👥 Developers
+# 👥 Team ALTF4
 
-Developed by the Perri Team.
+Developers behind Perri 🦜
+
+- Levine Kiana Centeno
+- Raymond Cinco
+- Jan Chester Asuncion
+- Syzmon Dave Abuan
 
 ---
 
