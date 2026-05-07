@@ -40,21 +40,12 @@ export function Header() {
                     Logout
                   </button>
                 ) : (
-                  <>
-                    <button
-                      onClick={() => setModal("login")}
-                      className="px-4 py-1.5 rounded-lg border border-[#001D3F] text-white hover:bg-[#0a1a3a] transition"
-                    >
-                      Login
-                    </button>
-
-                    <button
-                      onClick={() => setModal("signup")}
-                      className="px-4 py-1.5 rounded-lg bg-[#054E98] text-white hover:bg-[#04356A] transition"
-                    >
-                      Sign Up
-                    </button>
-                  </>
+                  <button
+                    onClick={() => setModal("signup")}
+                    className="px-4 py-1.5 rounded-lg bg-[#054E98] text-white hover:bg-[#04356A] transition"
+                  >
+                    Sign Up
+                  </button>
                 )}
               </div>
             )}

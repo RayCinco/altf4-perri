@@ -36,7 +36,6 @@ export default function DetectorPanel() {
   const { createHistory } = useCreateHistory();
   const { user } = useGetUser();
 
-
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -120,6 +119,11 @@ export default function DetectorPanel() {
           if (activeTab === "image" && imageFile) {
             finalData.originalInput = imageFile.name;
           }
+          console.log(
+            "[DetectorPanel] 💾 Saving history for user: ",
+            user.id,
+            finalData,
+          );
           await createHistory(user.id, finalData);
           console.log("[DetectorPanel] ✅ History saved");
         }
@@ -457,10 +461,11 @@ function TabButton({
   return (
     <button
       onClick={onClick}
-      className={`flex items-center gap-2 px-4 py-2 rounded-lg border text-sm transition ${active
+      className={`flex items-center gap-2 px-4 py-2 rounded-lg border text-sm transition ${
+        active
           ? "bg-[#04356A] text-white border-[#054E98]"
           : "bg-[#001D3F] border-[#04356A] hover:bg-[#0a1a3a] text-[#7FB3FF]"
-        }`}
+      }`}
     >
       {icon}
       {label}

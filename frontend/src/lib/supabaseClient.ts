@@ -65,3 +65,13 @@ export const getUserHistories = async (userId: string) => {
   if (error) throw error;
   return data;
 };
+
+export const getHistoryById = async (historyId: number) => {
+  const { data, error } = await supabase
+    .from("history")
+    .select("*")
+    .eq("id", historyId)
+    .single();
+  if (error) throw error;
+  return data;
+};

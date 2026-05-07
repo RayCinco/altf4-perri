@@ -12,7 +12,13 @@ export function useCreateHistory() {
       const data = await saveHistory(userId, analysisResult);
       return data;
     } catch (err) {
-      const errorObject = err instanceof Error ? err : new Error("Failed to save history");
+      // Supabase throws PostgrestError which is not instanceof Error — extract message via duck-typing
+      const message =
+        err instanceof Error
+          ? err.message
+          : ((err as { message?: string })?.message ??
+            "Failed to save history");
+      const errorObject = new Error(message);
       setError(errorObject);
       throw errorObject;
     } finally {
