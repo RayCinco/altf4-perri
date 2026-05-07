@@ -59,6 +59,24 @@ export default function Sidebar() {
               </div>
             </div>
 
+            {!user && (
+              <div className="mb-2">
+                <h2 className="text-xl font-bold text-white mb-1">
+                  ChismiScan
+                </h2>
+                <p className="text-base text-white/80 leading-snug mb-1">
+                  Gossip Analyzer & Fake News Detector
+                </p>
+                <p className="text-sm text-white/60 mb-1">
+                  Analyze screenshots, text, or viral posts for rumors, facts,
+                  or chismis.
+                </p>
+                <p className="text-sm text-white/60">
+                  Sign up to save your scan history!
+                </p>
+              </div>
+            )}
+
             {user ? (
               <>
                 <div>
@@ -200,18 +218,11 @@ export default function Sidebar() {
         )}
       </aside>
 
-      {sidebarOpen && (
-        <div
-          className="fixed inset-0 z-40 bg-black/35"
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
-
       <AuthModal isOpen={modal === "login"} onClose={() => setModal(null)}>
-        <LoginForm />
+        <LoginForm onSuccess={() => setModal(null)} />
       </AuthModal>
       <AuthModal isOpen={modal === "signup"} onClose={() => setModal(null)}>
-        <SignupForm />
+        <SignupForm onSuccess={() => setModal(null)} />
       </AuthModal>
     </>
   );

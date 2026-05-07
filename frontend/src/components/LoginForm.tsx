@@ -20,8 +20,9 @@ import { signIn } from "@/lib/supabaseClient";
 
 export function LoginForm({
   className,
+  onSuccess,
   ...props
-}: React.ComponentProps<"div">) {
+}: React.ComponentProps<"div"> & { onSuccess?: () => void }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -32,6 +33,7 @@ export function LoginForm({
     try {
       await signIn(email, password);
       toast.success("Login successful!");
+      if (onSuccess) onSuccess();
     } catch (err: any) {
       toast.error(err.message || "Login failed");
     } finally {

@@ -17,7 +17,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { signUp } from "@/lib/supabaseClient";
 
-export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
+export function SignupForm({
+  onSuccess,
+  ...props
+}: React.ComponentProps<typeof Card> & { onSuccess?: () => void }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -40,6 +43,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
       toast.success(
         "Signup successful! Please check your email to verify your account.",
       );
+      if (onSuccess) onSuccess();
     } catch (err: any) {
       toast.error(err.message || "Signup failed");
     } finally {
