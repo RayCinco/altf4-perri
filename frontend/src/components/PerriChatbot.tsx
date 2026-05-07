@@ -1,18 +1,36 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 
+interface LiteracyPoint {
+  issue: string;
+  correction: string;
+}
+
+interface LiteracyLesson {
+  summary: string;
+  points: LiteracyPoint[];
+  tip: string;
+}
+
+interface Source {
+  title: string;
+  url: string;
+  credibility: "verified" | "questionable" | "unknown";
+}
+
 interface Message {
   id: string;
   text: string;
   sender: "user" | "bot";
+  sources?: Source[];
+  factCorrection?: string | null;
+  literacyLesson?: LiteracyLesson | null;
 }
-
-
 
 export default function PerriChatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { id: "1", text: "Hi! I am Perri.", sender: "bot" },
+    { id: "1", text: "Hi! Bhie ako si Perri.", sender: "bot" },
   ]);
   const [input, setInput] = useState("");
   const [mounted, setMounted] = useState(false);
@@ -21,8 +39,6 @@ export default function PerriChatbot() {
   useEffect(() => {
     setMounted(true);
   }, []);
-
-
 
   useEffect(() => {
     try {
@@ -75,7 +91,14 @@ export default function PerriChatbot() {
 
       setMessages((prev) => [
         ...prev,
-        { id: (Date.now() + 1).toString(), text: botText, sender: "bot" },
+        {
+          id: (Date.now() + 1).toString(),
+          text: botText,
+          sender: "bot",
+          sources: data?.sources ?? [],
+          factCorrection: data?.factCorrection ?? null,
+          literacyLesson: data?.literacyLesson ?? null,
+        },
       ]);
     } catch (e) {
       setMessages((prev) => [
@@ -133,16 +156,85 @@ export default function PerriChatbot() {
                 <img
                   src="/logo/ChatbotIcon.png"
                   alt="Perri"
-                  className="h-5 w-5 sm:h-6 sm:w-6 rounded-full object-cover mr-1.5 sm:mr-2"
+                  className="h-5 w-5 sm:h-6 sm:w-6 rounded-full object-cover mr-1.5 sm:mr-2 self-start mt-1"
                 />
               )}
-              <div
-                className={`max-w-[80%] rounded-2xl px-2.5 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm ${msg.sender === "user"
-                  ? "bg-[#04356A] text-white"
-                  : "bg-[#001D3F]  text-white"
+              <div className="max-w-[80%] flex flex-col gap-1.5">
+                <div
+                  className={`rounded-2xl px-2.5 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm ${
+                    msg.sender === "user"
+                      ? "bg-[#04356A] text-white"
+                      : "bg-[#001D3F] text-white"
                   }`}
-              >
-                {msg.text}
+                >
+                  {msg.text}
+                </div>
+
+                {/* Fact Correction */}
+                {msg.sender === "bot" && msg.factCorrection && (
+                  <div className="rounded-xl bg-[#1a0a0a] border border-red-800/50 px-2.5 py-1.5 sm:px-3 sm:py-2 text-xs text-red-300">
+                    <span className="font-semibold text-red-400">
+                      ✗ Fact Check:{" "}
+                    </span>
+                    {msg.factCorrection}
+                  </div>
+                )}
+
+                {/* Sources */}
+                {msg.sender === "bot" &&
+                  msg.sources &&
+                  msg.sources.length > 0 && (
+                    <div className="rounded-xl bg-[#001d3f] border border-[#04356A]/60 px-2.5 py-1.5 sm:px-3 sm:py-2 text-xs">
+                      <p className="text-[#7FB3FF] font-semibold mb-1">
+                        📎 Sources:
+                      </p>
+                      <ul className="flex flex-col gap-0.5">
+                        {msg.sources.map((src, i) => (
+                          <li key={i} className="flex items-center gap-1">
+                            <span
+                              className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${
+                                src.credibility === "verified"
+                                  ? "bg-green-400"
+                                  : src.credibility === "questionable"
+                                    ? "bg-yellow-400"
+                                    : "bg-gray-400"
+                              }`}
+                            />
+                            <a
+                              href={src.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-[#7FB3FF] hover:underline truncate"
+                              title={src.title}
+                            >
+                              {src.title}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                {/* Media Literacy Lesson */}
+                {msg.sender === "bot" && msg.literacyLesson && (
+                  <div className="rounded-xl bg-[#001d3f] border border-[#054E98]/60 px-2.5 py-1.5 sm:px-3 sm:py-2 text-xs">
+                    <p className="text-[#7FB3FF] font-semibold mb-1">
+                      📚 Media Literacy:
+                    </p>
+                    <p className="text-white/80 mb-1">
+                      {msg.literacyLesson.summary}
+                    </p>
+                    {msg.literacyLesson.points.slice(0, 2).map((pt, i) => (
+                      <div key={i} className="mb-1">
+                        <span className="text-yellow-400">⚠ </span>
+                        <span className="text-white/70">{pt.issue}</span>
+                      </div>
+                    ))}
+                    <p className="text-green-400/80 italic">
+                      💡 {msg.literacyLesson.tip}
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           ))}

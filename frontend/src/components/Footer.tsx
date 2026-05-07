@@ -1,6 +1,6 @@
 "use client";
 
-import { Scan, Mail } from "lucide-react";
+import { Play } from "lucide-react";
 
 export function Footer() {
   return (
@@ -21,22 +21,25 @@ export function Footer() {
             </div>
 
             <p className="text-sm text-gray-400 max-w-md leading-relaxed">
-              Perri AI is an AI-powered misinformation detection and media literacy
-              platform designed to help users identify fake news, analyze viral
-              claims, and understand how credible information should look online.
+              Perri AI is an AI-powered misinformation detection and media
+              literacy platform designed to help users identify fake news,
+              analyze viral claims, and understand how credible information
+              should look online.
             </p>
           </div>
 
           {/* Social & Contact */}
           <div>
-            <h3 className="text-white font-medium mb-4">Connect</h3>
+            <h3 className="text-white font-medium mb-4">Demo</h3>
 
             <div className="flex gap-4">
               <a
-                href="mailto:perriai.support@gmail.com"
-                className="p-2 bg-white/5 rounded-full hover:bg-white/10 transition-all border border-white/10"
+                href="https://www.youtube.com/@PerriAI"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 bg-white/5 rounded-full hover:bg-red-600/20 transition-all border border-white/10"
               >
-                <Mail className="w-4 h-4 text-gray-400 hover:text-white" />
+                <Play className="w-4 h-4 text-gray-400 hover:text-red-500" />
               </a>
             </div>
 

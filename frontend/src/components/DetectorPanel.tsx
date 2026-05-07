@@ -446,13 +446,21 @@ function UrlUI({
 }) {
   return (
     <div className="w-full h-full flex flex-col items-center justify-center gap-4">
-      <input
-        type="text"
-        placeholder="Paste URL here..."
-        className="w-full px-4 py-3 bg-[#001D3F] border border-[#04356A] rounded-lg outline-none text-sm text-white placeholder-[#7FB3FF]/50"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-      />
+      <div className="w-full flex flex-col gap-1.5">
+        <input
+          type="text"
+          placeholder="Paste URL here..."
+          className="w-full px-4 py-3 bg-[#001D3F] border border-[#04356A] rounded-lg outline-none text-sm text-white placeholder-[#7FB3FF]/50"
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+        />
+        <p className="text-xs text-[#7FB3FF]/40 flex items-center gap-1.5 px-1">
+          <span className="text-yellow-500/70">⚠</span>
+          <span>
+            Does not support private, login-required, or locally hosted URLs.
+          </span>
+        </p>
+      </div>
 
       <button
         onClick={onAnalyze}

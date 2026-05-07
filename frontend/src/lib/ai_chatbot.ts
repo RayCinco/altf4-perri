@@ -43,6 +43,55 @@ Generate a Taglish, Filipino "Marites-style" explanation:
 - Levine Kiana Centeno
 `;
 
+const INTENT_CLASSIFIER_INSTRUCTION = `You are a message intent classifier for Perri, a Filipino AI fact-checking chatbot parrot.
+
+Classify the user message as either "chat" or "factcheck".
+Reply with ONLY one word: "chat" or "factcheck".
+
+Rules:
+- "chat": greetings (hi, hello, kumusta, hey), questions about Perri or the chatbot itself (sino ka, ano ang ginagawa mo, magpakilala ka), questions about the developers or who made Perri, thank you, goodbye, small talk, or anything that is personal/conversational and does NOT involve verifying a real-world claim.
+- "factcheck": any claim, rumor, news, viral post, or statement about real-world events, people, science, history, or current events that needs to be verified as true or false.
+
+Examples:
+- "Hello" → chat
+- "Hi Perri!" → chat
+- "Sino ang mga developers?" → chat
+- "Who made you?" → chat
+- "Ano ang ginagawa mo?" → chat
+- "What do you do?" → chat
+- "Pakilala ka naman" → chat
+- "Salamat Perri" → chat
+- "Totoo ba na si [politician] ay nag-[claim]?" → factcheck
+- "Is it true that [news claim]?" → factcheck
+- "Narinig ko na [viral claim]" → factcheck
+- "Fake ba ang post na ito?" → factcheck
+- "[Statement about real-world event]" → factcheck`;
+
+/**
+ * Classifies a user message as "chat" (conversational) or "factcheck" (needs verification).
+ * Uses a minimal Gemini call for fast routing.
+ */
+export async function classifyMessage(
+  userMessage: string,
+): Promise<"chat" | "factcheck"> {
+  const key = process.env.GEMINI_API_KEY;
+  if (!key) return "factcheck";
+
+  const genAI = new GoogleGenerativeAI(key);
+  const model = genAI.getGenerativeModel({
+    model: "gemini-2.0-flash",
+    systemInstruction: INTENT_CLASSIFIER_INSTRUCTION,
+  });
+
+  const result = await model.generateContent({
+    contents: [{ role: "user", parts: [{ text: userMessage }] }],
+    generationConfig: { temperature: 0, maxOutputTokens: 5 },
+  });
+
+  const label = result.response.text().trim().toLowerCase();
+  return label.includes("chat") ? "chat" : "factcheck";
+}
+
 export async function generateMaritesReply(userMessage: string) {
   const key = process.env.GEMINI_API_KEY;
 

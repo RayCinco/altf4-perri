@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { classifyMessage, generateMaritesReply } from "../../../lib/ai_chatbot";
 import { runTextAnalysis } from "../../../lib/pipeline/runner";
 
 export async function POST(req: Request) {
@@ -16,6 +17,18 @@ export async function POST(req: Request) {
     }
 
     try {
+      const intent = await classifyMessage(userMessage);
+
+      if (intent === "chat") {
+        const reply = await generateMaritesReply(userMessage);
+        return NextResponse.json({
+          reply,
+          sources: [],
+          factCorrection: null,
+          literacyLesson: null,
+        });
+      }
+
       const result = await runTextAnalysis(userMessage, "marites");
 
       return NextResponse.json({
