@@ -4,19 +4,17 @@
   <meta charset="UTF-8" />
   <title>Chismis Detector</title>
 
-  <!-- Inter Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="popup.css" />
 </head>
 
 <body>
   <div class="container">
 
-    <!-- Top Controls -->
+    <!-- MODE + TYPE -->
     <div class="top">
       <select id="modeSelect" class="select">
-        <option value="genz">GenZ Mode</option>
+        <option value="genz">Marites Mode</option>
         <option value="formal">Formal Mode</option>
       </select>
 
@@ -27,21 +25,40 @@
       </select>
     </div>
 
-    <!-- Center Input -->
+    <!-- INPUTS -->
     <div class="center-box">
+
       <textarea id="textInput" class="input active" placeholder="Paste chismis..."></textarea>
-      <input id="urlInput" class="input" placeholder="Paste URL (https://...)" />
-      <input type="file" id="imageInput" class="input" />
+
+      <input id="urlInput" class="input" placeholder="Paste URL..." />
+
+      <!-- IMAGE BOX -->
+      <div id="imageBox" class="image-box input">
+        <input type="file" id="imageInput" class="hidden" accept="image/*" />
+
+        <div id="imageDrop" class="image-drop">
+          📎 Paste (Ctrl+V) / Upload Image<br><br>
+          <button id="uploadBtn">Choose File</button>
+        </div>
+
+        <img id="imagePreview" class="preview hidden" />
+        <button id="removeImage" class="remove-btn hidden">Remove</button>
+      </div>
+
     </div>
 
-    <!-- Analyze -->
-    <button id="analyzeBtn" class="primary-btn">Analyze</button>
+    <!-- ACTIONS -->
+    <div class="button-row">
+      <button id="analyzeBtn" class="primary-btn">Analyze</button>
+    </div>
 
-    <!-- Results -->
-    <div id="resultBox" class="result">
+    <!-- RESULT -->
+    <div class="result">
+
       <div id="status">Your analysis will appear here.</div>
 
       <div id="analysisUI" class="hidden">
+
         <div class="meter">
           <div id="meterFill"></div>
         </div>
@@ -54,6 +71,7 @@
         <div id="classification"></div>
         <div id="comparison"></div>
         <div id="sources"></div>
+
       </div>
     </div>
 

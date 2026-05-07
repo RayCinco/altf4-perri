@@ -1,17 +1,21 @@
 {
   "manifest_version": 3,
   "name": "Perri",
-  "version": "1.3",
-  "description": "Analyze text, URLs, and images for chismis level.",
+  "version": "1.0",
+  "description": "Detect chismis in text, URLs, images, and screenshots.",
+
+  "permissions": [
+    "activeTab",
+    "tabs"
+  ],
+
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Perri",
     "default_icon": {
       "16": "icons/perri.png",
       "32": "icons/perri.png",
       "48": "icons/perri.png",
       "128": "icons/perri.png"
     }
-  },
-  "permissions": ["activeTab", "storage"]
+  }
 }

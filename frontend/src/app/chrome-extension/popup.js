@@ -3,16 +3,16 @@ const typeSelect = document.getElementById("typeSelect");
 const inputs = {
   text: document.getElementById("textInput"),
   url: document.getElementById("urlInput"),
-  image: document.getElementById("imageInput")
+  image: document.getElementById("imageBox")
 };
 
-// Switch input type
+/* SWITCH TYPE */
 typeSelect.addEventListener("change", () => {
   Object.values(inputs).forEach(el => el.classList.remove("active"));
   inputs[typeSelect.value].classList.add("active");
 });
 
-// UI Elements
+/* RESULT UI */
 const status = document.getElementById("status");
 const analysisUI = document.getElementById("analysisUI");
 
@@ -23,102 +23,107 @@ const classification = document.getElementById("classification");
 const comparison = document.getElementById("comparison");
 const sources = document.getElementById("sources");
 
-// Analyze
-document.getElementById("analyzeBtn").addEventListener("click", async () => {
+/* IMAGE SYSTEM */
+const imageInput = document.getElementById("imageInput");
+const imagePreview = document.getElementById("imagePreview");
+const imageDrop = document.getElementById("imageDrop");
+const uploadBtn = document.getElementById("uploadBtn");
+const removeBtn = document.getElementById("removeImage");
+
+let currentImageFile = null;
+
+/* FILE UPLOAD */
+uploadBtn.onclick = () => imageInput.click();
+
+imageInput.onchange = e => handleImage(e.target.files[0]);
+
+/* DROP */
+imageDrop.ondragover = e => e.preventDefault();
+imageDrop.ondrop = e => {
+  e.preventDefault();
+  handleImage(e.dataTransfer.files[0]);
+};
+
+/* PASTE IMAGE */
+document.addEventListener("paste", e => {
+  for (let item of e.clipboardData.items) {
+    if (item.type.includes("image")) {
+      handleImage(item.getAsFile());
+    }
+  }
+});
+
+function handleImage(file) {
+  if (!file) return;
+
+  currentImageFile = file;
+
+  imagePreview.src = URL.createObjectURL(file);
+  imagePreview.classList.remove("hidden");
+
+  imageDrop.style.display = "none";
+  removeBtn.classList.remove("hidden");
+}
+
+removeBtn.onclick = () => {
+  currentImageFile = null;
+  imagePreview.classList.add("hidden");
+  imageDrop.style.display = "block";
+  removeBtn.classList.add("hidden");
+};
+
+/* ANALYZE */
+document.getElementById("analyzeBtn").onclick = async () => {
   const mode = document.getElementById("modeSelect").value;
   const type = typeSelect.value;
 
-  status.className = "";
-  analysisUI.classList.add("hidden");
   status.innerText = "Analyzing...";
+  analysisUI.classList.add("hidden");
 
   let payload = {
     personality: mode === "genz" ? "marites" : "formal"
   };
 
-  // Validation
-  if (type === "text") {
-    const text = inputs.text.value.trim();
-    if (!text) {
-      status.innerText = "⚠️ Please enter text.";
-      status.classList.add("error");
-      return;
-    }
-    payload.text = text;
-  }
+  if (type === "text") payload.text = inputs.text.value;
+  if (type === "url") payload.url = inputs.url.value;
+  if (type === "image") payload.file = currentImageFile;
 
-  if (type === "url") {
-    const url = inputs.url.value.trim();
-    if (!url || !url.startsWith("http")) {
-      status.innerText = "⚠️ Enter valid URL (https://...)";
-      status.classList.add("error");
-      return;
-    }
-    payload.url = url;
-  }
+  // FAKE RESPONSE (replace with API)
+  const data = {
+    chismisLevel: Math.floor(Math.random() * 100),
+    classification: "chismis",
+    resibo: [
+      "https://reuters.com",
+      "https://bbc.com/news"
+    ]
+  };
 
-  if (type === "image") {
-    const file = inputs.image.files[0];
-    if (!file) {
-      status.innerText = "⚠️ Upload an image.";
-      status.classList.add("error");
-      return;
-    }
-    payload.file = file;
-  }
+  render(data);
+};
 
-  // API
-  try {
-    const res = await fetch("https://your-api-endpoint.com/analyze", {
-      method: "POST",
-      body: JSON.stringify(payload),
-      headers: { "Content-Type": "application/json" }
-    });
+/* RENDER */
+function render(data) {
+  const ch = data.chismisLevel;
+  const real = 100 - ch;
 
-    const data = await res.json();
+  meterFill.style.width = ch + "%";
 
-    if (data.error) {
-      status.innerText = "⚠️ " + data.error;
-      status.classList.add("error");
-      return;
-    }
+  chismisPercent.innerText = `Chismis: ${ch}%`;
+  realPercent.innerText = `Real: ${real}%`;
 
-    status.innerText = "Analysis complete";
-    status.classList.add("success");
+  classification.innerText = data.classification.toUpperCase();
 
-    const chismis = data.chismisLevel ?? 50;
-    const real = 100 - chismis;
+  comparison.innerText =
+    ch > 60 ? "⚠️ Likely misinformation" : "✅ Likely factual";
 
-    meterFill.style.width = chismis + "%";
+  sources.innerHTML = "";
+  data.resibo.forEach(l => {
+    const a = document.createElement("a");
+    a.href = l;
+    a.target = "_blank";
+    a.innerText = l;
+    sources.appendChild(a);
+  });
 
-    chismisPercent.innerText = `Chismis: ${chismis}%`;
-    realPercent.innerText = `Real: ${real}%`;
-
-    classification.innerText = `Result: ${data.classification.toUpperCase()}`;
-
-    comparison.innerText =
-      chismis > 60
-        ? "⚠️ Likely misinformation pattern."
-        : "✅ Likely factual or verifiable.";
-
-    sources.innerHTML = "";
-
-    (data.resibo || [
-      "https://www.rappler.com",
-      "https://www.reuters.com",
-      "https://www.bbc.com/news"
-    ]).forEach(link => {
-      const a = document.createElement("a");
-      a.href = link;
-      a.innerText = link;
-      a.target = "_blank";
-      sources.appendChild(a);
-    });
-
-    analysisUI.classList.remove("hidden");
-
-  } catch {
-    status.innerText = "⚠️ Network error.";
-    status.classList.add("error");
-  }
-});
+  analysisUI.classList.remove("hidden");
+}
