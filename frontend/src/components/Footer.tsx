@@ -27,40 +27,6 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-white font-medium mb-4">Features</h3>
-
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-[#0094c6] transition-colors"
-                >
-                  Fake News Analyzer
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-[#0094c6] transition-colors"
-                >
-                  OCR Screenshot Scan
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-[#0094c6] transition-colors"
-                >
-                  Media Literacy Guide
-                </a>
-              </li>
-            </ul>
-          </div>
-
           {/* Social & Contact */}
           <div>
             <h3 className="text-white font-medium mb-4">Connect</h3>
