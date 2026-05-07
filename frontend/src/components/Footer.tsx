@@ -34,7 +34,7 @@ export function Footer() {
 
             <div className="flex gap-4">
               <a
-                href="https://www.youtube.com/@PerriAI"
+                href="https://www.youtube.com/watch?v=xDznJ8C-hO4"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-white/5 rounded-full hover:bg-red-600/20 transition-all border border-white/10"
