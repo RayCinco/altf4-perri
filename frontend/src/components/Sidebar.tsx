@@ -337,7 +337,7 @@ export default function Sidebar() {
             <div className="group relative mt-auto rounded-full border border-white/10 bg-white/5 p-2">
               <UserRound className="h-5 w-5" />
               <div className="pointer-events-none absolute left-full top-1/2 z-[70] ml-3 hidden -translate-y-1/2 whitespace-nowrap rounded-lg bg-white px-3 py-2 text-sm font-medium text-black shadow-2xl group-hover:block">
-                {user ? displayName : "Account"}
+                {user ? displayName : "Guest Account"}
               </div>
             </div>
           </div>
