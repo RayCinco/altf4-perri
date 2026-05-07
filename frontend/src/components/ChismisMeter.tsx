@@ -1,99 +1,138 @@
-import { motion } from 'motion/react';
+import { motion } from "motion/react";
 
 interface ChismisMeterProps {
   level: number;
-  classification: 'fact' | 'opinion' | 'chismis';
+  classification: "fact" | "opinion" | "chismis";
+  personality?: "marites" | "formal";
+  reason?: string;
 }
 
-export function ChismisMeter({ level, classification }: ChismisMeterProps) {
-  const getColor = () => {
-    if (classification === 'fact') return 'from-green-500 to-emerald-500';
-    if (classification === 'opinion') return 'from-yellow-500 to-orange-500';
-    return 'from-red-500 to-red-700';
+export function ChismisMeter({
+  level,
+  classification,
+  personality = "marites",
+  reason,
+}: ChismisMeterProps) {
+  const radius = 70;
+  const circumference = 2 * Math.PI * radius;
+
+  const strokeDashoffset = circumference - (level / 100) * circumference;
+
+  const getGradient = () => {
+    if (classification === "fact") return ["#22c55e", "#86efac"];
+    if (classification === "opinion") return ["#f59e0b", "#fdba74"];
+    return ["#054E98", "#7FB3FF"];
   };
 
   const getLabel = () => {
-    if (level < 30) return 'Low Chismis';
-    if (level < 60) return 'Medium Chismis';
-    return 'HIGH CHISMIS';
+    if (personality === "formal") {
+      if (level < 30) return "Reliable";
+      if (level < 60) return "Unclear";
+      return "Likely Chismis";
+    } else {
+      if (level < 30) return "Legit na Legit!";
+      if (level < 60) return "Hmm... Medyo Chismis Vibes";
+      return "Chismis Alert!";
+    }
   };
 
-  const getEmoji = () => {
-    if (classification === 'fact') return '✅';
-    if (classification === 'opinion') return '🤔';
-    return '🫖';
+  const getDefaultReason = () => {
+    if (personality === "formal") {
+      if (classification === "fact")
+        return "The content is supported by consistent and verifiable information.";
+      if (classification === "opinion")
+        return "The content appears subjective and lacks strong supporting evidence.";
+      return "The content shows signs of misinformation, exaggeration, or missing credible sources.";
+    } else {
+      if (classification === "fact")
+        return "Legit ‘to, bes! May mga resibo at solid na sources.";
+      if (classification === "opinion")
+        return "Hmm, parang opinion lang—kulang sa pruweba, sis.";
+      return "Grabe, puro chismis vibes! Walang matibay na ebidensya, ingat sa pag-share.";
+    }
   };
+
+  const [start, end] = getGradient();
 
   return (
-    <div className="bg-white rounded-xl p-6 shadow-lg">
-      <div className="text-center mb-4">
-        <div className="text-6xl mb-2">{getEmoji()}</div>
-        <h3 className="text-xl font-bold text-gray-800">Chismis Meter</h3>
-      </div>
-
-      <div className="relative h-40 flex items-end justify-center">
-        <svg viewBox="0 0 200 100" className="w-full h-full">
-          {/* Background arc */}
-          <path
-            d="M 20 90 A 80 80 0 0 1 180 90"
+    <div className="flex flex-col items-center justify-center w-full h-full text-center px-4">
+      {/* Meter */}
+      <div className="relative w-48 h-48">
+        <svg viewBox="0 0 200 200" className="w-full h-full -rotate-90">
+          {/* Background */}
+          <circle
+            cx="100"
+            cy="100"
+            r={radius}
+            stroke="#0a1a3a"
+            strokeWidth="16"
             fill="none"
-            stroke="#e5e7eb"
-            strokeWidth="20"
-            strokeLinecap="round"
           />
 
-          {/* Colored arc based on level */}
-          <motion.path
-            d="M 20 90 A 80 80 0 0 1 180 90"
+          {/* Glow */}
+          <circle
+            cx="100"
+            cy="100"
+            r={radius}
+            stroke={end}
+            strokeWidth="16"
             fill="none"
-            stroke="url(#gradient)"
-            strokeWidth="20"
+            opacity={0.15}
+          />
+
+          {/* Progress */}
+          <motion.circle
+            cx="100"
+            cy="100"
+            r={radius}
+            stroke="url(#grad)"
+            strokeWidth="16"
+            fill="none"
             strokeLinecap="round"
-            strokeDasharray={`${(level / 100) * 251.2} 251.2`}
-            initial={{ strokeDasharray: '0 251.2' }}
-            animate={{ strokeDasharray: `${(level / 100) * 251.2} 251.2` }}
-            transition={{ duration: 1.5, ease: 'easeOut' }}
+            strokeDasharray={circumference}
+            strokeDashoffset={circumference}
+            animate={{ strokeDashoffset }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
           />
 
           <defs>
-            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" className={`stop-color-${classification}`} stopColor="#10b981" />
-              <stop offset="50%" stopColor="#f59e0b" />
-              <stop offset="100%" stopColor="#ef4444" />
+            <linearGradient id="grad">
+              <stop offset="0%" stopColor={start} />
+              <stop offset="100%" stopColor={end} />
             </linearGradient>
           </defs>
-
-          {/* Needle */}
-          <motion.g
-            initial={{ rotate: -90 }}
-            animate={{ rotate: (level / 100) * 180 - 90 }}
-            transition={{ duration: 1.5, ease: 'easeOut' }}
-            style={{ transformOrigin: '100px 90px' }}
-          >
-            <line
-              x1="100"
-              y1="90"
-              x2="100"
-              y2="30"
-              stroke="#1f2937"
-              strokeWidth="3"
-              strokeLinecap="round"
-            />
-            <circle cx="100" cy="90" r="6" fill="#1f2937" />
-          </motion.g>
         </svg>
+
+        {/* Center */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center">
+          <motion.div
+            initial={{ scale: 0.7, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="text-3xl font-bold text-[#7FB3FF]"
+          >
+            {level}%
+          </motion.div>
+
+          <div className="text-xs text-[#7FB3FF]/70 mt-1 uppercase tracking-wide">
+            Chismis Level
+          </div>
+        </div>
       </div>
 
+      {/* Label */}
+      <div className="mt-4 text-sm font-semibold text-[#7FB3FF]">
+        {getLabel()}
+      </div>
+
+      {/* Reason */}
       <motion.div
-        initial={{ scale: 0.5, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 1, duration: 0.5 }}
-        className="text-center mt-4"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.6 }}
+        className="mt-2 text-md text-[#7FB3FF]/80 max-w-xs leading-relaxed"
       >
-        <div className={`text-4xl font-bold bg-linear-to-r ${getColor()} bg-clip-text text-transparent mb-2`}>
-          {level}%
-        </div>
-        <div className="text-gray-600 font-semibold">{getLabel()}</div>
+        {reason || getDefaultReason()}
       </motion.div>
     </div>
   );
