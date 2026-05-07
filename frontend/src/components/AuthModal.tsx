@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { X } from "lucide-react";
-
+//ADD
 interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
