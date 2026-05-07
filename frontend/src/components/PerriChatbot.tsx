@@ -1,5 +1,4 @@
 "use client";
-import { Mic } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 interface Message {
@@ -8,24 +7,7 @@ interface Message {
   sender: "user" | "bot";
 }
 
-type SpeechRecognitionResultLike = {
-  transcript: string;
-};
 
-type SpeechRecognitionEventLike = {
-  results: Array<Array<SpeechRecognitionResultLike>>;
-};
-
-type SpeechRecognitionLike = {
-  continuous: boolean;
-  interimResults: boolean;
-  lang: string;
-  start: () => void;
-  stop: () => void;
-  onresult: ((event: SpeechRecognitionEventLike) => void) | null;
-  onend: (() => void) | null;
-  onerror: ((event: unknown) => void) | null;
-};
 
 export default function PerriChatbot() {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,79 +15,14 @@ export default function PerriChatbot() {
     { id: "1", text: "Hi! I am Perri.", sender: "bot" },
   ]);
   const [input, setInput] = useState("");
-  const [isListening, setIsListening] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const recognitionRef = useRef<SpeechRecognitionLike | null>(null);
 
-  const speakText = (text: string) => {
-    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = "en-US";
-    window.speechSynthesis.speak(utterance);
-  };
 
-  const stopListening = () => {
-    recognitionRef.current?.stop();
-    setIsListening(false);
-  };
-
-  const startListening = () => {
-    if (typeof window === "undefined") return;
-
-    if (isListening) return;
-
-    const browserWindow = window as Window & {
-      SpeechRecognition?: new () => SpeechRecognitionLike;
-      webkitSpeechRecognition?: new () => SpeechRecognitionLike;
-    };
-
-    const SpeechRecognitionConstructor =
-      browserWindow.SpeechRecognition || browserWindow.webkitSpeechRecognition;
-
-    if (!SpeechRecognitionConstructor) {
-      alert("Speech recognition is not supported in this browser.");
-      return;
-    }
-
-    recognitionRef.current?.stop();
-
-    const recognition =
-      new SpeechRecognitionConstructor() as SpeechRecognitionLike;
-    recognition.continuous = false;
-    recognition.interimResults = false;
-    recognition.lang = "en-US";
-
-    recognition.onresult = (event) => {
-      const transcript = event.results[0]?.[0]?.transcript?.trim();
-      if (transcript) {
-        setInput((current) =>
-          current ? `${current} ${transcript}` : transcript,
-        );
-      }
-    };
-
-    recognition.onend = () => {
-      setIsListening(false);
-      recognitionRef.current = null;
-    };
-
-    recognition.onerror = () => {
-      setIsListening(false);
-      recognitionRef.current = null;
-    };
-
-    recognitionRef.current = recognition;
-    setIsListening(true);
-
-    try {
-      recognition.start();
-    } catch {
-      setIsListening(false);
-      recognitionRef.current = null;
-    }
-  };
 
   useEffect(() => {
     try {
@@ -130,10 +47,7 @@ export default function PerriChatbot() {
 
   useEffect(() => {
     return () => {
-      recognitionRef.current?.stop();
-      if (typeof window !== "undefined" && "speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-      }
+      // Cleanup if needed
     };
   }, []);
 
@@ -163,7 +77,6 @@ export default function PerriChatbot() {
         ...prev,
         { id: (Date.now() + 1).toString(), text: botText, sender: "bot" },
       ]);
-      speakText(botText);
     } catch (e) {
       setMessages((prev) => [
         ...prev,
@@ -173,7 +86,6 @@ export default function PerriChatbot() {
           sender: "bot",
         },
       ]);
-      speakText("I can help with that.");
     }
   };
 
@@ -184,8 +96,13 @@ export default function PerriChatbot() {
     }
   };
 
+  if (!mounted) return null;
+
   return (
-    <div className="fixed bottom-2 right-2 z-50 h-12 w-12 sm:bottom-4 sm:right-4 sm:h-14 sm:w-14">
+    <div
+      className="fixed bottom-2 right-2 z-50 h-12 w-12 sm:bottom-4 sm:right-4 sm:h-14 sm:w-14"
+      suppressHydrationWarning
+    >
       <div
         className={`fixed bottom-2 right-2 sm:bottom-4 sm:right-4 flex h-[35vh] w-[85vw] max-w-[26rem] sm:h-[30rem] sm:w-[26rem] flex-col overflow-hidden rounded-2xl border border-[#04356A] bg-[#000919] shadow-2xl transform transition-all duration-300 ${isOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-4 pointer-events-none"}`}
       >
@@ -220,11 +137,10 @@ export default function PerriChatbot() {
                 />
               )}
               <div
-                className={`max-w-[80%] rounded-2xl px-2.5 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm ${
-                  msg.sender === "user"
-                    ? "bg-[#04356A] text-white"
-                    : "bg-[#001D3F]  text-white"
-                }`}
+                className={`max-w-[80%] rounded-2xl px-2.5 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm ${msg.sender === "user"
+                  ? "bg-[#04356A] text-white"
+                  : "bg-[#001D3F]  text-white"
+                  }`}
               >
                 {msg.text}
               </div>
@@ -240,38 +156,15 @@ export default function PerriChatbot() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="Type or speak..."
+              placeholder="Type a message..."
               className="flex-1 rounded-xl border border-[#04356A] bg-[#001D3F] px-2 py-1 sm:px-3 sm:py-2 text-xs sm:text-sm text-white placeholder-[#7FB3FF]/50 focus:border-[#054E98] focus:outline-none"
+              suppressHydrationWarning
             />
-            <button
-              onClick={isListening ? stopListening : startListening}
-              className={`relative flex items-center justify-center overflow-hidden rounded-xl px-2 py-1 sm:px-3 sm:py-2 text-xs sm:text-sm font-medium transition ${
-                isListening
-                  ? "bg-red-500 text-white hover:bg-red-600"
-                  : "bg-[#001D3F] border border-[#04356A] text-[#7FB3FF] hover:bg-[#0a1a3a]"
-              }`}
-              title={isListening ? "Stop listening" : "Speak to Perri"}
-            >
-              {isListening && (
-                <span className="absolute inset-0 flex items-center justify-center gap-0.5 opacity-40">
-                  <span className="h-2 w-1 rounded-full bg-white animate-[ping_1s_ease-in-out_infinite]" />
-                  <span className="h-3 w-1 rounded-full bg-white animate-[ping_1s_ease-in-out_infinite] [animation-delay:150ms]" />
-                  <span className="h-4 w-1 rounded-full bg-white animate-[ping_1s_ease-in-out_infinite] [animation-delay:300ms]" />
-                  <span className="h-3 w-1 rounded-full bg-white animate-[ping_1s_ease-in-out_infinite] [animation-delay:150ms]" />
-                  <span className="h-2 w-1 rounded-full bg-white animate-[ping_1s_ease-in-out_infinite]" />
-                </span>
-              )}
-              {isListening ? (
-                <span className="relative z-10 flex h-4 w-4 sm:h-5 sm:w-5 items-center justify-center text-sm sm:text-lg leading-none">
-                  ⏹
-                </span>
-              ) : (
-                <Mic className="h-4 w-4 sm:h-5 sm:w-5 text-[#7FB3FF]" />
-              )}
-            </button>
+
             <button
               onClick={handleSendMessage}
               className="rounded-xl bg-[#054E98] px-2.5 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium text-white transition hover:bg-[#043a7a]"
+              suppressHydrationWarning
             >
               Send
             </button>
@@ -284,6 +177,7 @@ export default function PerriChatbot() {
           onClick={() => setIsOpen(true)}
           className="absolute bottom-0 right-0 flex h-12 w-12 sm:h-17 sm:w-17 items-center justify-center rounded-full border-2 border-[#04356A] text-2xl text-white shadow-lg transition hover:scale-110"
           title="Open chat"
+          suppressHydrationWarning
         >
           <img
             src="/logo/ChatbotIcon.png"
