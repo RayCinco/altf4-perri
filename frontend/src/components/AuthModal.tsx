@@ -14,7 +14,7 @@ export default function AuthModal({
   onClose,
   children,
 }: AuthModalProps) {
-  // Close on Escape key
+  // Close on Escape key press
   useEffect(() => {
     if (!isOpen) return;
     const onKey = (e: KeyboardEvent) => {
