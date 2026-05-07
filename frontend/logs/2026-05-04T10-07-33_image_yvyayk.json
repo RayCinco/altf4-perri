@@ -1,0 +1,309 @@
+{
+  "session": {
+    "id": "yvyayk",
+    "mode": "image",
+    "startedAt": "2026-05-04T10:07:33.121Z",
+    "completedAt": "2026-05-04T10:07:43.348Z",
+    "durationMs": 10227
+  },
+  "pipeline": [
+    {
+      "timestamp": "2026-05-04T10:07:33.127Z",
+      "step": "PIPELINE",
+      "label": "Image pipeline started",
+      "data": {
+        "mimeType": "image/png",
+        "imageSizeBytes": 1355958
+      }
+    },
+    {
+      "timestamp": "2026-05-04T10:07:35.749Z",
+      "step": "OCR",
+      "label": "Raw text extracted from image",
+      "data": {
+        "mimeType": "image/png",
+        "imageSizeBytes": 1355958,
+        "ocrPrompt": "Extract ALL readable text from this image. Return ONLY the raw text content, exactly as it appears. Do not add commentary, analysis, or formatting. If there is no text in the image, return \"NO_TEXT_FOUND\". Preserve the original language (Filipino, English, Taglish, etc.)",
+        "rawExtractedText": "DU30 Forever · Follow\nPAYAG BA KAYO\nMAG RESIGN\nAKO?\nYes\nSend a gift\nNo\nMatagal na gusto namin . ikaw lang ayaw mag\nresign dahil takot ka mapunta sa ICC..\n#Duterte",
+        "rawTextLength": 162
+      }
+    },
+    {
+      "timestamp": "2026-05-04T10:07:35.751Z",
+      "step": "OCR",
+      "label": "Text cleaned and finalized",
+      "data": {
+        "cleanedText": "DU30 Forever · Follow\nPAYAG BA KAYO\nMAG RESIGN\nAKO?\nYes\nSend a gift\nNo\nMatagal na gusto namin . ikaw lang ayaw mag\nresign dahil takot ka mapunta sa ICC..\n#Duterte",
+        "cleanedTextLength": 162
+      }
+    },
+    {
+      "timestamp": "2026-05-04T10:07:36.772Z",
+      "step": "SEARCH",
+      "label": "Query generated from text",
+      "data": {
+        "inputTextPreview": "DU30 Forever · Follow\nPAYAG BA KAYO\nMAG RESIGN\nAKO?\nYes\nSend a gift\nNo\nMatagal na gusto namin . ikaw lang ayaw mag\nresign dahil takot ka mapunta sa ICC..\n#Duterte",
+        "generatedQuery": "Duterte resign ICC"
+      }
+    },
+    {
+      "timestamp": "2026-05-04T10:07:38.151Z",
+      "step": "SEARCH",
+      "label": "Search results retrieved",
+      "data": {
+        "query": "Duterte resign ICC",
+        "resultCount": 10,
+        "results": [
+          {
+            "title": "Rodrigo Duterte to pull Philippines out of international criminal court",
+            "snippet": "Rodrigo Duterte to pull Philippines out of international criminal court. This article is more than 8 years old. President accuses ICC of crusade ...",
+            "link": "https://www.theguardian.com/world/2018/mar/14/rodrigo-duterte-to-pull-philippines-out-of-international-criminal-court-icc"
+          },
+          {
+            "title": "Philippines drugs war: Duterte to withdraw from ICC - BBC",
+            "snippet": "Philippines President Rodrigo Duterte has said he plans to withdraw his country from the International Criminal Court (ICC) after it began ...",
+            "link": "https://www.bbc.com/news/world-asia-43397837"
+          },
+          {
+            "title": "Why did the Philippines turn over its former president to the ICC?",
+            "snippet": "On March 11, police in Manila arrested former Philippines President Rodrigo Duterte pursuant to an International Criminal Court (ICC) arrest warrant.",
+            "link": "https://www.brookings.edu/articles/why-did-the-philippines-turn-over-its-former-president-to-the-icc/"
+          },
+          {
+            "title": "Philippines Officially Leaves the International Criminal Court",
+            "snippet": "Philippines Officially Leaves the International Criminal Court · U.S. Attack on I.C.C. · Duterte Is Accused of Murder in New Filing at Hague Court.",
+            "link": "https://www.nytimes.com/2019/03/17/world/asia/philippines-international-criminal-court.html"
+          },
+          {
+            "title": "Philippines's Duterte moves to quit ICC over 'outrageous attacks'",
+            "snippet": "The Philippines said on Wednesday it is withdrawing from the International Criminal Court (ICC) due to what President Rodrigo Duterte called “outrageous” ...",
+            "link": "https://www.france24.com/en/20180314-philippines-duterte-icc-quit-over-outrageous-attacks-crimes-humanity-drug-war"
+          },
+          {
+            "title": "Duterte case - | International Criminal Court",
+            "snippet": "Since his surrender to the Court, Mr Duterte has been detained at the ICC detention centre in Scheveningen, The Hague, The Netherlands. The ...",
+            "link": "https://www.icc-cpi.int/victims/duterte-case"
+          },
+          {
+            "title": "Former president Duterte's fate at the ICC hinges on April 22.",
+            "snippet": "Duterte to face trial after ICC confirms charges The International Criminal Court (ICC) Pre-Trial Chamber I on Thursday, April 23, 2026 “ ...",
+            "link": "https://www.facebook.com/philstarnews/posts/former-president-dutertes-fate-at-the-icc-hinges-on-april-22/1403575575146525/"
+          },
+          {
+            "title": "ICC Declines To Release Former Philippines President Rodrigo ...",
+            "snippet": "ICC Declines To Release Former Philippines President Rodrigo Duterte | Spotlight | N18G The International Criminal Court rejected former ...",
+            "link": "https://www.youtube.com/watch?v=TI9y28HeTZ0"
+          },
+          {
+            "title": "Philippines officially out of the International Criminal Court | ICC News",
+            "snippet": "The Philippines has officially withdrawn from the International Criminal Court (ICC), though the beleaguered tribunal has pledged to pursue its examination of ...",
+            "link": "https://www.aljazeera.com/news/2019/3/17/philippines-officially-out-of-the-international-criminal-court"
+          },
+          {
+            "title": "Philippine President Rodrigo Duterte quits International Criminal Court",
+            "snippet": "The Philippines said on Wednesday it is withdrawing from the International Criminal Court (ICC) due to what President Rodrigo Duterte called “outrageous” ...",
+            "link": "https://www.scmp.com/news/asia/southeast-asia/article/2137150/philippine-president-rodrigo-duterte-moves-quit"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-04T10:07:38.153Z",
+      "step": "FILTER",
+      "label": "Sources classified by credibility",
+      "data": {
+        "totalSources": 10,
+        "trustedCount": 5,
+        "semiTrustedCount": 2,
+        "untrustedCount": 3,
+        "credibilityScore": 58,
+        "sources": [
+          {
+            "domain": "theguardian.com",
+            "credibility": "trusted",
+            "title": "Rodrigo Duterte to pull Philippines out of international criminal court"
+          },
+          {
+            "domain": "bbc.com",
+            "credibility": "trusted",
+            "title": "Philippines drugs war: Duterte to withdraw from ICC - BBC"
+          },
+          {
+            "domain": "brookings.edu",
+            "credibility": "semi-trusted",
+            "title": "Why did the Philippines turn over its former president to the ICC?"
+          },
+          {
+            "domain": "nytimes.com",
+            "credibility": "trusted",
+            "title": "Philippines Officially Leaves the International Criminal Court"
+          },
+          {
+            "domain": "france24.com",
+            "credibility": "trusted",
+            "title": "Philippines's Duterte moves to quit ICC over 'outrageous attacks'"
+          },
+          {
+            "domain": "icc-cpi.int",
+            "credibility": "untrusted",
+            "title": "Duterte case - | International Criminal Court"
+          },
+          {
+            "domain": "facebook.com",
+            "credibility": "untrusted",
+            "title": "Former president Duterte's fate at the ICC hinges on April 22."
+          },
+          {
+            "domain": "youtube.com",
+            "credibility": "semi-trusted",
+            "title": "ICC Declines To Release Former Philippines President Rodrigo ..."
+          },
+          {
+            "domain": "aljazeera.com",
+            "credibility": "trusted",
+            "title": "Philippines officially out of the International Criminal Court | ICC News"
+          },
+          {
+            "domain": "scmp.com",
+            "credibility": "untrusted",
+            "title": "Philippine President Rodrigo Duterte quits International Criminal Court"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-05-04T10:07:38.162Z",
+      "step": "AI",
+      "label": "Prompts constructed",
+      "data": {
+        "systemPrompt": "You are the core intelligence behind \"Chismis AI\", a Filipino gossip-analysis system designed to analyze screenshots or text and determine whether a claim is TRUE, SUSPICIOUS, or FAKE.\n\n========================================\n🎯 SYSTEM OBJECTIVE\n========================================\nAnalyze user-provided content (image OCR text or raw text), extract meaningful claims, verify them using available context (e.g., search results), and produce a structured, explainable, and entertaining output.\n\n========================================\n🧠 INTERNAL PROCESSING PIPELINE\n========================================\n\nStep 1: TEXT CLEANING\n- Normalize messy OCR text\n- Remove noise, duplicates, broken words\n\nStep 2: CLAIM EXTRACTION\n- Identify key claims or statements\n- Extract entities (people, places, events)\n- Focus on verifiable assertions\n\nStep 3: LINGUISTIC / WRITING ANALYSIS\nAnalyze the claim itself for suspicious writing patterns:\n- Detect ALL CAPS usage or excessive capitalization\n- Identify excessive punctuation (!!!, ???, ...)\n- Flag emotional manipulation language (\"SHOCKING!\", \"BREAKING!\", \"OMG!\", \"GRABE!\")\n- Detect vague attribution (\"sources say\", \"they confirmed\", \"ayon sa insider\")\n- Identify urgency/pressure language (\"share before deleted!\", \"viral na!\", \"last chance!\")\n- Check for lack of specific dates, names, or verifiable details\n- Detect logical inconsistencies within the text\n- Flag sensationalist or clickbait-style phrasing\nReport each detected pattern as a short, specific flag string.\nIf no suspicious patterns are detected, return an empty array.\n\nStep 4: CONTEXT INTERPRETATION\n- Evaluate if credible sources would support the claim\n- Look for consistency and plausibility\n- Pay attention to source credibility tags ([TRUSTED] vs [SEMI-TRUSTED])\n- If no reliable sources exist, treat as weak or unverified claim\n- Give more weight to trusted sources than semi-trusted ones\n\nStep 5: CLASSIFICATION\nClassify into one:\n- TRUE → supported by credible sources or widely known facts\n- SUSPICIOUS → unclear, conflicting, or insufficient evidence\n- FAKE → no credible evidence or likely misinformation\n\nStep 6: CONFIDENCE SCORING\n- Assign a confidence score (0–100)\n- Based on: presence of sources, source credibility, consistency, clarity of claim\n\nStep 6: MARITES RESPONSE GENERATION\nGenerate a Taglish, Filipino \"Marites-style\" explanation:\n- Casual, conversational, slightly dramatic\n- Use phrases like: \"Ayy girl…\", \"Peyk yan te 😭\", \"Sus mhie 👀\", \"Totoo yan besh\"\n- Keep it funny but informative\n- Avoid harmful or offensive language\n\n========================================\n🎭 STYLE RULES (IMPORTANT)\n========================================\n- Always use Taglish (mix of Filipino + English)\n- Tone: like a chismosa friend explaining rumors\n- Be expressive but clear\n- Do not hallucinate sources\n- If uncertain → choose Suspicious\n- Prefer clarity over exaggeration\n\nStep 8: FACT CORRECTION (ONLY when label is \"Fake\")\nWhen a claim is classified as FAKE, you MUST provide a factual correction:\n- State what the claim says vs what the evidence actually shows\n- Base the correction ONLY on the provided search sources — do NOT invent facts\n- Format: \"The claim says [X], but according to [source], [the actual fact is Y].\"\n- Keep it concise (1–2 sentences)\n- If no search results are available to form a correction, set fact_correction to null\n\n========================================\n📤 OUTPUT FORMAT (STRICT JSON)\n========================================\n\nReturn ONLY this JSON structure, no other text:\n\n{\n  \"label\": \"True | Suspicious | Fake\",\n  \"confidence\": number (0-100),\n  \"marites_explanation\": \"Taglish explanation here (2-4 sentences)\",\n  \"claims\": [\"list of extracted claims\"],\n  \"evidence\": [\"key findings or lack of sources\"],\n  \"linguistic_flags\": [\"list of detected suspicious writing patterns, or empty array\"],\n  \"fact_correction\": \"factual correction string when label is Fake, or null\"\n}\n\n========================================\n⚠️ CONSTRAINTS\n========================================\n- Do NOT invent facts\n- Do NOT assume something is true without evidence\n- Do NOT output outside the JSON format\n- Keep explanation concise (2–4 sentences)\n- fact_correction MUST be null when label is NOT \"Fake\"\n- linguistic_flags should be specific (e.g., \"Excessive punctuation (!!!)\" not just \"suspicious\")",
+        "userPrompt": "Analyze the following text and classify it:\n\n---\nDU30 Forever · Follow\nPAYAG BA KAYO\nMAG RESIGN\nAKO?\nYes\nSend a gift\nNo\nMatagal na gusto namin . ikaw lang ayaw mag\nresign dahil takot ka mapunta sa ICC..\n#Duterte\n---\n\nAdditional search context for fact-checking:\nSource 1 [TRUSTED]:\nTitle: Rodrigo Duterte to pull Philippines out of international criminal court\nSnippet: Rodrigo Duterte to pull Philippines out of international criminal court. This article is more than 8 years old. President accuses ICC of crusade ...\nLink: https://www.theguardian.com/world/2018/mar/14/rodrigo-duterte-to-pull-philippines-out-of-international-criminal-court-icc\nDomain: theguardian.com\n\nSource 2 [TRUSTED]:\nTitle: Philippines drugs war: Duterte to withdraw from ICC - BBC\nSnippet: Philippines President Rodrigo Duterte has said he plans to withdraw his country from the International Criminal Court (ICC) after it began ...\nLink: https://www.bbc.com/news/world-asia-43397837\nDomain: bbc.com\n\nSource 3 [SEMI-TRUSTED]:\nTitle: Why did the Philippines turn over its former president to the ICC?\nSnippet: On March 11, police in Manila arrested former Philippines President Rodrigo Duterte pursuant to an International Criminal Court (ICC) arrest warrant.\nLink: https://www.brookings.edu/articles/why-did-the-philippines-turn-over-its-former-president-to-the-icc/\nDomain: brookings.edu\n\nSource 4 [TRUSTED]:\nTitle: Philippines Officially Leaves the International Criminal Court\nSnippet: Philippines Officially Leaves the International Criminal Court · U.S. Attack on I.C.C. · Duterte Is Accused of Murder in New Filing at Hague Court.\nLink: https://www.nytimes.com/2019/03/17/world/asia/philippines-international-criminal-court.html\nDomain: nytimes.com\n\nSource 5 [TRUSTED]:\nTitle: Philippines's Duterte moves to quit ICC over 'outrageous attacks'\nSnippet: The Philippines said on Wednesday it is withdrawing from the International Criminal Court (ICC) due to what President Rodrigo Duterte called “outrageous” ...\nLink: https://www.france24.com/en/20180314-philippines-duterte-icc-quit-over-outrageous-attacks-crimes-humanity-drug-war\nDomain: france24.com\n\nSource 6 [SEMI-TRUSTED]:\nTitle: ICC Declines To Release Former Philippines President Rodrigo ...\nSnippet: ICC Declines To Release Former Philippines President Rodrigo Duterte | Spotlight | N18G The International Criminal Court rejected former ...\nLink: https://www.youtube.com/watch?v=TI9y28HeTZ0\nDomain: youtube.com\n\nSource 7 [TRUSTED]:\nTitle: Philippines officially out of the International Criminal Court | ICC News\nSnippet: The Philippines has officially withdrawn from the International Criminal Court (ICC), though the beleaguered tribunal has pledged to pursue its examination of ...\nLink: https://www.aljazeera.com/news/2019/3/17/philippines-officially-out-of-the-international-criminal-court\nDomain: aljazeera.com\n",
+        "hasSearchContext": true
+      }
+    },
+    {
+      "timestamp": "2026-05-04T10:07:40.440Z",
+      "step": "AI",
+      "label": "Raw Gemini response received",
+      "data": {
+        "rawResponse": "```json\n{\n  \"label\": \"SUSPICIOUS\",\n  \"confidence\": 65,\n  \"marites_explanation\": \"Ayy girl, si Duterte nagtatanong kung payag ba tayo mag-resign siya? 👀 Hmmm, suspicious 'yan kasi matagal na siyang wala sa pwesto. Tsismis pa more! 🤔\",\n  \"claims\": [\n    \"Rodrigo Duterte is asking if people want him to resign\"\n  ],\n  \"evidence\": [\n    \"Duterte is no longer president.\",\n    \"The question implies he currently holds a position he should resign from, which is false.\"\n  ],\n  \"linguistic_flags\": [\n    \"ALL CAPS usage\",\n    \"Questionable grammar/spelling\"\n  ],\n  \"fact_correction\": null\n}\n```"
+      }
+    },
+    {
+      "timestamp": "2026-05-04T10:07:40.441Z",
+      "step": "AI",
+      "label": "Response parsed successfully",
+      "data": {
+        "label": "Suspicious",
+        "confidence": 65,
+        "explanation": "Ayy girl, si Duterte nagtatanong kung payag ba tayo mag-resign siya? 👀 Hmmm, suspicious 'yan kasi matagal na siyang wala sa pwesto. Tsismis pa more! 🤔",
+        "claims": [
+          "Rodrigo Duterte is asking if people want him to resign"
+        ],
+        "evidence": [
+          "Duterte is no longer president.",
+          "The question implies he currently holds a position he should resign from, which is false."
+        ],
+        "linguisticFlags": [
+          "ALL CAPS usage",
+          "Questionable grammar/spelling"
+        ],
+        "factCorrection": null
+      }
+    },
+    {
+      "timestamp": "2026-05-04T10:07:40.443Z",
+      "step": "LITERACY",
+      "label": "Generating literacy lesson",
+      "data": {
+        "classification": "opinion",
+        "flagCount": 2,
+        "sourceCount": 3
+      }
+    },
+    {
+      "timestamp": "2026-05-04T10:07:43.345Z",
+      "step": "LITERACY",
+      "label": "Literacy lesson generated",
+      "data": {
+        "summary": "Let's break down how to spot misleading posts, especially those playing on emotions or old news.",
+        "pointCount": 3,
+        "tip": "Before sharing, always ask yourself: Is this information current and from a trustworthy source?"
+      }
+    },
+    {
+      "timestamp": "2026-05-04T10:07:43.347Z",
+      "step": "OUTPUT",
+      "label": "Final result mapped for frontend",
+      "data": {
+        "classification": "opinion",
+        "chismisLevel": 65,
+        "message": "Hmm... hindi sure si Marites 🤔",
+        "details": "May mga questionable parts — double check muna bago i-share.",
+        "breakdown": {
+          "reasons": [
+            "Rodrigo Duterte is asking if people want him to resign"
+          ],
+          "redFlags": [
+            "Duterte is no longer president."
+          ]
+        },
+        "harmScore": {
+          "level": "medium",
+          "score": 60,
+          "explanation": "This content has unclear or unverified claims. Verify before sharing."
+        },
+        "maritesMode": "Ayy girl, si Duterte nagtatanong kung payag ba tayo mag-resign siya? 👀 Hmmm, suspicious 'yan kasi matagal na siyang wala sa pwesto. Tsismis pa more! 🤔",
+        "resibo": {
+          "verdict": "Duterte is no longer president. | The question implies he currently holds a position he should resign from, which is false.",
+          "sources": [
+            {
+              "title": "Rodrigo Duterte to pull Philippines out of international criminal court",
+              "url": "https://www.theguardian.com/world/2018/mar/14/rodrigo-duterte-to-pull-philippines-out-of-international-criminal-court-icc",
+              "credibility": "verified"
+            },
+            {
+              "title": "Philippines drugs war: Duterte to withdraw from ICC - BBC",
+              "url": "https://www.bbc.com/news/world-asia-43397837",
+              "credibility": "verified"
+            },
+            {
+              "title": "Philippines Officially Leaves the International Criminal Court",
+              "url": "https://www.nytimes.com/2019/03/17/world/asia/philippines-international-criminal-court.html",
+              "credibility": "verified"
+            }
+          ]
+        },
+        "linguisticFlags": [
+          "ALL CAPS usage",
+          "Questionable grammar/spelling"
+        ],
+        "factCorrection": null,
+        "sourceCredibility": {
+          "score": 58,
+          "trustedCount": 5,
+          "semiTrustedCount": 2,
+          "untrustedCount": 3
+        },
+        "literacyLesson": {
+          "summary": "Let's break down how to spot misleading posts, especially those playing on emotions or old news.",
+          "points": [
+            {
+              "issue": "The post uses ALL CAPS to create a sense of urgency or importance, which is common in clickbait.",
+              "correction": "Legitimate news uses capitalization normally, focusing on facts rather than emotional manipulation."
+            },
+            {
+              "issue": "The post asks if Duterte should resign, but he's no longer president, making the question misleading.",
+              "correction": "Double-check the date and context to make sure the issue is still relevant and not outdated."
+            },
+            {
+              "issue": "The hashtag #Duterte doesn't make the post credible; it's just a way to spread it further.",
+              "correction": "Look for reliable sources like news organizations that provide context and verified information."
+            }
+          ],
+          "tip": "Before sharing, always ask yourself: Is this information current and from a trustworthy source?"
+        }
+      }
+    }
+  ]
+}
