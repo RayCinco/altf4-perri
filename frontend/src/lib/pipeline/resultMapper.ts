@@ -51,7 +51,11 @@ export function mapToAnalysisResult(
       reasons:
         gemini.claims.length > 0
           ? gemini.claims
-          : ["No specific claims extracted"],
+          : [
+              personality === "formal"
+                ? "No specific claims extracted."
+                : "Walang na-extract na specific claims.",
+            ],
       redFlags: gemini.evidence.filter(
         (evidence) =>
           evidence.toLowerCase().includes("no") ||
@@ -68,7 +72,7 @@ export function mapToAnalysisResult(
           ? gemini.evidence.join(" | ")
           : personality === "formal"
             ? "No evidence found to support the claim."
-            : "Walang mahanap na resibo si Perri... 👀",
+            : "Walang mahanap na matibay na resibo si Perri... 👀",
       sources: resiboSources,
     },
     linguisticFlags: gemini.linguistic_flags,
@@ -192,6 +196,10 @@ function getResultDetails(
   gemini: GeminiResponse,
   personality: "marites" | "formal" = "marites",
 ): string {
+  if (gemini.marites_explanation?.trim()) {
+    return gemini.marites_explanation.trim();
+  }
+
   const isFormal = personality === "formal";
 
   switch (gemini.label) {

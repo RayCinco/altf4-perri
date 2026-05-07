@@ -98,7 +98,7 @@ export default function ResultsPanel({
   onClose,
   onToggle,
 }: ResultsPanelProps) {
-  const [activeTab, setActiveTab] = useState<Tab>("sources");
+  const [activeTab, setActiveTab] = useState<Tab>("analysis");
 
   const panelStyle: React.CSSProperties = {
     position: "fixed",

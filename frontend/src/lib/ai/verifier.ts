@@ -114,6 +114,11 @@ When a claim is classified as FAKE, you MUST provide a factual correction:
 📤 OUTPUT FORMAT (STRICT JSON)
 ========================================
 
+Language rules for ALL user-facing strings in the JSON:
+- If personality is MARITES: use natural Filipino/Taglish tone across marites_explanation, claims[], evidence[], harm_score.explanation, and fact_correction. Keep it clear and not exaggerated.
+- If personality is FORMAL: use clear professional English.
+- Do not mix styles within a single response.
+
 Return ONLY this JSON structure, no other text:
 
 {

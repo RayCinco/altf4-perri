@@ -258,6 +258,7 @@ export default function DetectorPanel() {
                 <ChismisMeter
                   level={result.level}
                   classification={result.classification}
+                  personality={mode === "genz" ? "marites" : "formal"}
                 />
                 <button
                   onClick={() => setIsPanelOpen(true)}

@@ -3,19 +3,20 @@ import { motion } from "motion/react";
 interface ChismisMeterProps {
   level: number;
   classification: "fact" | "opinion" | "chismis";
+  personality?: "marites" | "formal";
   reason?: string;
 }
 
 export function ChismisMeter({
   level,
   classification,
+  personality = "marites",
   reason,
 }: ChismisMeterProps) {
   const radius = 70;
   const circumference = 2 * Math.PI * radius;
 
-  const strokeDashoffset =
-    circumference - (level / 100) * circumference;
+  const strokeDashoffset = circumference - (level / 100) * circumference;
 
   const getGradient = () => {
     if (classification === "fact") return ["#22c55e", "#86efac"];
@@ -24,30 +25,40 @@ export function ChismisMeter({
   };
 
   const getLabel = () => {
-    if (level < 30) return "Reliable";
-    if (level < 60) return "Unclear";
-    return "Likely Chismis";
+    if (personality === "formal") {
+      if (level < 30) return "Reliable";
+      if (level < 60) return "Unclear";
+      return "Likely Chismis";
+    } else {
+      if (level < 30) return "Legit na Legit!";
+      if (level < 60) return "Hmm... Medyo Chismis Vibes";
+      return "Chismis Alert!";
+    }
   };
 
   const getDefaultReason = () => {
-    if (classification === "fact")
-      return "The content is supported by consistent and verifiable information.";
-    if (classification === "opinion")
-      return "The content appears subjective and lacks strong supporting evidence.";
-    return "The content shows signs of misinformation, exaggeration, or missing credible sources.";
+    if (personality === "formal") {
+      if (classification === "fact")
+        return "The content is supported by consistent and verifiable information.";
+      if (classification === "opinion")
+        return "The content appears subjective and lacks strong supporting evidence.";
+      return "The content shows signs of misinformation, exaggeration, or missing credible sources.";
+    } else {
+      if (classification === "fact")
+        return "Legit ‘to, bes! May mga resibo at solid na sources.";
+      if (classification === "opinion")
+        return "Hmm, parang opinion lang—kulang sa pruweba, sis.";
+      return "Grabe, puro chismis vibes! Walang matibay na ebidensya, ingat sa pag-share.";
+    }
   };
 
   const [start, end] = getGradient();
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-full text-center px-4">
-      
       {/* Meter */}
       <div className="relative w-48 h-48">
-        <svg
-          viewBox="0 0 200 200"
-          className="w-full h-full -rotate-90"
-        >
+        <svg viewBox="0 0 200 200" className="w-full h-full -rotate-90">
           {/* Background */}
           <circle
             cx="100"
