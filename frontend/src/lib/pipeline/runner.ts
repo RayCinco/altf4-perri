@@ -6,7 +6,6 @@
 
 import type { AnalysisResult } from "@/app/types/analysis";
 import { verifyClaim } from "../ai/verifier";
-import { PipelineLogger } from "../logger";
 import { generateLiteracyLesson } from "../media_literacy";
 import { extractText } from "../ocr";
 import { executeFactCheck } from "../search/factCheck";
@@ -23,41 +22,28 @@ export async function runImageAnalysis(
   mimeType: string,
   personality: "marites" | "formal" = "marites",
 ): Promise<AnalysisResult> {
-  const logger = new PipelineLogger("image");
-
   console.log("----------------------------------------");
-  console.log("[PIPELINE] 📸 Starting ChismiScan Image Pipeline");
+  console.log("[PIPELINE] 📸 Starting Perri AI Image Pipeline");
   console.log(
     `[PIPELINE] 📦 Image type: ${mimeType}, Size: ${imageBuffer.length} bytes`,
   );
 
-  logger.log("PIPELINE", "Image pipeline started", {
-    mimeType,
-    imageSizeBytes: imageBuffer.length,
-  });
-
   try {
     console.log("[PIPELINE] ➡️ Step 1: Running OCR");
-    const extractedText = await extractText(imageBuffer, mimeType, logger);
+    const extractedText = await extractText(imageBuffer, mimeType);
 
     const result = await runCoreAnalysis(
       extractedText,
       personality,
-      logger,
       "image",
       "Image Analysis",
     );
 
     console.log("[PIPELINE] 🎉 Pipeline completed successfully!");
     console.log("----------------------------------------");
-    await logger.save();
     return result;
   } catch (error) {
-    logger.log("ERROR", "Pipeline failed with exception", {
-      error: error instanceof Error ? error.message : String(error),
-      stack: error instanceof Error ? error.stack : undefined,
-    });
-    await logger.save();
+    console.error("[PIPELINE] ❌ Pipeline failed:", error);
     throw error;
   }
 }
@@ -66,35 +52,22 @@ export async function runTextAnalysis(
   text: string,
   personality: "marites" | "formal" = "marites",
 ): Promise<AnalysisResult> {
-  const logger = new PipelineLogger("text");
-
   console.log("----------------------------------------");
-  console.log("[PIPELINE] 📝 Starting ChismiScan Text Pipeline");
-
-  logger.log("PIPELINE", "Text pipeline started", {
-    inputText: text,
-    inputTextLength: text.length,
-  });
+  console.log("[PIPELINE] 📝 Starting Perri AI Text Pipeline");
 
   try {
     const result = await runCoreAnalysis(
       text,
       personality,
-      logger,
       "text",
       text,
     );
 
     console.log("[PIPELINE] 🎉 Pipeline completed successfully!");
     console.log("----------------------------------------");
-    await logger.save();
     return result;
   } catch (error) {
-    logger.log("ERROR", "Pipeline failed with exception", {
-      error: error instanceof Error ? error.message : String(error),
-      stack: error instanceof Error ? error.stack : undefined,
-    });
-    await logger.save();
+    console.error("[PIPELINE] ❌ Pipeline failed:", error);
     throw error;
   }
 }
@@ -103,19 +76,13 @@ export async function runUrlAnalysis(
   url: string,
   personality: "marites" | "formal" = "marites",
 ): Promise<AnalysisResult> {
-  const logger = new PipelineLogger("url");
-
   console.log("----------------------------------------");
-  console.log("[PIPELINE] 🌐 Starting ChismiScan URL Pipeline");
+  console.log("[PIPELINE] 🌐 Starting Perri AI URL Pipeline");
   console.log(`[PIPELINE] 🔗 URL: ${url}`);
-
-  logger.log("PIPELINE", "URL pipeline started", {
-    inputUrl: url,
-  });
 
   try {
     console.log("[PIPELINE] ➡️ Step 1: Fetching & Extracting URL Content");
-    const urlResult = await extractFromUrl(url, logger);
+    const urlResult = await extractFromUrl(url);
     const extractedText = `[Title: ${urlResult.title}]\n[Source: ${urlResult.domain}]\n\n${urlResult.content}`;
 
     console.log(
@@ -125,21 +92,15 @@ export async function runUrlAnalysis(
     const result = await runCoreAnalysis(
       extractedText,
       personality,
-      logger,
       "url",
       url,
     );
 
     console.log("[PIPELINE] 🎉 URL Pipeline completed successfully!");
     console.log("----------------------------------------");
-    await logger.save();
     return result;
   } catch (error) {
-    logger.log("ERROR", "URL pipeline failed with exception", {
-      error: error instanceof Error ? error.message : String(error),
-      stack: error instanceof Error ? error.stack : undefined,
-    });
-    await logger.save();
+    console.error("[PIPELINE] ❌ URL pipeline failed:", error);
     throw error;
   }
 }
@@ -147,14 +108,12 @@ export async function runUrlAnalysis(
 async function runCoreAnalysis(
   extractedText: string,
   personality: "marites" | "formal",
-  logger: PipelineLogger,
   inputType: AnalysisResult["inputType"],
   originalInput: string,
 ): Promise<AnalysisResult> {
   console.log("[PIPELINE] ➡️ Step 2: Running Search Fact-Check");
   const searchResult = await executeFactCheck(
     extractedText,
-    logger,
     personality,
   );
 
@@ -163,7 +122,7 @@ async function runCoreAnalysis(
   let searchContext: string | undefined;
 
   if (searchResult && searchResult.rawSources.length > 0) {
-    filteredSources = filterSources(searchResult.rawSources, logger);
+    filteredSources = filterSources(searchResult.rawSources);
     searchContext = filteredSources.formattedContext;
   }
 
@@ -171,7 +130,6 @@ async function runCoreAnalysis(
   const geminiResult = await verifyClaim(
     extractedText,
     searchContext,
-    logger,
     personality,
   );
 
@@ -188,7 +146,6 @@ async function runCoreAnalysis(
       credibility: source.credibility,
     })),
     personality,
-    logger,
   );
 
   console.log("[PIPELINE] ➡️ Step 6: Mapping output to AnalysisResult");
@@ -202,20 +159,6 @@ async function runCoreAnalysis(
     originalInput,
   );
 
-  logger.log("OUTPUT", "Final result mapped for frontend", {
-    classification: finalResult.classification,
-    chismisLevel: finalResult.chismisLevel,
-    message: finalResult.message,
-    details: finalResult.details,
-    breakdown: finalResult.breakdown,
-    harmScore: finalResult.harmScore,
-    maritesMode: finalResult.maritesMode,
-    resibo: finalResult.resibo,
-    linguisticFlags: finalResult.linguisticFlags,
-    factCorrection: finalResult.factCorrection,
-    sourceCredibility: finalResult.sourceCredibility,
-    literacyLesson: finalResult.literacyLesson,
-  });
-
   return finalResult;
 }
+

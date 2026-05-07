@@ -10,34 +10,52 @@ export function Footer() {
           {/* Brand Section */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <Scan className="w-6 h-6 text-[#0094c6]" />
+              <img
+                src="/logo/Perri.png"
+                alt="Perri AI Logo"
+                className="w-12 h-12 rounded-full object-cover"
+              />
               <span className="text-xl font-semibold text-white tracking-tight">
-                ChismiScan
+                Perri AI
               </span>
             </div>
-            <p className="text-sm text-gray-400 max-w-xs leading-relaxed">
-              Empowering users to navigate the digital noise with AI-driven
-              gossip analysis and real-time fake news detection.
+
+            <p className="text-sm text-gray-400 max-w-md leading-relaxed">
+              Perri AI is an AI-powered misinformation detection and media literacy
+              platform designed to help users identify fake news, analyze viral
+              claims, and understand how credible information should look online.
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-white font-medium mb-4">Quicklinks</h3>
+            <h3 className="text-white font-medium mb-4">Features</h3>
+
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
-                <a href="#" className="hover:text-[#0094c6] transition-colors">
-                  Analyzer
+                <a
+                  href="#"
+                  className="hover:text-[#0094c6] transition-colors"
+                >
+                  Fake News Analyzer
                 </a>
               </li>
+
               <li>
-                <a href="#" className="hover:text-[#0094c6] transition-colors">
-                  Safety Guide
+                <a
+                  href="#"
+                  className="hover:text-[#0094c6] transition-colors"
+                >
+                  OCR Screenshot Scan
                 </a>
               </li>
+
               <li>
-                <a href="#" className="hover:text-[#0094c6] transition-colors">
-                  API Access
+                <a
+                  href="#"
+                  className="hover:text-[#0094c6] transition-colors"
+                >
+                  Media Literacy Guide
                 </a>
               </li>
             </ul>
@@ -46,21 +64,28 @@ export function Footer() {
           {/* Social & Contact */}
           <div>
             <h3 className="text-white font-medium mb-4">Connect</h3>
+
             <div className="flex gap-4">
               <a
-                href="#"
+                href="mailto:perriai.support@gmail.com"
                 className="p-2 bg-white/5 rounded-full hover:bg-white/10 transition-all border border-white/10"
               >
                 <Mail className="w-4 h-4 text-gray-400 hover:text-white" />
               </a>
             </div>
+
+            <p className="text-xs text-gray-500 mt-4 leading-relaxed">
+              Helping users navigate online information with smarter AI-powered
+              verification and educational analysis.
+            </p>
           </div>
         </div>
 
         {/* Bottom Bar */}
         <div className="mt-5 pt-5 border-t border-white/5 flex flex-col md:flex-row justify-between gap-1">
           <p className="text-xs text-gray-500">
-            © {new Date().getFullYear()} ChismiScan. Built for digital truth.
+            © {new Date().getFullYear()} Perri AI. Empowering digital truth and
+            media literacy.
           </p>
         </div>
       </div>

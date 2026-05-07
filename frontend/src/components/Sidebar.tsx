@@ -47,9 +47,8 @@ export default function Sidebar() {
 
       {/* Mobile slide-in panel */}
       <div
-        className={`sm:hidden fixed left-0 top-0 z-50 h-full w-72 flex flex-col bg-[#000919] border-r border-white/10 transition-transform duration-300 ${
-          mobileSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className={`sm:hidden fixed left-0 top-0 z-50 h-full w-72 flex flex-col bg-[#000919] border-r border-white/10 transition-transform duration-300 ${mobileSidebarOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
       >
         {/* Mobile panel header */}
         <div className="flex items-center justify-between px-4 py-4 border-b border-white/10">
@@ -60,7 +59,7 @@ export default function Sidebar() {
               className="h-8 w-8 rounded-full object-cover"
             />
             <span className="text-white font-semibold text-base">
-              ChismiScan
+              Perri AI
             </span>
           </div>
           <button
@@ -112,10 +111,9 @@ export default function Sidebar() {
                     </span>
                   </div>
                   <span
-                    className={`ml-6 text-[10px] capitalize ${
-                      CLASSIFICATION_COLORS[item.classification] ??
+                    className={`ml-6 text-[10px] capitalize ${CLASSIFICATION_COLORS[item.classification] ??
                       "text-white/50"
-                    }`}
+                      }`}
                   >
                     {item.classification}
                   </span>
@@ -170,9 +168,8 @@ export default function Sidebar() {
 
       {/* ── DESKTOP SIDEBAR (unchanged) ─────────────────────────────── */}
       <aside
-        className={`hidden sm:flex fixed left-0 top-0 z-50 h-screen flex-col overflow-visible border-r border-white/10 bg-[#000919]/95 backdrop-blur-[100px] transition-all duration-300 ${
-          desktopOpen ? "w-64 p-5" : "w-16 p-3"
-        }`}
+        className={`hidden sm:flex fixed left-0 top-0 z-50 h-screen flex-col overflow-visible border-r border-white/10 bg-[#000919]/95 backdrop-blur-[100px] transition-all duration-300 ${desktopOpen ? "w-64 p-5" : "w-16 p-3"
+          }`}
       >
         <button
           type="button"
@@ -215,14 +212,13 @@ export default function Sidebar() {
             {!user && (
               <div className="mb-2">
                 <h2 className="text-xl font-bold text-white mb-1">
-                  ChismiScan
+                  Perri AI
                 </h2>
                 <p className="text-base text-white/80 leading-snug mb-1">
-                  Gossip Analyzer & Fake News Detector
+                  AI-Powered Fact Detector & Digital Media Literacy
                 </p>
                 <p className="text-sm text-white/60 mb-1">
-                  Analyze screenshots, text, or viral posts for rumors, facts,
-                  or chismis.
+                  Verify online information and uncover misleading content with ease.
                 </p>
                 <p className="text-sm text-white/60">
                   Sign up to save your scan history!
@@ -250,10 +246,9 @@ export default function Sidebar() {
                           </span>
                         </div>
                         <span
-                          className={`ml-6 text-xs capitalize ${
-                            CLASSIFICATION_COLORS[item.classification] ??
+                          className={`ml-6 text-xs capitalize ${CLASSIFICATION_COLORS[item.classification] ??
                             "text-white/50"
-                          }`}
+                            }`}
                         >
                           {item.classification}
                         </span>

@@ -10,7 +10,6 @@
  */
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import type { PipelineLogger } from "./logger";
 import { MARITES_PERSONALITY, FORMAL_PERSONALITY } from "./ai_personality";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -87,7 +86,6 @@ export async function generateLiteracyLesson(
   evidence: string[],
   topSources: Array<{ title: string; url: string; credibility: string }>,
   personality: "marites" | "formal" = "marites",
-  logger?: PipelineLogger,
 ): Promise<LiteracyLesson | null> {
   const apiKey = process.env.GEMINI_API_KEY;
 
@@ -123,12 +121,6 @@ ${topSources.length > 0 ? topSources.map((s) => `- [${s.credibility}] ${s.title}
 
 Generate the teaching breakdown now.`;
 
-    logger?.log("LITERACY", "Generating literacy lesson", {
-      classification,
-      flagCount: linguisticFlags.length,
-      sourceCount: topSources.length,
-      personality,
-    });
 
     const result = await model.generateContent(userPrompt);
     const responseText = result.response.text().trim();
@@ -153,11 +145,6 @@ Generate the teaching breakdown now.`;
       tip: parsed.tip || "Check multiple credible sources before sharing.",
     };
 
-    logger?.log("LITERACY", "Literacy lesson generated", {
-      summary: lesson.summary,
-      pointCount: lesson.points.length,
-      tip: lesson.tip,
-    });
 
     console.log(
       `[LITERACY] ✅ Generated ${lesson.points.length} teaching points`,
@@ -166,9 +153,6 @@ Generate the teaching breakdown now.`;
     return lesson;
   } catch (error) {
     console.error("[LITERACY] ❌ Failed to generate literacy lesson:", error);
-    logger?.log("LITERACY", "Literacy lesson generation failed", {
-      error: error instanceof Error ? error.message : String(error),
-    });
     return null;
   }
 }

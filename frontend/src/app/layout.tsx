@@ -32,7 +32,7 @@ export default function RootLayout({
             <main className="relative z-10 flex-1 overflow-x-hidden">
               {children}
             </main>
-            {/* Chatbot (global) */}
+            {/* Chatbot (global)   */}
             <PerriChatbot />
             {/* Footer */}
             <Footer />

@@ -9,21 +9,18 @@
  */
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import type { PipelineLogger } from "./logger";
 
 /**
  * Extracts readable text from an image using Gemini Vision.
  *
  * @param imageBuffer - Raw image bytes as a Buffer
  * @param mimeType   - MIME type of the image (e.g., "image/png", "image/jpeg")
- * @param logger     - Optional pipeline logger to record OCR steps
  * @returns The extracted text content from the image
  * @throws Error if the API key is missing or extraction fails
  */
 export async function extractText(
   imageBuffer: Buffer,
   mimeType: string,
-  logger?: PipelineLogger
 ): Promise<string> {
   const apiKey = process.env.GEMINI_API_KEY;
 
@@ -61,14 +58,6 @@ Preserve the original language (Filipino, English, Taglish, etc.)`,
   const extractedText = response.text().trim();
   console.log(`[OCR] ✨ Raw extraction result length: ${extractedText.length} chars`);
 
-  logger?.log("OCR", "Raw text extracted from image", {
-    mimeType,
-    imageSizeBytes: imageBuffer.length,
-    ocrPrompt: `Extract ALL readable text from this image. Return ONLY the raw text content, exactly as it appears. Do not add commentary, analysis, or formatting. If there is no text in the image, return "NO_TEXT_FOUND". Preserve the original language (Filipino, English, Taglish, etc.)`,
-    rawExtractedText: extractedText,
-    rawTextLength: extractedText.length,
-  });
-
   if (!extractedText || extractedText === "NO_TEXT_FOUND") {
     throw new Error(
       "No readable text found in the image. Try uploading a clearer screenshot."
@@ -79,13 +68,9 @@ Preserve the original language (Filipino, English, Taglish, etc.)`,
   console.log(`[OCR] 🧹 Cleaned text length: ${cleanedText.length} chars`);
   console.log(`[OCR] 📄 Extracted Text Preview: "${cleanedText.substring(0, 50)}..."`);
 
-  logger?.log("OCR", "Text cleaned and finalized", {
-    cleanedText,
-    cleanedTextLength: cleanedText.length,
-  });
-
   return cleanedText;
 }
+
 
 /**
  * Cleans and normalizes extracted text.

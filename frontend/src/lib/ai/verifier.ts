@@ -5,7 +5,6 @@
  */
 
 import { MARITES_PERSONALITY, FORMAL_PERSONALITY } from "../ai_personality";
-import type { PipelineLogger } from "../logger";
 import { formatUserPrompt, formatSearchContextPrompt } from "../search/prompts";
 import { createGeminiModel } from "./gemini";
 import type { GeminiResponse } from "./types";
@@ -14,7 +13,7 @@ function getSystemPrompt(personality: "marites" | "formal"): string {
   const personalityInstruction =
     personality === "formal" ? FORMAL_PERSONALITY : MARITES_PERSONALITY;
 
-  return `You are the core intelligence behind "Chismis AI", a Filipino gossip-analysis system designed to analyze screenshots or text and determine whether a claim is TRUE, SUSPICIOUS, or FAKE.
+  return `You are the core intelligence behind "Perri AI", a Filipino gossip-analysis system designed to analyze screenshots or text and determine whether a claim is TRUE, SUSPICIOUS, or FAKE.
 
 ========================================
 🎯 SYSTEM OBJECTIVE
@@ -151,7 +150,6 @@ Return ONLY this JSON structure, no other text:
 export async function verifyClaim(
   text: string,
   searchContext?: string,
-  logger?: PipelineLogger,
   personality: "marites" | "formal" = "marites",
 ): Promise<GeminiResponse> {
   console.log(
@@ -168,11 +166,6 @@ export async function verifyClaim(
     userPrompt += formatSearchContextPrompt(searchContext);
   }
 
-  logger?.log("AI", "Prompts constructed", {
-    personality,
-    userPrompt,
-    hasSearchContext: !!searchContext,
-  });
 
   console.log("[AI] ⏳ Waiting for Gemini's verdict...");
   const result = await model.generateContent(userPrompt);
@@ -182,23 +175,9 @@ export async function verifyClaim(
     `[AI] 📜 Raw Response Preview: ${responseText.substring(0, 100).replace(/\n/g, " ")}...`,
   );
 
-  logger?.log("AI", "Raw Gemini response received", {
-    rawResponse: responseText,
-  });
 
   const parsed = parseGeminiResponse(responseText);
 
-  logger?.log("AI", "Response parsed successfully", {
-    label: parsed.label,
-    confidence: parsed.confidence,
-    explanation: parsed.marites_explanation,
-    claims: parsed.claims,
-    evidence: parsed.evidence,
-    linguisticFlags: parsed.linguistic_flags,
-    factCorrection: parsed.fact_correction,
-    chismisLevel: parsed.chismis_level,
-    harmScore: parsed.harm_score,
-  });
 
   return parsed;
 }

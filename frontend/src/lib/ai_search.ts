@@ -19,7 +19,6 @@ export type { FactCheckResult } from "./search/factCheck";
  * both raw structured results and a formatted context string.
  *
  * @param text   - The raw text or OCR extracted text
- * @param logger - Optional pipeline logger to record search steps
  * @returns FactCheckResult with raw sources and formatted context, or null if skipped
  */
 export { executeFactCheck };

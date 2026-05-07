@@ -33,13 +33,17 @@ export function Header() {
 
               {/* Brand */}
               <div className="flex items-center gap-2">
-                <Scan className="w-6 h-6 sm:w-7 sm:h-7 text-[#054E98]" />
+                <img
+                  src="/logo/Perri.png"
+                  alt="Perri AI Logo"
+                  className="w-10 h-10 rounded-full object-cover"
+                />
                 <div>
                   <h1 className="text-base sm:text-xl font-semibold text-white leading-tight">
-                    ChismiScan
+                    Perri AI
                   </h1>
                   <p className="text-[10px] sm:text-xs text-[#054E98] leading-tight">
-                    Gossip Analyzer &amp; Fake News Detector
+                    AI-Powered Fact Detector &amp; Digital Media Literacy
                   </p>
                 </div>
               </div>

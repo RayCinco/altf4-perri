@@ -6,15 +6,13 @@ export default function HeroHeading() {
 
       {/* Main Title */}
       <h1 className="text-4xl md:text-md font-bold tracking-tight text-white mb-6">
-        Humanize AI Text with the{" "}
-        <span className="text-[#0094c6] bg-clip-text">Most Trusted</span> AI Humanizer
+        Detect Fake News &amp; Claims with the Most Trusted
+        <span className="text-[#0094c6] bg-clip-text"> Perri AI </span>Detector
       </h1>
 
       {/* Subtitle */}
       <p className="text-lg md:text-md text-gray-400 leading-relaxed max-w-2xl mx-auto">
-        Make your AI text human-sounding with Humbot! Powered by an LLM with
-        billions of parameters, we help you turn robotic AI content into writing
-        that sounds natural and easy to read.
+        Verify online information and uncover misleading content with ease. Powered by advanced AI, Perri helps you break down claims and understand what’s real across the web.
       </p>
     </section>
   );

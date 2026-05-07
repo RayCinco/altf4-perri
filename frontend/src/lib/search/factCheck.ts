@@ -2,7 +2,6 @@
  * SerperDev fact-check execution stage.
  */
 
-import type { PipelineLogger } from "../logger";
 import type { SearchSource } from "../source_filter";
 import { generateSearchQuery } from "./query";
 
@@ -13,14 +12,12 @@ export interface FactCheckResult {
 
 export async function executeFactCheck(
   text: string,
-  logger?: PipelineLogger,
   personality: "marites" | "formal" = "marites",
 ): Promise<FactCheckResult | null> {
   const serperApiKey = process.env.SERPER_API_KEY;
 
   if (!serperApiKey || serperApiKey === "your_serper_api_key_here") {
     console.log("[SEARCH] ⚠️ SERPER_API_KEY missing. Skipping fact-check.");
-    logger?.log("SEARCH", "Skipped — SERPER_API_KEY not configured");
     return null;
   }
 
@@ -28,16 +25,11 @@ export async function executeFactCheck(
     console.log("[SEARCH] 🧠 Generating search query from text...");
     const query = await generateSearchQuery(text, personality);
 
-    logger?.log("SEARCH", "Query generated from text", {
-      inputTextPreview: text.substring(0, 200),
-      generatedQuery: query,
-    });
 
     if (!query || query === "NO_SEARCH_NEEDED") {
       console.log(
         "[SEARCH] ⏭️ AI determined no search is needed for this text.",
       );
-      logger?.log("SEARCH", "No search needed — AI decided to skip");
       return null;
     }
 
@@ -58,10 +50,6 @@ export async function executeFactCheck(
     if (!response.ok) {
       const errorData = await response.text();
       console.error("[SEARCH] SerperDev API Error:", errorData);
-      logger?.log("SEARCH", "SerperDev API returned an error", {
-        status: response.status,
-        error: errorData,
-      });
       return null;
     }
 
@@ -69,7 +57,6 @@ export async function executeFactCheck(
 
     if (!data.organic || data.organic.length === 0) {
       console.log("[SEARCH] 📭 No relevant search results found.");
-      logger?.log("SEARCH", "No results found", { query });
       return {
         rawSources: [],
         formatted: "NO SEARCH RESULTS FOUND FOR THIS CLAIM.",
@@ -92,18 +79,10 @@ export async function executeFactCheck(
       })
       .join("\n");
 
-    logger?.log("SEARCH", "Search results retrieved", {
-      query,
-      resultCount: rawSources.length,
-      results: rawSources,
-    });
 
     return { rawSources, formatted };
   } catch (error) {
     console.error("[SEARCH] ❌ Fact-checking failed:", error);
-    logger?.log("SEARCH", "Fact-check failed with exception", {
-      error: error instanceof Error ? error.message : String(error),
-    });
     return null;
   }
 }

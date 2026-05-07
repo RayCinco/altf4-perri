@@ -8,8 +8,6 @@
  * Pipeline position: URL Input → Fetch → Extract → Clean → (same as text pipeline)
  */
 
-import type { PipelineLogger } from "./logger";
-
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 /** The structured output from URL content extraction */
@@ -43,13 +41,11 @@ const USER_AGENT =
  * ready for the ChismiScan analysis pipeline.
  *
  * @param url    - The URL to fetch and extract content from
- * @param logger - Optional pipeline logger to record extraction steps
  * @returns A structured UrlExtractionResult
  * @throws Error if the URL is invalid, unreachable, or has no extractable text
  */
 export async function extractFromUrl(
   url: string,
-  logger?: PipelineLogger
 ): Promise<UrlExtractionResult> {
   console.log(`[URL] 🌐 Starting URL content extraction: ${url}`);
 
@@ -57,19 +53,10 @@ export async function extractFromUrl(
   const validatedUrl = validateUrl(url);
   const domain = extractDomain(validatedUrl);
 
-  logger?.log("URL", "URL extraction started", {
-    url: validatedUrl,
-    domain,
-  });
-
   // ── Fetch HTML ────────────────────────────────────────────────────────
   console.log("[URL] ⬇️ Fetching webpage HTML...");
   const html = await fetchHtml(validatedUrl);
   console.log(`[URL] 📄 Fetched ${html.length} chars of HTML`);
-
-  logger?.log("URL", "HTML fetched successfully", {
-    htmlLength: html.length,
-  });
 
   // ── Extract title ─────────────────────────────────────────────────────
   const title = extractTitle(html);
@@ -95,14 +82,6 @@ export async function extractFromUrl(
   console.log(`[URL] ✅ Extracted ${truncatedContent.length} chars of clean text`);
   console.log(`[URL] 📄 Content preview: "${truncatedContent.substring(0, 100)}..."`);
 
-  logger?.log("URL", "Content extracted and cleaned", {
-    title,
-    domain,
-    rawTextLength: rawText.length,
-    cleanedTextLength: truncatedContent.length,
-    contentPreview: truncatedContent.substring(0, 200),
-  });
-
   return {
     title,
     content: truncatedContent,
@@ -110,6 +89,7 @@ export async function extractFromUrl(
     domain,
   };
 }
+
 
 // ─── URL Validation ──────────────────────────────────────────────────────────
 

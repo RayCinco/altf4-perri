@@ -9,8 +9,6 @@
  * whether a source is generally reliable.
  */
 
-import type { PipelineLogger } from "./logger";
-
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 /** A single raw search result from SerperDev */
@@ -306,12 +304,10 @@ function formatCredibleContext(sources: CategorizedSource[]): string {
  * with a credibility score and formatted context for Gemini.
  *
  * @param rawResults - Array of raw search result objects from SerperDev
- * @param logger     - Optional pipeline logger
  * @returns FilteredSources with categorized sources and credibility score
  */
 export function filterSources(
     rawResults: SearchSource[],
-    logger?: PipelineLogger
 ): FilteredSources {
     const sources: CategorizedSource[] = rawResults.map((result) => {
         const domain = extractDomain(result.link);
@@ -341,18 +337,6 @@ export function filterSources(
         formattedContext,
     };
 
-    logger?.log("FILTER", "Sources classified by credibility", {
-        totalSources: sources.length,
-        trustedCount,
-        semiTrustedCount,
-        untrustedCount,
-        credibilityScore,
-        sources: sources.map((s) => ({
-            domain: s.domain,
-            credibility: s.credibility,
-            title: s.title,
-        })),
-    });
 
     console.log(
         `[FILTER] 🏷️ Source credibility: ${trustedCount} trusted, ${semiTrustedCount} semi-trusted, ${untrustedCount} untrusted (score: ${credibilityScore}/100)`
