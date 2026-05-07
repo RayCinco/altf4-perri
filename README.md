@@ -1,8 +1,8 @@
 # Perri 🦜📢
 
-Perri is a web-based fake news detection platform designed to help users identify misleading, suspicious, or potentially false information online. The application analyzes user-inputted news content and provides a “Chismis Meter” score that estimates how likely the information is fake or reliable.
+Perri is a web-based fake news detection platform designed to help users identify misleading, suspicious, or potentially false information online. The application analyzes user-submitted content and generates a “Chismis Meter” score that estimates the reliability of the information.
 
-The project also includes a Chrome Extension that allows users to quickly analyze articles, headlines, and online posts directly from their browser.
+The project also includes a Chrome Extension that allows users to analyze articles, headlines, and online posts directly from their browser.
 
 ---
 
@@ -10,20 +10,20 @@ The project also includes a Chrome Extension that allows users to quickly analyz
 
 - 🔍 Fake News Detection
 - 📊 Chismis Meter Analysis
-- 📈 Real vs Fake News Comparison
+- 📈 Real vs. Fake News Comparison
 - 🌐 Chrome Extension Integration
 - 📰 Verified Resource Suggestions
-- 🎨 Interactive and Modern 
-- ⚡ Real-time Analysis Feedback
+- 🎨 Interactive and Modern UI
+- ⚡ Real-Time Analysis Feedback
 - 📱 Responsive Design
 
 ---
 
 # 🧠 How It Works
 
-1. The user enters a news headline, article, or social media post via URL, Image, and Text.
-2. Perri processes the text using its analysis system.
-3. The application evaluates patterns commonly associated with fake news such as:
+1. The user submits a news headline, article, social media post, URL, image, or text.
+2. Perri processes the content through its analysis pipeline.
+3. The application evaluates patterns commonly associated with misinformation, including:
    - sensationalized wording
    - lack of credible sources
    - misleading phrasing
@@ -32,7 +32,7 @@ The project also includes a Chrome Extension that allows users to quickly analyz
 4. The system generates:
    - a reliability percentage
    - a Chismis Meter score
-   - explanation/reasoning for the result
+   - explanations and reasoning for the result
    - links to verified sources when available
 
 The Chrome Extension allows users to perform the same analysis directly while browsing websites.
@@ -42,9 +42,9 @@ The Chrome Extension allows users to perform the same analysis directly while br
 # 🛠️ Technologies Used
 
 - **Frontend:** Next.js, React, TypeScript
-- **Backend:** Next.js
+- **Backend:** Next.js API Routes
 - **Database:** Supabase
-- **AI:** GeminiAI, SurperDevAI
+- **AI:** Gemini AI, SuperDev AI
 - **Styling:** Tailwind CSS
 - **Animations:** Framer Motion
 - **Browser Extension:** Chrome Extension API
@@ -53,8 +53,6 @@ The Chrome Extension allows users to perform the same analysis directly while br
 ---
 
 # 📂 Project Structure
-
-# Project Structure
 
 ```bash
 public/
@@ -88,6 +86,7 @@ src/
     ├── ocr.ts
     ├── source_filter.ts
     └── supabaseClient.ts
+```
 
 ---
 
@@ -117,7 +116,7 @@ npm install
 npm run dev
 ```
 
-The application should now run on:
+The application should now run at:
 
 ```bash
 http://localhost:3000
@@ -136,7 +135,7 @@ chrome://extensions/
 
 3. Enable **Developer Mode**
 4. Click **Load Unpacked**
-5. Select the `chrome-extension` folder from the project
+5. Select the `chrome-extension` folder from the project directory
 
 ---
 
@@ -162,4 +161,4 @@ Developers behind Perri 🦜
 
 # 📄 License
 
-This project is for educational and hackathon purposes.
+This project was created for educational and hackathon purposes.
