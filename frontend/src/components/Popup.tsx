@@ -100,18 +100,20 @@ export default function ResultsPanel({
 }: ResultsPanelProps) {
   const [activeTab, setActiveTab] = useState<Tab>("analysis");
 
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
   const panelStyle: React.CSSProperties = {
     position: "fixed",
     top: 0,
     right: 0,
     zIndex: 50,
     height: "100%",
-    width: "min(420px, 95vw)",
+    width: isMobile ? "100vw" : "min(420px, 95vw)",
     background: "#0d1b2e",
     borderLeft: "1px solid #1e3a5f",
     transform: isOpen ? "translateX(0)" : "translateX(100%)",
     transition: "transform 0.4s cubic-bezier(0.3, 1, 0.3, 1)",
     boxShadow: "-8px 0 40px rgba(0,0,0,0.6)",
+    maxWidth: isMobile ? "100vw" : undefined,
   };
 
   const tabs: { id: Tab; label: string }[] = [
@@ -171,12 +173,19 @@ export default function ResultsPanel({
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              padding: "16px 20px",
+              padding: isMobile ? "10px 10px" : "16px 20px",
               borderBottom: "1px solid #1e3a5f",
               flexShrink: 0,
+              minHeight: isMobile ? 38 : 52,
             }}
           >
-            <span style={{ color: "#e2e8f0", fontWeight: 600, fontSize: 15 }}>
+            <span
+              style={{
+                color: "#e2e8f0",
+                fontWeight: 600,
+                fontSize: isMobile ? 13 : 15,
+              }}
+            >
               Analysis Results
             </span>
             <button
@@ -210,6 +219,7 @@ export default function ResultsPanel({
               display: "flex",
               borderBottom: "1px solid #1e3a5f",
               flexShrink: 0,
+              minHeight: isMobile ? 36 : 44,
             }}
           >
             {tabs.map((tab) => (
@@ -226,8 +236,8 @@ export default function ResultsPanel({
                       : "2px solid transparent",
                   color: activeTab === tab.id ? "#60a5fa" : "#64748b",
                   cursor: "pointer",
-                  padding: "12px 8px",
-                  fontSize: 13,
+                  padding: isMobile ? "8px 4px" : "12px 8px",
+                  fontSize: isMobile ? 12 : 13,
                   fontWeight: activeTab === tab.id ? 600 : 400,
                   transition: "all 0.15s",
                 }}
@@ -238,7 +248,13 @@ export default function ResultsPanel({
           </div>
 
           {/* ── Body ── */}
-          <div style={{ flex: 1, padding: "20px", overflowY: "auto" }}>
+          <div
+            style={{
+              flex: 1,
+              padding: isMobile ? "10px" : "20px",
+              overflowY: "auto",
+            }}
+          >
             {!result ? (
               <div
                 style={{

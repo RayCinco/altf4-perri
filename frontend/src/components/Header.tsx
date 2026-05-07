@@ -16,7 +16,7 @@ export function Header() {
 
   return (
     <>
-      <header className="relative top-0 z-20 bg-[#000919]/70 backdrop-blur-[100px] border-b border-white/10">
+      <header className="relative top-0 z-10 bg-[#000919]/70 backdrop-blur-[100px] border-b border-white/10">
         <div className="px-4 py-3 sm:px-6 sm:py-4">
           <div className="flex items-center justify-between">
             {/* LEFT — hamburger (mobile only) + brand */}
