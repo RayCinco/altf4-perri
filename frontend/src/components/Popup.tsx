@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { ChismisMeter } from "./ChismisMeter";
 
 // ─── Types (mirrors AnalysisResult from analysis.ts + LiteracyLesson) ─────────
@@ -40,6 +40,7 @@ export interface PopupResult {
     sources: PopupSource[];
     verdict: string;
   };
+  factCorrection: string | null;
   literacyLesson: LiteracyLesson | null;
 }
 
@@ -294,6 +295,13 @@ export default function ResultsPanel({
                           }}
                         >
                           {result.resibo.verdict}
+                          {result.classification === "chismis" &&
+                            result.factCorrection && (
+                              <span style={{ color: "#fbbf24" }}>
+                                {" "}
+                                {result.factCorrection}
+                              </span>
+                            )}
                         </p>
                       </div>
                     )}

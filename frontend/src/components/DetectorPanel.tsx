@@ -107,6 +107,7 @@ export default function DetectorPanel() {
         breakdown: data.breakdown,
         harmScore: data.harmScore,
         resibo: data.resibo,
+        factCorrection: data.factCorrection,
         literacyLesson: data.literacyLesson,
       });
       setIsPanelOpen(true);
