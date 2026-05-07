@@ -324,15 +324,6 @@ export default function HistoryByIdPage() {
               </p>
             </article>
           )}
-
-          <details className="rounded-2xl border border-white/10 bg-[#000919]/80 p-4">
-            <summary className="cursor-pointer text-sm font-semibold text-white">
-              View Full JSON
-            </summary>
-            <pre className="mt-3 overflow-x-auto rounded-xl border border-white/10 bg-black/40 p-3 text-xs leading-relaxed text-white/75">
-              {JSON.stringify(analysis, null, 2)}
-            </pre>
-          </details>
         </div>
       )}
     </section>
