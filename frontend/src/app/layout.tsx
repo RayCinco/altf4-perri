@@ -1,11 +1,10 @@
 import "./globals.css";
 import MeshGradientBackground from "@/components/MeshGradientBackground";
-import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import HeroHeading  from "@/components/Heading";
-import { Afacad } from "next/font/google";
+import HeroHeading from "@/components/Heading";
+import { Inter } from "next/font/google";
 
-const afacad = Afacad({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   icons: {
@@ -20,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${afacad.className} relative bg-black text-white`} suppressHydrationWarning={true}>
+      <body className={`${inter.className} relative bg-black text-white`}>
         <MeshGradientBackground />
 
         {/* Page Content */}

@@ -2,7 +2,10 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Upload, Link, ImageIcon, FileText, ChevronDown } from "lucide-react";
-import { type AnalysisResult } from "./PopUp";
+
+type AnalysisResult = {
+  [key: string]: unknown;
+};
 
 /* ----------------- MAIN ----------------- */
 
@@ -172,7 +175,7 @@ export default function DetectorPanel({ onAnalysisResult }: { onAnalysisResult: 
               onAnalyze={handleAnalyze}
               loading={loading}
               fileName={imageName}
-              onFileSelect={(file) => setImageName(file ? file.name : "")}
+              onFileSelect={(file) => setImageName(file?.name ?? "")}
             />
           )}
           {activeTab === "url" && (
@@ -187,6 +190,7 @@ export default function DetectorPanel({ onAnalysisResult }: { onAnalysisResult: 
 
         {/* Right Panel */}
         <div className="bg-[#001D3F] border border-[#04356A] rounded-xl p-4 flex items-center justify-center min-h-80">
+          
           {loading && (
             <div className="text-[#7FB3FF] animate-pulse text-sm">Analyzing...</div>
           )}

@@ -598,7 +598,7 @@ const MOCK_RESULT: AnalysisResult = {
 };
 
 export function Demo() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   return (
     <div
@@ -611,27 +611,10 @@ export function Demo() {
         fontFamily: "system-ui, sans-serif",
       }}
     >
-      <button
-        onClick={() => setOpen((v) => !v)}
-        style={{
-          background: "#1d4ed8",
-          color: "#fff",
-          border: "none",
-          borderRadius: 8,
-          padding: "12px 28px",
-          fontSize: 15,
-          cursor: "pointer",
-          fontWeight: 600,
-        }}
-      >
-        {open ? "Hide Results" : "Show Results Panel"}
-      </button>
-
       <ResultsPanel
         isOpen={open}
         result={MOCK_RESULT}
         onClose={() => setOpen(false)}
-        onToggle={() => setOpen((v) => !v)}
       />
     </div>
   );
