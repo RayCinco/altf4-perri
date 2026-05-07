@@ -6,7 +6,7 @@ The project also includes a Chrome Extension that allows users to quickly analyz
 
 ---
 
-## ✨ Features
+# ✨ Features
 
 - 🔍 Fake News Detection
 - 📊 Chismis Meter Analysis
@@ -19,7 +19,7 @@ The project also includes a Chrome Extension that allows users to quickly analyz
 
 ---
 
-## 🧠 How It Works
+# 🧠 How It Works
 
 1. The user enters a news headline, article, or social media post via URL, Image, and Text.
 2. Perri processes the text using its analysis system.
@@ -28,6 +28,7 @@ The project also includes a Chrome Extension that allows users to quickly analyz
    - lack of credible sources
    - misleading phrasing
    - suspicious claims
+
 4. The system generates:
    - a reliability percentage
    - a Chismis Meter score
@@ -38,12 +39,12 @@ The Chrome Extension allows users to perform the same analysis directly while br
 
 ---
 
-## 🛠️ Technologies Used
+# 🛠️ Technologies Used
 
 - **Frontend:** Next.js, React, TypeScript
-- **Backend:**
-- **Database:**
-- **AI:**
+- **Backend:** 
+- **Database:** 
+- **AI:** 
 - **Styling:** Tailwind CSS
 - **Animations:** Framer Motion
 - **Browser Extension:** Chrome Extension API
@@ -51,7 +52,7 @@ The Chrome Extension allows users to perform the same analysis directly while br
 
 ---
 
-## 📂 Project Structure
+# 📂 Project Structure
 
 ```bash
 chismiscan/
@@ -64,3 +65,74 @@ chismiscan/
 ├── utils/               # Helper functions
 ├── README.md
 └── package.json
+```
+
+---
+
+# 🚀 Installation & Setup
+
+## 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/chismiscan.git
+```
+
+## 2. Navigate to the Project Folder
+
+```bash
+cd chismiscan
+```
+
+## 3. Install Dependencies
+
+```bash
+npm install
+```
+
+## 4. Run the Development Server
+
+```bash
+npm run dev
+```
+
+The application should now run on:
+
+```bash
+http://localhost:3000
+```
+
+---
+
+# 🧩 Chrome Extension Setup
+
+1. Open Google Chrome
+2. Go to:
+
+```bash
+chrome://extensions/
+```
+
+3. Enable **Developer Mode**
+4. Click **Load Unpacked**
+5. Select the `extension` folder from the project
+
+---
+
+# 👥 Developers
+
+Developed by the Perri Team.
+
+---
+
+# 📌 Future Improvements
+
+- Multilingual support
+- Social media scanning
+- Community reporting system
+- Mobile application version
+
+---
+
+# 📄 License
+
+This project is for educational and hackathon purposes.
