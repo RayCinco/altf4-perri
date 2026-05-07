@@ -115,9 +115,9 @@ export default function ResultsPanel({
   };
 
   const tabs: { id: Tab; label: string }[] = [
-    { id: "sources", label: "Sources" },
-    { id: "literacy", label: "Media Literacy" },
     { id: "analysis", label: "Analysis" },
+    { id: "literacy", label: "Media Literacy" },
+    { id: "sources", label: "Sources" },
   ];
 
   return (
