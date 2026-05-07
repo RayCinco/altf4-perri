@@ -180,7 +180,7 @@ export default function Sidebar() {
           <img
             src="/logo/Perri.png"
             alt="Perri"
-            className="mt-6 mb-6 h-11 w-11 rounded-full object-cover p-0.5 transition-opacity duration-200 group-hover:opacity-0"
+            className="mt-2 h-11 w-11 rounded-full object-cover p-0.5 transition-opacity duration-200 group-hover:opacity-0"
           />
           <div className="absolute inset-0 rounded-full flex items-center justify-center bg-black/0 transition group-hover:bg-black/35">
             <Menu className="h-5 w-5 text-white opacity-0 transition group-hover:opacity-100" />
@@ -188,7 +188,7 @@ export default function Sidebar() {
         </button>
 
         {desktopOpen && (
-          <div className="mt-12 flex flex-1 flex-col space-y-1 text-sm text-white/80">
+          <div className="mt-6 flex flex-1 flex-col space-y-1 text-sm text-white/80">
             <div>
               <Link
                 href="/"
@@ -210,11 +210,11 @@ export default function Sidebar() {
               </div>
             )}
             {!user && (
-              <div className="mb-2">
-                <h2 className="text-xl font-bold text-white mb-1">
+              <div className="mb-4 mt-2 px-2">
+                <h2 className="text-base font-bold text-white mb-1">
                   Perri AI
                 </h2>
-                <p className="text-base text-white/80 leading-snug mb-1">
+                <p className="text-sm text-white/80 leading-snug mb-2">
                   AI-Powered Fact Detector & Digital Media Literacy
                 </p>
                 <p className="text-sm text-white/60 mb-1">
