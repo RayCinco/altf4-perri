@@ -3,7 +3,7 @@ const modeSelect = document.getElementById("modeSelect");
 const analyzeBtn = document.getElementById("analyzeBtn");
 
 const API_BASE_URL =
-  "https://chismi-scan-rngewfmuv-raymond-cincos-projects.vercel.app";
+  "https://chismi-scan-5lu15eibw-raymond-cincos-projects.vercel.app";
 const ANALYZE_ENDPOINT = `${API_BASE_URL}/api/analyze`;
 
 const inputs = {
